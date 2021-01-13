@@ -34,7 +34,6 @@ canvas.addEventListener("mousedown", down);
 
 function down(e) {
     e.preventDefault();
-    e.stopPropagation();
     mouseDown = true;
 
     // cancel Camera cameraing the current planet
@@ -53,7 +52,6 @@ canvas.addEventListener("mousemove", move);
 
 function move(e) {
     e.preventDefault();
-    e.stopPropagation();
     if (mouseDown) {
         center.x = (e.clientX / scale) - startDragOffset.x;
         center.y = (e.clientY / scale) - startDragOffset.y;
@@ -77,11 +75,51 @@ canvas.addEventListener("mouseup", () => mouseDown = false);
 canvas.addEventListener('mouseover', () => mouseDown = false);
 canvas.addEventListener('mouseout', () => mouseDown = false);
 
+
 // HANDLE TOUCH INPUT
-window.addEventListener('touchmove', move);
-window.addEventListener('touchstart', down);
-window.addEventListener('touchend', () => mouseDown = false);
-window.addEventListener('touchcancel', () => mouseDown = false);
+
+// Prevent scrolling when touching the canvas
+document.body.addEventListener("touchstart", e => {
+    if (e.target == canvas) {
+        e.preventDefault();
+    }
+}, false);
+document.body.addEventListener("touchend", e => {
+    if (e.target == canvas) {
+        e.preventDefault();
+    }
+}, false);
+document.body.addEventListener("touchmove", e => {
+    if (e.target == canvas) {
+        e.preventDefault();
+    }
+}, false);
+
+canvas.addEventListener('touchstart', (e) => {
+    var touch = {
+        x: e.touches[0].clientX - canvas.getBoundingClientRect().left,
+        y: e.touches[0].clientY - canvas.getBoundingClientRect().top
+    }
+    var mE = new MouseEvent("mousedown", {
+        clientX: touch.x,
+        clientY: touch.y
+    });
+    canvas.dispatchEvent(mE);
+});
+
+canvas.addEventListener('touchmove', e => {
+    var touch = e.touches[0];
+    var mE = new MouseEvent("mousemove", {
+        clientX: touch.x,
+        clientY: touch.y
+    });
+    canvas.dispatchEvent(mE);
+});
+
+canvas.addEventListener('touchend', () => {
+    var mE = new MouseEvent("mouseup", {});
+    canvas.dispatchEvent(mE);
+});
 
 // HANDLE MOUSE ZOOMING
 window.addEventListener('wheel', e => {
