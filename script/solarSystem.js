@@ -15,6 +15,11 @@ var bg = '#050a10';
 var frAId;
 
 // EVENT LISTENER
+
+window.addEventListener('touchmove', e => {
+    e.preventDefault();
+});
+
 // HANDLE MOUSE DRAG
 var mouse = {
     x: 0,
@@ -25,8 +30,11 @@ var mouse = {
 var startDragOffset = {};
 var mouseDown = false;
 
-canvas.addEventListener("mousedown", e => {
+canvas.addEventListener("mousedown", down);
+
+function down(e) {
     e.preventDefault();
+    e.stopPropagation();
     mouseDown = true;
 
     // cancel Camera cameraing the current planet
@@ -39,10 +47,13 @@ canvas.addEventListener("mousedown", e => {
     bigBodies.forEach(bB => {
         if (bB.isColliding) cameraPlanet = bB;
     });
-});
+}
 
-canvas.addEventListener("mousemove", e => {
+canvas.addEventListener("mousemove", move);
+
+function move(e) {
     e.preventDefault();
+    e.stopPropagation();
     if (mouseDown) {
         center.x = (e.clientX / scale) - startDragOffset.x;
         center.y = (e.clientY / scale) - startDragOffset.y;
@@ -59,13 +70,18 @@ canvas.addEventListener("mousemove", e => {
         // Distance needed to collide with Planets etc.
         r: 30 / scale
     }
-
-});
+}
 
 // To Cancel Dragging
 canvas.addEventListener("mouseup", () => mouseDown = false);
 canvas.addEventListener('mouseover', () => mouseDown = false);
 canvas.addEventListener('mouseout', () => mouseDown = false);
+
+// HANDLE TOUCH INPUT
+window.addEventListener('touchmove', move);
+window.addEventListener('touchstart', down);
+window.addEventListener('touchend', () => mouseDown = false);
+window.addEventListener('touchcancel', () => mouseDown = false);
 
 // HANDLE MOUSE ZOOMING
 window.addEventListener('wheel', e => {
@@ -185,8 +201,8 @@ function drawEverything() {
 
     if (orbit) {
         planets.forEach(p => p.orbit());
-        dwarfs.forEach(d => d.orbit());
-        moons.forEach(m => m.orbit());
+        // dwarfs.forEach(d => d.orbit());
+        // moons.forEach(m => m.orbit());
     }
     // RUN ALL BODIES
     everything.forEach(e => e.run());

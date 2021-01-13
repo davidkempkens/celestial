@@ -20,8 +20,8 @@ const center = {
 center.x = canvas.width / 2;
 center.y = canvas.height / 2;
 
-// c.font = `${12}px Arial`;
 const fontsize = 12;
+
 // Convert degrees to radians
 function deg(d) {
     return d * (Math.PI / 180);
