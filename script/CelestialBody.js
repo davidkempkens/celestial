@@ -216,25 +216,6 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
     }
 }
 
-// Symbols as Unicode for the planets in the solar system
-var symbols = {
-    mercury: '\u263F',
-    venus: '\u2640',
-    earth: '\u{1F728}',
-    mars: '\u2642',
-    jupiter: '\u2643',
-    saturn: '\u2644',
-    uranus: '\u26E2',
-    neptune: '\u2646',
-    ceres: '\u26B3',
-    pluto: '\u2647',
-    moon: '\u263D',
-    sun: '\u{1F31E}',
-    poop: '\u{1F4A9}',
-    rocket: '\u{1F680}',
-    ymcmb: '\u{1F4AF}'
-}
-
 function Star(w, h) {
     this.x = Math.random() * w;
     this.y = Math.random() * h;
@@ -252,11 +233,6 @@ function Star(w, h) {
     this.color = '#FFFFFF';
 
     this.spin = function() {
-
-        // this.center = {
-        //     x: canvas.width / 2,
-        //     y: canvas.height / 2
-        // }
 
         this.w -= this.v;
 
@@ -289,8 +265,17 @@ function asteroidFactory(count, name, center, minRadius, maxRadius, minDistance,
         let m = mass;
         let col = color;
         let t = type;
-        // Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color
+        // Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color - Type
         belt.push(new CelestialBody(name, center, r, d, v, e, m, col, t));
     }
     return belt;
+}
+
+// INITIALIZES STARS AS STAR OBJECTS AND RETURNS ARRAY OF STARS - Pass amount as argument
+function starsFactory(amount) {
+    let stars = [];
+    for (let i = 0; i < amount; i++) {
+        stars.push(new Star(canvas.width, canvas.height));
+    }
+    return stars;
 }

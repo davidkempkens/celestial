@@ -139,6 +139,9 @@ const moons = [
     charon
 ];
 
+// STARS ARRAY
+const stars = starsFactory(500);
+
 // ASTEROIDS ARRAY
 const kuiperBelt = asteroidFactory(800, 'Kuiper Asteroid', sun, .0001, .0006, 30 * AU, 20 * AU, 17, 25, .1, 10e10, '#5E574F', 'Asteroid');
 const mainBelt = asteroidFactory(200, 'Main Asteroid', sun, .0001, .0006, 600, 150, 17, 25, .2, 10e10, '#5E574F', 'Asteroid');
