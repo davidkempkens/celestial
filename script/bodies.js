@@ -1,47 +1,9 @@
 // Instantiating all Celestial Objects
 
-// Scale for radius
-const scaleR = 1;
-// Scale for distances
-const scaleD = 1;
-// Scale for orbital velocity ~ .00001 - .02
-const scaleV = .000005;
-
-// AU  - in Mio km
-const AU = 150;
-// Light year
-const ly = 63241.077 * AU;
-// Solar Mass
-const solarMass = 2e30;
-// Mio km
-const solarRadius = .695700;
-
-// OBSERVABLE UNIVERSE SCALE Radius 46,5 billion lightyears / 93 billion lighty-years Durchmesser
-const universe = new CelestialBody('Observable Universe', center, 46500000000 * ly, 46500000000 * ly, 0, 0, 0, 'white', 'Universe');
-
-// BLACK HOLE
-const m87 = new CelestialBody('Messier87', center, 2600000000 * AU, 5000000000 * AU, 0, 0, 10000 * solarMass, 'white', 'Black Hole');
-
-// Suns
-const barnard = new CelestialBody('Barnard\'s Star', center, solarRadius * .2, 150 * AU, 0, 0, solarMass * .144, '#D9042B', 'Star');
-const siriusA = new CelestialBody('Sirius A', center, 1.711 * solarRadius, 160 * AU, 0, 0, 2.063 * solarMass, '#52CBD9', 'Star');
-const betaCentauri = new CelestialBody('Beta Centauri', center, 9 * solarRadius, 170 * AU, 0, 0, 12.02 * solarMass, '#3037BF', 'Star');
-const r136a1 = new CelestialBody('R136a1', center, 39.2 * solarRadius, 210 * AU, 0, 0, 215 * solarMass, '#79DCF2', 'Star');
-const gacrux = new CelestialBody('Gacrux', center, 120 * solarRadius, 230 * AU, 0, 0, 1.5 * solarMass, '#D91438', 'Star');
-const pistolStar = new CelestialBody('Pistol Star', center, 420 * solarRadius, 250 * AU, 0, 0, 27.5 * solarMass, '#0597F2', 'Star');
-const rhoCassiopeiae = new CelestialBody('Rho Cassiopeiae', center, 981 * solarRadius, 300 * AU, 0, 0, 40 * solarMass, '#F5EFC8', 'Star');
-const stephenson218 = new CelestialBody('Stephenson 2-18', center, 2150 * solarRadius, 400 * AU, 0, 0, 1000 * solarMass, '#F21905', 'Star');
-
-
-// Alpha Centauri
-const alphaCentauriA = new CelestialBody('Alpha Centauri A', center, 1.2234 * solarRadius, 4.37 * ly, 0, 0, 1.1 * solarMass, '#F2B05E', 'Star');
-const alphaCentauriB = new CelestialBody('Alpha Centauri B', alphaCentauriA, .8632 * solarRadius, 7, 0, .124, 35.6 * AU, '#D98F4E', 'Star');
-
-// Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color
+// Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color - Type
 const sun = new CelestialBody("Sun", center, .696342, 0, 0, 0, 1.9855e30, "#F2A516", "Star");
 
 // Planets
-// Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color - Type
 const mercury = new CelestialBody("Mercury", sun, .00243964, 57.909175, 47.8725, 0.20563069, 3.302e23, "#BFB6AE", 'Planet');
 const venus = new CelestialBody("Venus", sun, .00605159, 108.208930, 35.0214, 0.00677323, 4.869e24, "#F2C879", 'Planet');
 const earth = new CelestialBody("Earth", sun, .0063781, 149.597890, 29.7859, 0.01671022, 5.972e24, "#03588C", 'Planet');
@@ -51,7 +13,7 @@ const saturn = new CelestialBody("Saturn", sun, .06026714, 1426.725400, 9.6726, 
 const uranus = new CelestialBody("Uranus", sun, .02555725, 2870.972200, 6.8352, 0.04716771, 8.6849e25, "#BBE2F2", 'Planet');
 const neptune = new CelestialBody("Neptune", sun, .02476636, 4498.252900, 5.4778, 0.00858587, 1.0244e26, "#5368A6", 'Planet');
 
-// Dwarf Planets
+// Dwarfs and Minor Planets
 const pluto = new CelestialBody("Pluto", sun, .001190, 5906.3800000, 4.7490, 0.24880766, 1.305e22, "#626973", 'Dwarf');
 const ceres = new CelestialBody("Ceres", sun, .000473, 413.700000, 17.882, 0.080, 9.39e20, "#626973", 'Dwarf');
 const haumea = new CelestialBody("Haumea", sun, .000816, 6484.000000, 4.484, .18874, 4.01e21, "#626973", 'Dwarf');
@@ -61,7 +23,6 @@ const eros = new CelestialBody('Eros', sun, .00000842, 1.4579 * AU, 24.36, .223,
 
 // Moons
 // Earth Moon
-// Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color
 const moon = new CelestialBody("Moon", earth, .0017371, .384399, 1.022, 0.0549, 7.3477e22, "#F2F2F2", "Moon");
 // Mars Moons
 const phobos = new CelestialBody("Phobos", mars, .0000111, .009270, 2.138, 0.0151, 1.08e16, "#D9D9D9", "Moon");
@@ -90,7 +51,30 @@ const oberon = new CelestialBody("Oberon", uranus, .0007614, .583519, 3.152, 0.0
 const triton = new CelestialBody("Triton", neptune, .0013534, .354759, 4.39, 0.00002, 2.14e22, "#F2C879", "Moon");
 // Pluto Moon
 const charon = new CelestialBody("Charon", pluto, .0006035, .017536, 0.2, 0.0022, .152e22, "#F2C879", "Moon");
+//-----------------------------------------------------//
+//-----------------------------------------------------//
+//-----------------------------------------------------//
+// OBSERVABLE UNIVERSE SCALE Radius 46,5 billion lightyears / 93 billion lighty-years Durchmesser
+const universe = new CelestialBody('Observable Universe', center, 46500000000 * ly, 46500000000 * ly, 0, 0, 0, 'white', 'Universe');
 
+// BLACK HOLE
+const m87 = new CelestialBody('Messier87', center, 2600000000 * AU, 5000000000 * AU, 0, 0, 10000 * solarMass, 'white', 'Black Hole');
+
+// Suns
+const barnard = new CelestialBody('Barnard\'s Star', center, solarRadius * .2, 150 * AU, 0, 0, solarMass * .144, '#D9042B', 'Star');
+const siriusA = new CelestialBody('Sirius A', center, 1.711 * solarRadius, 160 * AU, 0, 0, 2.063 * solarMass, '#52CBD9', 'Star');
+const betaCentauri = new CelestialBody('Beta Centauri', center, 9 * solarRadius, 170 * AU, 0, 0, 12.02 * solarMass, '#3037BF', 'Star');
+const r136a1 = new CelestialBody('R136a1', center, 39.2 * solarRadius, 210 * AU, 0, 0, 215 * solarMass, '#79DCF2', 'Star');
+const gacrux = new CelestialBody('Gacrux', center, 120 * solarRadius, 230 * AU, 0, 0, 1.5 * solarMass, '#D91438', 'Star');
+const pistolStar = new CelestialBody('Pistol Star', center, 420 * solarRadius, 250 * AU, 0, 0, 27.5 * solarMass, '#0597F2', 'Star');
+const rhoCassiopeiae = new CelestialBody('Rho Cassiopeiae', center, 981 * solarRadius, 300 * AU, 0, 0, 40 * solarMass, '#F5EFC8', 'Star');
+const stephenson218 = new CelestialBody('Stephenson 2-18', center, 2150 * solarRadius, 400 * AU, 0, 0, 1000 * solarMass, '#F21905', 'Star');
+
+// Alpha Centauri
+const alphaCentauriA = new CelestialBody('Alpha Centauri A', center, 1.2234 * solarRadius, 4.37 * ly, 0, 0, 1.1 * solarMass, '#F2B05E', 'Star');
+const alphaCentauriB = new CelestialBody('Alpha Centauri B', alphaCentauriA, .8632 * solarRadius, 7, 0, .124, 35.6 * AU, '#D98F4E', 'Star');
+
+// ARRAYS
 // Planets Array
 const planets = [
     earth,

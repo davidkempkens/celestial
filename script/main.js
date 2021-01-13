@@ -39,8 +39,10 @@ function start() {
     }
 
     if (scale > 5) {
-        moons.forEach((m) => m.n());
-        if (scale > 200) moons.forEach((m) => m.info());
+        moons.forEach(m => m.n());
+        if (scale > 200) moons.forEach(m => {
+            if (m.isColliding) m.info();
+        });
     }
 
     // Bar
@@ -144,7 +146,7 @@ function bar() {
     }
 
     // Text in the left corner
-    let corner = [`Press r to reset`, `Press c to center`, `Press o to toggle orbits`, `Scale: ${formatNumber(scale)}`];
+    let corner = [`Press:`, `s to stop / start`, `+/- to zoom (or scroll)`, `r to reset zoom`, `c to center`, `o to show / hide orbits`, `Scale: ${formatNumber(scale)}`];
     for (let i = 0; i < corner.length; i++) {
         c.fillText(corner[i], 20, 30 + (20 * i));
     }

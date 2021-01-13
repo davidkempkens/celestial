@@ -7,8 +7,9 @@ const c = canvas.getContext('2d');
 // Set canvas to fullscreen
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-// 
+// Parameter for camera function to center object on canvas
 var cameraPlanet = null;
+// Booleans to toggle in main loop - for user input
 var stop = false;
 var orbit = true;
 // SCALING AND TRANSLATION GLOBALS
@@ -19,12 +20,28 @@ var trans = {
     y: 0
 }
 
+// Scale for radius
+const scaleR = 1;
+// Scale for distances
+const scaleD = 1;
+// Scale for orbital velocity ~ .000005
+const scaleV = .00001;
+
+// AU - in Mio km
+const AU = 150;
+// Light year in AU
+const ly = 63241.077 * AU;
+// Solar Mass in KG
+const solarMass = 2e30;
+// Solar Radius in Mio km
+const solarRadius = .695700;
+
 // BACKGROUND COLOR THAT GETS DRAWN EVERY FRAME TO CLEAR THE CANVAS
 var bg = '#050a10';
 // Frame Animation ID - used to cancel / start frame animatinons
 var frAId;
 
-// Mouse object in global scope
+// Mouse objects and booleans - for user input via mouse
 var mouse = {
     x: 0,
     y: 0,
@@ -55,10 +72,7 @@ var symbols = {
     ceres: '\u26B3',
     pluto: '\u2647',
     moon: '\u263D',
-    sun: '\u{1F31E}',
-    poop: '\u{1F4A9}',
-    rocket: '\u{1F680}',
-    ymcmb: '\u{1F4AF}'
+    sun: '\u{1F31E}'
 }
 
 // Convert degrees to radians
@@ -115,6 +129,7 @@ function bar() {
 function drawText(t, coord, f, translated) {
     let lineX, lineY;
     c.fillStyle = coord.color;
+    c.font = "13px Calibri";
     if (translated) {
         lineX = ((coord.x + coord.r) * scale) + trans.x + f;
         lineY = (coord.y * scale) + trans.y;
