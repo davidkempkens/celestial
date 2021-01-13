@@ -131,3 +131,16 @@ window.addEventListener('keypress', e => {
             break;
     }
 });
+
+// BUTTONS
+const resetBtn = document.getElementById('resetBtn');
+const centerBtn = document.getElementById('centerBtn');
+const orbitBtn = document.getElementById('orbitBtn');
+
+resetBtn.addEventListener('click', () => scale = 1);
+centerBtn.addEventListener('click', () => {
+    cameraPlanet = null;
+    center.x = canvas.width / 2;
+    center.y = canvas.height / 2;
+});
+orbitBtn.addEventListener('click', () => orbit = !orbit);
