@@ -1,5 +1,7 @@
 // USER INPUT
+// ONLOAD
 
+window.addEventListener('onload', resizeCanvas);
 // HANDLE MOUSE EVENTS
 // SCALE CANVAS WITH SCROLL
 window.addEventListener('wheel', e => {
