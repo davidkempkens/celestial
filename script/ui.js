@@ -54,7 +54,7 @@ function move(e) {
 
 // HANDLE TOUCH EVENTS - EXPERIMENTAL
 // Send touch positions to mouse event
-canvas.addEventListener("touchstart", e => {
+document.body.addEventListener("touchstart", e => {
     e.preventDefault();
     var touch = {
         x: e.touches[0].clientX - canvas.getBoundingClientRect().left,
@@ -67,7 +67,7 @@ canvas.addEventListener("touchstart", e => {
     canvas.dispatchEvent(mE);
 });
 
-canvas.addEventListener("touchmove", e => {
+document.body.addEventListener("touchmove", e => {
     e.preventDefault();
     var touch = {
         x: e.touches[0].clientX - canvas.getBoundingClientRect().left,
@@ -80,7 +80,7 @@ canvas.addEventListener("touchmove", e => {
     canvas.dispatchEvent(mE);
 });
 
-canvas.addEventListener("touchend", () => {
+document.body.addEventListener("touchend", () => {
     var mE = new MouseEvent("mouseup", {});
     canvas.dispatchEvent(mE);
 });
