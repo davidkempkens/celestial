@@ -12,9 +12,9 @@ window.addEventListener("wheel", (e) => {
 // DRAG CANVAS
 canvas.addEventListener("mousedown", down);
 canvas.addEventListener("mousemove", move);
-canvas.addEventListener("mouseup", () => (mouseDown = false));
-canvas.addEventListener("mouseover", () => (mouseDown = false));
-canvas.addEventListener("mouseout", () => (mouseDown = false));
+canvas.addEventListener("mouseup", () => mouseDown = false);
+canvas.addEventListener("mouseover", () => mouseDown = false);
+canvas.addEventListener("mouseout", () => mouseDown = false);
 
 function down(e) {
     e.preventDefault();
@@ -57,8 +57,8 @@ function move(e) {
 document.body.addEventListener("touchstart", e => {
     e.preventDefault();
     var touch = {
-        x: e.touches[0].clientX - canvas.getBoundingClientRect().left,
-        y: e.touches[0].clientY - canvas.getBoundingClientRect().top,
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY
     };
     var mE = new MouseEvent("mousedown", {
         clientX: touch.x,
@@ -70,8 +70,8 @@ document.body.addEventListener("touchstart", e => {
 document.body.addEventListener("touchmove", e => {
     e.preventDefault();
     var touch = {
-        x: e.touches[0].clientX - canvas.getBoundingClientRect().left,
-        y: e.touches[0].clientY - canvas.getBoundingClientRect().top,
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
     };
     var mE = new MouseEvent("mousemove", {
         clientX: touch.x,
