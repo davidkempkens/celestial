@@ -148,7 +148,7 @@ function bar() {
     // Text in the left corner
     let corner = [`Press:`, `s to stop / start`, `+/- to zoom (or scroll)`, `r to reset zoom`, `c to center`, `o to show / hide orbits`, `Scale: ${formatNumber(scale)}`];
     for (let i = 0; i < corner.length; i++) {
-        c.fillText(corner[i], 20, 30 + (20 * i));
+        c.fillText(corner[i], canvas.width - 200, 30 + (20 * i));
     }
 }
 

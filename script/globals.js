@@ -88,43 +88,6 @@ function formatNumber(num) {
     })
 }
 
-// DRAW SCALE BAR
-function bar() {
-
-    // BAR POSITION
-    let xStart = (canvas.width / 2);
-    let barWidth = (canvas.width / 9);
-    let y = canvas.height - (canvas.height / 30);
-
-    // DRAW BAR
-    c.beginPath();
-    c.fillStyle = 'white';
-    c.fillRect(xStart, y, barWidth, 1);
-    c.fillRect(xStart, y - 6, 1, 12);
-    c.fillRect(xStart + barWidth, y - 6, 1, 12);
-    c.closePath();
-
-    let bar = {
-        x: (canvas.width / 2),
-        y: canvas.height - (canvas.height / 3),
-        r: 0
-    }
-
-    // TEXT ABOVE BAR
-    let km = formatNumber((earth.d * 1000000) / scale);
-    let AU = formatNumber(1 / scale);
-    let ly = formatNumber((1 / 63241.077) / scale);
-
-    let text = [`${ly} light-years`, `${AU} AU`, `${km} km`];
-
-    for (let i = 0; i < text.length; i++) {
-        c.fillText(text[i], xStart, y - 20 * (i + 1));
-    }
-
-    // Text beside Bar (right side)
-    c.fillText(`Scale: ${formatNumber(scale)}`, xStart + barWidth + 20, y);
-}
-
 // DRAW Text at scale and translated coords
 function drawText(t, coord, f, translated) {
     let lineX, lineY;

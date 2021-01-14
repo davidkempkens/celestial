@@ -25,31 +25,48 @@ body {
     height: 100%;
 }
 
-.btn {
-    border: 1px solid rgba(255, 255, 255, .1);
+.sidenav {
     border-radius: 5px;
-    position: absolute;
-    top: 30%;
-    padding: 10px 40px;
-    margin-left: 30px;
-    background-color: rgba(0, 0, 0, .0);
+    height: 94%;
+    left: -125px;
+    position: fixed;
+    z-index: 1;
+    top: 3%;
+    background-color: rgba(255, 255, 255, .05);
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    transition-delay: 4s;
+}
+
+.sidenav:hover {
+    background-color: rgba(255, 255, 255, .05);
+    left: -10px;
+    transition: left .5s;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav .btn {
+        font-size: 18px;
+    }
+}
+
+button {
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, .1);
     color: rgba(255, 255, 255, .1);
+    border-radius: 5px;
+    padding: 10px 15px;
+    background-color: rgba(0, 0, 0, .0);
+    margin: 10px 10px 10px 20px;
 }
 
-#resetBtn {
-    top: 30%;
-}
-
-#centerBtn {
-    top: 40%;
-}
-
-#orbitBtn {
-    top: 50%;
-}
-
-.btn:hover {
-    border: 1px solid white;
+button:hover {
+    border: 1px solid rgba(255, 255, 255, .5);
     color: white;
     transition: .2s;
 }

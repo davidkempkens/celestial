@@ -144,3 +144,6 @@ centerBtn.addEventListener('click', () => {
     center.y = canvas.height / 2;
 });
 orbitBtn.addEventListener('click', () => orbit = !orbit);
+
+// SIDENAV MENU
+const sideNav = document.getElementById('sidenav');
