@@ -41,7 +41,6 @@ body {
 }
 
 .sidenav:hover {
-    background-color: rgba(255, 255, 255, .05);
     left: -10px;
     transition: left .5s;
 }
@@ -52,6 +51,15 @@ body {
     }
     .sidenav .btn {
         font-size: 18px;
+    }
+}
+
+
+/* 2532x1170 pixels at 460ppi */
+
+@media only screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) {
+    .sidenav {
+        left: 125px;
     }
 }
 
