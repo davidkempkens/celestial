@@ -35,11 +35,9 @@ function down(e) {
     if (cameraPlanet != null) {
         cameraElement.innerHTML = 'Focus: ' + cameraPlanet.name;
         cameraElement.style.color = cameraPlanet.color;
-        cameraElement.href = `https://en.wikipedia.org/wiki/${cameraPlanet.name.toLowerCase()}`;
     } else {
         cameraElement.innerHTML = 'Solar System';
         cameraElement.style.color = 'white';
-        cameraElement.href = `https://en.wikipedia.org/wiki/Solar_System`;
     }
 }
 
@@ -156,6 +154,16 @@ const cameraElement = document.getElementById('camera');
 const scaleElement = document.getElementById('scaleElement');
 const stopElement = document.getElementById('stopElement');
 
+cameraElement.addEventListener('click', () => {
+    cameraPlanet = null;
+    center.x = canvas.width / 2;
+    center.y = canvas.height / 2;
+})
+
+scaleElement.addEventListener('click', () => scale = 1);
+
+
+stopElement.addEventListener('click', () => stop = !stop);
 // Draw bar at the bottom of the canvas to show scale
 function ui() {
 
@@ -192,7 +200,7 @@ function ui() {
     }
 
     scaleElement.innerHTML = `Scale: ${formatNumber(scale)}`;
-    stopElement.innerHTML = stop ? `Start` : `Stop`;
+    stopElement.innerHTML = stop ? `<b>S</b>tart` : `<b>S</b>top`;
 }
 
 // RUN MAIN LOOP

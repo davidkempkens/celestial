@@ -143,11 +143,12 @@ alphaCentauri.forEach(a => a.w = 0);
 
 // BIG BODIES ARRAY WITHOUT ASTEROIDS
 const bigBodies = [sun, m87, universe];
-suns.forEach(s => bigBodies.push(s));
-planets.forEach(p => bigBodies.push(p));
-dwarfs.forEach(d => bigBodies.push(d));
-moons.forEach(m => bigBodies.push(m));
 alphaCentauri.forEach(a => bigBodies.push(a));
+moons.forEach(m => bigBodies.push(m));
+suns.forEach(s => bigBodies.push(s));
+dwarfs.forEach(d => bigBodies.push(d));
+planets.forEach(p => bigBodies.push(p));
+
 
 // ASTEROIDS ARRAY
 const asteroids = [];
@@ -156,5 +157,5 @@ kuiperBelt.forEach(k => asteroids.push(k));
 
 // EVERYTHING ARRAY FOR EASY HANDLING
 var everything = [sun, m87, universe];
-bigBodies.forEach(p => everything.push(p));
 asteroids.forEach(d => everything.push(d));
+bigBodies.forEach(p => everything.push(p));
