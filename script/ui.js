@@ -133,10 +133,14 @@ window.addEventListener('keypress', e => {
 });
 
 // BUTTONS
+const plusBtn = document.getElementById('plusBtn');
+const minusBtn = document.getElementById('minusBtn');
 const resetBtn = document.getElementById('resetBtn');
 const centerBtn = document.getElementById('centerBtn');
 const orbitBtn = document.getElementById('orbitBtn');
 
+plusBtn.addEventListener('click', () => scale /= scaleFactor);
+minusBtn.addEventListener('click', () => scale *= scaleFactor);
 resetBtn.addEventListener('click', () => scale = 1);
 centerBtn.addEventListener('click', () => {
     cameraPlanet = null;
