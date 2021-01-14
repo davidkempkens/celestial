@@ -1,8 +1,7 @@
 // MAIN LOOP
 function start() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
+    // Resize Canvas
+    resizeCanvas();
     // Clear Canvas each frame
     clearCanvas();
     // Draw Stars before transfomation to fill the whole canvas
@@ -52,7 +51,11 @@ function start() {
     // frameAnimation ID
     frAId = window.requestAnimationFrame(start);
 }
-
+// Resize Canvas
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
 // Clear Canvas every frame - background color as global variable
 function clearCanvas() {
     c.fillStyle = bg;
