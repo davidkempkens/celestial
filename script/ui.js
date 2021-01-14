@@ -30,6 +30,17 @@ function down(e) {
     bigBodies.forEach((bB) => {
         if (bB.isColliding) cameraPlanet = bB;
     });
+
+    // show current planets that gets follow by the camera in the hud
+    if (cameraPlanet != null) {
+        cameraElement.innerHTML = 'Focus: ' + cameraPlanet.name;
+        cameraElement.style.color = cameraPlanet.color;
+        cameraElement.href = `https://en.wikipedia.org/wiki/${cameraPlanet.name.toLowerCase()}`;
+    } else {
+        cameraElement.innerHTML = 'Solar System';
+        cameraElement.style.color = 'white';
+        cameraElement.href = `https://en.wikipedia.org/wiki/Solar_System`;
+    }
 }
 
 function move(e) {
@@ -138,3 +149,51 @@ orbitBtn.addEventListener("click", () => (orbit = !orbit));
 
 // SIDENAV MENU
 const sideNav = document.getElementById("sidenav");
+
+// HUD
+const hud = document.getElementById('hud');
+const cameraElement = document.getElementById('camera');
+const scaleElement = document.getElementById('scaleElement');
+const stopElement = document.getElementById('stopElement');
+
+// Draw bar at the bottom of the canvas to show scale
+function ui() {
+
+    // Bar Position
+    let bar = {
+        x: (canvas.width / 2),
+        w: (canvas.width / 9),
+        y: canvas.height - (canvas.height / 30),
+        r: 0
+    }
+
+    // Draw Lines
+    c.beginPath();
+    c.fillStyle = 'white';
+    c.fillRect(bar.x, bar.y, bar.w, 1);
+    c.fillRect(bar.x, bar.y - 6, 1, 12);
+    c.fillRect(bar.x + bar.w, bar.y - 6, 1, 12);
+    c.closePath();
+
+    // Text above bar
+    let km = formatNumber((earth.d * 1000000) / scale);
+    let AU = formatNumber(1 / scale);
+    let ly = formatNumber((1 / 63241.077) / scale);
+
+    let text = [`${ly} light-years`, `${AU} AU`, `${km} km`];
+    for (let i = 0; i < text.length; i++) {
+        c.fillText(text[i], bar.x, bar.y - 20 * (i + 1));
+    }
+
+    // Text in the left corner
+    let corner = [`Press:`, `s to stop / start`, `+/- to zoom (or scroll)`, `r to reset zoom`, `c to center`, `o to show / hide orbits`];
+    for (let i = 0; i < corner.length; i++) {
+        c.fillText(corner[i], canvas.width - 200, 30 + (20 * i));
+    }
+
+    scaleElement.innerHTML = `Scale: ${formatNumber(scale)}`;
+    stopElement.innerHTML = stop ? `Start` : `Stop`;
+}
+
+// RUN MAIN LOOP
+start();

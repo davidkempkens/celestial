@@ -44,8 +44,8 @@ function start() {
         });
     }
 
-    // Bar
-    bar();
+    // ui
+    ui();
     // camera planet
     camera(cameraPlanet);
     // frameAnimation ID
@@ -154,6 +154,3 @@ function bar() {
         c.fillText(corner[i], canvas.width - 200, 30 + (20 * i));
     }
 }
-
-// RUN MAIN LOOP
-start();

@@ -92,7 +92,7 @@ function formatNumber(num) {
 function drawText(t, coord, f, translated) {
     let lineX, lineY;
     c.fillStyle = coord.color;
-    c.font = "13px Calibri";
+    c.font = "13px Consolas";
     if (translated) {
         lineX = ((coord.x + coord.r) * scale) + trans.x + f;
         lineY = (coord.y * scale) + trans.y;
