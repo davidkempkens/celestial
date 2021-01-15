@@ -48,48 +48,9 @@ body {
     background-color: rgba(255, 255, 255, .05);
     padding: 5px 15px;
     margin: auto;
-    left: 150px;
+    left: 5%;
     border-radius: 3px;
     display: flex;
-}
-
-.sidenav {
-    border-radius: 3px;
-    height: 96%;
-    left: -140px;
-    position: fixed;
-    z-index: 1;
-    top: 2%;
-    background-color: rgba(255, 255, 255, .05);
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    padding-top: 30px;
-    transition-delay: 1.5s;
-    transition: left .5s;
-}
-
-.sidenav:hover {
-    left: -10px;
-    transition: left .5s;
-}
-
-@media screen and (max-height: 450px) {
-    .sidenav {
-        padding-top: 15px;
-    }
-    .sidenav .btn {
-        font-size: 18px;
-    }
-}
-
-
-/* 2532x1170 pixels at 460ppi */
-
-@media only screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) {
-    .sidenav {
-        left: -10px;
-    }
 }
 
 button {
@@ -106,4 +67,15 @@ button:hover {
     border: 1px solid rgba(255, 255, 255, .5);
     color: white;
     transition: .2s;
+}
+
+@media only screen and (max-width: 600px) {
+    .hud {
+        flex-direction: column;
+        bottom: 0;
+    }
+    a {
+        max-width: 100px;
+        margin: 5px 0;
+    }
 }

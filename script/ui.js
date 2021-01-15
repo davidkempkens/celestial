@@ -1,7 +1,5 @@
 // USER INPUT
-// ONLOAD
 
-window.addEventListener("onload", resizeCanvas);
 // HANDLE MOUSE EVENTS
 // SCALE CANVAS WITH SCROLL
 window.addEventListener("wheel", (e) => {
@@ -30,15 +28,6 @@ function down(e) {
     bigBodies.forEach((bB) => {
         if (bB.isColliding) cameraPlanet = bB;
     });
-
-    // show current planets that gets follow by the camera in the hud
-    if (cameraPlanet != null) {
-        cameraElement.innerHTML = 'Focus: ' + cameraPlanet.name;
-        cameraElement.style.color = cameraPlanet.color;
-    } else {
-        cameraElement.innerHTML = 'Solar System';
-        cameraElement.style.color = 'white';
-    }
 }
 
 function move(e) {
@@ -120,7 +109,7 @@ window.addEventListener("keypress", (e) => {
         case "+":
             scale /= scaleFactor;
             break;
-        case "r":
+        case "z":
             scale = 1;
             break;
         default:
@@ -128,31 +117,14 @@ window.addEventListener("keypress", (e) => {
     }
 });
 
-// BUTTONS
-const plusBtn = document.getElementById("plusBtn");
-const minusBtn = document.getElementById("minusBtn");
-const resetBtn = document.getElementById("resetBtn");
-const centerBtn = document.getElementById("centerBtn");
-const orbitBtn = document.getElementById("orbitBtn");
-
-plusBtn.addEventListener("click", () => (scale /= scaleFactor));
-minusBtn.addEventListener("click", () => (scale *= scaleFactor));
-resetBtn.addEventListener("click", () => (scale = 1));
-centerBtn.addEventListener("click", () => {
-    cameraPlanet = null;
-    center.x = canvas.width / 2;
-    center.y = canvas.height / 2;
-});
-orbitBtn.addEventListener("click", () => (orbit = !orbit));
-
-// SIDENAV MENU
-const sideNav = document.getElementById("sidenav");
-
 // HUD
 const hud = document.getElementById('hud');
 const cameraElement = document.getElementById('camera');
-const scaleElement = document.getElementById('scaleElement');
+const zoomElement = document.getElementById('zoomElement');
 const stopElement = document.getElementById('stopElement');
+const orbitElement = document.getElementById('orbitElement');
+const plusElement = document.getElementById('plusElement');
+const minusElement = document.getElementById('minusElement');
 
 cameraElement.addEventListener('click', () => {
     cameraPlanet = null;
@@ -160,17 +132,19 @@ cameraElement.addEventListener('click', () => {
     center.y = canvas.height / 2;
 })
 
-scaleElement.addEventListener('click', () => scale = 1);
-
-
+zoomElement.addEventListener('click', () => scale = 1);
 stopElement.addEventListener('click', () => stop = !stop);
+orbitElement.addEventListener('click', () => orbit = !orbit);
+plusElement.addEventListener('click', () => scale /= scaleFactor);
+minusElement.addEventListener('click', () => scale *= scaleFactor);
+
 // Draw bar at the bottom of the canvas to show scale
 function ui() {
 
     // Bar Position
     let bar = {
         x: (canvas.width / 2),
-        w: (canvas.width / 9),
+        w: AU,
         y: canvas.height - (canvas.height / 30),
         r: 0
     }
@@ -185,22 +159,24 @@ function ui() {
 
     // Text above bar
     let km = formatNumber((earth.d * 1000000) / scale);
-    let AU = formatNumber(1 / scale);
+    let au = formatNumber(AU / scale);
     let ly = formatNumber((1 / 63241.077) / scale);
 
-    let text = [`${ly} light-years`, `${AU} AU`, `${km} km`];
+    let text = [`${ly} light-years`, `${au} AU`, `${km} km`];
     for (let i = 0; i < text.length; i++) {
         c.fillText(text[i], bar.x, bar.y - 20 * (i + 1));
     }
 
-    // Text in the left corner
-    let corner = [`Press:`, `s to stop / start`, `+/- to zoom (or scroll)`, `r to reset zoom`, `c to center`, `o to show / hide orbits`];
-    for (let i = 0; i < corner.length; i++) {
-        c.fillText(corner[i], canvas.width - 200, 30 + (20 * i));
-    }
-
-    scaleElement.innerHTML = `Scale: ${formatNumber(scale)}`;
+    zoomElement.innerHTML = `<b>Z</b>oom: ${formatNumber(scale)}`;
     stopElement.innerHTML = stop ? `<b>S</b>tart` : `<b>S</b>top`;
+    // show current planets that gets follow by the camera in the hud
+    if (cameraPlanet != null) {
+        cameraElement.innerHTML = '<b>C</b>amera: ' + cameraPlanet.name;
+        cameraElement.style.color = cameraPlanet.color;
+    } else {
+        cameraElement.innerHTML = 'Solar System';
+        cameraElement.style.color = 'white';
+    }
 }
 
 // RUN MAIN LOOP
