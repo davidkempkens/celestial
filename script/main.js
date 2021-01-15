@@ -1,7 +1,7 @@
 // MAIN LOOP
 function start() {
     // Resize Canvas
-    resizeCanvas();
+    resizeCanvasToDisplaySize();
     // Clear Canvas each frame
     clearCanvas();
     // Draw Stars before transfomation to fill the whole canvas
@@ -57,6 +57,19 @@ function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
+
+function resizeCanvasToDisplaySize() {
+    // look up the size the canvas is being displayed
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+
+    // If it's resolution does not match change it
+    if (canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
+    }
+}
+
 // Clear Canvas every frame - background color as global variable
 function clearCanvas() {
     c.fillStyle = bg;

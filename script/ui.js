@@ -117,7 +117,7 @@ window.addEventListener("keypress", (e) => {
     }
 });
 
-// HUD
+// HUD ELEMENTS
 const hud = document.getElementById('hud');
 const cameraElement = document.getElementById('camera');
 const zoomElement = document.getElementById('zoomElement');
@@ -126,12 +126,12 @@ const orbitElement = document.getElementById('orbitElement');
 const plusElement = document.getElementById('plusElement');
 const minusElement = document.getElementById('minusElement');
 
+// HUD EVENTS
 cameraElement.addEventListener('click', () => {
     cameraPlanet = null;
     center.x = canvas.width / 2;
     center.y = canvas.height / 2;
 })
-
 zoomElement.addEventListener('click', () => scale = 1);
 stopElement.addEventListener('click', () => stop = !stop);
 orbitElement.addEventListener('click', () => orbit = !orbit);
@@ -167,6 +167,7 @@ function ui() {
         c.fillText(text[i], bar.x, bar.y - 20 * (i + 1));
     }
 
+    // HUD
     zoomElement.innerHTML = `<b>Z</b>oom: ${formatNumber(scale)}`;
     stopElement.innerHTML = stop ? `<b>S</b>tart` : `<b>S</b>top`;
     // show current planets that gets follow by the camera in the hud
