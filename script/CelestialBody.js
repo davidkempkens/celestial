@@ -59,18 +59,6 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         c.closePath();
         c.fill();
 
-
-        // DRAW SHAODW - Test
-        let startAngle = this.w - deg(90);
-        let endAngle = this.w + deg(90);
-        c.fillStyle = 'black';
-        c.globalAlpha = .1;
-        c.beginPath();
-        c.arc(this.x, this.y, this.r, startAngle, endAngle);
-        c.closePath();
-        c.fill();
-        c.globalAlpha = 1;
-
         // draw the half of saturns rings after, so they appear infront of Saturn
         // front = true
         this.saturnRings(true);
@@ -226,6 +214,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
     this.n = function() {
         drawText(this.name, this, 13, true);
     }
+
 }
 
 function Star(w, h) {

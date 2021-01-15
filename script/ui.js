@@ -19,14 +19,14 @@ function down(e) {
     mouseDown = true;
 
     // cancel Camera cameraing the current planet
-    cameraPlanet = null;
+    cameraBody = null;
 
     startDragOffset.x = e.clientX / scale - center.x;
     startDragOffset.y = e.clientY / scale - center.y;
 
     // Click on body to camera
-    bigBodies.forEach((bB) => {
-        if (bB.isColliding) cameraPlanet = bB;
+    bigBodies.forEach(bB => {
+        if (bB.isColliding) cameraBody = bB;
     });
 }
 
@@ -87,19 +87,19 @@ document.body.addEventListener("touchend", () => {
 window.addEventListener("keypress", (e) => {
     switch (e.key) {
         case "s":
-            stop = !stop;
+            stopSpin = !stopSpin;
             break;
         case "o":
             orbit = !orbit;
             break;
         case "f":
-            cameraPlanet = planets[Math.floor(Math.random() * planets.length)];
+            cameraBody = planets[Math.floor(Math.random() * planets.length)];
             break;
         case "a":
             scale = 1e-10;
             break;
         case "c":
-            cameraPlanet = null;
+            cameraBody = null;
             center.x = canvas.width / 2;
             center.y = canvas.height / 2;
             break;
@@ -119,6 +119,7 @@ window.addEventListener("keypress", (e) => {
 
 // HUD ELEMENTS
 const hud = document.getElementById('hud');
+const hud2 = document.getElementById('hud2');
 const cameraElement = document.getElementById('camera');
 const zoomElement = document.getElementById('zoomElement');
 const stopElement = document.getElementById('stopElement');
@@ -126,17 +127,30 @@ const orbitElement = document.getElementById('orbitElement');
 const plusElement = document.getElementById('plusElement');
 const minusElement = document.getElementById('minusElement');
 
+// FILL LIST ON THE RIGHT SIDE
+bigBodies.forEach(b => {
+    let a = document.createElement('a');
+    hud2.appendChild(a);
+    a.style.color = b.color;
+    a.innerHTML = b.name;
+    a.href = '#';
+    a.addEventListener('click', () => {
+        cameraBody = b;
+    });
+});
+
 // HUD EVENTS
 cameraElement.addEventListener('click', () => {
-    cameraPlanet = null;
+    cameraBody = null;
     center.x = canvas.width / 2;
     center.y = canvas.height / 2;
 })
 zoomElement.addEventListener('click', () => scale = 1);
-stopElement.addEventListener('click', () => stop = !stop);
+stopElement.addEventListener('click', () => stopSpin = !stopSpin);
 orbitElement.addEventListener('click', () => orbit = !orbit);
 plusElement.addEventListener('click', () => scale /= scaleFactor);
 minusElement.addEventListener('click', () => scale *= scaleFactor);
+
 
 // Draw bar at the bottom of the canvas to show scale
 function ui() {
@@ -169,11 +183,12 @@ function ui() {
 
     // HUD
     zoomElement.innerHTML = `<b>Z</b>oom: ${formatNumber(scale)}`;
-    stopElement.innerHTML = stop ? `<b>S</b>tart` : `<b>S</b>top`;
+    stopElement.innerHTML = stopSpin ? `<b>S</b>top` : `<b>S</b>tart`;
+    stopElement.style.color = stopSpin ? 'red' : 'green';
     // show current planets that gets follow by the camera in the hud
-    if (cameraPlanet != null) {
-        cameraElement.innerHTML = '<b>C</b>amera: ' + cameraPlanet.name;
-        cameraElement.style.color = cameraPlanet.color;
+    if (cameraBody !== null) {
+        cameraElement.innerHTML = '<b>C</b>amera: ' + cameraBody.name;
+        cameraElement.style.color = cameraBody.color;
     } else {
         cameraElement.innerHTML = 'Solar System';
         cameraElement.style.color = 'white';

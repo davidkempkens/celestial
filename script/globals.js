@@ -8,9 +8,9 @@ const c = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 // Parameter for camera function to center object on canvas
-var cameraPlanet = null;
+var cameraBody = null;
 // Booleans to toggle in main loop - for user input
-var stop = false;
+var stopSpin = false;
 var orbit = true;
 // SCALING AND TRANSLATION GLOBALS
 var scale = 1;
@@ -79,6 +79,11 @@ var symbols = {
 function deg(d) {
     return d * (Math.PI / 180);
 }
+// Return angle
+function calcAngleDegrees(x, y) {
+    return Math.atan2(y, x) * 180 / Math.PI;
+}
+
 // Formats Big Numbers
 function formatNumber(num) {
     return num.toLocaleString("en-US", {

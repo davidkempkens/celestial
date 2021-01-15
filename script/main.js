@@ -1,7 +1,7 @@
 // MAIN LOOP
 function start() {
     // Resize Canvas
-    resizeCanvasToDisplaySize();
+    resizeCanvas();
     // Clear Canvas each frame
     clearCanvas();
     // Draw Stars before transfomation to fill the whole canvas
@@ -22,20 +22,31 @@ function start() {
     // Reset Transformation Matrix
     c.restore();
 
-    // DRAW THINGS UNSCALED HERE
-    if (scale > .001) {
-        bigBodies.forEach(b => {
-            if (b.type != 'Moon') b.n();
-            if (b.isColliding && b.type != 'Moon') {
-                b.info();
-            }
-        });
-    } else {
-        drawText(['Solar System', `\u2205 ${formatNumber(50 * AU * 2e6)} km`], center, 13, true);
-        if (scale > 1e-12) m87.info();
-        universe.info();
-        alphaCentauri.forEach(a => a.n());
-    }
+    // SHOW NAMES AND INFOS ON MOUSE OVER
+    // DRAW UNSCALED
+    planets.forEach(p => {
+        p.n();
+        if (p.isColliding) p.info();
+    });
+    dwarfs.forEach(d => {
+        d.n();
+        if (d.isColliding) d.info();
+    })
+    suns.forEach(s => {
+        s.n();
+        if (s.isColliding) s.info();
+    })
+    sun.n();
+    if (sun.isColliding) sun.info();
+    m87.n();
+    if (m87.isColliding) m87.info();
+    universe.n();
+    if (universe.isColliding) universe.info();
+    alphaCentauri.forEach(a => {
+        a.n();
+        if (a.isColliding) a.info();
+    });
+    // drawText(['Solar System', `\u2205 ${formatNumber(50 * AU * 2e6)} km`], center, 13, true);
 
     if (scale > 5) {
         moons.forEach(m => m.n());
@@ -44,11 +55,10 @@ function start() {
         });
     }
 
-
     // ui
     ui();
     // camera planet
-    camera(cameraPlanet);
+    camera(cameraBody);
     // frameAnimation ID
     frAId = window.requestAnimationFrame(start);
 }
@@ -56,18 +66,6 @@ function start() {
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-}
-
-function resizeCanvasToDisplaySize() {
-    // look up the size the canvas is being displayed
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
-
-    // If it's resolution does not match change it
-    if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-    }
 }
 
 // Clear Canvas every frame - background color as global variable
@@ -79,7 +77,7 @@ function clearCanvas() {
 // DRAW SUNS, PLANETS, MOONS, ORBITS AND COLLISION DETECTION
 function drawEverything() {
 
-    if (!stop) everything.forEach(e => e.v = e.velocity * scaleV);
+    if (!stopSpin) everything.forEach(e => e.v = e.velocity * scaleV);
     else everything.forEach(e => e.v = 0);
 
     if (orbit) {
@@ -108,7 +106,7 @@ function drawEverything() {
                 if (e.r > sun.r) e.compare(sun);
                 else if (e.r > earth.r) e.compare(earth);
                 else if (e.r > moon.r) e.compare(moon);
-                else e.draw();
+                // else e.draw();
             }
         });
     }
@@ -118,14 +116,15 @@ function drawEverything() {
 
 // Center the canvas on a chosen body's position
 // Gets called every fram in the main loop
-// Uses global variable "cameraPlanet" as argument
+// Uses global variable "cameraBody" as argument
 function camera(body) {
-    // Does nothing if cameraPlanet is set to null
+    // Does nothing if cameraBody is set to null
     if (body == null) return;
-
-    // Zomm down to Planet
+    // Zoom down to Planet
     // if (scale < p.r * 100) scale /= scaleFactor + .07;
 
     center.x += (canvas.width / 2) - body.x;
     center.y += (canvas.height / 2) - body.y - body.r;
+
+
 }

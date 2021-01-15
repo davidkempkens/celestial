@@ -49,9 +49,22 @@ body {
     background-color: rgba(255, 255, 255, .05);
     padding: 5px 15px;
     margin: auto;
-    left: 5%;
+    /* left: 5%; */
     border-radius: 3px;
     display: flex;
+}
+
+#hud {
+    left: 5%;
+}
+
+#hud2 {
+    flex-direction: column;
+    flex-wrap: wrap;
+    right: 0;
+    top: 1%;
+    height: 99%;
+    width: 350px;
 }
 
 button {

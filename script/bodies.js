@@ -61,7 +61,7 @@ const universe = new CelestialBody('Observable Universe', center, 46500000000 * 
 const m87 = new CelestialBody('Messier87', center, 2600000000 * AU, 5000000000 * AU, 0, 0, 10000 * solarMass, 'white', 'Black Hole');
 
 // Suns
-const barnard = new CelestialBody('Barnard\'s Star', center, solarRadius * .2, 150 * AU, 0, 0, solarMass * .144, '#D9042B', 'Star');
+const barnard = new CelestialBody('Barnard\'s Star', center, solarRadius * .2, 5.958 * ly, -110.6, 0, solarMass * .144, '#D9042B', 'Star');
 const siriusA = new CelestialBody('Sirius A', center, 1.711 * solarRadius, 160 * AU, 0, 0, 2.063 * solarMass, '#52CBD9', 'Star');
 const betaCentauri = new CelestialBody('Beta Centauri', center, 9 * solarRadius, 170 * AU, 0, 0, 12.02 * solarMass, '#3037BF', 'Star');
 const r136a1 = new CelestialBody('R136a1', center, 39.2 * solarRadius, 210 * AU, 0, 0, 215 * solarMass, '#79DCF2', 'Star');
@@ -144,8 +144,9 @@ alphaCentauri.forEach(a => a.w = 0);
 // BIG BODIES ARRAY WITHOUT ASTEROIDS
 const bigBodies = [sun, m87, universe];
 alphaCentauri.forEach(a => bigBodies.push(a));
-moons.forEach(m => bigBodies.push(m));
 suns.forEach(s => bigBodies.push(s));
+// Planets array must be pushed before moons, or there is a weird bug
+moons.forEach(m => bigBodies.push(m));
 dwarfs.forEach(d => bigBodies.push(d));
 planets.forEach(p => bigBodies.push(p));
 
