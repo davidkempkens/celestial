@@ -55,8 +55,8 @@ function move(e) {
 document.body.addEventListener("touchstart", e => {
     e.preventDefault();
     var touch = {
-        x: e.touches[0].clientX,
-        y: e.touches[0].clientY
+        x: e.touches[0].clientX - canvas.getBoundingClientRect().left,
+        y: e.touches[0].clientY - canvas.getBoundingClientRect().top
     };
     var mE = new MouseEvent("mousedown", {
         clientX: touch.x,
@@ -68,8 +68,8 @@ document.body.addEventListener("touchstart", e => {
 document.body.addEventListener("touchmove", e => {
     e.preventDefault();
     var touch = {
-        x: e.touches[0].clientX,
-        y: e.touches[0].clientY,
+        x: e.touches[0].clientX - canvas.getBoundingClientRect().left,
+        y: e.touches[0].clientY - canvas.getBoundingClientRect().top
     };
     var mE = new MouseEvent("mousemove", {
         clientX: touch.x,
@@ -143,7 +143,7 @@ function ui() {
 
     // Bar Position
     let bar = {
-        x: (canvas.width / 2),
+        x: (canvas.width / 2) - AU,
         w: AU,
         y: canvas.height - (canvas.height / 30),
         r: 0
