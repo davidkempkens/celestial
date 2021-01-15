@@ -52,12 +52,24 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         // front = false
         this.saturnRings(false);
 
-        // DRAW ACTUL BODY
+        // DRAW ACTUAL BODY
         c.fillStyle = this.color;
         c.beginPath();
         c.arc(this.x, this.y, this.r, 0, Math.PI * 2);
         c.closePath();
         c.fill();
+
+
+        // DRAW SHAODW - Test
+        let startAngle = this.w - deg(90);
+        let endAngle = this.w + deg(90);
+        c.fillStyle = 'black';
+        c.globalAlpha = .1;
+        c.beginPath();
+        c.arc(this.x, this.y, this.r, startAngle, endAngle);
+        c.closePath();
+        c.fill();
+        c.globalAlpha = 1;
 
         // draw the half of saturns rings after, so they appear infront of Saturn
         // front = true
@@ -194,10 +206,10 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
     this.info = function() {
 
         var t = [
-            `${this.name} ${this.symbol} `, // Display Symbols
+            `${this.name} ${this.symbol} ${this.type}`, // Display Symbols
             `\u2192 ${formatNumber(this.distance * 1e6)} km `, // Display Distance
             `${formatNumber(this.velocity)} km/s `, // Display Velocity
-            `${this.type} Mass: ${formatNumber(this.mass.toExponential(0))} kg` // Display Type
+            ` Mass: ${formatNumber(this.mass.toExponential(0))} kg` // Display Type
         ]
         drawText(t, this, 13, true);
 

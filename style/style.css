@@ -7,7 +7,7 @@
 * {
     box-sizing: border-box;
     list-style: none;
-    font-family: Consolas, sans-serif;
+    font-family: Consolas, monaco, monospace;
     /* padding: 0;
     margin: 0; */
     touch-action: manipulation;
