@@ -58,7 +58,7 @@ const charon = new CelestialBody("Charon", pluto, .0006035, .017536, 0.2, 0.0022
 const universe = new CelestialBody('Observable Universe', center, 46500000000 * ly, 46500000000 * ly, 0, 0, 0, 'white', 'Universe');
 
 // BLACK HOLE
-const m87 = new CelestialBody('Messier87', center, 2600000000 * AU, 5000000000 * AU, 0, 0, 10000 * solarMass, 'white', 'Black Hole');
+const m87 = new CelestialBody('Messier87', center, 1.9e-3 * ly, 53.49e6 * ly, 0, 0, 7.22e9 * solarMass, 'white', 'Black Hole');
 
 // Suns
 const barnard = new CelestialBody('Barnard\'s Star', center, solarRadius * .2, 5.958 * ly, 0, 0, solarMass * .144, '#D9042B', 'Star');
@@ -77,10 +77,10 @@ const alphaCentauriB = new CelestialBody('Alpha Centauri B', alphaCentauriA, .86
 // ARRAYS
 // Planets Array
 const planets = [
+    mercury,
+    venus,
     earth,
     mars,
-    venus,
-    mercury,
     jupiter,
     saturn,
     uranus,

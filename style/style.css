@@ -45,7 +45,7 @@ body {
 }
 
 .hud {
-    position: fixed;
+    position: absolute;
     background-color: rgba(255, 255, 255, .05);
     padding: 5px 15px;
     margin: auto;
@@ -63,17 +63,18 @@ body {
     /* flex-wrap: wrap; */
     right: 0;
     top: 5%;
-    min-width: auto;
+    width: 15%;
     height: auto;
     /* align-items: left; */
 }
 
 #hud3 {
+    position: absolute;
     top: 5%;
-    right: 29%;
-    width: auto;
+    right: 1%;
     display: none;
     flex-direction: column;
+    width: fit-content;
 }
 
 button {
@@ -100,7 +101,7 @@ button:hover {
         left: initial;
         width: auto;
         max-width: 40%;
-        font-size: 14px;
+        font-size: 12px;
     }
     a {
         border-radius: 5px;
@@ -111,6 +112,8 @@ button:hover {
     }
     #hud2 {
         top: 0;
+        width: 50%;
+        flex-wrap: wrap;
     }
     #hud3 {
         right: auto;

@@ -50,7 +50,7 @@ function start() {
     }
     // OTHER BODIES
     suns.forEach(s => {
-        s.n();
+        if (scale > 1e-9) s.n();
         if (s.isColliding) s.info();
     })
     m87.n();
@@ -58,7 +58,7 @@ function start() {
     universe.n();
     if (universe.isColliding) universe.info();
     alphaCentauri.forEach(a => {
-        a.n();
+        if (scale > 1e-9) a.n();
         if (a.isColliding) a.info();
     });
 
@@ -105,7 +105,7 @@ function drawEverything() {
     alphaCentauri.forEach(a => a.run());
     m87.run();
     universe.run();
-
+    runParticles();
     // RUN COLLISION DETECTION
     // SOLAR SYSTEM BODIES
     sun.collision(mouse);
@@ -165,6 +165,40 @@ function camera(body) {
 
     center.x += (canvas.width / 2) - body.x;
     center.y += (canvas.height / 2) - body.y - body.r;
+}
 
+// PARTICLES
+let cen = sun
+let minR = cen.r * .00001;
+let maxR = cen.r * .00003;
+let minD = cen.r * 5;
+let maxD = cen.r * 25;
+let minV = 5000;
+let maxV = 10000;
+
+var particles = asteroidFactory(500, '. Particle', cen, minR, maxR, minD, maxD, minV, maxV, .1, 1e20, 'white', 'Particle');
+
+function runParticles() {
+    cen = cameraBody || m87;
+    minR = cen.r * .00001;
+    maxR = cen.r * .00003;
+    minD = cen.r * 5;
+    maxD = cen.r * 25;
+    minV = 5000;
+    maxV = 10000;
+
+    particles.forEach(p => {
+        p.run();
+        p.v += .00001;
+        p.d -= p.w * p.center.r * .01;
+        if (p.d < p.center.r * 1.3) {
+            let i = particles.indexOf(p);
+            if (i > -1) particles.splice(i, 1);
+            let newParticle = asteroidFactory(1, p.name, cen, minR, maxR, minD, maxD, minV, maxV, .1, 1e20, 'white', 'Particle');
+            particles.push(newParticle[0]);
+        }
+        p.sunShine();
+        p.orbit();
+    });
 
 }

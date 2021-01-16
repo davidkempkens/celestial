@@ -164,6 +164,10 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
             c.fill();
         }
     }
+    this.particles = function() {
+
+    }
+
     this.hover = function() {
         this.r *= 25;
         this.draw();
