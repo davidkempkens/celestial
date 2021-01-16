@@ -24,21 +24,35 @@ function start() {
 
     // SHOW NAMES AND INFOS ON MOUSE OVER
     // DRAW UNSCALED
-
-    planets.forEach(p => {
-        p.n();
-        if (p.isColliding) p.info();
-    });
-    dwarfs.forEach(d => {
-        d.n();
-        if (d.isColliding) d.info();
-    })
+    // SOLAR SYSTEM BODIES
+    if (scale > .01) {
+        sun.n();
+        if (sun.isColliding) sun.info();
+        planets.forEach(p => {
+            p.n();
+            if (p.isColliding) p.info();
+        });
+        dwarfs.forEach(d => {
+            d.n();
+            if (d.isColliding) d.info();
+        })
+        moons.forEach(m => {
+            if (scale > 10) m.n();
+            if (scale > 200 && m.isColliding) m.info();
+        });
+    } else {
+        let t = {
+            x: center.x,
+            y: center.y - 50 * AU,
+            r: 0
+        }
+        drawText(['Solar System', `\u2205 ${formatNumber(50 * AU * 2e6)} km`], t, 13, true);
+    }
+    // OTHER BODIES
     suns.forEach(s => {
         s.n();
         if (s.isColliding) s.info();
     })
-    sun.n();
-    if (sun.isColliding) sun.info();
     m87.n();
     if (m87.isColliding) m87.info();
     universe.n();
@@ -47,14 +61,6 @@ function start() {
         a.n();
         if (a.isColliding) a.info();
     });
-    // drawText(['Solar System', `\u2205 ${formatNumber(50 * AU * 2e6)} km`], center, 13, true);
-
-    if (scale > 5) {
-        moons.forEach(m => m.n());
-        if (scale > 200) moons.forEach(m => {
-            if (m.isColliding) m.info();
-        });
-    }
 
     // ui
     ui();
@@ -81,37 +87,71 @@ function drawEverything() {
     if (!stopSpin) everything.forEach(e => e.v = e.velocity * scaleV);
     else everything.forEach(e => e.v = 0);
 
-    if (orbit) {
+    if (orbit && scale > .03) {
         planets.forEach(p => p.orbit());
         // dwarfs.forEach(d => d.orbit());
         // moons.forEach(m => m.orbit());
     }
+    if (scale < .01) c.fillRect(center.x - 50 * AU, center.y, 100 * AU, 1 / scale);
     // RUN ALL BODIES
-    everything.forEach(e => e.run());
-    everything.forEach(e => e.collision(mouse));
+    // SOLAR SYSTEM BODIES
+    sun.run();
+    planets.forEach(p => p.run());
+    dwarfs.forEach(d => d.run());
+    moons.forEach(m => m.run());
+    if (scale > .01) asteroids.forEach(a => a.run());
+    // OTHER BODIES
+    suns.forEach(s => s.run());
+    alphaCentauri.forEach(a => a.run());
+    m87.run();
+    universe.run();
 
-    // Dynamically show infos
-    if (scale < .01) {
-        bigBodies.forEach(bB => {
-            if (bB.isColliding) {
-                bB.orbit();
-                bB.compare(sun);
-            }
-        });
-    } else {
-        everything.forEach(e => {
-            if (e.isColliding) {
-                e.orbit();
-                if (e.r > m87) e.compare(m87);
-                if (e.r > sun.r) e.compare(sun);
-                else if (e.r > earth.r) e.compare(earth);
-                else if (e.r > moon.r) e.compare(moon);
-                else e.draw();
-            }
-        });
-    }
+    // RUN COLLISION DETECTION
+    // SOLAR SYSTEM BODIES
+    sun.collision(mouse);
+    planets.forEach(p => p.collision(mouse));
+    dwarfs.forEach(d => d.collision(mouse));
+    moons.forEach(m => m.collision(mouse));
+    if (scale > .01) asteroids.forEach(a => a.collision(mouse));
+    // OTHER BODIES
+    suns.forEach(s => s.collision(mouse));
+    alphaCentauri.forEach(a => a.collision(mouse));
+    m87.collision(mouse);
+    universe.collision(mouse);
 
-    universe.compare(m87);
+    // ON COLLISON DISPLAY COMAPRE BODY AND ORBIT
+    if (sun.isColliding) sun.compare(earth);
+    planets.forEach(p => {
+        if (p.isColliding) {
+            p.orbit();
+            p.compare(earth);
+        }
+    });
+    dwarfs.forEach(d => {
+        if (d.isColliding) {
+            d.orbit();
+            d.compare(earth)
+        }
+    });
+    moons.forEach(m => {
+        if (m.isColliding) {
+            m.orbit();
+            m.compare(moon);
+        }
+        if (scale > 5 && orbit) m.orbit();
+    });
+    asteroids.forEach(a => {
+        if (a.isColliding && scale > .01) a.hover();
+    });
+    suns.forEach(s => {
+        if (s.isColliding) s.compare(sun);
+    });
+    alphaCentauri.forEach(a => {
+        if (a.isColliding) a.compare(sun);
+    });
+
+    if (m87.isColliding) m87.compare(sun);
+    if (universe.isColliding) universe.compare(m87);
 }
 
 // Center the canvas on a chosen body's position

@@ -60,10 +60,20 @@ body {
 
 #hud2 {
     flex-direction: column;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     right: 0;
     top: 5%;
-    height: 60%;
+    min-width: auto;
+    height: auto;
+    /* align-items: left; */
+}
+
+#hud3 {
+    top: 5%;
+    right: 29%;
+    width: auto;
+    display: none;
+    flex-direction: column;
 }
 
 button {
@@ -85,14 +95,26 @@ button:hover {
 @media only screen and (max-width: 600px) {
     .hud {
         flex-direction: column;
-        bottom: 0;
-        right: 5%;
+        /* bottom: 0; */
+        /* right: 5%; */
         left: initial;
+        width: auto;
+        max-width: 40%;
+        font-size: 14px;
     }
     a {
         border-radius: 5px;
         background-color: rgba(255, 255, 255, .05);
-        margin: 10px 0;
-        padding: 10px 10px;
+        margin: 4px 0;
+        padding: 4px 3px;
+        flex-wrap: wrap;
+    }
+    #hud2 {
+        top: 0;
+    }
+    #hud3 {
+        right: auto;
+        left: 0;
+        top: 50%;
     }
 }

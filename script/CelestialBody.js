@@ -15,7 +15,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
     this.color = color;
     this.type = type;
     this.symbol = symbols[name.toLowerCase()] || '';
-
+    this.satelites = [];
     // Calculated Properties
 
     // RADIUS
@@ -164,6 +164,11 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
             c.fill();
         }
     }
+    this.hover = function() {
+        this.r *= 25;
+        this.draw();
+        this.r = this.radius * scaleR;
+    }
 
     this.collision = function(other) {
         let distX = this.x - other.x;
@@ -178,15 +183,25 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         copy.x = this.x;
         copy.y = this.y + this.r + (25 / scale) + copy.r;
 
-        // DRAW THIS RADIUS AS BAR ABOVE THIS BODY
+        // DRAW MEAN AS BAR ABOVE THIS BODY
         c.fillStyle = this.color;
         c.fillRect(this.x - this.r, this.y - this.r - (10 / scale), this.r * 2, 2 / scale);
+
+        // DRAW LINE TO SHOW DIRECTION
+        c.beginPath();
+        c.strokeStyle = this.color;
+        c.lineWidth = .3 / scale;
+        c.moveTo(this.x, this.y);
+        c.lineTo(this.center.x, this.center.y);
+        c.stroke();
 
         if (this == other) return;
         // DRAW Other Body under this Body
         c.fillStyle = copy.color;
         c.fillRect(this.x - copy.r, (this.y + this.r) + (10 / scale), copy.r * 2, 2 / scale);
         copy.draw()
+
+
     }
 
     this.info = function() {

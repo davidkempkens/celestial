@@ -25,7 +25,7 @@ const scaleR = 1;
 // Scale for distances
 const scaleD = 1;
 // Scale for orbital velocity ~ .000005
-const scaleV = .00001;
+const scaleV = .000002;
 
 // AU - in Mio km
 const AU = 150;

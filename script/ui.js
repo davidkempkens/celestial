@@ -120,6 +120,8 @@ window.addEventListener("keypress", e => {
 // HUD ELEMENTS
 const hud = document.getElementById('hud');
 const hud2 = document.getElementById('hud2');
+const hud3 = document.getElementById('hud3');
+
 const cameraElement = document.getElementById('camera');
 const zoomElement = document.getElementById('zoomElement');
 const stopElement = document.getElementById('stopElement');
@@ -141,6 +143,10 @@ bigBodies.forEach(b => {
     }
 });
 
+// MOON LIST FILLED BOOLEAN
+var moonListFilled = false;
+var moonCount = 0;
+var currentListFrom = null;
 // HUD EVENTS
 cameraElement.addEventListener('click', () => {
     cameraBody = null;
@@ -189,9 +195,51 @@ function ui() {
     stopElement.style.color = stopSpin ? 'red' : 'green';
     // show current planets that gets follow by the camera in the hud
     if (cameraBody !== null) {
+
         cameraElement.innerHTML = '<b>C</b>amera: ' + cameraBody.name;
         cameraElement.style.color = cameraBody.color;
+
+        // FILL LIST ON THE RIGHT SIDE
+        // IF LIST IS CURRENTLY EMPTY
+        if (!moonListFilled) {
+            moons.forEach(m => {
+                if (m.center == cameraBody) {
+                    moonCount++;
+                    currentListFrom = m.center;
+                    let a = document.createElement('a');
+                    hud3.appendChild(a);
+                    a.style.color = m.color;
+                    a.innerHTML = m.name;
+                    a.href = '#';
+                    a.addEventListener('click', () => {
+                        cameraBody = m;
+                    });
+                }
+            });
+            moonListFilled = true;
+            if (moonCount > 0) {
+                hud3.style = 'display:flex';
+            }
+            // IF CAMERA BODY CHANGES BUT WITHOUT GOING NULL INBETWEEN
+            // CHECK IF CAMERA BODY MATCHES THE CURRENT LIST
+        } else {
+            if (currentListFrom != cameraBody) {
+                // IF CAMERA BODY IS CAHNGED DELETE AND HIDE LIST
+                hud3.innerHTML = '';
+                hud3.style.display = 'none';
+                moonListFilled = false;
+                moonCount = 0;
+                currentListFrom = null;
+            }
+        }
     } else {
+        // IF CAMERA BODY IS NULL DELETE AND HIDE LIST
+        hud3.innerHTML = '';
+        hud3.style.display = 'none';
+        moonListFilled = false;
+        moonCount = 0;
+        currentListFrom = null;
+
         cameraElement.innerHTML = 'Solar System';
         cameraElement.style.color = 'white';
     }

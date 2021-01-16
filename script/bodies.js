@@ -61,14 +61,14 @@ const universe = new CelestialBody('Observable Universe', center, 46500000000 * 
 const m87 = new CelestialBody('Messier87', center, 2600000000 * AU, 5000000000 * AU, 0, 0, 10000 * solarMass, 'white', 'Black Hole');
 
 // Suns
-const barnard = new CelestialBody('Barnard\'s Star', center, solarRadius * .2, 5.958 * ly, -110.6, 0, solarMass * .144, '#D9042B', 'Star');
-const siriusA = new CelestialBody('Sirius A', center, 1.711 * solarRadius, 160 * AU, 0, 0, 2.063 * solarMass, '#52CBD9', 'Star');
-const betaCentauri = new CelestialBody('Beta Centauri', center, 9 * solarRadius, 170 * AU, 0, 0, 12.02 * solarMass, '#3037BF', 'Star');
-const r136a1 = new CelestialBody('R136a1', center, 39.2 * solarRadius, 210 * AU, 0, 0, 215 * solarMass, '#79DCF2', 'Star');
-const gacrux = new CelestialBody('Gacrux', center, 120 * solarRadius, 230 * AU, 0, 0, 1.5 * solarMass, '#D91438', 'Star');
-const pistolStar = new CelestialBody('Pistol Star', center, 420 * solarRadius, 250 * AU, 0, 0, 27.5 * solarMass, '#0597F2', 'Star');
-const rhoCassiopeiae = new CelestialBody('Rho Cassiopeiae', center, 981 * solarRadius, 300 * AU, 0, 0, 40 * solarMass, '#F5EFC8', 'Star');
-const stephenson218 = new CelestialBody('Stephenson 2-18', center, 2150 * solarRadius, 400 * AU, 0, 0, 1000 * solarMass, '#F21905', 'Star');
+const barnard = new CelestialBody('Barnard\'s Star', center, solarRadius * .2, 5.958 * ly, 0, 0, solarMass * .144, '#D9042B', 'Star');
+const siriusA = new CelestialBody('Sirius A', center, 1.711 * solarRadius, 8.611 * ly, 0, 0, 2.063 * solarMass, '#52CBD9', 'Star');
+const betaCentauri = new CelestialBody('Beta Centauri', center, 9 * solarRadius, 391.4 * ly, 0, 0, 12.02 * solarMass, '#3037BF', 'Star');
+const r136a1 = new CelestialBody('R136a1', center, 39.2 * solarRadius, 163000 * ly, 0, 0, 215 * solarMass, '#79DCF2', 'Star');
+const gacrux = new CelestialBody('Gacrux', center, 120 * solarRadius, 88.71 * ly, 0, 0, 1.5 * solarMass, '#D91438', 'Star');
+const pistolStar = new CelestialBody('Pistol Star', center, 420 * solarRadius, 26.090 * ly, 0, 0, 27.5 * solarMass, '#0597F2', 'Star');
+const rhoCassiopeiae = new CelestialBody('Rho Cassiopeiae', center, 981 * solarRadius, 3400 * ly, 0, 0, 40 * solarMass, '#F5EFC8', 'Star');
+const stephenson218 = new CelestialBody('Stephenson 2-18', center, 2150 * solarRadius, 19570 * ly, 0, 0, 1000 * solarMass, '#F21905', 'Star');
 
 // Alpha Centauri
 const alphaCentauriA = new CelestialBody('Alpha Centauri A', center, 1.2234 * solarRadius, 4.37 * ly, 0, 0, 1.1 * solarMass, '#F2B05E', 'Star');
@@ -134,23 +134,22 @@ const mainBelt = asteroidFactory(200, 'Main Asteroid', sun, .0001, .0006, 600, 1
 const suns = [barnard, siriusA, betaCentauri, r136a1, gacrux, pistolStar, rhoCassiopeiae, stephenson218];
 
 // Align on the right side to compare sizes
-suns.forEach(s => s.w = 0);
+// suns.forEach(s => s.w = 0);
 m87.w = 0;
 
 // ALPHA CENTAURI ARRAY
 const alphaCentauri = [alphaCentauriA, alphaCentauriB];
-alphaCentauri.forEach(a => a.w = 0);
+// alphaCentauri.forEach(a => a.w = 0);
 
 // BIG BODIES ARRAY WITHOUT ASTEROIDS
-const bigBodies = [sun, m87, universe];
-alphaCentauri.forEach(a => bigBodies.push(a));
-suns.forEach(s => bigBodies.push(s));
+const bigBodies = [sun];
 // Planets array must be pushed before moons, or there is a weird bug
+moons.forEach(m => bigBodies.push(m));
 planets.forEach(p => bigBodies.push(p));
 dwarfs.forEach(d => bigBodies.push(d));
-moons.forEach(m => bigBodies.push(m));
-
-
+alphaCentauri.forEach(a => bigBodies.push(a));
+suns.forEach(s => bigBodies.push(s));
+bigBodies.push(m87, universe);
 // ASTEROIDS ARRAY
 const asteroids = [];
 mainBelt.forEach(a => asteroids.push(a));
@@ -160,3 +159,12 @@ kuiperBelt.forEach(k => asteroids.push(k));
 var everything = [sun, m87, universe];
 asteroids.forEach(d => everything.push(d));
 bigBodies.forEach(p => everything.push(p));
+
+// RELATIONSHIP OF BODIES TO ITS SATELITES
+everything.forEach(p => {
+    everything.forEach(m => {
+        if (m.center == p) {
+            p.satelites.push(m);
+        }
+    });
+});
