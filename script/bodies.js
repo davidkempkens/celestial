@@ -135,7 +135,7 @@ const suns = [barnard, siriusA, betaCentauri, r136a1, gacrux, pistolStar, rhoCas
 
 // Align on the right side to compare sizes
 suns.forEach(s => s.w = 0);
-m87.w = 0
+m87.w = 0;
 
 // ALPHA CENTAURI ARRAY
 const alphaCentauri = [alphaCentauriA, alphaCentauriB];
@@ -146,9 +146,9 @@ const bigBodies = [sun, m87, universe];
 alphaCentauri.forEach(a => bigBodies.push(a));
 suns.forEach(s => bigBodies.push(s));
 // Planets array must be pushed before moons, or there is a weird bug
-moons.forEach(m => bigBodies.push(m));
-dwarfs.forEach(d => bigBodies.push(d));
 planets.forEach(p => bigBodies.push(p));
+dwarfs.forEach(d => bigBodies.push(d));
+moons.forEach(m => bigBodies.push(m));
 
 
 // ASTEROIDS ARRAY

@@ -84,7 +84,7 @@ document.body.addEventListener("touchend", () => {
 });
 
 // HANDLE KEYBOARD EVENTS
-window.addEventListener("keypress", (e) => {
+window.addEventListener("keypress", e => {
     switch (e.key) {
         case "s":
             stopSpin = !stopSpin;
@@ -129,14 +129,16 @@ const minusElement = document.getElementById('minusElement');
 
 // FILL LIST ON THE RIGHT SIDE
 bigBodies.forEach(b => {
-    let a = document.createElement('a');
-    hud2.appendChild(a);
-    a.style.color = b.color;
-    a.innerHTML = b.name;
-    a.href = '#';
-    a.addEventListener('click', () => {
-        cameraBody = b;
-    });
+    if (b.type != 'Moon') {
+        let a = document.createElement('a');
+        hud2.appendChild(a);
+        a.style.color = b.color;
+        a.innerHTML = b.name;
+        a.href = '#';
+        a.addEventListener('click', () => {
+            cameraBody = b;
+        });
+    }
 });
 
 // HUD EVENTS

@@ -24,6 +24,7 @@ function start() {
 
     // SHOW NAMES AND INFOS ON MOUSE OVER
     // DRAW UNSCALED
+
     planets.forEach(p => {
         p.n();
         if (p.isColliding) p.info();
@@ -87,11 +88,11 @@ function drawEverything() {
     }
     // RUN ALL BODIES
     everything.forEach(e => e.run());
+    everything.forEach(e => e.collision(mouse));
 
     // Dynamically show infos
     if (scale < .01) {
         bigBodies.forEach(bB => {
-            bB.collision(mouse);
             if (bB.isColliding) {
                 bB.orbit();
                 bB.compare(sun);
@@ -99,14 +100,13 @@ function drawEverything() {
         });
     } else {
         everything.forEach(e => {
-            e.collision(mouse);
             if (e.isColliding) {
                 e.orbit();
                 if (e.r > m87) e.compare(m87);
                 if (e.r > sun.r) e.compare(sun);
                 else if (e.r > earth.r) e.compare(earth);
                 else if (e.r > moon.r) e.compare(moon);
-                // else e.draw();
+                else e.draw();
             }
         });
     }

@@ -62,9 +62,8 @@ body {
     flex-direction: column;
     flex-wrap: wrap;
     right: 0;
-    top: 1%;
-    height: 99%;
-    width: 350px;
+    top: 5%;
+    height: 60%;
 }
 
 button {

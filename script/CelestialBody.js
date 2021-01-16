@@ -141,7 +141,6 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
     this.sunShine = function() {
         if (this.type != 'Star') return;
         for (let i = 0; i < 10; i++) {
-            // c.fillStyle = `rgba(242, 165, 22, ${.01 - .001 * i})`;
             c.fillStyle = this.color;
             c.globalAlpha = .01 - .001 * i;
             c.beginPath();
@@ -156,7 +155,6 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
     this.eventHorizon = function() {
         if (this.type != 'Black Hole') return;
         var colBH = ["#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"];
-        // var sizes = [1.075, 1.05, 1.025, 1.01, 1];
         var sizes = [1, .99, .98, .97, .96];
         for (let i = 0; i < sizes.length; i++) {
             c.fillStyle = colBH[i];
