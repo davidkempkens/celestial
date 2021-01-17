@@ -16,11 +16,11 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
     this.type = type;
     this.symbol = symbols[name.toLowerCase()] || '';
     this.satelites = [];
+
     // Calculated Properties
 
     // RADIUS
     this.r = this.radius * scaleR;
-    // this.r *= this.name === 'Sun' ? .2 : 1;
 
     // DISTANCE + center radius + planets radius
     this.d = this.distance ? (this.distance * scaleD) + (this.center.r + this.r) : this.distance;
@@ -44,6 +44,21 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
 
     // flag for collision function
     this.isColliding = false;
+
+    // PARTICLE PROPERTIES
+    this.particle = {
+        name: '. Particle of ' + this.name,
+        minR: this.r * .00001,
+        maxR: this.r * .00003,
+        minD: this.r * 5,
+        maxD: this.r * 25,
+        minV: 5000,
+        maxV: 10000,
+        e: .1,
+        m: 1e10,
+        color: 'white',
+        t: 'Particle'
+    };
 
     // DRAW CIRCLE ON CANVAS
     this.draw = function() {
@@ -164,8 +179,39 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
             c.fill();
         }
     }
-    this.particles = function() {
 
+    this.vortex = function() {
+        // particles ARRAY IS GLOBAL IN bodies.js
+        // Properties get drawn from the Body Object
+
+        particles.forEach(p => {
+            p.run();
+            p.v += .00001;
+            p.d -= p.w * p.center.r * .01;
+            if (p.d < p.center.r * 1.3) {
+                let i = particles.indexOf(p);
+                if (i > -1) particles.splice(i, 1);
+                let newParticle = asteroidFactory(1, this.particle.name, this, this.particle.minR, this.particle.maxR, this.particle.minD, this.particle.maxD, this.particle.minV, this.particle.maxV, this.particle.e, this.particle.m, this.particle.color, this.particle.t);
+                newParticle.forEach(nP => particles.push(nP));
+            }
+            // p.compare(sun);
+            p.orbit();
+        });
+    }
+    this.fly = function() {
+        this.d += this.v;
+        this.x = this.center.x + this.d;
+        this.y = this.center.y;
+
+        this.draw();
+        this.n();
+        // DRAW LINE TO SHOW DIRECTION
+        c.beginPath();
+        c.strokeStyle = this.color;
+        c.lineWidth = .3 / scale;
+        c.moveTo(this.center.x, this.center.y);
+        c.lineTo(this.x, this.y);
+        c.stroke();
     }
 
     this.hover = function() {
@@ -266,6 +312,50 @@ function Star(w, h) {
         c.arc(this.x, this.y, this.r, 0, Math.PI * 2);
         c.closePath();
         c.fill();
+    }
+}
+
+function SpaceShip(name, size, center, distance, velocity, color, type) {
+    this.name = name;
+    this.size = size;
+    this.center = center;
+    this.distance = distance;
+    this.velocity = velocity;
+    this.color = color;
+    this.type = type;
+    this.v = this.velocity * scaleV;
+    this.d = this.distance * scaleD;
+    this.x = this.center.x + this.d;
+    this.y = this.center.y;
+
+
+    this.fly = function() {
+
+        this.d += this.v;
+        this.x = this.center.x + this.d;
+        this.y = this.center.y;
+
+        this.draw();
+        this.n();
+        // DRAW LINE TO SHOW DIRECTION
+        c.beginPath();
+        c.strokeStyle = this.color;
+        c.lineWidth = .3 / scale;
+        c.moveTo(this.center.x, this.center.y);
+        c.lineTo(this.x, this.y);
+        c.stroke();
+    }
+
+    this.draw = function() {
+        c.fillStyle = this.color;
+        c.beginPath();
+        c.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        c.closePath();
+        c.fill();
+    }
+
+    this.n = function() {
+        drawText(this.name, this, 13, true);
     }
 }
 

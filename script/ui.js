@@ -26,7 +26,9 @@ function down(e) {
 
     // Click on body to camera
     bigBodies.forEach(bB => {
-        if (bB.isColliding) cameraBody = bB;
+        if (bB.isColliding) {
+            cameraBody = bB;
+        }
     });
 }
 
@@ -118,9 +120,9 @@ window.addEventListener("keypress", e => {
 });
 
 // HUD ELEMENTS
-const hud = document.getElementById('hud');
-const hud2 = document.getElementById('hud2');
-const hud3 = document.getElementById('hud3');
+const hud = document.getElementById('hud-top');
+const hud2 = document.getElementById('hud-planets');
+const hud3 = document.getElementById('hud-moons');
 
 const cameraElement = document.getElementById('camera');
 const zoomElement = document.getElementById('zoomElement');
@@ -138,8 +140,10 @@ bigBodies.forEach(b => {
         a.innerHTML = b.name;
         a.href = '#';
         a.addEventListener('click', () => {
+            scale = cameraBody == b ? 10 / b.r : 10 / sun.r;
             cameraBody = b;
         });
+        a.addEventListener('mouseover', () => {});
     }
 });
 

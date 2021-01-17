@@ -1,7 +1,8 @@
 :root {
     --dark-color: #182D40;
     --highlight-color: #f2a516;
-    --light-color: #EBF0F2;
+    --light-color: rgba(255, 255, 255, .05);
+    --width-hud: 15%;
 }
 
 * {
@@ -17,7 +18,7 @@
 a {
     color: white;
     opacity: .5;
-    margin: 0 15px;
+    margin: 2px 15px;
     text-align: center;
 }
 
@@ -46,35 +47,32 @@ body {
 
 .hud {
     position: absolute;
-    background-color: rgba(255, 255, 255, .05);
+    background-color: var(--light-color);
     padding: 5px 15px;
     margin: auto;
-    /* left: 5%; */
-    border-radius: 3px;
+    /* border-radius: 3px; */
     display: flex;
 }
 
-#hud {
+#hud-top {
     left: 5%;
 }
 
-#hud2 {
+#hud-planets {
     flex-direction: column;
     /* flex-wrap: wrap; */
     right: 0;
     top: 5%;
-    width: 15%;
+    width: var(--width-hud);
     height: auto;
-    /* align-items: left; */
 }
 
-#hud3 {
+#hud-moons {
+    flex-direction: column;
     position: absolute;
     top: 5%;
-    right: 1%;
     display: none;
-    flex-direction: column;
-    width: fit-content;
+    right: var(--width-hud);
 }
 
 button {

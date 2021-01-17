@@ -1,5 +1,8 @@
 // Instantiating all Celestial Objects
 
+// STARS ARRAY
+const stars = starsFactory(300);
+
 // Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color - Type
 const sun = new CelestialBody("Sun", center, .696342, 0, 0, 0, 1.9855e30, "#F2A516", "Star");
 
@@ -51,28 +54,14 @@ const oberon = new CelestialBody("Oberon", uranus, .0007614, .583519, 3.152, 0.0
 const triton = new CelestialBody("Triton", neptune, .0013534, .354759, 4.39, 0.00002, 2.14e22, "#F2C879", "Moon");
 // Pluto Moon
 const charon = new CelestialBody("Charon", pluto, .0006035, .017536, 0.2, 0.0022, .152e22, "#F2C879", "Moon");
-//-----------------------------------------------------//
-//-----------------------------------------------------//
-//-----------------------------------------------------//
-// OBSERVABLE UNIVERSE SCALE Radius 46,5 billion lightyears / 93 billion lighty-years Durchmesser
-const universe = new CelestialBody('Observable Universe', center, 46500000000 * ly, 46500000000 * ly, 0, 0, 0, 'white', 'Universe');
 
-// BLACK HOLE
-const m87 = new CelestialBody('Messier87', center, 1.9e-3 * ly, 53.49e6 * ly, 0, 0, 7.22e9 * solarMass, 'white', 'Black Hole');
+// ASteroid Belts
+const mainBelt = asteroidFactory(200, 'Main Asteroid', sun, .0001, .0006, 600, 150, 17, 25, .2, 10e10, '#5E574F', 'Asteroid');
+const kuiperBelt = asteroidFactory(1000, 'Kuiper Asteroid', sun, .0001, .0006, 30 * AU, 20 * AU, 17, 25, .1, 10e10, '#5E574F', 'Asteroid');
+const oortCloud = asteroidFactory(1000, 'Oort Cloud Asteroid', sun, .1, .6, 2000 * AU, 5000 * AU, -17, -25, .1, 1e25, '#5E574F', 'Asteroid');
 
-// Suns
-const barnard = new CelestialBody('Barnard\'s Star', center, solarRadius * .2, 5.958 * ly, 0, 0, solarMass * .144, '#D9042B', 'Star');
-const siriusA = new CelestialBody('Sirius A', center, 1.711 * solarRadius, 8.611 * ly, 0, 0, 2.063 * solarMass, '#52CBD9', 'Star');
-const betaCentauri = new CelestialBody('Beta Centauri', center, 9 * solarRadius, 391.4 * ly, 0, 0, 12.02 * solarMass, '#3037BF', 'Star');
-const r136a1 = new CelestialBody('R136a1', center, 39.2 * solarRadius, 163000 * ly, 0, 0, 215 * solarMass, '#79DCF2', 'Star');
-const gacrux = new CelestialBody('Gacrux', center, 120 * solarRadius, 88.71 * ly, 0, 0, 1.5 * solarMass, '#D91438', 'Star');
-const pistolStar = new CelestialBody('Pistol Star', center, 420 * solarRadius, 26.090 * ly, 0, 0, 27.5 * solarMass, '#0597F2', 'Star');
-const rhoCassiopeiae = new CelestialBody('Rho Cassiopeiae', center, 981 * solarRadius, 3400 * ly, 0, 0, 40 * solarMass, '#F5EFC8', 'Star');
-const stephenson218 = new CelestialBody('Stephenson 2-18', center, 2150 * solarRadius, 19570 * ly, 0, 0, 1000 * solarMass, '#F21905', 'Star');
-
-// Alpha Centauri
-const alphaCentauriA = new CelestialBody('Alpha Centauri A', center, 1.2234 * solarRadius, 4.37 * ly, 0, 0, 1.1 * solarMass, '#F2B05E', 'Star');
-const alphaCentauriB = new CelestialBody('Alpha Centauri B', alphaCentauriA, .8632 * solarRadius, 7, 0, .124, 35.6 * AU, '#D98F4E', 'Star');
+// SPACE PROBES
+const voyager1 = new CelestialBody('Yoyager 1', earth, 1, 152.2 * AU, 17, 0, 100, 'white', 'Probe');
 
 // ARRAYS
 // Planets Array
@@ -122,13 +111,28 @@ const moons = [
     triton,
     charon
 ];
+//-----------------------------------------------------//
+//-----------------------------------------------------//
+//-----------------------------------------------------//
+// OBSERVABLE UNIVERSE SCALE Radius 46,5 billion lightyears / 93 billion lighty-years Durchmesser
+const universe = new CelestialBody('Observable Universe', center, 46500000000 * ly, 46500000000 * ly, 0, 0, 0, 'white', 'Universe');
 
-// STARS ARRAY
-const stars = starsFactory(500);
+// BLACK HOLE
+const m87 = new CelestialBody('M87*', center, 1.9e-3 * ly, 53.49e6 * ly, 0, 0, 7.22e9 * solarMass, 'white', 'Black Hole');
 
-// ASTEROIDS ARRAY
-const kuiperBelt = asteroidFactory(800, 'Kuiper Asteroid', sun, .0001, .0006, 30 * AU, 20 * AU, 17, 25, .1, 10e10, '#5E574F', 'Asteroid');
-const mainBelt = asteroidFactory(200, 'Main Asteroid', sun, .0001, .0006, 600, 150, 17, 25, .2, 10e10, '#5E574F', 'Asteroid');
+// Suns
+const barnard = new CelestialBody('Barnard\'s Star', center, solarRadius * .2, 5.958 * ly, 0, 0, solarMass * .144, '#D9042B', 'Star');
+const siriusA = new CelestialBody('Sirius A', center, 1.711 * solarRadius, 8.611 * ly, 0, 0, 2.063 * solarMass, '#52CBD9', 'Star');
+const betaCentauri = new CelestialBody('Beta Centauri', center, 9 * solarRadius, 391.4 * ly, 0, 0, 12.02 * solarMass, '#3037BF', 'Star');
+const r136a1 = new CelestialBody('R136a1', center, 39.2 * solarRadius, 163000 * ly, 0, 0, 215 * solarMass, '#79DCF2', 'Star');
+const gacrux = new CelestialBody('Gacrux', center, 120 * solarRadius, 88.71 * ly, 0, 0, 1.5 * solarMass, '#D91438', 'Star');
+const pistolStar = new CelestialBody('Pistol Star', center, 420 * solarRadius, 26.090 * ly, 0, 0, 27.5 * solarMass, '#0597F2', 'Star');
+const rhoCassiopeiae = new CelestialBody('Rho Cassiopeiae', center, 981 * solarRadius, 3400 * ly, 0, 0, 40 * solarMass, '#F5EFC8', 'Star');
+const stephenson218 = new CelestialBody('Stephenson 2-18', center, 2150 * solarRadius, 19570 * ly, 0, 0, 1000 * solarMass, '#F21905', 'Star');
+
+// Alpha Centauri
+const alphaCentauriA = new CelestialBody('Alpha Centauri A', center, 1.2234 * solarRadius, 4.37 * ly, 0, 0, 1.1 * solarMass, '#F2B05E', 'Star');
+const alphaCentauriB = new CelestialBody('Alpha Centauri B', alphaCentauriA, .8632 * solarRadius, 7, 0, .124, 35.6 * AU, '#D98F4E', 'Star');
 
 // SUN ARRAY
 const suns = [barnard, siriusA, betaCentauri, r136a1, gacrux, pistolStar, rhoCassiopeiae, stephenson218];
@@ -150,10 +154,12 @@ dwarfs.forEach(d => bigBodies.push(d));
 alphaCentauri.forEach(a => bigBodies.push(a));
 suns.forEach(s => bigBodies.push(s));
 bigBodies.push(m87, universe);
+
 // ASTEROIDS ARRAY
 const asteroids = [];
 mainBelt.forEach(a => asteroids.push(a));
 kuiperBelt.forEach(k => asteroids.push(k));
+oortCloud.forEach(o => asteroids.push(o));
 
 // EVERYTHING ARRAY FOR EASY HANDLING
 var everything = [sun, m87, universe];
@@ -168,3 +174,14 @@ everything.forEach(p => {
         }
     });
 });
+
+// PARTICLES
+let cen = m87;
+let minR = cen.r * .00001;
+let maxR = cen.r * .00003;
+let minD = cen.r * 5;
+let maxD = cen.r * 25;
+let minV = 5000;
+let maxV = 10000;
+
+var particles = asteroidFactory(800, '. Particle', cen, minR, maxR, minD, maxD, minV, maxV, .1, 1e20, 'white', 'Particle');
