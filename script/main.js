@@ -71,17 +71,6 @@ function start() {
     // frameAnimation ID
     frAId = window.requestAnimationFrame(start);
 }
-// Resize Canvas
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-
-// Clear Canvas every frame - background color as global variable
-function clearCanvas() {
-    c.fillStyle = bg;
-    c.fillRect(0, 0, canvas.width, canvas.height);
-}
 
 // DRAW SUNS, PLANETS, MOONS, ORBITS AND COLLISION DETECTION
 function drawEverything() {
@@ -97,7 +86,7 @@ function drawEverything() {
     if (scale < .01) c.fillRect(center.x - 50 * AU, center.y, 100 * AU, 1 / scale);
     // RUN PARTICLES
     // runParticles();
-    m87.vortex();
+
     // RUN ALL BODIES
     // SOLAR SYSTEM BODIES
     sun.run();
@@ -112,7 +101,7 @@ function drawEverything() {
     alphaCentauri.forEach(a => a.run());
     m87.run();
     universe.run();
-
+    m87.vortex();
     // RUN COLLISION DETECTION
     // SOLAR SYSTEM BODIES
     sun.collision(mouse);

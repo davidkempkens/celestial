@@ -61,7 +61,7 @@ const kuiperBelt = asteroidFactory(1000, 'Kuiper Asteroid', sun, .0001, .0006, 3
 const oortCloud = asteroidFactory(1000, 'Oort Cloud Asteroid', sun, .1, .6, 2000 * AU, 5000 * AU, -17, -25, .1, 1e25, '#5E574F', 'Asteroid');
 
 // SPACE PROBES
-const voyager1 = new CelestialBody('Yoyager 1', earth, 1, 152.2 * AU, 17, 0, 100, 'white', 'Probe');
+const voyager1 = new CelestialBody('Yoyager 1', earth, .003, 152.2 * AU, 17, 0, 825.5, 'white', 'Probe');
 
 // ARRAYS
 // Planets Array
@@ -151,10 +151,10 @@ const bigBodies = [sun];
 moons.forEach(m => bigBodies.push(m));
 planets.forEach(p => bigBodies.push(p));
 dwarfs.forEach(d => bigBodies.push(d));
+bigBodies.push(m87, universe);
+bigBodies.push(voyager1)
 alphaCentauri.forEach(a => bigBodies.push(a));
 suns.forEach(s => bigBodies.push(s));
-bigBodies.push(m87, universe);
-
 // ASTEROIDS ARRAY
 const asteroids = [];
 mainBelt.forEach(a => asteroids.push(a));
@@ -176,12 +176,6 @@ everything.forEach(p => {
 });
 
 // PARTICLES
-let cen = m87;
-let minR = cen.r * .00001;
-let maxR = cen.r * .00003;
-let minD = cen.r * 5;
-let maxD = cen.r * 25;
-let minV = 5000;
-let maxV = 10000;
-
-var particles = asteroidFactory(800, '. Particle', cen, minR, maxR, minD, maxD, minV, maxV, .1, 1e20, 'white', 'Particle');
+let g = m87;
+let particleCount = 300;
+var particles = asteroidFactory(particleCount, g + '\'s . Particle', g, g.particle.minR, g.particle.maxR, g.particle.minD, g.particle.maxD, g.particle.minV, g.particle.maxV, g.particle.e, g.particle.m, g.particle.color, g.particle.t);

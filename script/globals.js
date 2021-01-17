@@ -3,6 +3,7 @@
 // GET CANVAS ELEMENT & DRAWING CONTEXT FROM THE DOM
 const canvas = document.getElementById('canvas');
 const c = canvas.getContext('2d');
+const img = document.getElementById('img');
 
 // Set canvas to fullscreen
 canvas.width = window.innerWidth;
@@ -73,6 +74,18 @@ var symbols = {
     pluto: '\u2647',
     moon: '\u263D',
     sun: '\u{1F31E}'
+}
+
+// Resize Canvas
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+// Clear Canvas every frame - background color as global variable
+function clearCanvas() {
+    c.fillStyle = bg;
+    c.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 // Convert degrees to radians
