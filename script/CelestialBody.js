@@ -45,21 +45,6 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
     // flag for collision function
     this.isColliding = false;
 
-    // PARTICLE PROPERTIES
-    this.particle = {
-        name: '. Particle of ' + this.name,
-        minR: this.r * 1e-6,
-        maxR: this.r * 1e-5,
-        minD: this.r * 1e-2,
-        maxD: this.r * 1,
-        minV: 5,
-        maxV: 10,
-        e: .0,
-        m: 1e10,
-        color: 'black',
-        t: 'Particle'
-    };
-
     // DRAW CIRCLE ON CANVAS
     this.draw = function() {
 
@@ -180,6 +165,22 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         }
     }
 
+    // PARTICLE PROPERTIES
+    this.particle = {
+        count: 1000,
+        name: '. Particle of ' + this.name,
+        minR: this.r * 1e-6,
+        maxR: this.r * 1e-5,
+        minD: this.r * 1e-2,
+        maxD: this.r * 2,
+        minV: 5,
+        maxV: 10,
+        e: .9,
+        m: 1e10,
+        color: this.colBH[Math.floor(Math.random() * (this.colBH.length + 1))],
+        t: 'Particle'
+    };
+
     this.vortex = function() {
         // particles ARRAY IS GLOBAL IN bodies.js
         // Properties get drawn from the Body Object
@@ -193,10 +194,10 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
                 if (i > -1) particles.splice(i, 1);
                 let newParticle = asteroidFactory(1, this.particle.name, this, this.particle.minR, this.particle.maxR, this.particle.minD, this.particle.maxD, this.particle.minV, this.particle.maxV, this.particle.e, this.particle.m, this.particle.color, this.particle.t);
                 newParticle.forEach(nP => particles.push(nP));
-                newParticle[0].color = this.colBH[Math.floor(Math.random() * this.colBH.length)];
+                newParticle[0].color = this.colBH[Math.floor(Math.random() * (this.colBH.length + 1))];
             }
             c.lineWidth = .01;
-            // p.orbit();
+            p.orbit();
         });
     }
 

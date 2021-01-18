@@ -177,5 +177,4 @@ everything.forEach(p => {
 
 // PARTICLES
 let g = m87;
-let particleCount = 300;
-var particles = asteroidFactory(particleCount, g + '\'s . Particle', g, g.particle.minR, g.particle.maxR, g.particle.minD, g.particle.maxD, g.particle.minV, g.particle.maxV, g.particle.e, g.particle.m, g.particle.color, g.particle.t);
+var particles = asteroidFactory(g.particle.count, g + '\'s . Particle', g, g.particle.minR, g.particle.maxR, g.particle.minD, g.particle.maxD, g.particle.minV, g.particle.maxV, g.particle.e, g.particle.m, g.particle.color, g.particle.t);

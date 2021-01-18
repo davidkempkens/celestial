@@ -99,9 +99,9 @@ function drawEverything() {
     // OTHER BODIES
     suns.forEach(s => s.run());
     alphaCentauri.forEach(a => a.run());
+    m87.vortex();
     m87.run();
     universe.run();
-    m87.vortex();
     // RUN COLLISION DETECTION
     // SOLAR SYSTEM BODIES
     sun.collision(mouse);
