@@ -25,9 +25,12 @@ var trans = {
 const scaleR = 1;
 // Scale for distances
 const scaleD = 1;
-// Scale for orbital velocity ~ .000005
-const scaleV = .000002;
-
+// Scale for velocity 1 / 60e6
+const scaleV = (1 / 60e6) * 10;
+// TIMER FOR MEASURIG
+var startTime = 0;
+// SPEED OF LIGHT - C
+const C = 299792.458;
 // AU - in Mio km
 const AU = 150;
 // Light year in AU

@@ -64,6 +64,10 @@ function start() {
         if (a.isColliding) a.info();
     });
 
+    // LIGHTSPEED TEST
+    lightRay.n();
+    if (lightRay.isColliding) lightRay.info();
+
     // ui
     ui();
     // camera planet
@@ -95,7 +99,8 @@ function drawEverything() {
     moons.forEach(m => m.run());
     if (scale > .01) asteroids.forEach(a => a.run());
     oortCloud.forEach(o => o.run());
-    voyager1.fly();
+    voyager1.voyager();
+    lightRay.lightSpeed();
     // OTHER BODIES
     suns.forEach(s => s.run());
     alphaCentauri.forEach(a => a.run());
@@ -111,6 +116,7 @@ function drawEverything() {
     if (scale > .01) asteroids.forEach(a => a.collision(mouse));
     oortCloud.forEach(o => o.collision(mouse));
     voyager1.collision(mouse);
+    lightRay.collision(mouse);
     // OTHER BODIES
     suns.forEach(s => s.collision(mouse));
     alphaCentauri.forEach(a => a.collision(mouse));
@@ -165,3 +171,11 @@ function camera(body) {
     center.x += (canvas.width / 2) - body.x;
     center.y += (canvas.height / 2) - body.y - body.r;
 }
+
+setInterval(timer, 1000);
+
+function timer() {
+    var d = new Date();
+    var t = d.toLocaleString();
+    startTime++;
+};

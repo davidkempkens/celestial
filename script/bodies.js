@@ -55,15 +55,14 @@ const triton = new CelestialBody("Triton", neptune, .0013534, .354759, 4.39, 0.0
 // Pluto Moon
 const charon = new CelestialBody("Charon", pluto, .0006035, .017536, 0.2, 0.0022, .152e22, "#F2C879", "Moon");
 
-// ASteroid Belts
-const mainBelt = asteroidFactory(200, 'Main Asteroid', sun, .0001, .0006, 600, 150, 17, 25, .2, 10e10, '#5E574F', 'Asteroid');
-const kuiperBelt = asteroidFactory(1000, 'Kuiper Asteroid', sun, .0001, .0006, 30 * AU, 20 * AU, 17, 25, .1, 10e10, '#5E574F', 'Asteroid');
-const oortCloud = asteroidFactory(1000, 'Oort Cloud Asteroid', sun, .1, .6, 2000 * AU, 5000 * AU, -17, -25, .1, 1e25, '#5E574F', 'Asteroid');
+// Asteroid Belts - Sizes not to scale
+const mainBelt = asteroidFactory(200, 'Main Asteroid', sun, .001, .002, 600, 750, 17, 25, 0, .2, 10e10, '#5E574F', 'Asteroid');
+const kuiperBelt = asteroidFactory(1000, 'Kuiper Asteroid', sun, .001, .002, 30 * AU, 20 * AU, 17, 25, 0, .1, 10e10, '#5E574F', 'Asteroid');
+const oortCloud = asteroidFactory(1000, 'Oort Cloud Asteroid', sun, .1, .6, 2000 * AU, 5000 * AU, -17, -25, 0, .1, 1e25, '#5E574F', 'Asteroid');
 
-// SPACE PROBES
+// Space Probes
 const voyager1 = new CelestialBody('Yoyager 1', earth, .003, 152.2 * AU, 17, 0, 825.5, 'white', 'Probe');
 
-// ARRAYS
 // Planets Array
 const planets = [
     mercury,
@@ -111,10 +110,8 @@ const moons = [
     triton,
     charon
 ];
-//-----------------------------------------------------//
-//-----------------------------------------------------//
-//-----------------------------------------------------//
-// OBSERVABLE UNIVERSE SCALE Radius 46,5 billion lightyears / 93 billion lighty-years Durchmesser
+
+// OBSERVABLE UNIVERSE SCALE Radius 46,5 billion lightyears / 93 billion lighty-years
 const universe = new CelestialBody('Observable Universe', center, 46500000000 * ly, 46500000000 * ly, 0, 0, 0, 'white', 'Universe');
 
 // BLACK HOLE
@@ -134,32 +131,26 @@ const stephenson218 = new CelestialBody('Stephenson 2-18', center, 2150 * solarR
 const alphaCentauriA = new CelestialBody('Alpha Centauri A', center, 1.2234 * solarRadius, 4.37 * ly, 0, 0, 1.1 * solarMass, '#F2B05E', 'Star');
 const alphaCentauriB = new CelestialBody('Alpha Centauri B', alphaCentauriA, .8632 * solarRadius, 7, 0, .124, 35.6 * AU, '#D98F4E', 'Star');
 
-// SUN ARRAY
-const suns = [barnard, siriusA, betaCentauri, r136a1, gacrux, pistolStar, rhoCassiopeiae, stephenson218];
-
-// Align on the right side to compare sizes
-// suns.forEach(s => s.w = 0);
-m87.w = 0;
-
-// ALPHA CENTAURI ARRAY
-const alphaCentauri = [alphaCentauriA, alphaCentauriB];
-// alphaCentauri.forEach(a => a.w = 0);
-
 // BIG BODIES ARRAY WITHOUT ASTEROIDS
 const bigBodies = [sun];
-// Planets array must be pushed before moons, or there is a weird bug
 moons.forEach(m => bigBodies.push(m));
 planets.forEach(p => bigBodies.push(p));
 dwarfs.forEach(d => bigBodies.push(d));
 bigBodies.push(m87, universe);
-bigBodies.push(voyager1)
-alphaCentauri.forEach(a => bigBodies.push(a));
-suns.forEach(s => bigBodies.push(s));
-// ASTEROIDS ARRAY
+bigBodies.push(voyager1);
+
+// ASTEROIDS ARRAYS
 const asteroids = [];
 mainBelt.forEach(a => asteroids.push(a));
 kuiperBelt.forEach(k => asteroids.push(k));
 oortCloud.forEach(o => asteroids.push(o));
+
+// SUN ARRAY
+const suns = [barnard, siriusA, betaCentauri, r136a1, gacrux, pistolStar, rhoCassiopeiae, stephenson218];
+// ALPHA CENTAURI ARRAY
+const alphaCentauri = [alphaCentauriA, alphaCentauriB];
+alphaCentauri.forEach(a => bigBodies.push(a));
+suns.forEach(s => bigBodies.push(s));
 
 // EVERYTHING ARRAY FOR EASY HANDLING
 var everything = [sun, m87, universe];
@@ -177,4 +168,20 @@ everything.forEach(p => {
 
 // PARTICLES
 let g = m87;
-var particles = asteroidFactory(g.particle.count, g + '\'s . Particle', g, g.particle.minR, g.particle.maxR, g.particle.minD, g.particle.maxD, g.particle.minV, g.particle.maxV, g.particle.e, g.particle.m, g.particle.color, g.particle.t);
+var particles = asteroidFactory(
+    g.particle.count,
+    g.particle.name,
+    g,
+    g.particle.minR,
+    g.particle.maxR,
+    g.particle.minD,
+    g.particle.maxD,
+    g.particle.minV,
+    g.particle.maxV,
+    g.particle.minE,
+    g.particle.maxE,
+    g.particle.m,
+    g.particle.color,
+    g.particle.t);
+
+const lightRay = new CelestialBody('Ray of Light', sun, earth.r, 0, C, 0, 1, 'CYAN', 'Photon');

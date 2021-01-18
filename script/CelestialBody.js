@@ -36,8 +36,8 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
     this.w = Math.random() * deg(360);
 
     // Inital postion oriented around the assigned center object
-    this.x = this.center.x;
-    this.y = this.center.y;
+    this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
+    this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
 
     // Distance to center using the pythagorean theorem
     this.dtc = Math.hypot((this.x - center.x), (this.y - center.y)) - (this.r - center.r);
@@ -155,11 +155,11 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
 
     this.eventHorizon = function() {
         if (this.type != 'Black Hole') return;
-        var sizes = [1, .99, .98, .97, .96, .95];
-        for (let i = 0; i < sizes.length; i++) {
+        for (let i = 0; i < this.colBH.length; i++) {
             c.fillStyle = this.colBH[i];
             c.beginPath();
-            c.arc(this.x, this.y, this.r * sizes[i], 0, Math.PI * 2);
+            this.r * 1 - i * 1e-1;
+            c.arc(this.x, this.y, this.r * (1 - (i * 1e-2)), 0, Math.PI * 2);
             c.closePath();
             c.fill();
         }
@@ -167,41 +167,55 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
 
     // PARTICLE PROPERTIES
     this.particle = {
-        count: 1000,
-        name: '. Particle of ' + this.name,
-        minR: this.r * 1e-6,
-        maxR: this.r * 1e-5,
-        minD: this.r * 1e-2,
-        maxD: this.r * 2,
-        minV: 5,
-        maxV: 10,
-        e: .9,
+        count: 100,
+        name: 'Particle of ' + this.name,
+        minR: this.r * 1e-5,
+        maxR: this.r * 2e-5,
+        minD: this.r * .01,
+        maxD: this.r * 20,
+        minV: C * .01,
+        maxV: C * .4,
+        acc: 1.01,
+        minE: .0,
+        maxE: .1,
         m: 1e10,
-        color: this.colBH[Math.floor(Math.random() * (this.colBH.length + 1))],
+        color: this.colBH[Math.floor(1 + Math.random() * (this.colBH.length))],
         t: 'Particle'
     };
 
     this.vortex = function() {
-        // particles ARRAY IS GLOBAL IN bodies.js
-        // Properties get drawn from the Body Object
-
         particles.forEach(p => {
             p.run();
-            p.v += .001;
-            p.d -= p.w * p.center.r * .001;
-            if (p.d < p.center.r) {
+            p.v *= (p.v <= C * scaleV) ? this.particle.acc : 1;
+            if (p.v >= C * scaleV) p.color = 'white';
+            p.d *= 1 / this.particle.acc;
+            if (p.d < p.center.r + this.particle.minD) {
                 let i = particles.indexOf(p);
                 if (i > -1) particles.splice(i, 1);
-                let newParticle = asteroidFactory(1, this.particle.name, this, this.particle.minR, this.particle.maxR, this.particle.minD, this.particle.maxD, this.particle.minV, this.particle.maxV, this.particle.e, this.particle.m, this.particle.color, this.particle.t);
-                newParticle.forEach(nP => particles.push(nP));
-                newParticle[0].color = this.colBH[Math.floor(Math.random() * (this.colBH.length + 1))];
+                let newParticle = asteroidFactory(1, this.particle.name, this, this.particle.minR, this.particle.maxR, this.particle.minD, this.particle.maxD, this.particle.minV, this.particle.maxV, this.particle.minE, this.particle.maxE, this.particle.m, this.particle.color, this.particle.t);
+                newParticle.forEach(nP => {
+                    nP.color = this.colBH[Math.floor(1 + Math.random() * (this.colBH.length))];
+                    particles.push(nP);
+                });
             }
-            c.lineWidth = .01;
-            p.orbit();
+            c.lineWidth = .1 / scale;
+            p.tail();
         });
     }
 
-    this.fly = function() {
+    this.tail = function() {
+        let rotation = deg(0);
+        c.beginPath();
+        c.strokeStyle = '#626973';
+        c.strokeStyle = this.color;
+        c.lineWidth = 0.1 / scale;
+        // ellipses center coords (x,y), (Major) x-radius, (Minor) y-radius, rotation, start, end
+        c.ellipse(this.center.x, this.center.y, this.a * this.d, this.b * this.d, rotation, this.w - deg(50), this.w);
+        c.stroke();
+        c.closePath();
+    }
+
+    this.voyager = function() {
         this.d += this.v;
         this.x = this.center.x + this.d;
         this.y = this.center.y;
@@ -209,6 +223,23 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         c.drawImage(img, this.x, this.y - this.r / 2, this.r, this.r);
 
         // DRAW LINE TO SHOW DIRECTION
+        if (!this.isColliding) return;
+        c.beginPath();
+        c.strokeStyle = this.color;
+        c.lineWidth = .3 / scale;
+        c.moveTo(this.center.x, this.center.y);
+        c.lineTo(this.x, this.y);
+        c.stroke();
+    }
+
+    this.lightSpeed = function() {
+        this.d += this.v;
+        this.x = this.center.x + this.d;
+        this.y = this.center.y;
+        this.draw();
+
+        // DRAW LINE TO SHOW DIRECTION
+        if (!this.isColliding) return;
         c.beginPath();
         c.strokeStyle = this.color;
         c.lineWidth = .3 / scale;
@@ -218,7 +249,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
     }
 
     this.hover = function() {
-        this.r *= 25;
+        this.r *= 5;
         this.draw();
         this.r = this.radius * scaleR;
     }
@@ -277,7 +308,6 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
     this.n = function() {
         drawText(this.name, this, 13, true);
     }
-
 }
 
 function Star(w, h) {
@@ -318,19 +348,19 @@ function Star(w, h) {
 // INITIALIZES ASTEROIDS AS CELESTIAL BODY OBJECTS AND RETURNS ARRAY OF ASTEROIDS
 // count - name - center - min. radius(Mio km) - max. radius(Mio km)- min. distance(Mio km) - max. distance(Mio km)
 // - min. velocity(km/s) - max. velocity(km/s) - eccentricity - eass - color - type
-function asteroidFactory(count, name, center, minRadius, maxRadius, minDistance, maxDistance, minVelocity, maxVelocity, eccentricity, mass, color, type) {
+function asteroidFactory(count, name, center, minRadius, maxRadius, minDistance, maxDistance, minVelocity, maxVelocity, minEccentricity, maxEccentricity, mass, color, type) {
     let belt = [];
     for (let i = 0; i < count; i++) {
         let n = i + ". " + name;
-        let r = (minRadius + (Math.random() * maxRadius)) * 500;
-        let d = minDistance + (Math.random() * maxDistance);
-        let v = minVelocity + (Math.random() * maxVelocity);
-        let e = eccentricity > .9 ? eccentricity : eccentricity * Math.random();
+        let r = (minRadius + (Math.random() * (maxRadius - minRadius))) * 500;
+        let d = minDistance + (Math.random() * (maxDistance - minDistance));
+        let v = minVelocity + (Math.random() * (maxVelocity - minVelocity));
+        let e = minEccentricity + (Math.random() * (maxEccentricity - minEccentricity));
         let m = mass;
         let col = color;
         let t = type;
         // Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color - Type
-        belt.push(new CelestialBody(name, center, r, d, v, e, m, col, t));
+        belt.push(new CelestialBody(n, center, r, d, v, e, m, col, t));
     }
     return belt;
 }
