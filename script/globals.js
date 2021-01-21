@@ -25,28 +25,17 @@ var trans = {
 var scaleR = 1;
 // Scale for distances
 var scaleD = 1;
+
+timeControl = [
+    ['s', 1],
+    ['m', 60],
+    ['h', 60 * 60],
+    ['d', 60 * 60 * 24],
+    ['y', 60 * 60 * 24 * 365]
+]
+
 // Scale for time - 1 = REAL TIME 1s = 1s
-var scaleT = 60 * 60 * 24;
-var currentTimeUnit = 'h';
-switch (scaleT) {
-    case 1:
-        currentTimeUnit = 's';
-        break;
-    case 60:
-        currentTimeUnit = 'm';
-        break;
-    case 60 * 60:
-        currentTimeUnit = 'h';
-        break;
-    case 60 * 60 * 24:
-        currentTimeUnit = 'd';
-        break;
-    case 60 * 60 * 24 * 365:
-        currentTimeUnit = 'y';
-        break;
-    default:
-        break;
-}
+var scaleT = 1;
 // Scale for velocity 1 / 60e6
 var scaleV = (1 / 60e6) * scaleT;
 // TIMER FOR MEASURING
@@ -139,8 +128,8 @@ setInterval(timer, 1000);
 function timer() {
     var d = new Date();
     var t = d.toLocaleString();
-    startTime++;
-    console.log(startTime, currentTimeUnit);
+    startTime += scaleT;
+    // console.log(startTime, currentTimeUnit);
 };
 
 // DRAW Text at scale and translated coords

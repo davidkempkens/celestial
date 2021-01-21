@@ -80,7 +80,7 @@ function start() {
 function drawEverything() {
 
     if (stopSpin) everything.forEach(e => e.w -= e.v);
-
+    scaleT = timeControl[i][1];
     if (orbit && scale > .03) {
         planets.forEach(p => p.orbit());
         // dwarfs.forEach(d => d.orbit());
@@ -98,13 +98,12 @@ function drawEverything() {
     moons.forEach(m => m.run());
     if (scale > .01) asteroids.forEach(a => a.run());
     oortCloud.forEach(o => o.run());
-    voyager1.voyager();
-    lightRay.lightSpeed();
-    test2.lightSpeed();
+    voyager1.run();
+    lightRay.run();
+    test2.run();
     // OTHER BODIES
     suns.forEach(s => s.run());
     alphaCentauri.forEach(a => a.run());
-    m87.vortex();
     m87.run();
     universe.run();
     // RUN COLLISION DETECTION

@@ -88,24 +88,6 @@ document.body.addEventListener("touchend", () => {
 // HANDLE KEYBOARD EVENTS
 window.addEventListener("keypress", e => {
     switch (e.key) {
-        case "1":
-            scaleT = 1;
-            break;
-        case "2":
-            scaleT = 60;
-            break;
-        case "3":
-            scaleT = 60 * 60;
-            break;
-        case "4":
-            scaleT = 60 * 60 * 24;
-            break;
-        case "5":
-            scaleT = 60 * 60 * 24 * 365;
-            break;
-        case "6":
-            scaleT = 60 * 60 * 24 * 365 * 10;
-            break;
         case "s":
             stopSpin = !stopSpin;
             break;
@@ -135,29 +117,6 @@ window.addEventListener("keypress", e => {
         default:
             break;
     }
-
-    switch (scaleT) {
-        case 1:
-            currentTimeUnit = 's';
-            break;
-        case 60:
-            currentTimeUnit = 'm';
-            break;
-        case 60 * 60:
-            currentTimeUnit = 'h';
-            break;
-        case 60 * 60 * 24:
-            currentTimeUnit = 'd';
-            break;
-        case 60 * 60 * 24 * 365:
-            currentTimeUnit = 'y';
-            break;
-        case 60 * 60 * 24 * 365 * 10:
-            currentTimeUnit = '10 y';
-            break;
-        default:
-            break;
-    }
 });
 
 // HUD ELEMENTS
@@ -169,6 +128,7 @@ const cameraElement = document.getElementById('camera');
 const zoomElement = document.getElementById('zoomElement');
 const stopElement = document.getElementById('stopElement');
 const orbitElement = document.getElementById('orbitElement');
+const timeElement = document.getElementById('timeElement');
 const plusElement = document.getElementById('plusElement');
 const minusElement = document.getElementById('minusElement');
 
@@ -203,7 +163,11 @@ stopElement.addEventListener('click', () => stopSpin = !stopSpin);
 orbitElement.addEventListener('click', () => orbit = !orbit);
 plusElement.addEventListener('click', () => scale /= scaleFactor);
 minusElement.addEventListener('click', () => scale *= scaleFactor);
-
+var i = 0;
+timeElement.addEventListener('click', () => {
+    i = ++i % timeControl.length;
+    // scaleT = timeControl[i];
+});
 
 // Draw bar at the bottom of the canvas to show scale
 function ui() {
@@ -229,12 +193,13 @@ function ui() {
     let au = formatNumber(AU / scale);
     let ly = formatNumber((1 / 63241.077) / scale);
 
-    let text = [`${ly} light-years`, `${au} AU`, `${km} km`];
+    let text = [`${ly} light-years`, `${au} AU`, `${km} km`, `${startTime} s passed`];
     for (let i = 0; i < text.length; i++) {
         c.fillText(text[i], bar.x, bar.y - 20 * (i + 1));
     }
 
     // HUD
+    timeElement.innerHTML = `<b>T</b>ime: ${timeControl[i][0]}`;
     zoomElement.innerHTML = `<b>Z</b>oom: ${formatNumber(scale)}`;
     stopElement.innerHTML = stopSpin ? `<b>S</b>top` : `<b>S</b>tart`;
     stopElement.style.color = stopSpin ? 'red' : 'green';

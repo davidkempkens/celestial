@@ -58,6 +58,8 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
             c.arc(this.x, this.y, this.r, 0, Math.PI * 2);
             c.closePath();
             c.fill();
+        } else {
+            c.drawImage(img, this.x, this.y - this.r / 2, this.r, this.r);
         }
 
         // draw the half of saturns rings after, so they appear infront of Saturn
@@ -69,30 +71,35 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
 
         // DRAW EVENT HORIZON FOR BLACK HOLES
         this.eventHorizon();
+        this.vortex();
     }
 
     // RUN PHYSICS
     this.run = function() {
-        // RESCALE TIME + DISTANCES + RADIUS + VELOCITIES
-        this.r = this.radius * scaleR;
-        this.d = this.distance ? (this.distance * scaleD) + (this.center.r + this.r) : this.distance * scaleD;
-        scaleV = (1 / 60e6) * scaleT;
-        this.v = this.velocity * scaleV;
-        if (this.type != 'Photon' && this.distance != 0) this.v = (this.velocity / this.distance) * scaleV;
-
-        // Increase inital value each frame by the v - attribute, scaled with the velocity of each body
-        this.w += this.v;
-
-        // Cosinus and sinus functions return values between -1 to 1
-        // Those values multiplied with the d - attribute (magnifying the alternating values) + the centers radius are added to the center coordinates
-        // a and b values are for the eccentricity of each orbit
-        // center coord +   eccent * -1 < val < 1 *      + minimum distance to the center obj
-
-        this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
-        this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
-
+        this.rescale();
+        if (this.type == 'Probe' || this.type == 'Photon') {
+            // Physics for Bodies flying in a straight line
+            this.d += this.v;
+            this.x = this.center.x + this.d;
+            this.y = this.center.y;
+            this.flightPath();
+        } else {
+            // Physics for orbiting Bodies
+            this.w += this.v;
+            this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
+            this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
+        }
         // Call the draw function to draw the body as filled circle on the canvas
         this.draw();
+    }
+    this.rescale = function() {
+        // RESCALE TIME + DISTANCES + RADIUS + VELOCITIES
+        this.r = this.radius * scaleR;
+        // if (this.type != 'Photon' && this.type != 'Probe') this.d = this.distance ? (this.distance * scaleD) + (this.center.r + this.r) : this.distance * scaleD;
+        scaleV = (1 / 60e6) * scaleT;
+        if (this.type != 'Photon' && this.distance != 0) this.v = (this.velocity / this.distance) * scaleV;
+        else this.v = this.velocity * scaleV;
+
     }
 
     // drawing the orbit as lines 
@@ -191,6 +198,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
     };
 
     this.vortex = function() {
+        if (this.type != 'Black Hole') return;
         let minSpeed = (this.particle.minV / this.particle.minD) * scaleV;
         let maxSpeed = (this.particle.maxV / this.particle.maxD) * scaleV;
         let rate = (maxSpeed - minSpeed) * .001;
@@ -228,13 +236,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         c.closePath();
     }
 
-    this.voyager = function() {
-
-        this.d += this.v;
-        this.x = this.center.x + this.d;
-        this.y = this.center.y;
-
-        c.drawImage(img, this.x, this.y - this.r / 2, this.r, this.r);
+    this.flightPath = function() {
 
         // DRAW LINE TO SHOW DIRECTION
         if (!this.isColliding) return;
@@ -244,22 +246,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         c.moveTo(this.center.x, this.center.y);
         c.lineTo(this.x, this.y);
         c.stroke();
-    }
-
-    this.lightSpeed = function() {
-        this.d += this.v;
-        this.x = this.center.x + this.d;
-        this.y = this.center.y;
-        this.draw();
-
-        // DRAW LINE TO SHOW DIRECTION
-        if (!this.isColliding) return;
-        c.beginPath();
-        c.strokeStyle = this.color;
-        c.lineWidth = .3 / scale;
-        c.moveTo(this.center.x, this.center.y);
-        c.lineTo(this.x, this.y);
-        c.stroke();
+        c.closePath();
     }
 
     this.hover = function() {
@@ -310,7 +297,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
             color: this.color
         }
         if (this.type == 'Probe') drawText(`\u2192 ${(this.d / 150).toPrecision(10)} AU`, b, 13, true);
-        else if (this.type == 'Photon') drawText([`\u2192 ${formatNumber(this.d * 1e6)} km`, `${startTime} ${currentTimeUnit}`], b, 13, true);
+        else if (this.type == 'Photon') drawText([`\u2192 ${formatNumber(this.d * 1e6)} km`], b, 13, true);
         else drawText(`\u2205 ${formatNumber(this.radius * 2e6)} km`, b, 13, true);
 
         // Text on the right side of the body
