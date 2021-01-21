@@ -67,7 +67,7 @@ function start() {
     // LIGHTSPEED TEST
     lightRay.n();
     if (lightRay.isColliding) lightRay.info();
-
+    test2.n();
     // ui
     ui();
     // camera planet
@@ -79,8 +79,7 @@ function start() {
 // DRAW SUNS, PLANETS, MOONS, ORBITS AND COLLISION DETECTION
 function drawEverything() {
 
-    if (!stopSpin) everything.forEach(e => e.v = e.velocity * scaleV);
-    else everything.forEach(e => e.v = 0);
+    if (stopSpin) everything.forEach(e => e.w -= e.v);
 
     if (orbit && scale > .03) {
         planets.forEach(p => p.orbit());
@@ -101,6 +100,7 @@ function drawEverything() {
     oortCloud.forEach(o => o.run());
     voyager1.voyager();
     lightRay.lightSpeed();
+    test2.lightSpeed();
     // OTHER BODIES
     suns.forEach(s => s.run());
     alphaCentauri.forEach(a => a.run());
@@ -146,7 +146,6 @@ function drawEverything() {
     });
     asteroids.forEach(a => {
         if (a.isColliding && scale > .01) a.hover();
-        if (a.isColliding) a.hover();
     });
     suns.forEach(s => {
         if (s.isColliding) s.compare(sun);
@@ -159,23 +158,12 @@ function drawEverything() {
     if (universe.isColliding) universe.compare(m87);
 }
 
-// Center the canvas on a chosen body's position
-// Gets called every fram in the main loop
-// Uses global variable "cameraBody" as argument
 function camera(body) {
     // Does nothing if cameraBody is set to null
     if (body == null) return;
-    // Zoom down to Planet
-    // if (scale < p.r * 100) scale /= scaleFactor + .07;
-
+    // Center the canvas on a chosen body's position
+    // Gets called every frame in the main loop
+    // Uses global variable "cameraBody" as argument
     center.x += (canvas.width / 2) - body.x;
     center.y += (canvas.height / 2) - body.y - body.r;
 }
-
-setInterval(timer, 1000);
-
-function timer() {
-    var d = new Date();
-    var t = d.toLocaleString();
-    startTime++;
-};

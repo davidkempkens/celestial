@@ -18,16 +18,15 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
     this.satelites = [];
 
     // Calculated Properties
-
     // RADIUS
     this.r = this.radius * scaleR;
 
     // DISTANCE + center radius + planets radius
-    this.d = this.distance ? (this.distance * scaleD) + (this.center.r + this.r) : this.distance;
+    this.d = this.distance ? (this.distance * scaleD) + (this.center.r + this.r) : this.distance * scaleD;
 
-    // VELOCITY 
+    // VELOCITY
     this.v = this.velocity * scaleV;
-
+    if (this.type != 'Photon' && this.distance != 0) this.v = (this.velocity / this.distance) * scaleV;
     // ECCENTRICITY
     this.a = 1;
     this.b = 1 - this.eccentricity;
@@ -53,11 +52,13 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         this.saturnRings(false);
 
         // DRAW ACTUAL BODY
-        c.fillStyle = this.color;
-        c.beginPath();
-        c.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        c.closePath();
-        c.fill();
+        if (this.type != 'Probe') {
+            c.fillStyle = this.color;
+            c.beginPath();
+            c.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+            c.closePath();
+            c.fill();
+        }
 
         // draw the half of saturns rings after, so they appear infront of Saturn
         // front = true
@@ -72,6 +73,12 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
 
     // RUN PHYSICS
     this.run = function() {
+        // RESCALE TIME + DISTANCES + RADIUS + VELOCITIES
+        this.r = this.radius * scaleR;
+        this.d = this.distance ? (this.distance * scaleD) + (this.center.r + this.r) : this.distance * scaleD;
+        scaleV = (1 / 60e6) * scaleT;
+        this.v = this.velocity * scaleV;
+        if (this.type != 'Photon' && this.distance != 0) this.v = (this.velocity / this.distance) * scaleV;
 
         // Increase inital value each frame by the v - attribute, scaled with the velocity of each body
         this.w += this.v;
@@ -151,7 +158,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         }
 
     }
-    this.colBH = ["#FFFFFF", "#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"];
+    this.colBH = ["#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"];
 
     this.eventHorizon = function() {
         if (this.type != 'Black Hole') return;
@@ -167,55 +174,62 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
 
     // PARTICLE PROPERTIES
     this.particle = {
-        count: 100,
+        count: 300,
         name: 'Particle of ' + this.name,
-        minR: this.r * 1e-5,
-        maxR: this.r * 2e-5,
+        minR: this.r * 1e-6,
+        maxR: this.r * 1e-5,
         minD: this.r * .01,
-        maxD: this.r * 20,
-        minV: C * .01,
+        maxD: this.r * .1,
+        minV: 0,
         maxV: C * .4,
-        acc: 1.01,
         minE: .0,
-        maxE: .1,
+        maxE: .0,
         m: 1e10,
-        color: this.colBH[Math.floor(1 + Math.random() * (this.colBH.length))],
+        color: "#000000",
+        colors: ["#FFFFFF", "#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"],
         t: 'Particle'
     };
 
     this.vortex = function() {
+        let minSpeed = (this.particle.minV / this.particle.minD) * scaleV;
+        let maxSpeed = (this.particle.maxV / this.particle.maxD) * scaleV;
+        let rate = (maxSpeed - minSpeed) * .001;
         particles.forEach(p => {
-            p.run();
-            p.v *= (p.v <= C * scaleV) ? this.particle.acc : 1;
-            if (p.v >= C * scaleV) p.color = 'white';
-            p.d *= 1 / this.particle.acc;
-            if (p.d < p.center.r + this.particle.minD) {
+
+            if (p.v <= maxSpeed) {
+                p.v += rate;
+                let interval = (maxSpeed - minSpeed) / this.particle.colors.length;
+                let accumulated = p.v - minSpeed;
+                let idx = this.particle.colors.length - Math.floor(accumulated / interval)
+                p.color = this.particle.colors[idx];
+            }
+            p.d -= p.w;
+            if (p.d < p.center.r) {
                 let i = particles.indexOf(p);
                 if (i > -1) particles.splice(i, 1);
                 let newParticle = asteroidFactory(1, this.particle.name, this, this.particle.minR, this.particle.maxR, this.particle.minD, this.particle.maxD, this.particle.minV, this.particle.maxV, this.particle.minE, this.particle.maxE, this.particle.m, this.particle.color, this.particle.t);
-                newParticle.forEach(nP => {
-                    nP.color = this.colBH[Math.floor(1 + Math.random() * (this.colBH.length))];
-                    particles.push(nP);
-                });
+                newParticle.forEach(nP => particles.push(nP));
+
             }
-            c.lineWidth = .1 / scale;
-            p.tail();
+            p.tail(p.r, 10);
+            p.run();
         });
     }
 
-    this.tail = function() {
+    this.tail = function(w, l) {
         let rotation = deg(0);
         c.beginPath();
         c.strokeStyle = '#626973';
         c.strokeStyle = this.color;
-        c.lineWidth = 0.1 / scale;
+        c.lineWidth = w;
         // ellipses center coords (x,y), (Major) x-radius, (Minor) y-radius, rotation, start, end
-        c.ellipse(this.center.x, this.center.y, this.a * this.d, this.b * this.d, rotation, this.w - deg(50), this.w);
+        c.ellipse(this.center.x, this.center.y, this.a * this.d, this.b * this.d, rotation, this.w - deg(l), this.w);
         c.stroke();
         c.closePath();
     }
 
     this.voyager = function() {
+
         this.d += this.v;
         this.x = this.center.x + this.d;
         this.y = this.center.y;
@@ -287,6 +301,19 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
     }
 
     this.info = function() {
+
+        // Text above the body
+        let b = {
+            x: this.x - this.r * 2,
+            y: this.y - this.r - (25 / scale),
+            r: this.r,
+            color: this.color
+        }
+        if (this.type == 'Probe') drawText(`\u2192 ${(this.d / 150).toPrecision(10)} AU`, b, 13, true);
+        else if (this.type == 'Photon') drawText([`\u2192 ${formatNumber(this.d * 1e6)} km`, `${startTime} ${currentTimeUnit}`], b, 13, true);
+        else drawText(`\u2205 ${formatNumber(this.radius * 2e6)} km`, b, 13, true);
+
+        // Text on the right side of the body
         var t = [
             `${this.name} ${this.symbol} ${this.type}`, // Display Symbols
             `\u2192 ${formatNumber(this.distance * 1e6)} km `, // Display Distance
@@ -294,15 +321,6 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
             ` Mass: ${formatNumber(this.mass.toExponential(0))} kg` // Display Type
         ]
         drawText(t, this, 13, true);
-
-        let b = {
-            x: this.x - this.r * 2,
-            y: this.y - this.r - (25 / scale),
-            r: this.r,
-            color: this.color
-        }
-        if (this.type == 'Probe') drawText(`\u2192 ${(this.d / 150).toPrecision(8)} AU`, b, 13, true);
-        else drawText(`\u2205 ${formatNumber(this.radius * 2e6)} km`, b, 13, true);
     }
 
     this.n = function() {

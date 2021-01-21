@@ -58,7 +58,7 @@ const charon = new CelestialBody("Charon", pluto, .0006035, .017536, 0.2, 0.0022
 // Asteroid Belts - Sizes not to scale
 const mainBelt = asteroidFactory(200, 'Main Asteroid', sun, .001, .002, 600, 750, 17, 25, 0, .2, 10e10, '#5E574F', 'Asteroid');
 const kuiperBelt = asteroidFactory(1000, 'Kuiper Asteroid', sun, .001, .002, 30 * AU, 20 * AU, 17, 25, 0, .1, 10e10, '#5E574F', 'Asteroid');
-const oortCloud = asteroidFactory(1000, 'Oort Cloud Asteroid', sun, .1, .6, 2000 * AU, 5000 * AU, -17, -25, 0, .1, 1e25, '#5E574F', 'Asteroid');
+const oortCloud = asteroidFactory(1000, 'Oort Cloud Asteroid', sun, .6, 1, 2000 * AU, 5000 * AU, -17, -25, 0, .1, 1e25, '#5E574F', 'Asteroid');
 
 // Space Probes
 const voyager1 = new CelestialBody('Yoyager 1', earth, .003, 152.2 * AU, 17, 0, 825.5, 'white', 'Probe');
@@ -117,6 +117,10 @@ const universe = new CelestialBody('Observable Universe', center, 46500000000 * 
 // BLACK HOLE
 const m87 = new CelestialBody('M87*', center, 1.9e-3 * ly, 53.49e6 * ly, 0, 0, 7.22e9 * solarMass, 'white', 'Black Hole');
 
+// SPPED OF LIGHT
+const lightRay = new CelestialBody('C', sun, earth.r, 0, C, 0, 1, 'CYAN', 'Photon');
+const test2 = new CelestialBody('C2', m87, sun.r, 0, C, 0, 1, 'CYAN', 'Photon');
+
 // Suns
 const barnard = new CelestialBody('Barnard\'s Star', center, solarRadius * .2, 5.958 * ly, 0, 0, solarMass * .144, '#D9042B', 'Star');
 const siriusA = new CelestialBody('Sirius A', center, 1.711 * solarRadius, 8.611 * ly, 0, 0, 2.063 * solarMass, '#52CBD9', 'Star');
@@ -137,7 +141,7 @@ moons.forEach(m => bigBodies.push(m));
 planets.forEach(p => bigBodies.push(p));
 dwarfs.forEach(d => bigBodies.push(d));
 bigBodies.push(m87, universe);
-bigBodies.push(voyager1);
+bigBodies.push(voyager1, lightRay);
 
 // ASTEROIDS ARRAYS
 const asteroids = [];
@@ -183,5 +187,3 @@ var particles = asteroidFactory(
     g.particle.m,
     g.particle.color,
     g.particle.t);
-
-const lightRay = new CelestialBody('Ray of Light', sun, earth.r, 0, C, 0, 1, 'CYAN', 'Photon');

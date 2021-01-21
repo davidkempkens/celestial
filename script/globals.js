@@ -22,13 +22,38 @@ var trans = {
 }
 
 // Scale for radius
-const scaleR = 1;
+var scaleR = 1;
 // Scale for distances
-const scaleD = 1;
+var scaleD = 1;
+// Scale for time - 1 = REAL TIME 1s = 1s
+var scaleT = 60 * 60 * 24;
+var currentTimeUnit = 'h';
+switch (scaleT) {
+    case 1:
+        currentTimeUnit = 's';
+        break;
+    case 60:
+        currentTimeUnit = 'm';
+        break;
+    case 60 * 60:
+        currentTimeUnit = 'h';
+        break;
+    case 60 * 60 * 24:
+        currentTimeUnit = 'd';
+        break;
+    case 60 * 60 * 24 * 365:
+        currentTimeUnit = 'y';
+        break;
+    default:
+        break;
+}
 // Scale for velocity 1 / 60e6
-const scaleV = (1 / 60e6) * 10;
-// TIMER FOR MEASURIG
+var scaleV = (1 / 60e6) * scaleT;
+// TIMER FOR MEASURING
 var startTime = 0;
+// 30 km * 60s * 60m * 24h * 365d = 946.080.000 km around the sun
+// 
+
 // SPEED OF LIGHT - C
 const C = 299792.458;
 // AU - in Mio km
@@ -108,6 +133,15 @@ function formatNumber(num) {
         maximumSignificantDigits: "2"
     })
 }
+
+setInterval(timer, 1000);
+
+function timer() {
+    var d = new Date();
+    var t = d.toLocaleString();
+    startTime++;
+    console.log(startTime, currentTimeUnit);
+};
 
 // DRAW Text at scale and translated coords
 function drawText(t, coord, f, translated) {

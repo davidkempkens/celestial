@@ -88,6 +88,24 @@ document.body.addEventListener("touchend", () => {
 // HANDLE KEYBOARD EVENTS
 window.addEventListener("keypress", e => {
     switch (e.key) {
+        case "1":
+            scaleT = 1;
+            break;
+        case "2":
+            scaleT = 60;
+            break;
+        case "3":
+            scaleT = 60 * 60;
+            break;
+        case "4":
+            scaleT = 60 * 60 * 24;
+            break;
+        case "5":
+            scaleT = 60 * 60 * 24 * 365;
+            break;
+        case "6":
+            scaleT = 60 * 60 * 24 * 365 * 10;
+            break;
         case "s":
             stopSpin = !stopSpin;
             break;
@@ -113,6 +131,29 @@ window.addEventListener("keypress", e => {
             break;
         case "z":
             scale = 1;
+            break;
+        default:
+            break;
+    }
+
+    switch (scaleT) {
+        case 1:
+            currentTimeUnit = 's';
+            break;
+        case 60:
+            currentTimeUnit = 'm';
+            break;
+        case 60 * 60:
+            currentTimeUnit = 'h';
+            break;
+        case 60 * 60 * 24:
+            currentTimeUnit = 'd';
+            break;
+        case 60 * 60 * 24 * 365:
+            currentTimeUnit = 'y';
+            break;
+        case 60 * 60 * 24 * 365 * 10:
+            currentTimeUnit = '10 y';
             break;
         default:
             break;
