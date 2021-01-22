@@ -1,7 +1,7 @@
 // MAIN LOOP
 function start() {
     // Resize Canvas
-    resizeCanvas();
+    // resizeCanvas();
     // Clear Canvas each frame
     clearCanvas();
     // Draw Stars before transfomation to fill the whole canvas

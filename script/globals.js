@@ -2,12 +2,29 @@
 
 // GET CANVAS ELEMENT & DRAWING CONTEXT FROM THE DOM
 const canvas = document.getElementById('canvas');
-const c = canvas.getContext('2d');
+// const c = canvas.getContext('2d');
 const img = document.getElementById('img');
 
+function setupCanvas(canvas) {
+    // Get the device pixel ratio, falling back to 1.
+    var dpr = window.devicePixelRatio || 1;
+    // Get the size of the canvas in CSS pixels.
+    var rect = canvas.getBoundingClientRect();
+    // Give the canvas pixel dimensions of their CSS
+    // size * the device pixel ratio.
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    var c = canvas.getContext('2d');
+    // Scale all drawing operations by the dpr, so you
+    // don't have to worry about the difference.
+    c.scale(dpr, dpr);
+    return c;
+}
+const c = setupCanvas(canvas);
+
 // Set canvas to fullscreen
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// canvas.width = window.innerWidth;
+// canvas.height = window.innerHeight;
 // Parameter for camera function to center object on canvas
 var cameraBody = null;
 // Booleans to toggle in main loop - for user input
