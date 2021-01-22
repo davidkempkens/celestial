@@ -93,7 +93,7 @@ function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     var dpr = window.devicePixelRatio;
-    c.scale(dpr, dpr);
+    c.scale(1 / dpr, 1 / dpr);
 }
 
 // Clear Canvas every frame - background color as global variable
