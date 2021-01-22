@@ -210,7 +210,7 @@ function ui() {
     let au = formatNumber(AU / scale);
     let ly = formatNumber((1 / 63241.077) / scale);
 
-    let text = [`${ly} light-years`, `${au} AU`, `${km} km`];
+    let text = [`${ly} light-years`, `${au} AU`, `${km} km`, window.devicePixelRatio];
     for (let i = 0; i < text.length; i++) {
         c.fillText(text[i], bar.x, bar.y - 20 * (i + 1));
     }
