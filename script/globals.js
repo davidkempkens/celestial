@@ -6,13 +6,9 @@ const c = canvas.getContext('2d');
 const img = document.getElementById('img');
 
 // Set canvas to fullscreen
-var w = window.innerWidth;
-var h = window.innerHeight;
-canvas.style.width = w + "px";
-canvas.style.height = h + "px";
-canvas.width = Math.floor(w * window.devicePixelRatio);
-canvas.height = Math.floor(h * window.devicePixelRatio);
-c.scale(window.devicePixelRatio, window.devicePixelRatio);
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
 
 // Parameter for camera function to center object on canvas
 var cameraBody = null;
@@ -94,10 +90,22 @@ var symbols = {
     sun: '\u{1F31E}'
 }
 
+var colors = {
+    sun: "#F2A516",
+    mercury: "#BFB6AE",
+    venus: "#F2C879",
+    earth: "#03588C",
+    mars: "#F24E29",
+    jupiter: "#D96C0D",
+    saturn: "#D9CAAD",
+    uranus: "#BBE2F2",
+    neptune: "#5368A6"
+}
+
 // Resize Canvas
 function resizeCanvas() {
-    // var dpr = window.devicePixelRatio;
-    // c.scale(1 / dpr, 1 / dpr);
+    var dpr = window.devicePixelRatio;
+    c.scale(1 / dpr, 1 / dpr);
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
