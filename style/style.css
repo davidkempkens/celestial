@@ -24,6 +24,10 @@ a:hover {
     opacity: 1;
 }
 
+html {
+    overflow-x: hidden;
+}
+
 body {
     position: relative;
     overflow-x: hidden;
