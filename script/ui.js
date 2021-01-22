@@ -152,8 +152,17 @@ cameraElement.addEventListener('click', () => {
 zoomElement.addEventListener('click', () => scale = 1);
 stopElement.addEventListener('click', () => stopSpin = !stopSpin);
 orbitElement.addEventListener('click', () => orbit = !orbit);
-plusElement.addEventListener('click', () => scale /= scaleFactor);
-minusElement.addEventListener('click', () => scale *= scaleFactor);
+
+plusElement.addEventListener('click', zoomIn);
+minusElement.addEventListener('click', zoomOut);
+// HOLD + or - TO keep zooming
+var plusPressed = false;
+var minusPressed = false;
+plusElement.addEventListener('mousedown', () => plusPressed = true);
+minusElement.addEventListener('mousedown', () => minusPressed = true);
+plusElement.addEventListener('mouseup', () => plusPressed = false);
+minusElement.addEventListener('mouseup', () => minusPressed = false);
+
 var i = 0;
 timeElement.addEventListener('click', () => {
     i = ++i % timeControl.length;
@@ -162,6 +171,8 @@ timeElement.addEventListener('click', () => {
 
 // Draw bar at the bottom of the canvas to show scale
 function ui() {
+    if (plusPressed) zoomIn();
+    if (minusPressed) zoomOut();
 
     // BAR
     let bar = {

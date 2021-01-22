@@ -148,3 +148,12 @@ function updateHUD(bodies, hud) {
         // a.addEventListener('mouseover', () => {});
     });
 }
+
+function zoomIn() {
+    scale /= scaleFactor;
+}
+
+function zoomOut() {
+
+    scale *= scaleFactor;
+}
