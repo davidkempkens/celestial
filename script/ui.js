@@ -168,8 +168,15 @@ plusElement.addEventListener('touchstart', e => {
     e.preventDefault();
     plusPressed = true;
 });
+plusElement.addEventListener('touchend', () => plusPressed = false);
+plusElement.addEventListener('touchcancel', () => plusPressed = false);
 
+minusElement.addEventListener('touchstart', e => {
+    e.preventDefault();
+    minusPressed = true;
+});
 minusElement.addEventListener('touchend', () => minusPressed = false);
+minusElement.addEventListener('touchcancel', () => minusPressed = false);
 
 var i = 0;
 timeElement.addEventListener('click', () => {
