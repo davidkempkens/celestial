@@ -55,6 +55,9 @@ function move(e) {
 // HANDLE KEYBOARD EVENTS
 window.addEventListener("keypress", e => {
     switch (e.key) {
+        case "t":
+            toggleTime();
+            break;
         case "s":
             stopSpin = !stopSpin;
             break;
@@ -65,7 +68,7 @@ window.addEventListener("keypress", e => {
             cameraBody = planets[Math.floor(Math.random() * planets.length)];
             break;
         case "a":
-            scale = 1e-10;
+            scale = 1e-4;
             break;
         case "c":
             cameraBody = null;
@@ -73,10 +76,10 @@ window.addEventListener("keypress", e => {
             center.y = canvas.height / 2;
             break;
         case "-":
-            scale *= scaleFactor;
+            zoomOut();
             break;
         case "+":
-            scale /= scaleFactor;
+            zoomOut();
             break;
         case "z":
             scale = 1;
@@ -131,10 +134,7 @@ plusElement.addEventListener('mouseup', () => plusPressed = false);
 minusElement.addEventListener('mouseup', () => minusPressed = false);
 
 var i = 0;
-timeElement.addEventListener('click', () => {
-    i = ++i % timeControl.length;
-    // scaleT = timeControl[i];
-});
+timeElement.addEventListener('click', toggleTime);
 
 // Draw bar at the bottom of the canvas to show scale
 function ui() {
@@ -167,7 +167,7 @@ function ui() {
     }
 
     // HUD
-    timeElement.innerHTML = `<b>T</b>ime/s = 1 ${timeControl[i][0]}`;
+    timeElement.innerHTML = `<b>T</b>ime/s 1 ${timeControl[i][0]}`;
     zoomElement.innerHTML = `<b>Z</b>oom: ${formatNumber(scale)}`;
     stopElement.innerHTML = stopSpin ? `<b>S</b>tart` : `<b>S</b>top`;
     stopElement.style.color = stopSpin ? 'green' : 'red';

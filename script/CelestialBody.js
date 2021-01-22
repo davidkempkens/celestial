@@ -211,7 +211,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
                 let idx = this.particle.colors.length - Math.floor(accumulated / interval)
                 p.color = this.particle.colors[idx];
             }
-            p.d -= p.w;
+            p.d -= p.d / 3000;
             if (p.d < p.center.r) {
                 let i = particles.indexOf(p);
                 if (i > -1) particles.splice(i, 1);

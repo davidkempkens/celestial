@@ -9,7 +9,6 @@ const img = document.getElementById('img');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-
 // Parameter for camera function to center object on canvas
 var cameraBody = null;
 // Booleans to toggle in main loop - for user input
@@ -108,7 +107,6 @@ function resizeCanvas() {
     c.scale(1 / dpr, 1 / dpr);
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-
 }
 
 // Clear Canvas every frame - background color as global variable
@@ -120,10 +118,6 @@ function clearCanvas() {
 // Convert degrees to radians
 function deg(d) {
     return d * (Math.PI / 180);
-}
-// Return angle
-function calcAngleDegrees(x, y) {
-    return Math.atan2(y, x) * 180 / Math.PI;
 }
 
 // Formats Big Numbers
@@ -171,6 +165,10 @@ function zoomIn() {
 }
 
 function zoomOut() {
-
     scale *= scaleFactor;
+}
+
+function toggleTime() {
+    i = ++i % timeControl.length;
+    scaleT = timeControl[i][1];
 }

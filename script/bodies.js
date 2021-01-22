@@ -119,7 +119,6 @@ const m87 = new CelestialBody('M87*', center, 1.9e-3 * ly, 53.49e6 * ly, 0, 0, 7
 
 // SPPED OF LIGHT
 const lightRay = new CelestialBody('C', sun, earth.r, 0, C, 0, 1, 'CYAN', 'Photon');
-const test2 = new CelestialBody('C2', m87, sun.r, 0, C, 0, 1, 'CYAN', 'Photon');
 
 // Suns
 const barnard = new CelestialBody('Barnard\'s Star', center, solarRadius * .2, 5.958 * ly, 0, 0, solarMass * .144, '#D9042B', 'Star');
@@ -135,31 +134,18 @@ const stephenson218 = new CelestialBody('Stephenson 2-18', center, 2150 * solarR
 const alphaCentauriA = new CelestialBody('Alpha Centauri A', center, 1.2234 * solarRadius, 4.37 * ly, 0, 0, 1.1 * solarMass, '#F2B05E', 'Star');
 const alphaCentauriB = new CelestialBody('Alpha Centauri B', alphaCentauriA, .8632 * solarRadius, 7, 0, .124, 35.6 * AU, '#D98F4E', 'Star');
 
-// BIG BODIES ARRAY WITHOUT ASTEROIDS
-const bigBodies = [sun];
-moons.forEach(m => bigBodies.push(m));
-planets.forEach(p => bigBodies.push(p));
-dwarfs.forEach(d => bigBodies.push(d));
-bigBodies.push(m87, universe);
-bigBodies.push(voyager1, lightRay);
-
-// ASTEROIDS ARRAYS
-const asteroids = [];
-mainBelt.forEach(a => asteroids.push(a));
-kuiperBelt.forEach(k => asteroids.push(k));
-oortCloud.forEach(o => asteroids.push(o));
-
 // SUN ARRAY
 const suns = [barnard, siriusA, betaCentauri, r136a1, gacrux, pistolStar, rhoCassiopeiae, stephenson218];
 // ALPHA CENTAURI ARRAY
 const alphaCentauri = [alphaCentauriA, alphaCentauriB];
-alphaCentauri.forEach(a => bigBodies.push(a));
-suns.forEach(s => bigBodies.push(s));
+
+// BIG BODIES ARRAY WITHOUT ASTEROIDS
+const bigBodies = [sun, ...moons, ...planets, ...dwarfs, m87, universe, voyager1, lightRay, ...suns, ...alphaCentauri];
+// ASTEROIDS ARRAYS
+const asteroids = [...mainBelt, ...kuiperBelt, ...oortCloud];
 
 // EVERYTHING ARRAY FOR EASY HANDLING
-var everything = [sun, m87, universe];
-asteroids.forEach(d => everything.push(d));
-bigBodies.forEach(p => everything.push(p));
+const everything = [...bigBodies, ...asteroids];
 
 // RELATIONSHIP OF BODIES TO ITS SATELITES
 everything.forEach(p => {

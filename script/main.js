@@ -18,13 +18,13 @@ function start() {
     // Scale Canvas
     c.scale(scale, scale);
     // Actually run Physics and draw everything
-    drawBodiesScaled();
+    drawScaled();
     // Reset Transformation Matrix
     c.restore();
 
     // SHOW NAMES AND INFOS ON MOUSE OVER
     // DRAW UNSCALED
-    drawBodiesUnscaled();
+    drawUnscaled();
     // ui
     ui();
     // camera planet
@@ -33,7 +33,7 @@ function start() {
     frAId = window.requestAnimationFrame(start);
 }
 
-function drawBodiesUnscaled() {
+function drawUnscaled() {
     // SOLAR SYSTEM BODIES
     if (scale > .01) {
         sun.n();
@@ -81,18 +81,16 @@ function drawBodiesUnscaled() {
 }
 
 // DRAW SUNS, PLANETS, MOONS, ORBITS AND COLLISION DETECTION
-function drawBodiesScaled() {
+function drawScaled() {
 
-    if (stopSpin) everything.forEach(e => e.w -= e.v);
-    scaleT = timeControl[i][1];
+    if (stopSpin) scaleT = 0;
+    else scaleT = timeControl[i][1];
     if (orbit && scale > .03) {
         planets.forEach(p => p.orbit());
         // dwarfs.forEach(d => d.orbit());
         // moons.forEach(m => m.orbit());
     }
     if (scale < .01) c.fillRect(center.x - 50 * AU, center.y, 100 * AU, 1 / scale);
-    // RUN PARTICLES
-    // runParticles();
 
     // RUN ALL BODIES
     // SOLAR SYSTEM BODIES
@@ -104,7 +102,6 @@ function drawBodiesScaled() {
     oortCloud.forEach(o => o.run());
     voyager1.run();
     lightRay.run();
-    test2.run();
     // OTHER BODIES
     suns.forEach(s => s.run());
     alphaCentauri.forEach(a => a.run());
