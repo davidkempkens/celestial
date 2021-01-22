@@ -25,6 +25,7 @@ a:hover {
 }
 
 body {
+    overflow: hidden;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -112,10 +113,9 @@ button:hover {
         background-color: var(--bg-color);
     }
     #nav-hud {
-        top: auto;
-        left: auto;
+        left: unset;
         right: 1%;
-        bottom: 3%;
+        top: 70%;
         flex-direction: column-reverse;
         width: 180px;
     }
@@ -124,9 +124,6 @@ button:hover {
     }
     #hud-moons {
         top: 63%;
-    }
-    #hud-suns {
-        /* width: 120px; */
     }
     #hud-other {
         top: 50%;
