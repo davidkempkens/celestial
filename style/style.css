@@ -108,14 +108,16 @@ button:hover {
     }
     a {
         opacity: .7;
+        padding: 1px;
+        background-color: var(--bg-color);
     }
     #nav-hud {
         top: auto;
         left: auto;
         right: 1%;
         bottom: 3%;
-        flex-direction: column;
-        width: 120px;
+        flex-direction: column-reverse;
+        width: 180px;
     }
     #hud-planets {
         top: 10%;
@@ -142,6 +144,8 @@ button:hover {
     }
     a {
         opacity: .7;
+        padding: 1px;
+        background-color: var(--bg-color);
     }
     #nav-hud {
         top: auto;
