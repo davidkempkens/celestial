@@ -6,8 +6,14 @@ const c = canvas.getContext('2d');
 const img = document.getElementById('img');
 
 // Set canvas to fullscreen
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+var w = window.innerWidth;
+var h = window.innerHeight;
+canvas.style.width = w + "px";
+canvas.style.height = h + "px";
+canvas.width = Math.floor(w * window.devicePixelRatio);
+canvas.height = Math.floor(h * window.devicePixelRatio);
+c.scale(window.devicePixelRatio, window.devicePixelRatio);
+
 // Parameter for camera function to center object on canvas
 var cameraBody = null;
 // Booleans to toggle in main loop - for user input

@@ -140,7 +140,6 @@ timeElement.addEventListener('click', () => {
 function ui() {
     if (plusPressed) zoomIn();
     if (minusPressed) zoomOut();
-    c.font = "13px Consolas";
     // BAR
     let bar = {
         x: (canvas.width / 2) - AU,
