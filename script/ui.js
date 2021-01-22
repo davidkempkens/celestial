@@ -58,6 +58,9 @@ window.addEventListener("keypress", e => {
         case "t":
             toggleTime();
             break;
+        case "h":
+            toggleHUD();
+            break;
         case "s":
             stopSpin = !stopSpin;
             break;
@@ -109,12 +112,14 @@ const timeElement = document.getElementById('timeElement');
 const plusElement = document.getElementById('plusElement');
 const minusElement = document.getElementById('minusElement');
 
-hideHUDElement.addEventListener('click', () => {
+hideHUDElement.addEventListener('click', toggleHUD);
+
+function toggleHUD() {
     hideHUD = !hideHUD;
     hudElements.forEach(h => {
         h.style.display = hideHUD ? 'none' : 'flex';
     });
-});
+}
 // FILL HUDS WITH BODIES + EVENT LISTENER ON EACH BODY
 updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
 updateHUD([...alphaCentauri, ...suns], hudSuns);
