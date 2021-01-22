@@ -106,7 +106,7 @@ const minusElement = document.getElementById('minusElement');
 
 // FILL HUDS WITH BODIES + EVENT LISTENER ON EACH BODY
 updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
-updateHUD([...suns, ...alphaCentauri], hudSuns);
+updateHUD([...alphaCentauri, ...suns], hudSuns);
 updateHUD([m87, lightRay, voyager1, universe], hudOther);
 
 // MOON LIST FILLED BOOLEAN
@@ -195,7 +195,6 @@ function ui() {
             moonListFilled = true;
             if (moonCount > 0) {
                 hudMoons.style.display = 'flex';
-                if (window.innerWidth > 600) hudMoons.style.left = hudPlanets.clientWidth + 30 + 'px';
             }
             // IF CAMERA BODY CHANGES BUT WITHOUT GOING NULL INBETWEEN
             // CHECK IF CAMERA BODY MATCHES THE CURRENT LIST
