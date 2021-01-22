@@ -112,8 +112,8 @@ button:hover {
     #nav-hud {
         top: auto;
         left: auto;
-        right: 3%;
-        bottom: 5%;
+        right: 1%;
+        bottom: 3%;
         flex-direction: column;
         width: 120px;
     }
