@@ -195,7 +195,7 @@ function ui() {
             moonListFilled = true;
             if (moonCount > 0) {
                 hudMoons.style.display = 'flex';
-                if (window.innerWidth > 600) hudMoons.style.left = hudPlanets.clientWidth + 'px';
+                if (window.innerWidth > 600) hudMoons.style.left = hudPlanets.clientWidth + 30 + 'px';
             }
             // IF CAMERA BODY CHANGES BUT WITHOUT GOING NULL INBETWEEN
             // CHECK IF CAMERA BODY MATCHES THE CURRENT LIST

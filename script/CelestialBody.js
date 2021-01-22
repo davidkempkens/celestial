@@ -80,7 +80,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         if (this.type == 'Probe' || this.type == 'Photon') {
             // Physics for Bodies flying in a straight line
             this.d += this.v;
-            this.x = this.center.x + this.d;
+            this.x = this.center.x + this.center.r + this.d;
             this.y = this.center.y;
             this.flightPath();
         } else {
@@ -243,7 +243,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         c.beginPath();
         c.strokeStyle = this.color;
         c.lineWidth = .3 / scale;
-        c.moveTo(this.center.x, this.center.y);
+        c.moveTo(this.center.x + this.center.r, this.center.y);
         c.lineTo(this.x, this.y);
         c.stroke();
         c.closePath();

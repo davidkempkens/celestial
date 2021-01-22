@@ -61,7 +61,7 @@ const kuiperBelt = asteroidFactory(1000, 'Kuiper Asteroid', sun, .001, .002, 30 
 const oortCloud = asteroidFactory(1000, 'Oort Cloud Asteroid', sun, .6, 1, 2000 * AU, 5000 * AU, -17, -25, 0, .1, 1e25, '#5E574F', 'Asteroid');
 
 // Space Probes
-const voyager1 = new CelestialBody('Yoyager 1', earth, .003, 152.2 * AU, 17, 0, 825.5, 'white', 'Probe');
+const voyager1 = new CelestialBody('Yoyager 1', center, .003, 152.2 * AU, 17, 0, 825.5, 'white', 'Probe');
 
 // Planets Array
 const planets = [
@@ -118,7 +118,7 @@ const universe = new CelestialBody('Universe', center, 46500000000 * ly, 4650000
 const m87 = new CelestialBody('M87*', center, 1.9e-3 * ly, 53.49e6 * ly, 0, 0, 7.22e9 * solarMass, 'white', 'Black Hole');
 
 // SPPED OF LIGHT
-const lightRay = new CelestialBody('C', sun, earth.r, 0, C, 0, 1, 'CYAN', 'Photon');
+const lightRay = new CelestialBody('C', sun, earth.r, 0, C, 0, 0, 'CYAN', 'Photon');
 
 // Suns
 const barnard = new CelestialBody('Barnard\'s Star', center, solarRadius * .2, 5.958 * ly, 0, 0, solarMass * .144, '#D9042B', 'Star');

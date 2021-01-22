@@ -50,25 +50,27 @@ body {
 
 #nav-hud {
     position: fixed;
-    top: 0;
+    top: 1%;
     left: 5%;
 }
 
 #time-hud {
     position: fixed;
-    top: 0;
-    left: 45%;
+    top: 1%;
+    left: 50%;
 }
 
 #hud-planets {
     position: fixed;
     flex-direction: column;
+    left: 1%;
     top: 15%;
 }
 
 #hud-moons {
     position: fixed;
     flex-direction: column;
+    left: 1%;
     top: 15%;
     display: none;
 }
@@ -77,30 +79,14 @@ body {
     position: fixed;
     flex-direction: column;
     top: 15%;
-    right: 0;
+    right: 1%;
 }
 
 #hud-other {
     position: fixed;
     flex-direction: column;
     top: 55%;
-    right: 0;
-}
-
-button {
-    outline: none;
-    border: 1px solid rgba(255, 255, 255, .1);
-    color: rgba(255, 255, 255, .1);
-    border-radius: 5px;
-    padding: 10px 15px;
-    background-color: rgba(0, 0, 0, .0);
-    margin: 10px 10px 10px 20px;
-}
-
-button:hover {
-    border: 1px solid rgba(255, 255, 255, .5);
-    color: white;
-    transition: .2s;
+    right: 1%;
 }
 
 @media only screen and (max-width: 600px) {
@@ -116,7 +102,7 @@ button:hover {
         left: unset;
         top: unset;
         right: 1%;
-        bottom: 5%;
+        bottom: 1%;
         flex-direction: column-reverse;
         width: 180px;
     }
@@ -136,6 +122,11 @@ button:hover {
         top: 1%;
         right: 1%;
         left: auto;
+    }
+    #plusElement,
+    #minusElement {
+        padding: 5px;
+        font-size: 20px;
     }
 }
 
