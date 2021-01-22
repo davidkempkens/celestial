@@ -49,6 +49,14 @@ body {
     align-items: center;
 }
 
+.hide-hud {
+    background-color: var(--bg-color);
+    position: fixed;
+    display: flex;
+    top: 1%;
+    right: 1%;
+}
+
 #nav-hud {
     position: fixed;
     top: 1%;
@@ -130,6 +138,10 @@ body {
         padding: 5px;
         font-size: 20px;
     }
+    .hide-hud {
+        top: 1%;
+        right: 50%;
+    }
 }
 
 @media only screen and (max-height: 600px) {
@@ -175,5 +187,10 @@ body {
     #minusElement {
         padding: 5px;
         font-size: 20px;
+    }
+    .hide-hud {
+        top: 1%;
+        right: unset;
+        left: 1%;
     }
 }

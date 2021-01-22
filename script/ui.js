@@ -96,6 +96,11 @@ const hudMoons = document.getElementById('hud-moons');
 const hudSuns = document.getElementById('hud-suns');
 const hudOther = document.getElementById('hud-other');
 
+var hudElements = document.querySelectorAll('.hud');
+
+
+var hideHUD = false;
+const hideHUDElement = document.getElementById('hideElement')
 const cameraElement = document.getElementById('camera');
 const zoomElement = document.getElementById('zoomElement');
 const stopElement = document.getElementById('stopElement');
@@ -104,6 +109,12 @@ const timeElement = document.getElementById('timeElement');
 const plusElement = document.getElementById('plusElement');
 const minusElement = document.getElementById('minusElement');
 
+hideHUDElement.addEventListener('click', () => {
+    hideHUD = !hideHUD;
+    hudElements.forEach(h => {
+        h.style.display = hideHUD ? 'none' : 'flex';
+    });
+});
 // FILL HUDS WITH BODIES + EVENT LISTENER ON EACH BODY
 updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
 updateHUD([...alphaCentauri, ...suns], hudSuns);
