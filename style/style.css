@@ -121,13 +121,13 @@ button:hover {
         top: 5%;
     }
     #hud-moons {
-        top: 43%;
+        top: 55%;
     }
     #hud-suns {
         /* width: 120px; */
     }
     #hud-other {
-        top: 41%;
+        top: 55%;
     }
     #time-hud {
         top: 1%;
