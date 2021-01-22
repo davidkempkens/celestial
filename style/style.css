@@ -112,16 +112,16 @@ button:hover {
     #nav-hud {
         top: auto;
         left: auto;
-        right: 1%;
-        bottom: 1%;
+        right: 3%;
+        bottom: 5%;
         flex-direction: column;
         width: 120px;
     }
     #hud-planets {
-        top: 5%;
+        top: 10%;
     }
     #hud-moons {
-        top: 55%;
+        top: 60%;
     }
     #hud-suns {
         /* width: 120px; */
@@ -130,7 +130,7 @@ button:hover {
         top: 55%;
     }
     #time-hud {
-        top: 1%;
+        top: 5%;
         right: 1%;
         left: auto;
     }
