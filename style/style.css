@@ -114,22 +114,26 @@ button:hover {
     }
     #nav-hud {
         left: unset;
+        top: unset;
         right: 1%;
-        top: 70%;
+        bottom: 5%;
         flex-direction: column-reverse;
         width: 180px;
     }
     #hud-planets {
-        top: 10%;
+        top: 1%;
     }
     #hud-moons {
         top: 63%;
+    }
+    #hud-suns {
+        top: 8%;
     }
     #hud-other {
         top: 50%;
     }
     #time-hud {
-        top: 5%;
+        top: 1%;
         right: 1%;
         left: auto;
     }
