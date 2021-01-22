@@ -10,17 +10,25 @@
 <body>
     <div class="container">
         <canvas id="canvas"></canvas>
-        <div class="hud" id="hud-top">
+
+        <div class="hud" id="nav-hud">
             <a id="camera" href="#">Solar System</a>
-            <a id="stopElement" href="#">Stop</a>
+            <hr>
             <a id="orbitElement" href="#"><b>O</b>rbit</a>
-            <a id="timeElement" href="#"><b>T</b>ime</a>
-            <a id="minusElement" href="#"><b>-</b></a>
+            <hr>
             <a id="plusElement" href="#"><b>+</b></a>
+            <a id="minusElement" href="#"><b>-</b></a>
             <a id="zoomElement" href="#"><b>Z</b>oom: 1</a>
+        </div>
+        <div class="hud" id="time-hud">
+            <a id="stopElement" href="#">Stop</a>
+            <hr>
+            <a id="timeElement" href="#"><b>U</b>nit</a>
         </div>
         <div class="hud" id="hud-planets"></div>
         <div class="hud" id="hud-moons"></div>
+        <div class="hud" id="hud-suns"></div>
+        <div class="hud" id="hud-other"></div>
     </div>
     <div style="display:none;">
         <img id="img" src="voyager.png">

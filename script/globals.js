@@ -38,11 +38,6 @@ timeControl = [
 var scaleT = 1;
 // Scale for velocity 1 / 60e6
 var scaleV = (1 / 60e6) * scaleT;
-// TIMER FOR MEASURING
-var startTime = 0;
-// 30 km * 60s * 60m * 24h * 365d = 946.080.000 km around the sun
-// 
-
 // SPEED OF LIGHT - C
 const C = 299792.458;
 // AU - in Mio km
@@ -123,31 +118,13 @@ function formatNumber(num) {
     })
 }
 
-setInterval(timer, 1000);
-
-function timer() {
-    var d = new Date();
-    var t = d.toLocaleString();
-    startTime += scaleT;
-    // console.log(startTime, currentTimeUnit);
-};
-
 // DRAW Text at scale and translated coords
-function drawText(t, coord, f, translated) {
+function drawText(t, coord, f) {
     let lineX, lineY;
     c.fillStyle = coord.color;
     c.font = "13px Consolas";
-    if (translated) {
-        lineX = ((coord.x + coord.r) * scale) + trans.x + f;
-        lineY = (coord.y * scale) + trans.y;
-    } else {
-        // CURRENTLY NOT WORKING
-        // c.setTransform(1, 0, 0, 1, 0, 0);
-        lineX = coord.x + coord.r + f;
-        lineY = coord.y;
-        // c.resetTransform();
-    }
-
+    lineX = ((coord.x + coord.r) * scale) + trans.x + f;
+    lineY = (coord.y * scale) + trans.y;
     if (t instanceof Array) {
         for (let i = 0; i < t.length; i++) {
             c.fillText(t[i], lineX, lineY + f * i);
@@ -155,4 +132,19 @@ function drawText(t, coord, f, translated) {
     } else {
         c.fillText(t, lineX, lineY);
     }
+}
+
+function updateHUD(bodies, hud) {
+    bodies.forEach(b => {
+        var a = document.createElement('a');
+        hud.appendChild(a);
+        a.style.color = b.color;
+        a.innerHTML = b.name;
+        a.href = '#';
+        a.addEventListener('click', () => {
+            scale = cameraBody == b ? 10 / b.r : 10 / sun.r;
+            cameraBody = b;
+        });
+        // a.addEventListener('mouseover', () => {});
+    });
 }

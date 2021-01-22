@@ -121,8 +121,10 @@ window.addEventListener("keypress", e => {
 
 // HUD ELEMENTS
 const hud = document.getElementById('hud-top');
-const hud2 = document.getElementById('hud-planets');
-const hud3 = document.getElementById('hud-moons');
+const hudPlanets = document.getElementById('hud-planets');
+const hudMoons = document.getElementById('hud-moons');
+const hudSuns = document.getElementById('hud-suns');
+const hudOther = document.getElementById('hud-other');
 
 const cameraElement = document.getElementById('camera');
 const zoomElement = document.getElementById('zoomElement');
@@ -132,21 +134,10 @@ const timeElement = document.getElementById('timeElement');
 const plusElement = document.getElementById('plusElement');
 const minusElement = document.getElementById('minusElement');
 
-// FILL LIST ON THE RIGHT SIDE
-bigBodies.forEach(b => {
-    if (b.type != 'Moon') {
-        let a = document.createElement('a');
-        hud2.appendChild(a);
-        a.style.color = b.color;
-        a.innerHTML = b.name;
-        a.href = '#';
-        a.addEventListener('click', () => {
-            scale = cameraBody == b ? 10 / b.r : 10 / sun.r;
-            cameraBody = b;
-        });
-        a.addEventListener('mouseover', () => {});
-    }
-});
+// FILL HUDS WITH BODIES
+updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
+updateHUD([...suns, ...alphaCentauri], hudSuns);
+updateHUD([m87, lightRay, voyager1, universe], hudOther);
 
 // MOON LIST FILLED BOOLEAN
 var moonListFilled = false;
@@ -157,7 +148,7 @@ cameraElement.addEventListener('click', () => {
     cameraBody = null;
     center.x = canvas.width / 2;
     center.y = canvas.height / 2;
-})
+});
 zoomElement.addEventListener('click', () => scale = 1);
 stopElement.addEventListener('click', () => stopSpin = !stopSpin);
 orbitElement.addEventListener('click', () => orbit = !orbit);
@@ -172,7 +163,7 @@ timeElement.addEventListener('click', () => {
 // Draw bar at the bottom of the canvas to show scale
 function ui() {
 
-    // Bar Position
+    // BAR
     let bar = {
         x: (canvas.width / 2) - AU,
         w: AU,
@@ -193,22 +184,20 @@ function ui() {
     let au = formatNumber(AU / scale);
     let ly = formatNumber((1 / 63241.077) / scale);
 
-    let text = [`${ly} light-years`, `${au} AU`, `${km} km`, `${startTime} s passed`];
+    let text = [`${ly} light-years`, `${au} AU`, `${km} km`];
     for (let i = 0; i < text.length; i++) {
         c.fillText(text[i], bar.x, bar.y - 20 * (i + 1));
     }
 
     // HUD
-    timeElement.innerHTML = `<b>T</b>ime: ${timeControl[i][0]}`;
+    timeElement.innerHTML = `<b>T</b>ime/s = 1 ${timeControl[i][0]}`;
     zoomElement.innerHTML = `<b>Z</b>oom: ${formatNumber(scale)}`;
     stopElement.innerHTML = stopSpin ? `<b>S</b>top` : `<b>S</b>tart`;
     stopElement.style.color = stopSpin ? 'red' : 'green';
     // show current planets that gets follow by the camera in the hud
     if (cameraBody !== null) {
-
-        cameraElement.innerHTML = '<b>C</b>amera: ' + cameraBody.name;
+        cameraElement.innerHTML = cameraBody.name;
         cameraElement.style.color = cameraBody.color;
-
         // FILL LIST ON THE RIGHT SIDE
         // IF LIST IS CURRENTLY EMPTY
         if (!moonListFilled) {
@@ -216,8 +205,8 @@ function ui() {
                 if (m.center == cameraBody) {
                     moonCount++;
                     currentListFrom = m.center;
-                    let a = document.createElement('a');
-                    hud3.appendChild(a);
+                    var a = document.createElement('a');
+                    hudMoons.appendChild(a);
                     a.style.color = m.color;
                     a.innerHTML = m.name;
                     a.href = '#';
@@ -228,15 +217,16 @@ function ui() {
             });
             moonListFilled = true;
             if (moonCount > 0) {
-                hud3.style = 'display:flex';
+                hudMoons.style.display = 'flex';
+                if (window.innerWidth > 600) hudMoons.style.left = hudPlanets.clientWidth + 'px';
             }
             // IF CAMERA BODY CHANGES BUT WITHOUT GOING NULL INBETWEEN
             // CHECK IF CAMERA BODY MATCHES THE CURRENT LIST
         } else {
             if (currentListFrom != cameraBody) {
                 // IF CAMERA BODY IS CAHNGED DELETE AND HIDE LIST
-                hud3.innerHTML = '';
-                hud3.style.display = 'none';
+                hudMoons.innerHTML = '';
+                hudMoons.style.display = 'none';
                 moonListFilled = false;
                 moonCount = 0;
                 currentListFrom = null;
@@ -244,8 +234,8 @@ function ui() {
         }
     } else {
         // IF CAMERA BODY IS NULL DELETE AND HIDE LIST
-        hud3.innerHTML = '';
-        hud3.style.display = 'none';
+        hudMoons.innerHTML = '';
+        hudMoons.style.display = 'none';
         moonListFilled = false;
         moonCount = 0;
         currentListFrom = null;

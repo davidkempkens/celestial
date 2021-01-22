@@ -296,9 +296,9 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
             r: this.r,
             color: this.color
         }
-        if (this.type == 'Probe') drawText(`\u2192 ${(this.d / 150).toPrecision(10)} AU`, b, 13, true);
-        else if (this.type == 'Photon') drawText([`\u2192 ${formatNumber(this.d * 1e6)} km`], b, 13, true);
-        else drawText(`\u2205 ${formatNumber(this.radius * 2e6)} km`, b, 13, true);
+        if (this.type == 'Probe') drawText(`\u2192 ${(this.d / 150).toPrecision(10)} AU`, b, 13);
+        else if (this.type == 'Photon') drawText([`\u2192 ${formatNumber(this.d * 1e6)} km`], b, 13);
+        else drawText(`\u2205 ${formatNumber(this.radius * 2e6)} km`, b, 13);
 
         // Text on the right side of the body
         var t = [
@@ -307,11 +307,11 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
             `${formatNumber(this.velocity)} km/s `, // Display Velocity
             ` Mass: ${formatNumber(this.mass.toExponential(0))} kg` // Display Type
         ]
-        drawText(t, this, 13, true);
+        drawText(t, this, 13);
     }
 
     this.n = function() {
-        drawText(this.name, this, 13, true);
+        drawText(this.name, this, 13);
     }
 }
 

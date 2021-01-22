@@ -112,7 +112,7 @@ const moons = [
 ];
 
 // OBSERVABLE UNIVERSE SCALE Radius 46,5 billion lightyears / 93 billion lighty-years
-const universe = new CelestialBody('Observable Universe', center, 46500000000 * ly, 46500000000 * ly, 0, 0, 0, 'white', 'Universe');
+const universe = new CelestialBody('Universe', center, 46500000000 * ly, 46500000000 * ly, 0, 0, 0, 'white', 'Universe');
 
 // BLACK HOLE
 const m87 = new CelestialBody('M87*', center, 1.9e-3 * ly, 53.49e6 * ly, 0, 0, 7.22e9 * solarMass, 'white', 'Black Hole');

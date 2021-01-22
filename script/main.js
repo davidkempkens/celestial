@@ -18,12 +18,22 @@ function start() {
     // Scale Canvas
     c.scale(scale, scale);
     // Actually run Physics and draw everything
-    drawEverything();
+    drawBodiesScaled();
     // Reset Transformation Matrix
     c.restore();
 
     // SHOW NAMES AND INFOS ON MOUSE OVER
     // DRAW UNSCALED
+    drawBodiesUnscaled();
+    // ui
+    ui();
+    // camera planet
+    camera(cameraBody);
+    // frameAnimation ID
+    frAId = window.requestAnimationFrame(start);
+}
+
+function drawBodiesUnscaled() {
     // SOLAR SYSTEM BODIES
     if (scale > .01) {
         sun.n();
@@ -40,6 +50,8 @@ function start() {
             if (scale > 10) m.n();
             if (scale > 200 && m.isColliding) m.info();
         });
+        voyager1.n();
+        if (voyager1.isColliding) voyager1.info();
     } else {
         let t = {
             x: center.x,
@@ -48,8 +60,7 @@ function start() {
         }
         drawText(['Solar System', `\u2205 ${formatNumber(50 * AU * 2e6)} km`], t, 13, true);
     }
-    voyager1.n();
-    if (voyager1.isColliding) voyager1.info();
+
     // OTHER BODIES
     suns.forEach(s => {
         if (scale > 1e-9) s.n();
@@ -67,17 +78,10 @@ function start() {
     // LIGHTSPEED TEST
     lightRay.n();
     if (lightRay.isColliding) lightRay.info();
-    test2.n();
-    // ui
-    ui();
-    // camera planet
-    camera(cameraBody);
-    // frameAnimation ID
-    frAId = window.requestAnimationFrame(start);
 }
 
 // DRAW SUNS, PLANETS, MOONS, ORBITS AND COLLISION DETECTION
-function drawEverything() {
+function drawBodiesScaled() {
 
     if (stopSpin) everything.forEach(e => e.w -= e.v);
     scaleT = timeControl[i][1];
