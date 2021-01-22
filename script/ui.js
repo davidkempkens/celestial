@@ -155,6 +155,7 @@ orbitElement.addEventListener('click', () => orbit = !orbit);
 
 plusElement.addEventListener('click', zoomIn);
 minusElement.addEventListener('click', zoomOut);
+
 // HOLD + or - TO keep zooming
 var plusPressed = false;
 var minusPressed = false;
@@ -162,6 +163,13 @@ plusElement.addEventListener('mousedown', () => plusPressed = true);
 minusElement.addEventListener('mousedown', () => minusPressed = true);
 plusElement.addEventListener('mouseup', () => plusPressed = false);
 minusElement.addEventListener('mouseup', () => minusPressed = false);
+
+plusElement.addEventListener('touchstart', e => {
+    e.preventDefault();
+    plusPressed = true;
+});
+
+minusElement.addEventListener('touchend', () => minusPressed = false);
 
 var i = 0;
 timeElement.addEventListener('click', () => {
