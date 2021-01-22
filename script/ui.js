@@ -52,39 +52,6 @@ function move(e) {
     };
 }
 
-// HANDLE TOUCH EVENTS - EXPERIMENTAL
-// Send touch positions to mouse event
-document.body.addEventListener("touchstart", e => {
-    e.preventDefault();
-    var touch = {
-        x: e.touches[0].clientX - canvas.getBoundingClientRect().left,
-        y: e.touches[0].clientY - canvas.getBoundingClientRect().top
-    };
-    var mE = new MouseEvent("mousedown", {
-        clientX: touch.x,
-        clientY: touch.y,
-    });
-    canvas.dispatchEvent(mE);
-});
-
-document.body.addEventListener("touchmove", e => {
-    e.preventDefault();
-    var touch = {
-        x: e.touches[0].clientX - canvas.getBoundingClientRect().left,
-        y: e.touches[0].clientY - canvas.getBoundingClientRect().top
-    };
-    var mE = new MouseEvent("mousemove", {
-        clientX: touch.x,
-        clientY: touch.y,
-    });
-    canvas.dispatchEvent(mE);
-});
-
-document.body.addEventListener("touchend", () => {
-    var mE = new MouseEvent("mouseup", {});
-    canvas.dispatchEvent(mE);
-});
-
 // HANDLE KEYBOARD EVENTS
 window.addEventListener("keypress", e => {
     switch (e.key) {
@@ -134,7 +101,7 @@ const timeElement = document.getElementById('timeElement');
 const plusElement = document.getElementById('plusElement');
 const minusElement = document.getElementById('minusElement');
 
-// FILL HUDS WITH BODIES
+// FILL HUDS WITH BODIES + EVENT LISTENER ON EACH BODY
 updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
 updateHUD([...suns, ...alphaCentauri], hudSuns);
 updateHUD([m87, lightRay, voyager1, universe], hudOther);
@@ -152,7 +119,6 @@ cameraElement.addEventListener('click', () => {
 zoomElement.addEventListener('click', () => scale = 1);
 stopElement.addEventListener('click', () => stopSpin = !stopSpin);
 orbitElement.addEventListener('click', () => orbit = !orbit);
-
 plusElement.addEventListener('click', zoomIn);
 minusElement.addEventListener('click', zoomOut);
 
@@ -164,20 +130,6 @@ minusElement.addEventListener('mousedown', () => minusPressed = true);
 plusElement.addEventListener('mouseup', () => plusPressed = false);
 minusElement.addEventListener('mouseup', () => minusPressed = false);
 
-plusElement.addEventListener('touchstart', e => {
-    e.preventDefault();
-    plusPressed = true;
-});
-plusElement.addEventListener('touchend', () => plusPressed = false);
-plusElement.addEventListener('touchcancel', () => plusPressed = false);
-
-minusElement.addEventListener('touchstart', e => {
-    e.preventDefault();
-    minusPressed = true;
-});
-minusElement.addEventListener('touchend', () => minusPressed = false);
-minusElement.addEventListener('touchcancel', () => minusPressed = false);
-
 var i = 0;
 timeElement.addEventListener('click', () => {
     i = ++i % timeControl.length;
@@ -188,7 +140,7 @@ timeElement.addEventListener('click', () => {
 function ui() {
     if (plusPressed) zoomIn();
     if (minusPressed) zoomOut();
-
+    c.font = "13px Consolas";
     // BAR
     let bar = {
         x: (canvas.width / 2) - AU,
@@ -210,7 +162,7 @@ function ui() {
     let au = formatNumber(AU / scale);
     let ly = formatNumber((1 / 63241.077) / scale);
 
-    let text = [`${ly} light-years`, `${au} AU`, `${km} km`, window.devicePixelRatio];
+    let text = [`${ly} light-years`, `${au} AU`, `${km} km`];
     for (let i = 0; i < text.length; i++) {
         c.fillText(text[i], bar.x, bar.y - 20 * (i + 1));
     }

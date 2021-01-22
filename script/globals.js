@@ -90,8 +90,8 @@ var symbols = {
 
 // Resize Canvas
 function resizeCanvas() {
-    var dpr = window.devicePixelRatio;
-    c.scale(1 / dpr, 1 / dpr);
+    // var dpr = window.devicePixelRatio;
+    // c.scale(1 / dpr, 1 / dpr);
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
