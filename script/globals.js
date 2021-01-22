@@ -90,10 +90,11 @@ var symbols = {
 
 // Resize Canvas
 function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
     var dpr = window.devicePixelRatio;
     c.scale(1 / dpr, 1 / dpr);
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
 }
 
 // Clear Canvas every frame - background color as global variable
