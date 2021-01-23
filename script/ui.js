@@ -50,6 +50,8 @@ function move(e) {
         // Distance needed to collide with Bodies etc.
         r: 30 / scale,
     };
+
+    runCollisionDetection();
 }
 
 // HANDLE KEYBOARD EVENTS
@@ -82,7 +84,7 @@ window.addEventListener("keypress", e => {
             zoomOut();
             break;
         case "+":
-            zoomOut();
+            zoomIn();
             break;
         case "z":
             scale = 1;

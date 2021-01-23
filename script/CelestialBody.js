@@ -61,7 +61,6 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         } else {
             c.drawImage(img, this.x, this.y - this.r / 2, this.r, this.r);
         }
-
         // draw the half of saturns rings after, so they appear infront of Saturn
         // front = true
         this.saturnRings(true);
@@ -223,6 +222,41 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
             p.run();
         });
     }
+    this.radioWave = function() {
+        if (this.type != 'Photon') return;
+        let d = this.d < 1 ? this.d : 1;
+        let wave = {
+            x: this.x - d,
+            y: this.y,
+            h: this.r,
+            line: 1 / scale,
+            i: .01,
+            m: 50
+        }
+
+        c.beginPath();
+        c.strokeStyle = 'red';
+        c.lineWidth = wave.line;
+        c.moveTo(wave.x, wave.y);
+        for (let i = 0; i < d; i += wave.i) {
+            c.moveTo(wave.x + i - wave.i, wave.y + Math.sin((i - wave.i) * wave.m) * wave.h);
+            c.lineTo(wave.x + i, wave.y + Math.sin(i * wave.m) * wave.h);
+        }
+        c.closePath();
+        c.stroke();
+
+        c.beginPath();
+        c.strokeStyle = 'blue';
+        c.lineWidth = wave.line;
+        c.moveTo(wave.x, wave.y);
+        for (let i = 0; i < d; i += wave.i) {
+            c.moveTo(wave.x + i - wave.i, wave.y - Math.sin((i - wave.i) * wave.m) * wave.h);
+            c.lineTo(wave.x + i, wave.y - Math.sin(i * wave.m) * wave.h);
+        }
+        c.closePath();
+        c.stroke();
+
+    }
 
     this.tail = function(w, l) {
         let rotation = deg(0);
@@ -247,6 +281,8 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         c.lineTo(this.x, this.y);
         c.stroke();
         c.closePath();
+
+        this.radioWave();
     }
 
     this.hover = function() {
@@ -262,15 +298,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         this.isColliding = distance < (this.r + other.r);
     }
 
-    // Draw Other Planet on mouse position
     this.compare = function(other) {
-        let copy = Object.assign({}, other);
-        copy.x = this.x;
-        copy.y = this.y + this.r + (25 / scale) + copy.r;
-
-        // DRAW MEAN AS BAR ABOVE THIS BODY
-        c.fillStyle = this.color;
-        c.fillRect(this.x - this.r, this.y - this.r - (10 / scale), this.r * 2, 2 / scale);
 
         // DRAW LINE TO SHOW DIRECTION
         c.beginPath();
@@ -280,11 +308,25 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         c.lineTo(this.center.x, this.center.y);
         c.stroke();
 
-        if (this == other) return;
-        // DRAW Other Body under this Body
-        c.fillStyle = copy.color;
-        c.fillRect(this.x - copy.r, (this.y + this.r) + (10 / scale), copy.r * 2, 2 / scale);
-        copy.draw()
+        // Draw this body's diameter above this body
+        c.fillStyle = this.color;
+        c.fillRect(this.x - this.r, this.y - this.r - (10 / scale), this.r * 2, 2 / scale);
+
+        // Draw Compares bodies
+        let copies = other.map(o => ({...o }));
+        for (let i = 0; i < copies.length; i++) {
+            // Copy other body to alter the x,y postion, without changing the orbit of the other body
+            copies[i].x = i < 1 ? this.x : copies[i - 1].x;
+            copies[i].y = i < 1 ? this.y + this.r + (25 / scale) + copies[i].r : copies[i - 1].y + copies[i - 1].r + ((25 / scale)) + copies[i].r;
+
+            // DRAW Other Body under this Body or below the other 'other' bodies
+            c.fillStyle = copies[i].color;
+            copies[i].draw();
+            if (copies.length > 2) continue;
+            if (i < 1) c.fillRect(this.x - copies[i].r, (this.y + this.r) + (10 / scale), copies[i].r * 2, 2 / scale);
+            else c.fillRect(copies[i - 1].x - copies[i].r, (copies[i - 1].y + copies[i - 1].r) + ((10 / scale) * i), copies[i].r * 2, 2 / scale);
+
+        }
     }
 
     this.info = function() {

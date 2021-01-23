@@ -82,8 +82,6 @@ function drawScaled() {
     else scaleT = timeControl[i][1];
     if (orbit && scale > .03) {
         planets.forEach(p => p.orbit());
-        // dwarfs.forEach(d => d.orbit());
-        // moons.forEach(m => m.orbit());
     }
     if (scale < .01) c.fillRect(center.x - 50 * AU, center.y, 100 * AU, 1 / scale);
 
@@ -102,6 +100,53 @@ function drawScaled() {
     alphaCentauri.forEach(a => a.run());
     m87.run();
     universe.run();
+
+    // ON COLLISON DISPLAY COMAPRE BODY AND ORBIT
+    if (sun.isColliding) sun.compare(planets);
+    planets.forEach(p => {
+        if (p.isColliding) {
+            p.orbit();
+            p.compare([earth, moon]);
+        }
+    });
+    dwarfs.forEach(d => {
+        if (d.isColliding) {
+            d.orbit();
+            d.compare([earth, moon])
+        }
+    });
+    moons.forEach(m => {
+        if (m.isColliding) {
+            m.orbit();
+            m.compare([moon]);
+        }
+        if (scale > 5 && orbit) m.orbit();
+    });
+    asteroids.forEach(a => {
+        if (a.isColliding && scale > .01) a.hover();
+    });
+    suns.forEach(s => {
+        if (s.isColliding) s.compare([sun, ...suns]);
+    });
+    alphaCentauri.forEach(a => {
+        if (a.isColliding) a.compare([sun]);
+    });
+
+    if (m87.isColliding) m87.compare([sun, ...suns]);
+    if (universe.isColliding) universe.compare([m87]);
+}
+
+function camera(body) {
+    // Does nothing if cameraBody is set to null
+    if (body == null) return;
+    // Center the canvas on a chosen body's position
+    // Gets called every frame in the main loop
+    // Uses global variable "cameraBody" as argument
+    center.x += (canvas.width / 2) - body.x;
+    center.y += (canvas.height / 2) - body.y - body.r;
+}
+
+function runCollisionDetection() {
     // RUN COLLISION DETECTION
     // SOLAR SYSTEM BODIES
     sun.collision(mouse);
@@ -117,48 +162,4 @@ function drawScaled() {
     alphaCentauri.forEach(a => a.collision(mouse));
     m87.collision(mouse);
     universe.collision(mouse);
-
-    // ON COLLISON DISPLAY COMAPRE BODY AND ORBIT
-    if (sun.isColliding) sun.compare(earth);
-    planets.forEach(p => {
-        if (p.isColliding) {
-            p.orbit();
-            p.compare(earth);
-        }
-    });
-    dwarfs.forEach(d => {
-        if (d.isColliding) {
-            d.orbit();
-            d.compare(earth)
-        }
-    });
-    moons.forEach(m => {
-        if (m.isColliding) {
-            m.orbit();
-            m.compare(moon);
-        }
-        if (scale > 5 && orbit) m.orbit();
-    });
-    asteroids.forEach(a => {
-        if (a.isColliding && scale > .01) a.hover();
-    });
-    suns.forEach(s => {
-        if (s.isColliding) s.compare(sun);
-    });
-    alphaCentauri.forEach(a => {
-        if (a.isColliding) a.compare(sun);
-    });
-
-    if (m87.isColliding) m87.compare(sun);
-    if (universe.isColliding) universe.compare(m87);
-}
-
-function camera(body) {
-    // Does nothing if cameraBody is set to null
-    if (body == null) return;
-    // Center the canvas on a chosen body's position
-    // Gets called every frame in the main loop
-    // Uses global variable "cameraBody" as argument
-    center.x += (canvas.width / 2) - body.x;
-    center.y += (canvas.height / 2) - body.y - body.r;
 }
