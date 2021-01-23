@@ -150,6 +150,8 @@ plusElement.addEventListener('mousedown', () => plusPressed = true);
 minusElement.addEventListener('mousedown', () => minusPressed = true);
 plusElement.addEventListener('mouseup', () => plusPressed = false);
 minusElement.addEventListener('mouseup', () => minusPressed = false);
+plusElement.addEventListener('mouseout', () => plusPressed = false);
+minusElement.addEventListener('mouseout', () => minusPressed = false);
 
 var i = 0;
 timeElement.addEventListener('click', toggleTime);
