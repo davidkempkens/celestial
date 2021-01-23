@@ -130,12 +130,12 @@ function formatNumber(num) {
 }
 
 // DRAW Text at scale and translated coords
-function drawText(t, coord, f) {
+function drawText(t, x, y, color, f) {
     let lineX, lineY;
-    c.fillStyle = coord.color;
+    c.fillStyle = color;
     c.font = "13px Consolas";
-    lineX = ((coord.x + coord.r) * scale) + trans.x + f;
-    lineY = (coord.y * scale) + trans.y;
+    lineX = (x * scale) + trans.x + f;
+    lineY = (y * scale) + trans.y;
     if (t instanceof Array) {
         for (let i = 0; i < t.length; i++) {
             c.fillText(t[i], lineX, lineY + f * i);

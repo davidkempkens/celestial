@@ -289,29 +289,35 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
 
     this.info = function() {
 
-        // Text above the body
-        let b = {
-            x: this.x - this.r * 2,
-            y: this.y - this.r - (25 / scale),
-            r: this.r,
-            color: this.color
-        }
-        if (this.type == 'Probe') drawText(`\u2192 ${(this.d / 150).toPrecision(10)} AU`, b, 13);
-        else if (this.type == 'Photon') drawText([`\u2192 ${formatNumber(this.d * 1e6)} km`], b, 13);
-        else drawText(`\u2205 ${formatNumber(this.radius * 2e6)} km`, b, 13);
-
-        // Text on the right side of the body
-        var t = [
+        var textAbove = [`\u2205 ${formatNumber(this.radius * 2e6)} km`]; // DEFAULT TEXT ABOVE BODY IS DIAMETER
+        var textAside = [
             `${this.name} ${this.symbol} ${this.type}`, // Display Symbols
-            `\u2192 ${formatNumber(this.distance * 1e6)} km `, // Display Distance
             `${formatNumber(this.velocity)} km/s `, // Display Velocity
-            ` Mass: ${formatNumber(this.mass.toExponential(0))} kg` // Display Type
-        ]
-        drawText(t, this, 13);
+            `\u2192 ${formatNumber(this.distance * 1e6)} km `, // Display Distance
+            `Mass: ${formatNumber(this.mass.toExponential(0))} kg` // Display Type
+        ];
+
+        if (this.type == 'Probe') {
+            textAbove = [`\u2192 ${(this.d / 150).toPrecision(14)} AU`];
+            textAside = [
+                `${this.name} ${this.symbol} ${this.type}`, // Display Symbols
+                `${formatNumber(this.velocity)} km/s `, // Display Velocity
+            ];
+        } else if (this.type == 'Photon') {
+            textAbove = [`\u2192 ${formatNumber(this.d * 1e6)} km`];
+            textAside = [
+                `${this.name} ${this.symbol} ${this.type}`, // Display Symbols
+                `${formatNumber(this.velocity)} km/s `, // Display Velocity
+            ];
+        }
+
+        // CALL TEXT FUNCTION
+        drawText(textAbove, this.x - this.r * 2, this.y - this.r - (25 / scale), this.color, 13);
+        drawText(textAside, this.x + this.r, this.y, this.color, 13);
     }
 
     this.n = function() {
-        drawText(this.name, this, 13);
+        drawText(this.name, this.x + this.r, this.y, this.color, 13);
     }
 }
 

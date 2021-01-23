@@ -53,12 +53,7 @@ function drawUnscaled() {
         voyager1.n();
         if (voyager1.isColliding) voyager1.info();
     } else {
-        let t = {
-            x: center.x,
-            y: center.y - 50 * AU,
-            r: 0
-        }
-        drawText(['Solar System', `\u2205 ${formatNumber(50 * AU * 2e6)} km`], t, 13, true);
+        drawText(['Solar System', `\u2205 ${formatNumber(50 * AU * 2e6)} km`], center.x, center.y - 50 * AU, 'white', 13);
     }
 
     // OTHER BODIES
