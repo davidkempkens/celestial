@@ -185,7 +185,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         minR: this.r * 1e-6,
         maxR: this.r * 1e-5,
         minD: this.r * .01,
-        maxD: this.r * .1,
+        maxD: this.r * .3,
         minV: 0,
         maxV: C * .4,
         minE: .0,
@@ -200,7 +200,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         if (this.type != 'Black Hole') return;
         let minSpeed = (this.particle.minV / this.particle.minD) * scaleV;
         let maxSpeed = (this.particle.maxV / this.particle.maxD) * scaleV;
-        let rate = (maxSpeed - minSpeed) * .001;
+        let rate = (maxSpeed - minSpeed) * .1;
         particles.forEach(p => {
 
             if (p.v <= maxSpeed) {
@@ -222,16 +222,28 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
             p.run();
         });
     }
+
+    this.tail = function(w, l) {
+        let rotation = deg(0);
+        c.beginPath();
+        c.strokeStyle = this.color;
+        c.lineWidth = w;
+        // ellipses center coords (x,y), (Major) x-radius, (Minor) y-radius, rotation, start, end
+        c.ellipse(this.center.x, this.center.y, this.a * this.d, this.b * this.d, rotation, this.w - deg(l), this.w);
+        c.stroke();
+        c.closePath();
+    }
+
     this.radioWave = function() {
         if (this.type != 'Photon') return;
-        let d = this.d < 1 ? this.d : 1;
+        let d = this.d % .5;
         let wave = {
             x: this.x - d,
             y: this.y,
             h: this.r,
             line: 1 / scale,
-            i: .01,
-            m: 50
+            i: .005,
+            m: 100
         }
 
         c.beginPath();
@@ -256,18 +268,6 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         c.closePath();
         c.stroke();
 
-    }
-
-    this.tail = function(w, l) {
-        let rotation = deg(0);
-        c.beginPath();
-        c.strokeStyle = '#626973';
-        c.strokeStyle = this.color;
-        c.lineWidth = w;
-        // ellipses center coords (x,y), (Major) x-radius, (Minor) y-radius, rotation, start, end
-        c.ellipse(this.center.x, this.center.y, this.a * this.d, this.b * this.d, rotation, this.w - deg(l), this.w);
-        c.stroke();
-        c.closePath();
     }
 
     this.flightPath = function() {
