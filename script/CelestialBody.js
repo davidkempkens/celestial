@@ -43,6 +43,9 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
 
     // flag for collision function
     this.isColliding = false;
+    // Last position
+    this._x = this.x;
+    this._y = this.y;
 
     // DRAW CIRCLE ON CANVAS
     this.draw = function() {
@@ -75,6 +78,10 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
 
     // RUN PHYSICS
     this.run = function() {
+        // Save last postion
+        this._x = this.x;
+        this._y = this.y;
+
         this.rescale();
         if (this.type == 'Probe' || this.type == 'Photon') {
             // Physics for Bodies flying in a straight line
@@ -325,7 +332,6 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
             if (copies.length > 2) continue;
             if (i < 1) c.fillRect(this.x - copies[i].r, (this.y + this.r) + (10 / scale), copies[i].r * 2, 2 / scale);
             else c.fillRect(copies[i - 1].x - copies[i].r, (copies[i - 1].y + copies[i - 1].r) + ((10 / scale) * i), copies[i].r * 2, 2 / scale);
-
         }
     }
 
