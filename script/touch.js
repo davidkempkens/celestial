@@ -2,11 +2,11 @@
 // Send touch positions to mouse event
 document.body.addEventListener("touchstart", e => {
     e.preventDefault();
-    var touch = {
+    let touch = {
         x: e.touches[0].clientX - canvas.getBoundingClientRect().left,
         y: e.touches[0].clientY - canvas.getBoundingClientRect().top
     };
-    var mE = new MouseEvent("mousedown", {
+    let mE = new MouseEvent("mousedown", {
         clientX: touch.x,
         clientY: touch.y,
     });
@@ -15,11 +15,11 @@ document.body.addEventListener("touchstart", e => {
 
 document.body.addEventListener("touchmove", e => {
     e.preventDefault();
-    var touch = {
+    let touch = {
         x: e.touches[0].clientX - canvas.getBoundingClientRect().left,
         y: e.touches[0].clientY - canvas.getBoundingClientRect().top
     };
-    var mE = new MouseEvent("mousemove", {
+    let mE = new MouseEvent("mousemove", {
         clientX: touch.x,
         clientY: touch.y,
     });
@@ -27,7 +27,7 @@ document.body.addEventListener("touchmove", e => {
 });
 
 document.body.addEventListener("touchend", () => {
-    var mE = new MouseEvent("mouseup", {});
+    let mE = new MouseEvent("mouseup", {});
     canvas.dispatchEvent(mE);
 });
 

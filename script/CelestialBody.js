@@ -26,7 +26,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
 
     // VELOCITY
     this.v = this.velocity * scaleV;
-    if (this.type != 'Photon' && this.distance != 0) this.v = (this.velocity / this.distance) * scaleV;
+    if (this.type !== 'Photon' && this.distance !== 0) this.v = (this.velocity / this.distance) * scaleV;
     // ECCENTRICITY
     this.a = 1;
     this.b = 1 - this.eccentricity;
@@ -55,7 +55,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         this.saturnRings(false);
 
         // DRAW ACTUAL BODY
-        if (this.type != 'Probe') {
+        if (this.type !== 'Probe') {
             c.fillStyle = this.color;
             c.beginPath();
             c.arc(this.x, this.y, this.r, 0, Math.PI * 2);
@@ -83,7 +83,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         this._y = this.y;
 
         this.rescale();
-        if (this.type == 'Probe' || this.type == 'Photon') {
+        if (this.type === 'Probe' || this.type === 'Photon') {
             // Physics for Bodies flying in a straight line
             this.d += this.v;
             this.x = this.center.x + this.center.r + this.d;
@@ -103,7 +103,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         this.r = this.radius * scaleR;
         // if (this.type != 'Photon' && this.type != 'Probe') this.d = this.distance ? (this.distance * scaleD) + (this.center.r + this.r) : this.distance * scaleD;
         scaleV = (1 / 60e6) * scaleT;
-        if (this.type != 'Photon' && this.distance != 0) this.v = (this.velocity / this.distance) * scaleV;
+        if (this.type !== 'Photon' && this.distance !== 0) this.v = (this.velocity / this.distance) * scaleV;
         else this.v = this.velocity * scaleV;
 
     }
@@ -127,7 +127,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
         // doesn't execute if not Saturn object
         if (this.name === 'Saturn') {
 
-            var rings = {
+            const rings = {
                 rx: this.r * 0.5,
                 ry: this.r * 2.5,
                 angle: deg(80),
@@ -138,7 +138,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
                 alpha: .1,
                 color: [`rgba(217,202,173,.5)`, `rgba(89,89,89,.5)`, `rgba(166,155,141,.5)`, `rgba(5, 10, 16, .2)`],
                 inner: [.9, .65, .45]
-            }
+            };
 
             c.lineWidth = 0.2 / scale;
 
@@ -159,7 +159,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
     }
 
     this.sunShine = function() {
-        if (this.type != 'Star') return;
+        if (this.type !== 'Star') return;
         for (let i = 0; i < 10; i++) {
             c.fillStyle = this.color;
             c.globalAlpha = .01 - .001 * i;
@@ -174,7 +174,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
     this.colBH = ["#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"];
 
     this.eventHorizon = function() {
-        if (this.type != 'Black Hole') return;
+        if (this.type !== 'Black Hole') return;
         for (let i = 0; i < this.colBH.length; i++) {
             c.fillStyle = this.colBH[i];
             c.beginPath();
@@ -204,7 +204,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
     };
 
     this.vortex = function() {
-        if (this.type != 'Black Hole') return;
+        if (this.type !== 'Black Hole') return;
         let minSpeed = (this.particle.minV / this.particle.minD) * scaleV;
         let maxSpeed = (this.particle.maxV / this.particle.maxD) * scaleV;
         let rate = (maxSpeed - minSpeed) * .1;
@@ -242,7 +242,7 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
     }
 
     this.radioWave = function() {
-        if (this.type != 'Photon') return;
+        if (this.type !== 'Photon') return;
         let d = this.d % .5;
         let wave = {
             x: this.x - d,
@@ -337,21 +337,21 @@ function CelestialBody(name, center, radius, distance, velocity, eccentricity, m
 
     this.info = function() {
 
-        var textAbove = [`\u2205 ${formatNumber(this.radius * 2e6)} km`]; // DEFAULT TEXT ABOVE BODY IS DIAMETER
-        var textAside = [
+        let textAbove = [`\u2205 ${formatNumber(this.radius * 2e6)} km`]; // DEFAULT TEXT ABOVE BODY IS DIAMETER
+        let textAside = [
             `${this.name} ${this.symbol} ${this.type}`, // Display Symbols
             `${formatNumber(this.velocity)} km/s `, // Display Velocity
             `\u2192 ${formatNumber(this.distance * 1e6)} km `, // Display Distance
             `Mass: ${formatNumber(this.mass.toExponential(0))} kg` // Display Type
         ];
 
-        if (this.type == 'Probe') {
+        if (this.type === 'Probe') {
             textAbove = [`\u2192 ${(this.d / 150).toPrecision(14)} AU`];
             textAside = [
                 `${this.name} ${this.symbol} ${this.type}`, // Display Symbols
                 `${formatNumber(this.velocity)} km/s `, // Display Velocity
             ];
-        } else if (this.type == 'Photon') {
+        } else if (this.type === 'Photon') {
             textAbove = [`\u2192 ${formatNumber(this.d * 1e6)} km`];
             textAside = [
                 `${this.name} ${this.symbol} ${this.type}`, // Display Symbols

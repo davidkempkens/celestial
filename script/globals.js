@@ -10,22 +10,22 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 // Parameter for camera function to center object on canvas
-var cameraBody = null;
+let cameraBody = null;
 // Booleans to toggle in main loop - for user input
-var stopSpin = false;
-var orbit = true;
+let stopSpin = false;
+let orbit = true;
 // SCALING AND TRANSLATION GLOBALS
-var scale = 1;
-var scaleFactor = .9;
-var trans = {
+let scale = 1;
+let scaleFactor = .9;
+let trans = {
     x: 0,
     y: 0
 }
 
 // Scale for radius
-var scaleR = 1;
+let scaleR = 1;
 // Scale for distances
-var scaleD = 1;
+let scaleD = 1;
 
 timeControl = [
     ['s', 1],
@@ -38,9 +38,9 @@ timeControl = [
 ]
 
 // Scale for time - 1 = REAL TIME 1s = 1s
-var scaleT = 1;
+let scaleT = 1;
 // Scale for velocity 1 / 60e6
-var scaleV = (1 / 60e6) * scaleT;
+let scaleV = (1 / 60e6) * scaleT;
 // SPEED OF LIGHT - C
 const C = 299792.458;
 // AU - in Mio km
@@ -53,19 +53,19 @@ const solarMass = 2e30;
 const solarRadius = .695700;
 
 // BACKGROUND COLOR THAT GETS DRAWN EVERY FRAME TO CLEAR THE CANVAS
-var bg = '#050a10';
+const bg = '#050a10';
 // Frame Animation ID - used to cancel / start frame animatinons
-var frAId;
+let frAId;
 
 // Mouse objects and booleans - for user input via mouse
-var mouse = {
+let mouse = {
     x: 0,
     y: 0,
     r: 30 / scale
 };
 
-var startDragOffset = {};
-var mouseDown = false;
+let startDragOffset = {};
+let mouseDown = false;
 
 // Center Object for as center of the "Universe / Solar System"
 const center = {
@@ -76,7 +76,7 @@ const center = {
 }
 
 // Symbols as Unicode for the planets in the solar system
-var symbols = {
+const symbols = {
     mercury: '\u263F',
     venus: '\u2640',
     earth: '\u{1F728}',
@@ -89,9 +89,9 @@ var symbols = {
     pluto: '\u2647',
     moon: '\u263D',
     sun: '\u{1F31E}'
-}
+};
 
-var colors = {
+const colors = {
     sun: "#F2A516",
     mercury: "#BFB6AE",
     venus: "#F2C879",
@@ -101,11 +101,11 @@ var colors = {
     saturn: "#D9CAAD",
     uranus: "#BBE2F2",
     neptune: "#5368A6"
-}
+};
 
 // Resize Canvas
 function resizeCanvas() {
-    var dpr = window.devicePixelRatio;
+    let dpr = window.devicePixelRatio;
     c.scale(1 / dpr, 1 / dpr);
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -149,13 +149,13 @@ function drawText(t, x, y, color, f) {
 
 function updateHUD(bodies, hud) {
     bodies.forEach(b => {
-        var a = document.createElement('a');
+        const a = document.createElement('a');
         hud.appendChild(a);
         a.style.color = b.color;
         a.innerHTML = b.name;
         a.href = '#';
         a.addEventListener('click', () => {
-            scale = cameraBody == b ? 10 / b.r : 10 / sun.r;
+            scale = cameraBody === b ? 10 / b.r : 10 / sun.r;
             cameraBody = b;
         });
         // a.addEventListener('mouseover', () => {});

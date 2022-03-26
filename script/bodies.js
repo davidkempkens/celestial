@@ -150,7 +150,7 @@ const everything = [...bigBodies, ...asteroids];
 // RELATIONSHIP OF BODIES TO ITS SATELITES
 everything.forEach(p => {
     everything.forEach(m => {
-        if (m.center == p) {
+        if (m.center === p) {
             p.satelites.push(m);
         }
     });
@@ -158,7 +158,7 @@ everything.forEach(p => {
 
 // PARTICLES
 let g = m87;
-var particles = asteroidFactory(
+const particles = asteroidFactory(
     g.particle.count,
     g.particle.name,
     g,

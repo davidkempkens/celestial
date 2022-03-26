@@ -40,7 +40,7 @@ function move(e) {
     }
 
     // Collision detection on mouse over bodies
-    var bCR = canvas.getBoundingClientRect();
+    const bCR = canvas.getBoundingClientRect();
 
     // Update Mouse Coords on Mouse Move in Mouse object
     mouse = {
@@ -101,10 +101,10 @@ const hudMoons = document.getElementById('hud-moons');
 const hudSuns = document.getElementById('hud-suns');
 const hudOther = document.getElementById('hud-other');
 
-var hudElements = document.querySelectorAll('.hud');
+const hudElements = document.querySelectorAll('.hud');
 
 
-var hideHUD = false;
+let hideHUD = false;
 const hideHUDElement = document.getElementById('hideElement')
 const cameraElement = document.getElementById('camera');
 const zoomElement = document.getElementById('zoomElement');
@@ -128,9 +128,9 @@ updateHUD([...alphaCentauri, ...suns], hudSuns);
 updateHUD([m87, lightRay, voyager1, universe], hudOther);
 
 // MOON LIST FILLED BOOLEAN
-var moonListFilled = false;
-var moonCount = 0;
-var currentListFrom = null;
+let moonListFilled = false;
+let moonCount = 0;
+let currentListFrom = null;
 // HUD EVENTS
 cameraElement.addEventListener('click', () => {
     cameraBody = null;
@@ -144,8 +144,8 @@ plusElement.addEventListener('click', zoomIn);
 minusElement.addEventListener('click', zoomOut);
 
 // HOLD + or - TO keep zooming
-var plusPressed = false;
-var minusPressed = false;
+let plusPressed = false;
+let minusPressed = false;
 plusElement.addEventListener('mousedown', () => plusPressed = true);
 minusElement.addEventListener('mousedown', () => minusPressed = true);
 plusElement.addEventListener('mouseup', () => plusPressed = false);
@@ -153,7 +153,7 @@ minusElement.addEventListener('mouseup', () => minusPressed = false);
 plusElement.addEventListener('mouseout', () => plusPressed = false);
 minusElement.addEventListener('mouseout', () => minusPressed = false);
 
-var i = 0;
+let i = 0;
 timeElement.addEventListener('click', toggleTime);
 
 // Draw bar at the bottom of the canvas to show scale
@@ -199,10 +199,10 @@ function ui() {
         // IF LIST IS CURRENTLY EMPTY
         if (!moonListFilled) {
             moons.forEach(m => {
-                if (m.center == cameraBody) {
+                if (m.center === cameraBody) {
                     moonCount++;
                     currentListFrom = m.center;
-                    var a = document.createElement('a');
+                    const a = document.createElement('a');
                     hudMoons.appendChild(a);
                     a.style.color = m.color;
                     a.innerHTML = m.name;
@@ -219,7 +219,7 @@ function ui() {
             // IF CAMERA BODY CHANGES BUT WITHOUT GOING NULL INBETWEEN
             // CHECK IF CAMERA BODY MATCHES THE CURRENT LIST
         } else {
-            if (currentListFrom != cameraBody) {
+            if (currentListFrom !== cameraBody) {
                 // IF CAMERA BODY IS CAHNGED DELETE AND HIDE LIST
                 hudMoons.innerHTML = '';
                 hudMoons.style.display = 'none';
