@@ -45,14 +45,14 @@ class CelestialBody {
         this.rescale();
 
         // Physics for orbiting Bodies
-        this.w += this.v;
+        this.w -= this.v;
+        this.w %= Math.PI * 2;
         this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
         this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
 
         // Call the draw function to draw the body as filled circle on the canvas
         this.draw();
     }
-
 
     draw() {
         // DRAW ACTUAL BODY
@@ -66,12 +66,12 @@ class CelestialBody {
     compare(other) {
 
         // DRAW LINE TO SHOW DIRECTION
-        c.beginPath();
-        c.strokeStyle = this.color;
-        c.lineWidth = .3 / scale;
-        c.moveTo(this.x, this.y);
-        c.lineTo(this.center.x, this.center.y);
-        c.stroke();
+        // c.beginPath();
+        // c.strokeStyle = this.color;
+        // c.lineWidth = .3 / scale;
+        // c.moveTo(this.x, this.y);
+        // c.lineTo(this.center.x, this.center.y);
+        // c.stroke();
 
         // Draw this body's diameter above this body
         c.fillStyle = this.color;
@@ -96,7 +96,7 @@ class CelestialBody {
         }
     }
 
-    n() {
+    drawName() {
         drawText(this.name, this.x + this.r, this.y, this.color, 13);
     }
 

@@ -21,14 +21,14 @@ function start() {
     c.scale(scale, scale);
 
     // Actually run Physics and draw everything
-    drawScaled();
+    runUniverse();
 
     // Reset Transformation Matrix
     c.restore();
 
     // SHOW NAMES AND INFOS ON MOUSE OVER
     // DRAW UNSCALED
-    drawUnscaled();
+    drawNames();
 
     runClock();
     // controls
@@ -39,24 +39,24 @@ function start() {
     frAId = window.requestAnimationFrame(start);
 }
 
-function drawUnscaled() {
+function drawNames() {
     // SOLAR SYSTEM BODIES
     if (scale > .01) {
-        sun.n();
+        sun.drawName();
         if (sun.isColliding) sun.info();
         planets.forEach(p => {
-            p.n();
+            p.drawName();
             if (p.isColliding) p.info();
         });
         dwarfs.forEach(d => {
-            d.n();
+            d.drawName();
             if (d.isColliding) d.info();
         })
         moons.forEach(m => {
-            if (scale > 10) m.n();
+            if (scale > 10) m.drawName();
             if (scale > 200 && m.isColliding) m.info();
         });
-        voyager1.n();
+        voyager1.drawName();
         if (voyager1.isColliding) voyager1.info();
     } else {
         drawText(['Solar System', `\u2205 ${formatNumber(50 * AU * 2e6)} km`], center.x, center.y - 50 * AU, 'white', 13);
@@ -64,25 +64,25 @@ function drawUnscaled() {
 
     // OTHER BODIES
     suns.forEach(s => {
-        if (scale > 1e-9) s.n();
+        if (scale > 1e-9) s.drawName();
         if (s.isColliding) s.info();
     })
-    m87.n();
+    m87.drawName();
     if (m87.isColliding) m87.info();
-    universe.n();
+    universe.drawName();
     if (universe.isColliding) universe.info();
     alphaCentauri.forEach(a => {
-        if (scale > 1e-9) a.n();
+        if (scale > 1e-9) a.drawName();
         if (a.isColliding) a.info();
     });
 
     // LIGHTSPEED TEST
-    lightRay.n();
+    lightRay.drawName();
     if (lightRay.isColliding) lightRay.info();
 }
 
 // DRAW SUNS, PLANETS, MOONS, ORBITS AND COLLISION DETECTION
-function drawScaled() {
+function runUniverse() {
 
     if (stopSpin) scaleT = 0;
     else scaleT = timeControl[i][1];

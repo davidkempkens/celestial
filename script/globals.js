@@ -117,6 +117,22 @@ const colors = {
     neptune: "#5368A6"
 };
 
+const initialDeg = {
+    mercury: 180,
+    venus: 300,
+    earth: 0,
+    mars: 270,
+    jupiter: 210,
+    saturn: 240,
+    uranus: 135,
+    neptune: 190,
+    eros: 165,
+    ceres: 90,
+    pluto: 260,
+    eris: 170,
+    makemake: 10
+}
+
 // Resize Canvas
 function resizeCanvas() {
     let dpr = window.devicePixelRatio;
