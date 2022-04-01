@@ -8,7 +8,7 @@ class BlackHole extends CelestialBody {
         // PARTICLE PROPERTIES
         this.particle = {
             count: 300,
-            name: 'Particle of ' + this.name,
+            name: 'Asteroid of ' + this.name,
             minR: this.r * 1e-6,
             maxR: this.r * 1e-5,
             minD: this.r * .01,

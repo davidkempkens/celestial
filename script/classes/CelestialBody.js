@@ -1,11 +1,9 @@
-// Defining the CelestialBody literal object
-// Assigning properties
 
 // Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color - Type
 class CelestialBody {
     constructor(name, center, radius, distance, velocity, eccentricity, mass, color, type) {
 
-        // Reallife Properties
+        // Real life Properties
         this.name = name;
         this.center = center;
         this.radius = radius;
@@ -27,33 +25,43 @@ class CelestialBody {
 
         // VELOCITY
         this.v = this.velocity * scaleV;
-        if (this.type !== 'Photon' && this.distance !== 0) this.v = (this.velocity / this.distance) * scaleV;
+
         // ECCENTRICITY
         this.a = 1;
         this.b = 1 - this.eccentricity;
 
-        // Inital angle of orbit : degrees / radian - "0" degrees is the right side
+        // Initial angle of orbit : degrees / radian - "0" degrees is the right side
         this.w = Math.random() * deg(360);
 
-        // Inital postion oriented around the assigned center object
+        // Initial position oriented around the assigned center object
         this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
         this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
 
-        // Distance to center using the pythagorean theorem
-        this.dtc = Math.hypot((this.x - center.x), (this.y - center.y)) - (this.r - center.r);
-
         // flag for collision function
         this.isColliding = false;
-        // Last position
-        this._x = this.x;
-        this._y = this.y;
 
-        // DRAW CIRCLE ON CANVAS
+    }
 
-        // RUN PHYSICS
+    run() {
+        this.rescale();
 
-        // drawing the orbit as lines
+        // Physics for orbiting Bodies
+        this.w += this.v;
+        this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
+        this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
 
+        // Call the draw function to draw the body as filled circle on the canvas
+        this.draw();
+    }
+
+
+    draw() {
+        // DRAW ACTUAL BODY
+        c.fillStyle = this.color;
+        c.beginPath();
+        c.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        c.closePath();
+        c.fill();
     }
 
     compare(other) {
@@ -87,82 +95,6 @@ class CelestialBody {
         }
     }
 
-    sunShine() {
-        if (this.type !== 'Star') return;
-        for (let i = 0; i < 10; i++) {
-            c.fillStyle = this.color;
-            c.globalAlpha = .01 - .001 * i;
-            c.beginPath();
-            c.arc(this.x, this.y, this.r + (this.r * i / 3), 0, Math.PI * 2);
-            c.closePath();
-            c.fill();
-            c.globalAlpha = 1;
-        }
-
-    }
-
-    run() {
-        // Save last postion
-        this._x = this.x;
-        this._y = this.y;
-
-        this.rescale();
-        if (this.type === 'Probe' || this.type === 'Photon') {
-            // Physics for Bodies flying in a straight line
-            this.d += this.v;
-            this.x = this.center.x + this.center.r + this.d;
-            this.y = this.center.y;
-            this.flightPath();
-        } else {
-            // Physics for orbiting Bodies
-            this.w += this.v;
-            this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
-            this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
-        }
-        // Call the draw function to draw the body as filled circle on the canvas
-        this.draw();
-    }
-
-    flightPath() {
-
-        // DRAW LINE TO SHOW DIRECTION
-        if (!this.isColliding) return;
-        c.beginPath();
-        c.strokeStyle = this.color;
-        c.lineWidth = .3 / scale;
-        c.moveTo(this.center.x + this.center.r, this.center.y);
-        c.lineTo(this.x, this.y);
-        c.stroke();
-        c.closePath();
-
-        this.radioWave();
-    }
-
-    draw() {
-
-        // draw the half of saturns rings first, so they appear behind Saturn
-        // front = false
-        this.saturnRings(false);
-
-        // DRAW ACTUAL BODY
-        if (this.type !== 'Probe') {
-            c.fillStyle = this.color;
-            c.beginPath();
-            c.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-            c.closePath();
-            c.fill();
-        } else {
-            c.drawImage(img, this.x, this.y - this.r / 2, this.r, this.r);
-        }
-        // draw the half of saturns rings after, so they appear infront of Saturn
-        // front = true
-        this.saturnRings(true);
-
-        // DRAW SUNSHINE FOR STARS
-        this.sunShine();
-
-    }
-
     n() {
         drawText(this.name, this.x + this.r, this.y, this.color, 13);
     }
@@ -180,41 +112,6 @@ class CelestialBody {
         this.isColliding = distance < (this.r + other.r);
     }
 
-    saturnRings(front) {
-        // doesn't execute if not Saturn object
-        if (this.name === 'Saturn') {
-
-            const rings = {
-                rx: this.r * 0.5,
-                ry: this.r * 2.5,
-                angle: deg(80),
-
-                start: front ? deg(270) : deg(90),
-                end: front ? deg(90) : deg(270),
-                // beige (Saturns color), grey, darker saturn base, background (dark blue),
-                alpha: .1,
-                color: [`rgba(217, 202, 173, .5)`, `rgba(89, 89, 89, .5)`, `rgba(166, 155, 141, .5)`, `rgba(5, 10, 16, .2)`],
-                inner: [.9, .65, .45]
-            };
-
-            c.lineWidth = 0.2 / scale;
-
-            c.beginPath();
-            c.strokeStyle = rings.color[1];
-            c.ellipse(this.x, this.y, rings.rx, rings.ry, rings.angle, rings.start, rings.end);
-            c.stroke();
-            c.closePath();
-
-            for (let i = 0; i < rings.inner.length; i++) {
-                c.beginPath();
-                c.fillStyle = rings.color[i + 1];
-                c.ellipse(this.x, this.y, rings.rx * rings.inner[i], rings.ry * rings.inner[i], rings.angle, rings.start, rings.end);
-                c.fill();
-                c.closePath();
-            }
-        }
-    }
-
     rescale() {
         // RESCALE TIME + DISTANCES + RADIUS + VELOCITIES
         this.r = this.radius * scaleR;
@@ -222,46 +119,9 @@ class CelestialBody {
         scaleV = (1 / 60e6) * scaleT;
         if (this.type !== 'Photon' && this.distance !== 0) this.v = (this.velocity / this.distance) * scaleV;
         else this.v = this.velocity * scaleV;
-
     }
 
-    radioWave() {
-        if (this.type !== 'Photon') return;
-        let d = this.d % .5;
-        let wave = {
-            x: this.x - d,
-            y: this.y,
-            h: this.r,
-            line: 1 / scale,
-            i: .005,
-            m: 100
-        }
-
-        c.beginPath();
-        c.strokeStyle = 'red';
-        c.lineWidth = wave.line;
-        c.moveTo(wave.x, wave.y);
-        for (let i = 0; i < d; i += wave.i) {
-            c.moveTo(wave.x + i - wave.i, wave.y + Math.sin((i - wave.i) * wave.m) * wave.h);
-            c.lineTo(wave.x + i, wave.y + Math.sin(i * wave.m) * wave.h);
-        }
-        c.closePath();
-        c.stroke();
-
-        c.beginPath();
-        c.strokeStyle = 'blue';
-        c.lineWidth = wave.line;
-        c.moveTo(wave.x, wave.y);
-        for (let i = 0; i < d; i += wave.i) {
-            c.moveTo(wave.x + i - wave.i, wave.y - Math.sin((i - wave.i) * wave.m) * wave.h);
-            c.lineTo(wave.x + i, wave.y - Math.sin(i * wave.m) * wave.h);
-        }
-        c.closePath();
-        c.stroke();
-
-    }
-
-    orbit() {
+    drawOrbit() {
 
         let rotation = deg(0);
 
@@ -302,41 +162,6 @@ class CelestialBody {
         // CALL TEXT FUNCTION
         drawText(textAbove, this.x - this.r * 2, this.y - this.r - (25 / scale), this.color, 13);
         drawText(textAside, this.x + this.r, this.y, this.color, 13);
-    }
-}
-
-function Star(w, h) {
-    this.x = Math.random() * w;
-    this.y = Math.random() * h;
-
-    this.center = {
-        x: canvas.width / 2,
-        y: canvas.height / 2
-    }
-
-    this.r = .1;
-    this.d = Math.random() * (w / Math.SQRT2) + 50;
-    this.v = Math.random() * .0001;
-    this.w = Math.random() * deg(360);
-
-    this.color = '#FFFFFF';
-
-    this.spin = function () {
-
-        this.w -= this.v;
-
-        this.x = Math.cos(this.w) * this.d + this.center.x;
-        this.y = Math.sin(this.w) * this.d + this.center.y;
-
-        this.draw();
-    }
-
-    this.draw = function () {
-        c.fillStyle = this.color;
-        c.beginPath();
-        c.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        c.closePath();
-        c.fill();
     }
 }
 

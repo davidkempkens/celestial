@@ -157,7 +157,7 @@ let i = 0;
 timeElement.addEventListener('click', toggleTime);
 
 // Draw bar at the bottom of the canvas to show scale
-function ui() {
+function controls() {
     if (plusPressed) zoomIn();
     if (minusPressed) zoomOut();
     // BAR

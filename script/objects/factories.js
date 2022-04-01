@@ -13,7 +13,7 @@ function asteroidFactory(count, name, center, minRadius, maxRadius, minDistance,
         let col = color;
         let t = type;
         // Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color - Type
-        belt.push(new Particle(n, center, r, d, v, e, m, col, t));
+        belt.push(new Asteroid(n, center, r, d, v, e, m, col, t));
     }
     return belt;
 }

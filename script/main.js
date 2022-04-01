@@ -29,8 +29,8 @@ function start() {
     // SHOW NAMES AND INFOS ON MOUSE OVER
     // DRAW UNSCALED
     drawUnscaled();
-    // ui
-    ui();
+    // controls
+    controls();
     // camera planet
     camera(cameraBody);
     // frameAnimation ID
@@ -85,7 +85,7 @@ function drawScaled() {
     if (stopSpin) scaleT = 0;
     else scaleT = timeControl[i][1];
     if (orbit && scale > .03) {
-        planets.forEach(p => p.orbit());
+        planets.forEach(p => p.drawOrbit());
     }
     if (scale < .01) c.fillRect(center.x - 50 * AU, center.y, 100 * AU, 1 / scale);
 
@@ -110,22 +110,22 @@ function drawScaled() {
         // sun.compare(planets);
     planets.forEach(p => {
         if (p.isColliding) {
-            p.orbit();
+            p.drawOrbit();
             // p.compare([earth, moon]);
         }
     });
     dwarfs.forEach(d => {
         if (d.isColliding) {
-            d.orbit();
+            d.drawOrbit();
             // d.compare([earth, moon])
         }
     });
     moons.forEach(m => {
         if (m.isColliding) {
-            m.orbit();
+            m.drawOrbit();
             // m.compare([moon]);
         }
-        if (scale > 5 && orbit) m.orbit();
+        if (scale > 5 && orbit) m.drawOrbit();
     });
     asteroids.forEach(a => {
         if (a.isColliding && scale > .01) a.hover();

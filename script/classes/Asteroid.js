@@ -1,8 +1,4 @@
-class Particle extends CelestialBody {
-
-    constructor(name, center, radius, distance, velocity, eccentricity, mass, color, type) {
-        super(name, center, radius, distance, velocity, eccentricity, mass, color, type);
-    }
+class Asteroid extends CelestialBody {
 
     tail(w, l) {
         let rotation = deg(0);
