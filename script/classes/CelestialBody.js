@@ -1,4 +1,3 @@
-
 // Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color - Type
 class CelestialBody {
     constructor(name, center, radius, distance, velocity, eccentricity, mass, color, type) {
@@ -79,8 +78,10 @@ class CelestialBody {
         c.fillRect(this.x - this.r, this.y - this.r - (10 / scale), this.r * 2, 2 / scale);
 
         // Draw Compares classes
-        let copies = other.map(o => new CelestialBody(o));
-        for (let i = 0; i < other.length; i++) {
+        let copies = other
+            .filter(o => o.name !== this.name)
+            .map(o => o.copy(o));
+        for (let i = 0; i < copies.length; i++) {
 
             // Copy other body to alter the x,y position, without changing the orbit of the other body
             copies[i].x = i < 1 ? this.x : copies[i - 1].x;
@@ -161,6 +162,10 @@ class CelestialBody {
         // CALL TEXT FUNCTION
         drawText(textAbove, this.x - this.r * 2, this.y - this.r - (25 / scale), this.color, 13);
         drawText(textAside, this.x + this.r, this.y, this.color, 13);
+    }
+
+    copy(copy) {
+        return new CelestialBody(copy.name, copy.center, copy.radius, copy.distance, copy.velocity, copy.eccentricity, copy.mass, copy.color, copy.type);
     }
 }
 
