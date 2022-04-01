@@ -1,4 +1,5 @@
 // USER INPUT
+// noinspection JSUndeclaredVariable
 
 // HANDLE MOUSE EVENTS
 // SCALE CANVAS WITH SCROLL
@@ -18,7 +19,7 @@ function down(e) {
     e.preventDefault();
     mouseDown = true;
 
-    // cancel Camera cameraing the current planet
+    // cancel Camera sticking to current planet
     cameraBody = null;
 
     startDragOffset.x = e.clientX / scale - center.x;
@@ -39,12 +40,12 @@ function move(e) {
         center.y = e.clientY / scale - startDragOffset.y;
     }
 
-    // Collision detection on mouse over bodies
-    var bCR = canvas.getBoundingClientRect();
+    // Collision detection on mouse over classes
+    const bCR = canvas.getBoundingClientRect();
 
     // Update Mouse Coords on Mouse Move in Mouse object
     mouse = {
-        // Actual Mouse Coord - offSet (start Canvas) - Translation / current scale
+        // Actual Mouse Coordinates - offSet (start Canvas) - Translation / current scale
         x: (e.clientX - bCR.x - trans.x) / scale,
         y: (e.clientY - bCR.y - trans.y) / scale,
         // Distance needed to collide with Bodies etc.
@@ -101,10 +102,10 @@ const hudMoons = document.getElementById('hud-moons');
 const hudSuns = document.getElementById('hud-suns');
 const hudOther = document.getElementById('hud-other');
 
-var hudElements = document.querySelectorAll('.hud');
+const hudElements = document.querySelectorAll('.hud');
 
 
-var hideHUD = false;
+let hideHUD = false;
 const hideHUDElement = document.getElementById('hideElement')
 const cameraElement = document.getElementById('camera');
 const zoomElement = document.getElementById('zoomElement');
@@ -113,6 +114,8 @@ const orbitElement = document.getElementById('orbitElement');
 const timeElement = document.getElementById('timeElement');
 const plusElement = document.getElementById('plusElement');
 const minusElement = document.getElementById('minusElement');
+
+const clockElement = document.getElementById('clockElement')
 
 hideHUDElement.addEventListener('click', toggleHUD);
 
@@ -128,9 +131,9 @@ updateHUD([...alphaCentauri, ...suns], hudSuns);
 updateHUD([m87, lightRay, voyager1, universe], hudOther);
 
 // MOON LIST FILLED BOOLEAN
-var moonListFilled = false;
-var moonCount = 0;
-var currentListFrom = null;
+let moonListFilled = false;
+let moonCount = 0;
+let currentListFrom = null;
 // HUD EVENTS
 cameraElement.addEventListener('click', () => {
     cameraBody = null;
@@ -144,8 +147,8 @@ plusElement.addEventListener('click', zoomIn);
 minusElement.addEventListener('click', zoomOut);
 
 // HOLD + or - TO keep zooming
-var plusPressed = false;
-var minusPressed = false;
+let plusPressed = false;
+let minusPressed = false;
 plusElement.addEventListener('mousedown', () => plusPressed = true);
 minusElement.addEventListener('mousedown', () => minusPressed = true);
 plusElement.addEventListener('mouseup', () => plusPressed = false);
@@ -153,11 +156,11 @@ minusElement.addEventListener('mouseup', () => minusPressed = false);
 plusElement.addEventListener('mouseout', () => plusPressed = false);
 minusElement.addEventListener('mouseout', () => minusPressed = false);
 
-var i = 0;
+let i = 0;
 timeElement.addEventListener('click', toggleTime);
 
 // Draw bar at the bottom of the canvas to show scale
-function ui() {
+function controls() {
     if (plusPressed) zoomIn();
     if (minusPressed) zoomOut();
     // BAR
@@ -188,6 +191,7 @@ function ui() {
 
     // HUD
     timeElement.innerHTML = `<b>T</b>ime/s 1 ${timeControl[i][0]}`;
+    clockElement.innerHTML = `${secToTime(clock)}`
     zoomElement.innerHTML = `<b>Z</b>oom: ${formatNumber(scale)}`;
     stopElement.innerHTML = stopSpin ? `<b>S</b>tart` : `<b>S</b>top`;
     stopElement.style.color = stopSpin ? 'green' : 'red';
@@ -199,10 +203,10 @@ function ui() {
         // IF LIST IS CURRENTLY EMPTY
         if (!moonListFilled) {
             moons.forEach(m => {
-                if (m.center == cameraBody) {
+                if (m.center === cameraBody) {
                     moonCount++;
                     currentListFrom = m.center;
-                    var a = document.createElement('a');
+                    const a = document.createElement('a');
                     hudMoons.appendChild(a);
                     a.style.color = m.color;
                     a.innerHTML = m.name;
@@ -216,11 +220,11 @@ function ui() {
             if (moonCount > 0) {
                 hudMoons.style.display = 'flex';
             }
-            // IF CAMERA BODY CHANGES BUT WITHOUT GOING NULL INBETWEEN
+            // IF CAMERA BODY CHANGES BUT WITHOUT GOING NULL IN BETWEEN
             // CHECK IF CAMERA BODY MATCHES THE CURRENT LIST
         } else {
-            if (currentListFrom != cameraBody) {
-                // IF CAMERA BODY IS CAHNGED DELETE AND HIDE LIST
+            if (currentListFrom !== cameraBody) {
+                // IF CAMERA BODY IS CHANGED DELETE AND HIDE LIST
                 hudMoons.innerHTML = '';
                 hudMoons.style.display = 'none';
                 moonListFilled = false;
