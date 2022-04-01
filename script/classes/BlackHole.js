@@ -22,6 +22,22 @@ class BlackHole extends CelestialBody {
             colors: ["#FFFFFF", "#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"],
             t: 'Particle'
         };
+
+        this.particles = asteroidFactory(
+            this.particle.count,
+            this.particle.name,
+            this,
+            this.particle.minR,
+            this.particle.maxR,
+            this.particle.minD,
+            this.particle.maxD,
+            this.particle.minV,
+            this.particle.maxV,
+            this.particle.minE,
+            this.particle.maxE,
+            this.particle.m,
+            this.particle.color,
+            this.particle.t);
     }
 
 
@@ -53,7 +69,7 @@ class BlackHole extends CelestialBody {
         let minSpeed = (this.particle.minV / this.particle.minD) * scaleV;
         let maxSpeed = (this.particle.maxV / this.particle.maxD) * scaleV;
         let rate = (maxSpeed - minSpeed) * .1;
-        particles.forEach(p => {
+        this.particles.forEach(p => {
 
             if (p.v <= maxSpeed) {
                 p.v += rate;
@@ -64,10 +80,10 @@ class BlackHole extends CelestialBody {
             }
             p.d -= p.d / 3000;
             if (p.d < p.center.r) {
-                let i = particles.indexOf(p);
-                if (i > -1) particles.splice(i, 1);
+                let i = this.particles.indexOf(p);
+                if (i > -1) this.particles.splice(i, 1);
                 let newParticle = asteroidFactory(1, this.particle.name, this, this.particle.minR, this.particle.maxR, this.particle.minD, this.particle.maxD, this.particle.minV, this.particle.maxV, this.particle.minE, this.particle.maxE, this.particle.m, this.particle.color, this.particle.t);
-                newParticle.forEach(nP => particles.push(nP));
+                newParticle.forEach(nP => this.particles.push(nP));
 
             }
             p.tail(p.r, 10);

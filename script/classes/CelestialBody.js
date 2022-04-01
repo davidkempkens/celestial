@@ -65,14 +65,6 @@ class CelestialBody {
 
     compare(other) {
 
-        // DRAW LINE TO SHOW DIRECTION
-        // c.beginPath();
-        // c.strokeStyle = this.color;
-        // c.lineWidth = .3 / scale;
-        // c.moveTo(this.x, this.y);
-        // c.lineTo(this.center.x, this.center.y);
-        // c.stroke();
-
         // Draw this body's diameter above this body
         c.fillStyle = this.color;
         c.fillRect(this.x - this.r, this.y - this.r - (10 / scale), this.r * 2, 2 / scale);
@@ -116,10 +108,8 @@ class CelestialBody {
     rescale() {
         // RESCALE TIME + DISTANCES + RADIUS + VELOCITIES
         this.r = this.radius * scaleR;
-        // if (this.type != 'Photon' && this.type != 'Probe') this.d = this.distance ? (this.distance * scaleD) + (this.center.r + this.r) : this.distance * scaleD;
         scaleV = (1 / 60e6) * scaleT;
-        if (this.type !== 'Photon' && this.distance !== 0) this.v = (this.velocity / this.distance) * scaleV;
-        else this.v = this.velocity * scaleV;
+        this.v = (this.velocity / this.distance) * scaleV;
     }
 
     drawOrbit() {

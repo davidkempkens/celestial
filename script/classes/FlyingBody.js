@@ -20,4 +20,12 @@ class FlyingBody extends CelestialBody {
         c.stroke();
         c.closePath();
     }
+
+
+    rescale() {
+        // RESCALE TIME + DISTANCES + RADIUS + VELOCITIES
+        this.r = this.radius * scaleR;
+        scaleV = (1 / 60e6) * scaleT;
+        this.v = this.velocity * scaleV;
+    }
 }

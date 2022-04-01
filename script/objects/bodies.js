@@ -155,21 +155,3 @@ everything.forEach(p => {
         }
     });
 });
-
-// PARTICLES
-let g = m87;
-const particles = asteroidFactory(
-    g.particle.count,
-    g.particle.name,
-    g,
-    g.particle.minR,
-    g.particle.maxR,
-    g.particle.minD,
-    g.particle.maxD,
-    g.particle.minV,
-    g.particle.maxV,
-    g.particle.minE,
-    g.particle.maxE,
-    g.particle.m,
-    g.particle.color,
-    g.particle.t);
