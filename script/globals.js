@@ -11,10 +11,13 @@ canvas.height = window.innerHeight;
 
 // Parameter for camera function to center object on canvas
 let cameraBody = null;
+
 // Booleans to toggle in main loop - for user input
 let stopSpin = false;
 let orbit = true;
+
 // SCALING AND TRANSLATION GLOBALS
+
 let scale = 1;
 let scaleFactor = .9;
 let trans = {
@@ -24,6 +27,7 @@ let trans = {
 
 // Scale for radius
 let scaleR = 1;
+
 // Scale for distances
 let scaleD = 1;
 
@@ -39,21 +43,28 @@ timeControl = [
 
 // Scale for time - 1 = REAL TIME 1s = 1s
 let scaleT = 1;
+
 // Scale for velocity 1 / 60e6
 let scaleV = (1 / 60e6) * scaleT;
+
 // SPEED OF LIGHT - C
 const C = 299792.458;
+
 // AU - in Mio km
 const AU = 150;
+
 // Light year in AU
 const ly = 63241.077 * AU;
+
 // Solar Mass in KG
 const solarMass = 2e30;
+
 // Solar Radius in Mio km
 const solarRadius = .695700;
 
 // BACKGROUND COLOR THAT GETS DRAWN EVERY FRAME TO CLEAR THE CANVAS
 const bg = '#050a10';
+
 // Frame Animation ID - used to cancel / start frame animatinons
 let frAId;
 

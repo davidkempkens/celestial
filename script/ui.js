@@ -39,7 +39,7 @@ function move(e) {
         center.y = e.clientY / scale - startDragOffset.y;
     }
 
-    // Collision detection on mouse over bodies
+    // Collision detection on mouse over classes
     const bCR = canvas.getBoundingClientRect();
 
     // Update Mouse Coords on Mouse Move in Mouse object

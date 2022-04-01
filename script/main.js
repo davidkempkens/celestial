@@ -4,21 +4,25 @@ function start() {
     resizeCanvas();
     // Clear Canvas each frame
     clearCanvas();
-    // Draw Stars before transfomation to fill the whole canvas
+    // Draw Stars before transformation to fill the whole canvas
     stars.forEach(s => s.spin());
 
     // Save Transformation Matrix
     c.save();
+
     // Translate corresponding to the current scale - MAGIC NUMBER FOR NOW
     trans = {
         x: (canvas.width / 2) * (1 - scale),
         y: (canvas.height / 2) * (1 - scale)
     }
     c.translate(trans.x, trans.y);
+
     // Scale Canvas
     c.scale(scale, scale);
+
     // Actually run Physics and draw everything
     drawScaled();
+
     // Reset Transformation Matrix
     c.restore();
 
@@ -102,23 +106,24 @@ function drawScaled() {
     universe.run();
 
     // ON COLLISON DISPLAY COMAPRE BODY AND ORBIT
-    if (sun.isColliding) sun.compare(planets);
+    if (sun.isColliding)
+        // sun.compare(planets);
     planets.forEach(p => {
         if (p.isColliding) {
             p.orbit();
-            p.compare([earth, moon]);
+            // p.compare([earth, moon]);
         }
     });
     dwarfs.forEach(d => {
         if (d.isColliding) {
             d.orbit();
-            d.compare([earth, moon])
+            // d.compare([earth, moon])
         }
     });
     moons.forEach(m => {
         if (m.isColliding) {
             m.orbit();
-            m.compare([moon]);
+            // m.compare([moon]);
         }
         if (scale > 5 && orbit) m.orbit();
     });
@@ -126,14 +131,14 @@ function drawScaled() {
         if (a.isColliding && scale > .01) a.hover();
     });
     suns.forEach(s => {
-        if (s.isColliding) s.compare([sun, ...suns]);
+        // if (s.isColliding) s.compare([sun, ...suns]);
     });
     alphaCentauri.forEach(a => {
-        if (a.isColliding) a.compare([sun]);
+        // if (a.isColliding) a.compare([sun]);
     });
 
-    if (m87.isColliding) m87.compare([sun, ...suns]);
-    if (universe.isColliding) universe.compare([m87]);
+    // if (m87.isColliding) m87.compare([sun, ...suns]);
+    // if (universe.isColliding) universe.compare([m87]);
 }
 
 function camera(body) {

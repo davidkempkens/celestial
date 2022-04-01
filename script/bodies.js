@@ -115,7 +115,7 @@ const moons = [
 const universe = new CelestialBody('Universe', center, 46500000000 * ly, 46500000000 * ly, 0, 0, 0, 'white', 'Universe');
 
 // BLACK HOLE
-const m87 = new CelestialBody('M87*', center, 1.9e-3 * ly, 53.49e6 * ly, 0, 0, 7.22e9 * solarMass, 'white', 'Black Hole');
+const m87 = new BlackHole('M87*', center, 1.9e-3 * ly, 53.49e6 * ly, 0, 0, 7.22e9 * solarMass, 'white', 'Black Hole');
 
 // SPPED OF LIGHT
 const lightRay = new CelestialBody('C', sun, earth.r, 0, C, 0, 0, 'CYAN', 'Photon');
