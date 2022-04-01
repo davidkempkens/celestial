@@ -3,11 +3,11 @@ class Planet extends CelestialBody {
 
     draw() {
 
-        // draw the half of Saturns rings first, so they appear behind Saturn
+        // draw the half of Saturn's rings first, so they appear behind Saturn
         // front = false
         if (this.name === 'Saturn') this.saturnRings(false);
         super.draw();
-        // draw the half of saturns rings after, so they appear infront of Saturn
+        // draw the half of Saturn's rings after, so they appear in front of Saturn
         // front = true
         if (this.name === 'Saturn') this.saturnRings(true);
     }
@@ -21,7 +21,7 @@ class Planet extends CelestialBody {
 
             start: front ? deg(270) : deg(90),
             end: front ? deg(90) : deg(270),
-            // beige (Saturns color), grey, darker saturn base, background (dark blue),
+            // beige (Saturn's color), grey, darker saturn base, background (dark blue),
             alpha: .1,
             color: [`rgba(217, 202, 173, .5)`, `rgba(89, 89, 89, .5)`, `rgba(166, 155, 141, .5)`, `rgba(5, 10, 16, .2)`],
             inner: [.9, .65, .45]

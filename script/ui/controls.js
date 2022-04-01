@@ -1,4 +1,5 @@
 // USER INPUT
+// noinspection JSUndeclaredVariable
 
 // HANDLE MOUSE EVENTS
 // SCALE CANVAS WITH SCROLL
@@ -18,7 +19,7 @@ function down(e) {
     e.preventDefault();
     mouseDown = true;
 
-    // cancel Camera cameraing the current planet
+    // cancel Camera sticking to current planet
     cameraBody = null;
 
     startDragOffset.x = e.clientX / scale - center.x;
@@ -44,7 +45,7 @@ function move(e) {
 
     // Update Mouse Coords on Mouse Move in Mouse object
     mouse = {
-        // Actual Mouse Coord - offSet (start Canvas) - Translation / current scale
+        // Actual Mouse Coordinates - offSet (start Canvas) - Translation / current scale
         x: (e.clientX - bCR.x - trans.x) / scale,
         y: (e.clientY - bCR.y - trans.y) / scale,
         // Distance needed to collide with Bodies etc.
@@ -113,6 +114,8 @@ const orbitElement = document.getElementById('orbitElement');
 const timeElement = document.getElementById('timeElement');
 const plusElement = document.getElementById('plusElement');
 const minusElement = document.getElementById('minusElement');
+
+const clockElement = document.getElementById('clockElement')
 
 hideHUDElement.addEventListener('click', toggleHUD);
 
@@ -188,6 +191,7 @@ function controls() {
 
     // HUD
     timeElement.innerHTML = `<b>T</b>ime/s 1 ${timeControl[i][0]}`;
+    clockElement.innerHTML = `${secToTime(clock)}`
     zoomElement.innerHTML = `<b>Z</b>oom: ${formatNumber(scale)}`;
     stopElement.innerHTML = stopSpin ? `<b>S</b>tart` : `<b>S</b>top`;
     stopElement.style.color = stopSpin ? 'green' : 'red';
@@ -216,11 +220,11 @@ function controls() {
             if (moonCount > 0) {
                 hudMoons.style.display = 'flex';
             }
-            // IF CAMERA BODY CHANGES BUT WITHOUT GOING NULL INBETWEEN
+            // IF CAMERA BODY CHANGES BUT WITHOUT GOING NULL IN BETWEEN
             // CHECK IF CAMERA BODY MATCHES THE CURRENT LIST
         } else {
             if (currentListFrom !== cameraBody) {
-                // IF CAMERA BODY IS CAHNGED DELETE AND HIDE LIST
+                // IF CAMERA BODY IS CHANGED DELETE AND HIDE LIST
                 hudMoons.innerHTML = '';
                 hudMoons.style.display = 'none';
                 moonListFilled = false;

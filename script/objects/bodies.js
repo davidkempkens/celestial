@@ -111,13 +111,13 @@ const moons = [
     charon
 ];
 
-// OBSERVABLE UNIVERSE SCALE Radius 46,5 billion lightyears / 93 billion lighty-years
+// OBSERVABLE UNIVERSE SCALE Radius 46,5 billion light-years / 93 billion light-years
 const universe = new CelestialBody('Universe', center, 46500000000 * ly, 46500000000 * ly, 0, 0, 0, 'white', 'Universe');
 
 // BLACK HOLE
 const m87 = new BlackHole('M87*', center, 1.9e-3 * ly, 53.49e6 * ly, 0, 0, 7.22e9 * solarMass, 'white', 'Black Hole');
 
-// SPPED OF LIGHT
+// SPEED OF LIGHT
 const lightRay = new Photon('C', sun, earth.r, 0, C, 0, 0, 'CYAN', 'Photon');
 
 // Suns
@@ -147,7 +147,7 @@ const asteroids = [...mainBelt, ...kuiperBelt, ...oortCloud];
 // EVERYTHING ARRAY FOR EASY HANDLING
 const everything = [...bigBodies, ...asteroids];
 
-// RELATIONSHIP OF BODIES TO ITS SATELITES
+// RELATIONSHIP OF BODIES TO ITS SATELLITES
 everything.forEach(p => {
     everything.forEach(m => {
         if (m.center === p) {

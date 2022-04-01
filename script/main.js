@@ -29,6 +29,8 @@ function start() {
     // SHOW NAMES AND INFOS ON MOUSE OVER
     // DRAW UNSCALED
     drawUnscaled();
+
+    runClock();
     // controls
     controls();
     // camera planet
@@ -105,15 +107,15 @@ function drawScaled() {
     m87.run();
     universe.run();
 
-    // ON COLLISON DISPLAY COMAPRE BODY AND ORBIT
+    // ON COLLISION DISPLAY COMPARE BODY AND ORBIT
     if (sun.isColliding)
         // sun.compare(planets);
-    planets.forEach(p => {
-        if (p.isColliding) {
-            p.drawOrbit();
-            // p.compare([earth, moon]);
-        }
-    });
+        planets.forEach(p => {
+            if (p.isColliding) {
+                p.drawOrbit();
+                // p.compare([earth, moon]);
+            }
+        });
     dwarfs.forEach(d => {
         if (d.isColliding) {
             d.drawOrbit();
@@ -167,4 +169,13 @@ function runCollisionDetection() {
     alphaCentauri.forEach(a => a.collision(mouse));
     m87.collision(mouse);
     universe.collision(mouse);
+}
+
+function runClock() {
+    frames++;
+    if (frames === 60) {
+        clock += scaleT;
+        frames = 0;
+    }
+
 }

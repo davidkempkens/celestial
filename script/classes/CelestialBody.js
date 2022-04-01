@@ -82,7 +82,7 @@ class CelestialBody {
         let copies = other.map(o => new CelestialBody(o));
         for (let i = 0; i < other.length; i++) {
 
-            // Copy other body to alter the x,y postion, without changing the orbit of the other body
+            // Copy other body to alter the x,y position, without changing the orbit of the other body
             copies[i].x = i < 1 ? this.x : copies[i - 1].x;
             copies[i].y = i < 1 ? this.y + this.r + (25 / scale) + copies[i].r : copies[i - 1].y + copies[i - 1].r + ((25 / scale)) + copies[i].r;
 
@@ -126,7 +126,6 @@ class CelestialBody {
         let rotation = deg(0);
 
         c.beginPath();
-        c.strokeStyle = '#626973';
         c.strokeStyle = this.color;
         c.lineWidth = 0.1 / scale;
         // ellipses center coords (x,y), (Major) x-radius, (Minor) y-radius, rotation, start, end
