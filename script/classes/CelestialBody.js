@@ -109,7 +109,8 @@ class CelestialBody {
         // RESCALE TIME + DISTANCES + RADIUS + VELOCITIES
         this.r = this.radius * scaleR;
         scaleV = (1 / 60e6) * scaleT;
-        this.v = (this.velocity / this.distance) * scaleV;
+        if (this.distance !== 0) this.v = (this.velocity / this.distance) * scaleV;
+        else this.v = this.velocity * scaleV;
     }
 
     drawOrbit() {
