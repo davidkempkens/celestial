@@ -51,9 +51,16 @@ class CelestialBody {
         this.w %= Math.PI * 2;
         this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
         this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
-
         // Call the draw function to draw the body as filled circle on the canvas
         this.draw();
+    }
+
+    rescale() {
+        // RESCALE TIME + DISTANCES + RADIUS + VELOCITIES
+        this.r = this.radius * scaleR;
+        scaleV = (1 / 60e6) * scaleT;
+        if (this.distance !== 0) this.v = (this.velocity / this.distance) * scaleV;
+        else this.v = this.velocity * scaleV;
     }
 
     draw() {
@@ -107,13 +114,7 @@ class CelestialBody {
         this.isColliding = distance < (this.r + other.r);
     }
 
-    rescale() {
-        // RESCALE TIME + DISTANCES + RADIUS + VELOCITIES
-        this.r = this.radius * scaleR;
-        scaleV = (1 / 60e6) * scaleT;
-        if (this.distance !== 0) this.v = (this.velocity / this.distance) * scaleV;
-        else this.v = this.velocity * scaleV;
-    }
+
 
     drawOrbit() {
 
@@ -137,20 +138,6 @@ class CelestialBody {
             `\u2192 ${formatNumber(this.distance * 1e6)} km `, // Display Distance
             `Mass: ${formatNumber(this.mass.toExponential(0))} kg` // Display Type
         ];
-
-        if (this.type === 'Probe') {
-            textAbove = [`\u2192 ${(this.d / 150).toPrecision(14)} AU`];
-            textAside = [
-                `${this.name} ${this.symbol} ${this.type}`, // Display Symbols
-                `${formatNumber(this.velocity)} km/s `, // Display Velocity
-            ];
-        } else if (this.type === 'Photon') {
-            textAbove = [`\u2192 ${formatNumber(this.d * 1e6)} km`];
-            textAside = [
-                `${this.name} ${this.symbol} ${this.type}`, // Display Symbols
-                `${formatNumber(this.velocity)} km/s `, // Display Velocity
-            ];
-        }
 
         // CALL TEXT FUNCTION
         drawText(textAbove, this.x - this.r * 2, this.y - this.r - (25 / scale), this.color, 13);

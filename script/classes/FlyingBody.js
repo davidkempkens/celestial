@@ -28,4 +28,13 @@ class FlyingBody extends CelestialBody {
         scaleV = (1 / 60e6) * scaleT;
         this.v = this.velocity * scaleV;
     }
+
+    info() {
+        let textAside = [
+            `${this.name} ${this.symbol} ${this.type}`, // Display Symbols
+            `${formatNumber(this.velocity)} km/s `, // Display Velocity
+        ];
+        // CALL TEXT FUNCTION
+        drawText(textAside, this.x + this.r, this.y, this.color, 13);
+    }
 }

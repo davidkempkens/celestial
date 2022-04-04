@@ -33,4 +33,4 @@ function test_creating_body() {
 function testAllBodies(){
     bigBodies.forEach(b => console.log(b.name, b))
 }
-testAllBodies()
+// testAllBodies()

@@ -149,6 +149,7 @@ function camera(body) {
     // Center the canvas on a chosen body's position
     // Gets called every frame in the main loop
     // Uses global variable "cameraBody" as argument
+    body.rescale()
     center.x += (canvas.width / 2) - body.x;
     center.y += (canvas.height / 2) - body.y - body.r;
 }
