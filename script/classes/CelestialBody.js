@@ -41,14 +41,16 @@ class CelestialBody {
         // flag for collision function
         this.isColliding = false;
 
+        this._x = this.x;
+        this._y = this.y;
     }
 
     run() {
+        this._x = this.x;
+        this._y = this.y;
         this.rescale();
-
         // Physics for orbiting Bodies
         this.w -= this.v;
-        this.w %= Math.PI * 2;
         this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
         this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
         // Call the draw function to draw the body as filled circle on the canvas
@@ -113,7 +115,6 @@ class CelestialBody {
         let distance = Math.hypot(distX, distY);
         this.isColliding = distance < (this.r + other.r);
     }
-
 
 
     drawOrbit() {

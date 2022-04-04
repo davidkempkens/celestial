@@ -6,7 +6,6 @@ function start() {
     clearCanvas();
     // Draw Stars before transformation to fill the whole canvas
     stars.forEach(s => s.spin());
-
     // Save Transformation Matrix
     c.save();
 
@@ -68,12 +67,12 @@ function runUniverse() {
     // ON COLLISION DISPLAY COMPARE BODY AND ORBIT
     if (sun.isColliding)
         sun.compare(planets);
-        planets.forEach(p => {
-            if (p.isColliding) {
-                p.drawOrbit();
-                p.compare([earth, moon]);
-            }
-        });
+    planets.forEach(p => {
+        if (p.isColliding) {
+            p.drawOrbit();
+            p.compare([earth, moon]);
+        }
+    });
     dwarfs.forEach(d => {
         if (d.isColliding) {
             d.drawOrbit();
@@ -143,20 +142,35 @@ function drawNames() {
     if (lightRay.isColliding) lightRay.info();
 }
 
+// Center the canvas on a chosen body's position
+// Gets called every frame in the main loop
+// Uses global variable "cameraBody" as argument
+// Does nothing if cameraBody is set to null
 function camera(body) {
-    // Does nothing if cameraBody is set to null
-    if (body == null) return;
-    // Center the canvas on a chosen body's position
-    // Gets called every frame in the main loop
-    // Uses global variable "cameraBody" as argument
-    body.rescale()
-    center.x += (canvas.width / 2) - body.x;
-    center.y += (canvas.height / 2) - body.y - body.r;
+    if (body === null) return;
+
+    let cwm = (canvas.width / 2)
+    let chm = (canvas.height / 2)
+    // let bx = body.x
+    // let by = body.y;
+    // STRAIGHT FLYING OBJECT
+    center.x += cwm - body.x - body.v;
+    center.y += chm - body.y - body.r;
+
+    // OrBIT
+    // center.x += cxm - bx ;
+    // center.y += chm - by - body.r;
+    // this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
+    // this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
+    //
+    // drawPlus(canvas.width / 2, canvas.height / 2, '#0f0')
+    // drawX(body.center.x, body.center.y, '#f00')
+
 }
 
+// RUN COLLISION DETECTION
+// SOLAR SYSTEM BODIES
 function runCollisionDetection() {
-    // RUN COLLISION DETECTION
-    // SOLAR SYSTEM BODIES
     sun.collision(mouse);
     planets.forEach(p => p.collision(mouse));
     dwarfs.forEach(d => d.collision(mouse));
@@ -179,4 +193,24 @@ function runClock() {
         frames = 0;
     }
 
+}
+
+function drawX(x, y, col) {
+    c.beginPath();
+    c.strokeStyle = col
+    c.moveTo(x - 20, y - 20);
+    c.lineTo(x + 20, y + 20)
+    c.moveTo(x + 20, y - 20);
+    c.lineTo(x - 20, y + 20);
+    c.stroke();
+}
+
+function drawPlus(x, y, col) {
+    c.beginPath();
+    c.strokeStyle = col
+    c.moveTo(x - 20, y);
+    c.lineTo(x + 20, y)
+    c.moveTo(x, y - 20);
+    c.lineTo(x, y + 20);
+    c.stroke();
 }
