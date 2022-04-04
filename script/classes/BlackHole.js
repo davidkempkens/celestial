@@ -2,6 +2,7 @@ class BlackHole extends CelestialBody {
 
     constructor(name, center, radius, distance, velocity, eccentricity, mass, color, type) {
         super(name, center, radius, distance, velocity, eccentricity, mass, color, type);
+        this.w = 0;
 
         this.colBH = ["#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"];
 
