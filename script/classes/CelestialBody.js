@@ -30,7 +30,9 @@ class CelestialBody {
         this.b = 1 - this.eccentricity;
 
         // Initial angle of orbit : degrees / radian - "0" degrees is the right side
-        this.w = Math.random() * deg(360);
+        this.w = isNaN(initialDeg[this.name.toLowerCase()])
+            ? Math.random() * deg(360)
+            : deg(initialDeg[this.name.toLowerCase()]);
 
         // Initial position oriented around the assigned center object
         this.x = this.center.x + this.a * Math.cos(this.w) * this.d;

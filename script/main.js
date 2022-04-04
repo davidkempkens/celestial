@@ -39,48 +39,6 @@ function start() {
     frAId = window.requestAnimationFrame(start);
 }
 
-function drawNames() {
-    // SOLAR SYSTEM BODIES
-    if (scale > .01) {
-        sun.drawName();
-        if (sun.isColliding) sun.info();
-        planets.forEach(p => {
-            p.drawName();
-            if (p.isColliding) p.info();
-        });
-        dwarfs.forEach(d => {
-            d.drawName();
-            if (d.isColliding) d.info();
-        })
-        moons.forEach(m => {
-            if (scale > 10) m.drawName();
-            if (scale > 200 && m.isColliding) m.info();
-        });
-        voyager1.drawName();
-        if (voyager1.isColliding) voyager1.info();
-    } else {
-        drawText(['Solar System', `\u2205 ${formatNumber(50 * AU * 2e6)} km`], center.x, center.y - 50 * AU, 'white', 13);
-    }
-
-    // OTHER BODIES
-    suns.forEach(s => {
-        if (scale > 1e-9) s.drawName();
-        if (s.isColliding) s.info();
-    })
-    m87.drawName();
-    if (m87.isColliding) m87.info();
-    universe.drawName();
-    if (universe.isColliding) universe.info();
-    alphaCentauri.forEach(a => {
-        if (scale > 1e-9) a.drawName();
-        if (a.isColliding) a.info();
-    });
-
-    // LIGHTSPEED TEST
-    lightRay.drawName();
-    if (lightRay.isColliding) lightRay.info();
-}
-
 // DRAW SUNS, PLANETS, MOONS, ORBITS AND COLLISION DETECTION
 function runUniverse() {
 
@@ -141,6 +99,48 @@ function runUniverse() {
 
     if (m87.isColliding) m87.compare([sun, ...suns]);
     if (universe.isColliding) universe.compare([m87]);
+}
+
+function drawNames() {
+    // SOLAR SYSTEM BODIES
+    if (scale > .01) {
+        sun.drawName();
+        if (sun.isColliding) sun.info();
+        planets.forEach(p => {
+            p.drawName();
+            if (p.isColliding) p.info();
+        });
+        dwarfs.forEach(d => {
+            d.drawName();
+            if (d.isColliding) d.info();
+        })
+        moons.forEach(m => {
+            if (scale > 10) m.drawName();
+            if (scale > 200 && m.isColliding) m.info();
+        });
+        voyager1.drawName();
+        if (voyager1.isColliding) voyager1.info();
+    } else {
+        drawText(['Solar System', `\u2205 ${formatNumber(50 * AU * 2e6)} km`], center.x, center.y - 50 * AU, 'white', 13);
+    }
+
+    // OTHER BODIES
+    suns.forEach(s => {
+        if (scale > 1e-9) s.drawName();
+        if (s.isColliding) s.info();
+    })
+    m87.drawName();
+    if (m87.isColliding) m87.info();
+    universe.drawName();
+    if (universe.isColliding) universe.info();
+    alphaCentauri.forEach(a => {
+        if (scale > 1e-9) a.drawName();
+        if (a.isColliding) a.info();
+    });
+
+    // LIGHTSPEED TEST
+    lightRay.drawName();
+    if (lightRay.isColliding) lightRay.info();
 }
 
 function camera(body) {

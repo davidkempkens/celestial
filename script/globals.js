@@ -130,7 +130,8 @@ const initialDeg = {
     ceres: 90,
     pluto: 260,
     eris: 170,
-    makemake: 10
+    makemake: 10,
+    moon : 135
 }
 
 // Resize Canvas
