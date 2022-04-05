@@ -38,10 +38,22 @@ timeControl = [
     ['day', 60 * 60 * 24],
     ['week', 60 * 60 * 24 * 7],
     ['month', 60 * 60 * 24 * 30],
-    ['year', 60 * 60 * 24 * 365]
+    ['year', 60 * 60 * 24 * 365],
+    ['millennium', 60 * 60 * 24 * 365 * 1000],
+    ['mio year', 60 * 60 * 24 * 365 * 1000000]
 ]
 
+
+const MIN = 60;
+const HOUR = 60 * 60;
+const DAY = 60 * 60 * 24;
+const WEEK = 60 * 60 * 24 * 7;
+const MONTH = 60 * 60 * 24 * 30;
+const YEAR = 60 * 60 * 24 * 365;
+
+// Time in seconds - 94 days in 2022
 let clock = 0;
+
 let frames = 0;
 
 // Scale for time - 1 = REAL TIME 1s = 1s
@@ -155,10 +167,6 @@ function deg(d) {
 
 // Format Big Numbers
 function formatNumber(num) {
-
-    // if(num > LY) {
-    //     return Math.floor(num / LY)
-    // }
     // noinspection JSCheckFunctionSignatures
     return num.toLocaleString("en-US", {
         notation: "compact",
@@ -233,7 +241,7 @@ function secToTime(s) {
     if (seconds < 10) {
         seconds = "0" + seconds;
     }
-    return `${years} y ${days} d - ${hours}:${minutes}:${seconds}`;
+    return `${formatNumber(years)} y ${days} d - ${hours}:${minutes}:${seconds}`;
 }
 
 // km to light-years
