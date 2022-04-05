@@ -5,7 +5,7 @@ class FlyingBody extends CelestialBody {
 
         // Physics for Bodies flying in a straight line
         this.d += this.v;
-        this.x = this.center.x + this.center.r + this.d;
+        this.x = this.center.x + this.d;
         this.y = this.center.y;
     }
 
@@ -20,7 +20,6 @@ class FlyingBody extends CelestialBody {
         c.stroke();
         c.closePath();
     }
-
 
     rescale() {
         // RESCALE TIME + DISTANCES + RADIUS + VELOCITIES

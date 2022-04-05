@@ -8,18 +8,24 @@ class Photon extends FlyingBody {
 
     draw() {
         super.draw();
+        this.drawOrbit()
         this.flightPath();
         this.radioWave();
     }
 
     radioWave() {
+        // length of sine curve
         let d = this.d % .5;
         let wave = {
             x: this.x - d,
             y: this.y,
+            // Amplitude of sine curve
             h: this.r,
+            // Thickness of line
             line: 1 / scale,
+            // Points per period
             i: .005,
+            // Angular frequency
             m: 100
         }
 

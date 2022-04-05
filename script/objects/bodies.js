@@ -139,6 +139,8 @@ const suns = [barnard, siriusA, betaCentauri, r136a1, gacrux, pistolStar, rhoCas
 // ALPHA CENTAURI ARRAY
 const alphaCentauri = [alphaCentauriA, alphaCentauriB];
 
+const solarSystem = [sun, ...planets, ...dwarfs]
+
 // BIG BODIES ARRAY WITHOUT ASTEROIDS
 const bigBodies = [sun, ...moons, ...planets, ...dwarfs, m87, universe, voyager1, lightRay, ...suns, ...alphaCentauri];
 // ASTEROIDS ARRAYS

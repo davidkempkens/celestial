@@ -46,7 +46,10 @@ function runUniverse() {
     if (orbit && scale > .03) {
         planets.forEach(p => p.drawOrbit());
     }
-    if (scale < .01) c.fillRect(center.x - 50 * AU, center.y, 100 * AU, 1 / scale);
+    if (scale < .01) {
+        solarSystem.forEach(s => s.drawOrbit())
+        // c.fillRect(center.x - 50 * AU, center.y, 100 * AU, 1 / scale);
+    }
 
     // RUN ALL BODIES
     // SOLAR SYSTEM BODIES
