@@ -112,27 +112,27 @@ const moons = [
 ];
 
 // OBSERVABLE UNIVERSE SCALE Radius 46,5 billion light-years / 93 billion light-years
-const universe = new CelestialBody('Universe', center, 46500000000 * ly, 46500000000 * ly, 0, 0, 0, 'white', 'Universe');
+const universe = new CelestialBody('Universe', center, 46500000000 * LY, 46500000000 * LY, 0, 0, 0, 'white', 'Universe');
 
 // BLACK HOLE
-const m87 = new BlackHole('M87*', center, 1.9e-3 * ly, 53.49e6 * ly, 0, 0, 7.22e9 * solarMass, 'white', 'Black Hole');
+const m87 = new BlackHole('M87*', center, 1.9e-3 * LY, 53.49e6 * LY, 0, 0, 7.22e9 * SOLAR_MASS, 'white', 'Black Hole');
 
 // SPEED OF LIGHT
 const lightRay = new Photon('C', sun, earth.r, 0, C, 0, 0, 'CYAN', 'Photon');
 
 // Suns
-const barnard = new Sun('Barnard\'s Star', center, solarRadius * .2, 5.958 * ly, 0, 0, solarMass * .144, '#D9042B', 'Star');
-const siriusA = new Sun('Sirius A', center, 1.711 * solarRadius, 8.611 * ly, 0, 0, 2.063 * solarMass, '#52CBD9', 'Star');
-const betaCentauri = new Sun('Beta Centauri', center, 9 * solarRadius, 391.4 * ly, 0, 0, 12.02 * solarMass, '#3037BF', 'Star');
-const r136a1 = new Sun('R136a1', center, 39.2 * solarRadius, 163000 * ly, 0, 0, 215 * solarMass, '#79DCF2', 'Star');
-const gacrux = new Sun('Gacrux', center, 120 * solarRadius, 88.71 * ly, 0, 0, 1.5 * solarMass, '#D91438', 'Star');
-const pistolStar = new Sun('Pistol Star', center, 420 * solarRadius, 26.090 * ly, 0, 0, 27.5 * solarMass, '#0597F2', 'Star');
-const rhoCassiopeiae = new Sun('Rho Cassiopeiae', center, 981 * solarRadius, 3400 * ly, 0, 0, 40 * solarMass, '#F5EFC8', 'Star');
-const stephenson218 = new Sun('Stephenson 2-18', center, 2150 * solarRadius, 19570 * ly, 0, 0, 1000 * solarMass, '#F21905', 'Star');
+const barnard = new Sun('Barnard\'s Star', center, SOLAR_RADIUS * .2, 5.958 * LY, 0, 0, SOLAR_MASS * .144, '#D9042B', 'Star');
+const siriusA = new Sun('Sirius A', center, 1.711 * SOLAR_RADIUS, 8.611 * LY, 0, 0, 2.063 * SOLAR_MASS, '#52CBD9', 'Star');
+const betaCentauri = new Sun('Beta Centauri', center, 9 * SOLAR_RADIUS, 391.4 * LY, 0, 0, 12.02 * SOLAR_MASS, '#3037BF', 'Star');
+const r136a1 = new Sun('R136a1', center, 39.2 * SOLAR_RADIUS, 163000 * LY, 0, 0, 215 * SOLAR_MASS, '#79DCF2', 'Star');
+const gacrux = new Sun('Gacrux', center, 120 * SOLAR_RADIUS, 88.71 * LY, 0, 0, 1.5 * SOLAR_MASS, '#D91438', 'Star');
+const pistolStar = new Sun('Pistol Star', center, 420 * SOLAR_RADIUS, 26.090 * LY, 0, 0, 27.5 * SOLAR_MASS, '#0597F2', 'Star');
+const rhoCassiopeiae = new Sun('Rho Cassiopeiae', center, 981 * SOLAR_RADIUS, 3400 * LY, 0, 0, 40 * SOLAR_MASS, '#F5EFC8', 'Star');
+const stephenson218 = new Sun('Stephenson 2-18', center, 2150 * SOLAR_RADIUS, 19570 * LY, 0, 0, 1000 * SOLAR_MASS, '#F21905', 'Star');
 
 // Alpha Centauri
-const alphaCentauriA = new Sun('Alpha Centauri A', center, 1.2234 * solarRadius, 4.37 * ly, 0, 0, 1.1 * solarMass, '#F2B05E', 'Star');
-const alphaCentauriB = new Sun('Alpha Centauri B', alphaCentauriA, .8632 * solarRadius, 7, 0, .124, 35.6 * AU, '#D98F4E', 'Star');
+const alphaCentauriA = new Sun('Alpha Centauri A', center, 1.2234 * SOLAR_RADIUS, 4.37 * LY, 0, 0, 1.1 * SOLAR_MASS, '#F2B05E', 'Star');
+const alphaCentauriB = new Sun('Alpha Centauri B', alphaCentauriA, .8632 * SOLAR_RADIUS, 7, 0, .124, 35.6 * AU, '#D98F4E', 'Star');
 
 // SUN ARRAY
 const suns = [barnard, siriusA, betaCentauri, r136a1, gacrux, pistolStar, rhoCassiopeiae, stephenson218];

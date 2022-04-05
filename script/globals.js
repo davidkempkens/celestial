@@ -54,16 +54,16 @@ let scaleV = (1 / 60e6) * scaleT;
 const C = 299792.458;
 
 // AU - in Mio km
-const AU = 150;
+const AU = 149.597870700;
 
-// Light year in AU
-const ly = 63241.077 * AU;
+// Light year in Mio km
+const LY = 9460730.472580800;
 
 // Solar Mass in KG
-const solarMass = 2e30;
+const SOLAR_MASS = 2e30;
 
 // Solar Radius in Mio km
-const solarRadius = .695700;
+const SOLAR_RADIUS = .695700;
 
 // BACKGROUND COLOR THAT GETS DRAWN EVERY FRAME TO CLEAR THE CANVAS
 const bg = '#050a10';
@@ -153,8 +153,12 @@ function deg(d) {
     return d * (Math.PI / 180);
 }
 
-// Formats Big Numbers
+// Format Big Numbers
 function formatNumber(num) {
+
+    // if(num > LY) {
+    //     return Math.floor(num / LY)
+    // }
     // noinspection JSCheckFunctionSignatures
     return num.toLocaleString("en-US", {
         notation: "compact",

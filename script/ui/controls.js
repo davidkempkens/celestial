@@ -125,6 +125,7 @@ function toggleHUD() {
         h.style.display = hideHUD ? 'none' : 'flex';
     });
 }
+
 // FILL HUDS WITH BODIES + EVENT LISTENER ON EACH BODY
 updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
 updateHUD([...alphaCentauri, ...suns], hudSuns);
@@ -180,9 +181,10 @@ function controls() {
     c.closePath();
 
     // Text above bar
-    let km = formatNumber((earth.d * 1000000) / scale);
-    let au = formatNumber(AU / scale);
-    let ly = formatNumber((1 / 63241.077) / scale);
+    let km = formatNumber((AU * 1e6) / scale);
+    let au = formatNumber( 1 / scale);
+    let ly = formatNumber((AU / LY) / scale);
+    // 0,0000158125074 LY = 1 AU
 
     let text = [`${ly} light-years`, `${au} AU`, `${km} km`];
     for (let i = 0; i < text.length; i++) {
