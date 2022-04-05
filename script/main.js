@@ -123,21 +123,29 @@ function drawNames() {
         voyager1.drawName();
         if (voyager1.isColliding) voyager1.info();
     } else {
-        drawText(['Solar System', `\u2205 ${formatNumber(50 * AU * 2e6)} km`], center.x, center.y - 50 * AU, 'white', 13);
+        drawText('Solar System', center.x, center.y - 50 * AU, 'white', 13);
+        if (scale > .00003) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
+        oortCloud[0].drawOrbit()
+        voyager1.drawName();
+        if (voyager1.isColliding) voyager1.info();
     }
 
     // OTHER BODIES
     suns.forEach(s => {
-        if (scale > 1e-9) s.drawName();
-        if (s.isColliding) s.info();
+        if (scale > 1e-9) {
+            s.drawName();
+            if (s.isColliding) s.info();
+        }
     })
     m87.drawName();
     if (m87.isColliding) m87.info();
     universe.drawName();
     if (universe.isColliding) universe.info();
     alphaCentauri.forEach(a => {
-        if (scale > 1e-9) a.drawName();
-        if (a.isColliding) a.info();
+        if (scale > 1e-9) {
+            a.drawName();
+            if (a.isColliding) a.info();
+        }
     });
 
     // LIGHTSPEED TEST
