@@ -126,7 +126,7 @@ function drawNames() {
         drawText('Solar System', center.x, center.y - 50 * AU, 'white', 13);
         if (scale > .00003) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
         oortCloud[0].drawOrbit()
-        voyager1.drawName();
+        // voyager1.drawName();
         if (voyager1.isColliding) voyager1.info();
     }
 
