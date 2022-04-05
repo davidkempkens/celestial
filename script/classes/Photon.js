@@ -49,7 +49,7 @@ class Photon extends FlyingBody {
 
     info() {
         super.info()
-        let textAbove = [`\u2192 ${formatNumber(this.d * 1e6)} km`];
+        let textAbove = toLy(this.d) > 0 ?`\u2192 ${formatNumber(toLy(this.d))} ly`: `\u2192 ${formatNumber(this.d * 1e6)} km`;
         // CALL TEXT FUNCTION
         drawText(textAbove, this.x - this.r * 2, this.y - this.r - (25 / scale), this.color, 13);
     }

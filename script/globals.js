@@ -131,7 +131,7 @@ const initialDeg = {
     pluto: 260,
     eris: 170,
     makemake: 10,
-    moon : 135
+    moon: 135
 }
 
 // Resize Canvas
@@ -234,4 +234,9 @@ function secToTime(s) {
         seconds = "0" + seconds;
     }
     return `${years} y ${days} d - ${hours}:${minutes}:${seconds}`;
+}
+
+// km to light-years
+function toLy(km) {
+    if (km > LY) return Math.floor(km / LY)
 }
