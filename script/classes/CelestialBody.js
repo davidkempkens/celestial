@@ -93,6 +93,11 @@ class CelestialBody {
             // DRAW Other Body under this Body or below the other 'other' classes
             c.fillStyle = copies[i].color;
             copies[i].draw();
+
+            // rescaleDynamic()
+            // copies[i].drawName();
+            // scaleDynamic()
+
             if (copies.length > 2) continue;
             if (i < 1) c.fillRect(this.x - copies[i].r, (this.y + this.r) + (10 / scale), copies[i].r * 2, 2 / scale);
             else c.fillRect(copies[i - 1].x - copies[i].r, (copies[i - 1].y + copies[i - 1].r) + ((10 / scale) * i), copies[i].r * 2, 2 / scale);
@@ -146,6 +151,7 @@ class CelestialBody {
     }
 
     copy(copy) {
+        if(copy instanceof BlackHole) return new BlackHole(copy.name, copy.center, copy.radius, copy.distance, copy.velocity, copy.eccentricity, copy.mass, copy.color, copy.type, copy.colBH);
         return new CelestialBody(copy.name, copy.center, copy.radius, copy.distance, copy.velocity, copy.eccentricity, copy.mass, copy.color, copy.type);
     }
 }

@@ -129,7 +129,7 @@ function toggleHUD() {
 // FILL HUDS WITH BODIES + EVENT LISTENER ON EACH BODY
 updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
 updateHUD([...alphaCentauri, ...suns], hudSuns);
-updateHUD([m87, lightRay, voyager1, universe], hudOther);
+updateHUD([...blackHoles, lightRay, voyager1, universe], hudOther);
 
 // MOON LIST FILLED BOOLEAN
 let moonListFilled = false;

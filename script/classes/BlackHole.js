@@ -1,10 +1,11 @@
 class BlackHole extends CelestialBody {
 
-    constructor(name, center, radius, distance, velocity, eccentricity, mass, color, type) {
+    constructor(name, center, radius, distance, velocity, eccentricity, mass, color, type, colBH) {
         super(name, center, radius, distance, velocity, eccentricity, mass, color, type);
         this.w = 0;
 
-        this.colBH = ["#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"];
+        this.colBH = colBH;
+        // this.colBH = ["#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"];
 
         // PARTICLE PROPERTIES
         this.particle = {
@@ -52,7 +53,7 @@ class BlackHole extends CelestialBody {
 
         // DRAW EVENT HORIZON FOR BLACK HOLES
         this.eventHorizon();
-        this.vortex();
+        // this.vortex();
     }
 
     eventHorizon() {
