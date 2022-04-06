@@ -6,6 +6,8 @@ function start() {
     clearCanvas();
     // Draw Stars before transformation to fill the whole canvas
     stars.forEach(s => s.spin());
+    // camera planet
+    camera(cameraBody);
     // Save Transformation Matrix
     c.save();
 
@@ -32,8 +34,8 @@ function start() {
     runClock();
     // controls
     controls();
-    // camera planet
-    camera(cameraBody);
+    // // camera planet
+    // camera(cameraBody);
     // frameAnimation ID
     frAId = window.requestAnimationFrame(start);
 }
@@ -162,21 +164,22 @@ function camera(body) {
 
     let cwm = (canvas.width / 2)
     let chm = (canvas.height / 2)
-    // let bx = body.x
-    // let by = body.y;
+    // let bx = body.x - (body.a * Math.cos(body.w + body.v) * body.d);
+    // let by = body.y - ( body.b * Math.sin(body.w + body.v) * body.d);
     // STRAIGHT FLYING OBJECT
     center.x += cwm - body.x - body.v;
     center.y += chm - body.y - body.r;
 
-    // OrBIT
+    // center.x += cwm - bx;
+    // center.y += chm - by;
+    // ORBIT
     // center.x += cxm - bx ;
     // center.y += chm - by - body.r;
     // this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
     // this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
-    //
+
     // drawPlus(canvas.width / 2, canvas.height / 2, '#0f0')
     // drawX(body.center.x, body.center.y, '#f00')
-
 }
 
 // RUN COLLISION DETECTION
