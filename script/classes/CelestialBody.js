@@ -83,7 +83,7 @@ class CelestialBody {
         // Draw Compares classes
         let copies = other
             .filter(o => o.name !== this.name)
-            .map(o => o.copy(o));
+            .map(o => this.copy(o));
         for (let i = 0; i < copies.length; i++) {
 
             // Copy other body to alter the x,y position, without changing the orbit of the other body
@@ -151,8 +151,10 @@ class CelestialBody {
     }
 
     copy(copy) {
+        // return Object.create(copy);
         if(copy instanceof BlackHole) return new BlackHole(copy.name, copy.center, copy.radius, copy.distance, copy.velocity, copy.eccentricity, copy.mass, copy.color, copy.type, copy.colBH);
         return new CelestialBody(copy.name, copy.center, copy.radius, copy.distance, copy.velocity, copy.eccentricity, copy.mass, copy.color, copy.type);
+
     }
 }
 

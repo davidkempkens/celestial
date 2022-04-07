@@ -199,7 +199,7 @@ function updateHUD(bodies, hud) {
         a.innerHTML = b.name;
         a.href = '#';
         a.addEventListener('click', () => {
-            scale = cameraBody === b ? 10 / b.r : 10 / sun.r;
+            scale = cameraBody === b ? 100 / b.r : 10 / sun.r;
             cameraBody = b;
         });
         // a.addEventListener('mouseover', () => {});

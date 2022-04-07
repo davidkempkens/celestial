@@ -92,7 +92,7 @@ function runUniverse() {
     });
 
     blackHoles.forEach(bH => {
-        if (bH.isColliding) bH.compare([sun, ...blackHoles])
+        if (bH.isColliding) bH.compare([earth, sun, sagittariusA])
     })
     // if (m87.isColliding) m87.compare([sun, ...suns, ...blackHoles]);
     // if (universe.isColliding) universe.compare([m87]);

@@ -21,7 +21,7 @@ class BlackHole extends CelestialBody {
             maxE: .0,
             m: 1e10,
             color: "#000000",
-            colors: ["#FFFFFF", "#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"],
+            colors: ["#FFFFFF", ...this.colBH],
             t: 'Particle'
         };
 
@@ -53,7 +53,7 @@ class BlackHole extends CelestialBody {
 
         // DRAW EVENT HORIZON FOR BLACK HOLES
         this.eventHorizon();
-        // this.vortex();
+        this.vortex();
     }
 
     eventHorizon() {
@@ -74,13 +74,13 @@ class BlackHole extends CelestialBody {
         this.particles.forEach(p => {
 
             if (p.v <= maxSpeed) {
-                p.v += rate;
+                if (!stopSpin) p.v += rate;
                 let interval = (maxSpeed - minSpeed) / this.particle.colors.length;
                 let accumulated = p.v - minSpeed;
-                let idx = this.particle.colors.length - Math.floor(accumulated / interval)
-                p.color = this.particle.colors[idx];
+                let idx = this.particle.colors.length - Math.floor(accumulated / interval);
+                if (!isNaN(idx)) p.color = this.particle.colors[idx];
             }
-            p.d -= p.d / 3000;
+            if (!stopSpin) p.d -= p.d / 3000;
             if (p.d < p.center.r) {
                 let i = this.particles.indexOf(p);
                 if (i > -1) this.particles.splice(i, 1);
