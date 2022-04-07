@@ -2,7 +2,7 @@ class Sun extends CelestialBody {
 
     constructor(name, center, radius, distance, velocity, eccentricity, mass, color, type) {
         super(name, center, radius, distance, velocity, eccentricity, mass, color, type);
-        this.w = 0;
+        // this.w = 0;
     }
 
     draw() {

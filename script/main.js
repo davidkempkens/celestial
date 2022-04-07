@@ -56,6 +56,7 @@ function runUniverse() {
     // m87.run();
     // sagittariusA.run()
     blackHoles.forEach(bH => bH.run());
+    milkyWay.run();
     universe.run();
 
     // ON COLLISION DISPLAY COMPARE BODY AND ORBIT
@@ -90,8 +91,11 @@ function runUniverse() {
         if (a.isColliding) a.compare([sun]);
     });
 
-    if (m87.isColliding) m87.compare([sun, ...suns, ...blackHoles]);
-    if (universe.isColliding) universe.compare([m87]);
+    blackHoles.forEach(bH => {
+        if (bH.isColliding) bH.compare([sun, ...blackHoles])
+    })
+    // if (m87.isColliding) m87.compare([sun, ...suns, ...blackHoles]);
+    // if (universe.isColliding) universe.compare([m87]);
 }
 
 function drawNames() {
@@ -114,9 +118,8 @@ function drawNames() {
         voyager1.drawName();
         if (voyager1.isColliding) voyager1.info();
     } else {
-        drawText('Solar System', center.x, center.y - 50 * AU, 'white', 13);
+        if (scale > 1e-16) drawText('Solar System', center.x, center.y - 50 * AU, 'white', 13);
         if (scale > .00003) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
-        oortCloud[0].drawOrbit()
         // voyager1.drawName();
         if (voyager1.isColliding) voyager1.info();
     }
@@ -130,17 +133,12 @@ function drawNames() {
     })
 
     blackHoles.forEach(bh => {
-        bh.drawName();
-        if(bh.isColliding) bh.info();
+        if (scale > 1e-14) {
+            bh.drawName();
+            if (bh.isColliding) bh.info();
+        }
     })
-    // m87.drawName();
-    // if (m87.isColliding) m87.info();
-    //
-    // sagittariusA.drawName();
-    // if(sagittariusA.isColliding) sagittariusA.info();
 
-    universe.drawName();
-    if (universe.isColliding) universe.info();
     alphaCentauri.forEach(a => {
         if (scale > 1e-9) {
             a.drawName();
@@ -150,7 +148,16 @@ function drawNames() {
 
     // LIGHTSPEED TEST
     lightRay.drawName();
-    if (lightRay.isColliding) lightRay.info();
+    if (lightRay.isColliding) {
+        lightRay.info();
+        // console.log(lightRay.d, scale)
+    }
+
+    milkyWay.draw();
+    milkyWay.info();
+    universe.drawName();
+    universe.info();
+    // if (universe.isColliding) universe.info();
 }
 
 // Center the canvas on a chosen body's position
@@ -194,10 +201,10 @@ function runCollisionDetection() {
     // OTHER BODIES
     suns.forEach(s => s.collision(mouse));
     alphaCentauri.forEach(a => a.collision(mouse));
-    blackHoles.forEach( bH => bH.collision(mouse));
+    blackHoles.forEach(bH => bH.collision(mouse));
     // m87.collision(mouse);
     // sagittariusA.collision(mouse)
-    universe.collision(mouse);
+    // universe.collision(mouse);
 }
 
 function runClock() {
@@ -244,6 +251,7 @@ function scaleDynamic() {
     // Scale Canvas
     c.scale(scale, scale);
 }
+
 // Scale Canvas for Drawing Text
 function rescaleDynamic() {
     // Reset Transformation Matrix
