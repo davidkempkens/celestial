@@ -116,10 +116,10 @@ const universe = new Galaxy('Observable Universe', center, 46.5e9 * LY, 0, 0, 0,
 
 // BLACK HOLES
 const sagittariusA = new BlackHole('Sagittarius A*', center, 17 * SOLAR_RADIUS, -26673 * LY, 0, 0, 4e6 * SOLAR_MASS, '#3097BF', 'Black Hole', ["#59D9D9", "#4ECBD9", "#3097BF", "#024959", "#000000"]);
-const bLLacertae = new BlackHole('BL Lacertae*', center, 115 * SOLAR_RADIUS, -9e8 * LY, 0, 0, 1, 'white', 'Black Hole', ["#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"])
-const cygnusA = new BlackHole('Cygnus A', center, 14700, -760e6 * LY, 0, 0, 2.5e9 * SOLAR_MASS, '#F2358D', 'Black Hole', ["#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"])
+const bLLacertae = new BlackHole('BL Lacertae*', center, 115 * SOLAR_RADIUS, -9e8 * LY, 0, 0, 1, 'white', 'Black Hole', ["#F2E7DC", "#A9D9D0", "#038C7F", '#027373', "#000"])
+const cygnusA = new BlackHole('Cygnus A', center, 14700, -760e6 * LY, 0, 0, 2.5e9 * SOLAR_MASS, 'white', 'Black Hole', ["#F24405", "#D90452", "#8C035C", "#090126", "#000000"])
 const m87 = new BlackHole('M87*', center, 19000, -53.49e6 * LY, 0, 0, 7.22e9 * SOLAR_MASS, 'white', 'Black Hole', ["#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"]);
-
+const ton618 = new BlackHole('TON 618', center,1.949e5,10.37e9 * LY,0,0,66e9 * SOLAR_MASS,'white','Black Hole', ["#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"]);
 
 // GALAXIES
 const milkyWay = new Galaxy('Milky Way', sagittariusA, 185e3 * LY, 0, 0, 0, 1e12 * SOLAR_MASS, 'white', 'Galaxy');
@@ -148,7 +148,7 @@ const alphaCentauri = [alphaCentauriA, alphaCentauriB];
 
 const solarSystem = [sun, ...planets, ...dwarfs]
 // Black Holes
-const blackHoles = [sagittariusA, bLLacertae, cygnusA, m87]
+const blackHoles = [sagittariusA, bLLacertae, cygnusA, m87, ton618]
 // Galaxies
 const galaxies = [milkyWay]
 // BIG BODIES ARRAY WITHOUT ASTEROIDS
