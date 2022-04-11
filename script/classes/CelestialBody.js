@@ -41,16 +41,13 @@ class CelestialBody {
         // flag for collision function
         this.isColliding = false;
 
-        this._x = this.x;
-        this._y = this.y;
     }
 
     run() {
-        this._x = this.x;
-        this._y = this.y;
+
         this.rescale();
         // Physics for orbiting Bodies
-        this.w -= this.v;
+        this.w += this.v;
         this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
         this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
         // Call the draw function to draw the body as filled circle on the canvas
@@ -136,7 +133,7 @@ class CelestialBody {
     }
 
     info() {
-        let distanceText = toLy(this.distance) > 0 ?`\u2192 ${formatNumber(toLy(this.distance))} ly `: `\u2192 ${formatNumber(this.distance * 1e6)} km `;
+        let distanceText = toLy(this.distance) > 0 ? `\u2192 ${formatNumber(toLy(this.distance))} ly ` : `\u2192 ${formatNumber(this.distance * 1e6)} km `;
         let textAbove = [`\u2205 ${formatNumber(this.radius * 2e6)} km`]; // DEFAULT TEXT ABOVE BODY IS DIAMETER
         let textAside = [
             `${this.name} ${this.symbol} ${this.type}`, // Display Symbols
@@ -152,7 +149,7 @@ class CelestialBody {
 
     copy(copy) {
         // return Object.create(copy);
-        if(copy instanceof BlackHole) return new BlackHole(copy.name, copy.center, copy.radius, copy.distance, copy.velocity, copy.eccentricity, copy.mass, copy.color, copy.type, copy.colBH);
+        if (copy instanceof BlackHole) return new BlackHole(copy.name, copy.center, copy.radius, copy.distance, copy.velocity, copy.eccentricity, copy.mass, copy.color, copy.type, copy.colBH);
         return new CelestialBody(copy.name, copy.center, copy.radius, copy.distance, copy.velocity, copy.eccentricity, copy.mass, copy.color, copy.type);
 
     }

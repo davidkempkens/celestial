@@ -9,8 +9,7 @@ const img = document.getElementById('img');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-// Parameter for camera function to center object on canvas
-let cameraBody = null;
+
 
 // Booleans to toggle in main loop - for user input
 let stopSpin = false;
@@ -100,6 +99,9 @@ const center = {
     y: canvas.height / 2,
     r: 0
 }
+
+// Parameter for camera function to center object on canvas
+let cameraBody = null;
 
 // Symbols as Unicode for the planets in the solar system
 const symbols = {

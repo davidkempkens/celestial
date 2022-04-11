@@ -6,10 +6,11 @@ function start() {
     clearCanvas();
     // Draw Stars before transformation to fill the whole canvas
     stars.forEach(s => s.spin());
-    // camera planet
-    camera(cameraBody);
 
     scaleDynamic();
+
+    // camera planet
+    camera(cameraBody);
     // Actually run Physics and draw everything
     runUniverse();
 
@@ -167,13 +168,21 @@ function drawNames() {
 function camera(body) {
     if (body === null) return;
 
-    let cwm = (canvas.width / 2)
-    let chm = (canvas.height / 2)
-    // let bx = body.x - (body.a * Math.cos(body.w + body.v) * body.d);
-    // let by = body.y - ( body.b * Math.sin(body.w + body.v) * body.d);
+    let centerOfScreen = {
+        x: canvas.width / 2,
+        y: canvas.height / 2
+    }
+
+    let bodyPosition = {
+        x: body.center.x + body.a * Math.cos(body.w + (scaleV * (body.velocity / body.distance))) * body.d,
+        y: body.center.y + body.b * Math.sin(body.w + (scaleV * (body.velocity / body.distance))) * body.d
+    }
     // STRAIGHT FLYING OBJECT
-    center.x += cwm - body.x - body.v;
-    center.y += chm - body.y - body.r;
+    center.x -= bodyPosition.x - centerOfScreen.x;
+    center.y -= bodyPosition.y - centerOfScreen.y + body.r;
+    // scaleV = (1 / 60e6) * scaleT;
+    // if (this.distance !== 0) this.v = (this.velocity / this.distance) * scaleV;
+    // else this.v = this.velocity * scaleV;
 
     // center.x += cwm - bx;
     // center.y += chm - by;
@@ -247,7 +256,6 @@ function scaleDynamic() {
         y: (canvas.height / 2) * (1 - scale)
     }
     c.translate(trans.x, trans.y);
-
     // Scale Canvas
     c.scale(scale, scale);
 }
