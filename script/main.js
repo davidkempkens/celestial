@@ -172,8 +172,8 @@ function camera(body) {
     }
 
     let bodyPosition = {
-        x: body.center.x + body.a * Math.cos(body.w + (scaleV * (body.velocity / body.distance))) * body.d,
-        y: body.center.y + body.b * Math.sin(body.w + (scaleV * (body.velocity / body.distance))) * body.d
+        x: body instanceof FlyingBody ? body.x + body.v : body.center.x + body.a * Math.cos(body.w + (scaleV * (body.velocity / body.distance))) * body.d,
+        y: body instanceof FlyingBody ? body.y : body.center.y + body.b * Math.sin(body.w + (scaleV * (body.velocity / body.distance))) * body.d
     }
 
     center.x -= bodyPosition.x - centerOfScreen.x;
