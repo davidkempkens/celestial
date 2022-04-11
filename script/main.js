@@ -22,8 +22,6 @@ function start() {
     runClock();
     // controls
     controls();
-    // // camera planet
-    // camera(cameraBody);
     // frameAnimation ID
     frAId = window.requestAnimationFrame(start);
 }
@@ -177,23 +175,10 @@ function camera(body) {
         x: body.center.x + body.a * Math.cos(body.w + (scaleV * (body.velocity / body.distance))) * body.d,
         y: body.center.y + body.b * Math.sin(body.w + (scaleV * (body.velocity / body.distance))) * body.d
     }
-    // STRAIGHT FLYING OBJECT
+
     center.x -= bodyPosition.x - centerOfScreen.x;
     center.y -= bodyPosition.y - centerOfScreen.y + body.r;
-    // scaleV = (1 / 60e6) * scaleT;
-    // if (this.distance !== 0) this.v = (this.velocity / this.distance) * scaleV;
-    // else this.v = this.velocity * scaleV;
 
-    // center.x += cwm - bx;
-    // center.y += chm - by;
-    // ORBIT
-    // center.x += cxm - bx ;
-    // center.y += chm - by - body.r;
-    // this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
-    // this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
-
-    // drawPlus(canvas.width / 2, canvas.height / 2, '#0f0')
-    // drawX(body.center.x, body.center.y, '#f00')
 }
 
 // RUN COLLISION DETECTION
@@ -223,26 +208,6 @@ function runClock() {
         frames = 0;
     }
 
-}
-
-function drawX(x, y, col) {
-    c.beginPath();
-    c.strokeStyle = col
-    c.moveTo(x - 20, y - 20);
-    c.lineTo(x + 20, y + 20)
-    c.moveTo(x + 20, y - 20);
-    c.lineTo(x - 20, y + 20);
-    c.stroke();
-}
-
-function drawPlus(x, y, col) {
-    c.beginPath();
-    c.strokeStyle = col
-    c.moveTo(x - 20, y);
-    c.lineTo(x + 20, y)
-    c.moveTo(x, y - 20);
-    c.lineTo(x, y + 20);
-    c.stroke();
 }
 
 // Scale Canvas for Running Physics
