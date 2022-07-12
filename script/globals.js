@@ -116,7 +116,8 @@ const symbols = {
     ceres: '\u26B3',
     pluto: '\u2647',
     moon: '\u263D',
-    sun: '\u{1F31E}'
+    sun: '\u{1F31E}',
+    c :'\u03B3'
 };
 
 const colors = {
@@ -168,12 +169,12 @@ function deg(d) {
 }
 
 // Format Big Numbers
-function formatNumber(num) {
+function formatNumber(num,d) {
     // noinspection JSCheckFunctionSignatures
     return num.toLocaleString("en-US", {
         notation: "compact",
         compactDisplay: "long",
-        maximumSignificantDigits: "2"
+        maximumSignificantDigits: d
     })
 }
 

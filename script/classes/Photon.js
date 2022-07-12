@@ -54,8 +54,14 @@ class Photon extends FlyingBody {
     }
 
     info() {
-        super.info()
-        let textAbove = toLy(this.d) > 0 ?`\u2192 ${formatNumber(toLy(this.d))} ly`: `\u2192 ${formatNumber(this.d * 1e6)} km`;
+        // super.info()
+        let textAside = [
+            `${this.name} ${this.symbol} ${this.type}`, // Display Symbols
+            `299 792 458 m/s `, // Display Velocity
+        ];
+        // CALL TEXT FUNCTION
+        drawText(textAside, this.x + this.r, this.y, this.color, 13);
+        let textAbove = toLy(this.d) > 0 ? `\u2192 ${formatNumber(toLy(this.d))} ly` : `\u2192 ${formatNumber(this.d * 1e6)} km`;
         // CALL TEXT FUNCTION
         drawText(textAbove, this.x - this.r * 2, this.y - this.r - (25 / scale), this.color, 13);
     }
