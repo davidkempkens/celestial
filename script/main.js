@@ -176,13 +176,26 @@ function r(phi, center, satelite) {
     return p / (1 + eps * Math.cos(phi));
 }
 
+function v(r, center, satelite) {
+    let M = center.mass
+    let m = satelite.mass
+    let rp = satelite.perihelion
+    let ra = satelite.aphelion
+    let a = (rp + ra) / 2;
+
+    return Math.sqrt(G * (M + m) * ((2 / r) - (1 / a)))
+}
+
 function polarToCartesian(r, phi) {
     return r * Math.cos(phi), r * Math.sin(phi);
 }
 
+
+
 earth.perihelion = 0.983 * AE;
 earth.aphelion = 1.017 * AE;
 console.log(r(Math.PI, sun, earth))
+console.log(v(r(Math.PI, sun, earth), sun, earth))
 
 // Center the canvas on a chosen body's position
 // Gets called every frame in the main loop
