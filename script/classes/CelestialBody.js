@@ -19,6 +19,8 @@ class CelestialBody {
     this.velocity = velocity;
     this.eccentricity = eccentricity;
     this.mass = mass;
+    this.perihelion;
+    this.aphelion;
     this.color = color;
     this.type = type;
     this.symbol = symbols[name.toLowerCase()] || "";

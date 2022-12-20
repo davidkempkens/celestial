@@ -64,8 +64,12 @@ let scaleV = (1 / 60e6) * scaleT;
 // SPEED OF LIGHT - C
 const C = 299792.458;
 
+// Gravitational Constant
+const G = 6.67430e-11;
+
 // AU - in Mio km
 const AU = 149.597870700;
+const AE = 149597870700;
 
 // Light year in Mio km
 const LY = 9460730.472580800;
@@ -117,7 +121,7 @@ const symbols = {
     pluto: '\u2647',
     moon: '\u263D',
     sun: '\u{1F31E}',
-    c :'\u03B3'
+    c: '\u03B3'
 };
 
 const colors = {
@@ -169,7 +173,7 @@ function deg(d) {
 }
 
 // Format Big Numbers
-function formatNumber(num,d) {
+function formatNumber(num, d) {
     // noinspection JSCheckFunctionSignatures
     return num.toLocaleString("en-US", {
         notation: "compact",

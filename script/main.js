@@ -159,6 +159,27 @@ function drawNames() {
     // if (universe.isColliding) universe.info();
 }
 
+
+function r(phi, center, satelite) {
+
+    let M = center.mass
+    let m = satelite.mass
+    let rp = satelite.perihelion
+    let ra = satelite.aphelion
+
+    let E = -G * M * m / (ra + rp);
+    let L = Math.sqrt(2 * G * M * m ** 2 * ((rp * ra) / (ra + rp)));
+    let p = L ** 2 / (G * M * m ** 2)
+    let k = 2 * m * L ** 2 / (G * M * m ** 2) ** 2
+    let eps = Math.sqrt(1 + k * E)
+
+    return p / (1 + eps * Math.cos(phi));
+}
+
+earth.perihelion = 0.983 * AE;
+earth.aphelion = 1.017 * AE;
+console.log(r(Math.PI, sun, earth))
+
 // Center the canvas on a chosen body's position
 // Gets called every frame in the main loop
 // Uses global variable "cameraBody" as argument
