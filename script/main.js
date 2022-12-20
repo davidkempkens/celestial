@@ -176,6 +176,10 @@ function r(phi, center, satelite) {
     return p / (1 + eps * Math.cos(phi));
 }
 
+function polarToCartesian(r, phi) {
+    return r * Math.cos(phi), r * Math.sin(phi);
+}
+
 earth.perihelion = 0.983 * AE;
 earth.aphelion = 1.017 * AE;
 console.log(r(Math.PI, sun, earth))
