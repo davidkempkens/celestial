@@ -1,0 +1,372 @@
+[
+  {
+    "name": "Sun",
+    "center": "Center",
+    "radius": 696000000,
+    "perihelion": 0,
+    "aphelion": 0,
+    "mass": 1.99e+30,
+    "color": "#F2A516",
+    "type": "Star"
+  },
+  {
+    "name": "Mercury",
+    "center": "Sun",
+    "radius": 2440530,
+    "perihelion": 46001200000,
+    "aphelion": 69816900000,
+    "mass": 3.3e+23,
+    "color": "#BFB6AE",
+    "type": "Planet"
+  },
+  {
+    "name": "Venus",
+    "center": "Sun",
+    "radius": 6051800,
+    "perihelion": 107477000000,
+    "aphelion": 108939000000,
+    "mass": 4.87e+24,
+    "color": "#F2C879",
+    "type": "Planet"
+  },
+  {
+    "name": "Earth",
+    "center": "Sun",
+    "radius": 6378136.6,
+    "perihelion": 147095000000,
+    "aphelion": 152100000000,
+    "mass": 5.97e+24,
+    "color": "#03588C",
+    "type": "Planet"
+  },
+  {
+    "name": "Mars",
+    "center": "Sun",
+    "radius": 3396190,
+    "perihelion": 206650000000,
+    "aphelion": 249261000000,
+    "mass": 6.42e+23,
+    "color": "#F24E29",
+    "type": "Planet"
+  },
+  {
+    "name": "Jupiter",
+    "center": "Sun",
+    "radius": 71492000,
+    "perihelion": 740595000000,
+    "aphelion": 816363000000,
+    "mass": 1.9e+27,
+    "color": "#D96C0D",
+    "type": "Planet"
+  },
+  {
+    "name": "Saturn",
+    "center": "Sun",
+    "radius": 60268000,
+    "perihelion": 1352550000000,
+    "aphelion": 1514500000000,
+    "mass": 5.69e+26,
+    "color": "#D9CAAD",
+    "type": "Planet"
+  },
+  {
+    "name": "Uranus",
+    "center": "Sun",
+    "radius": 25559000,
+    "perihelion": 2735560000000,
+    "aphelion": 3006390000000,
+    "mass": 8.68e+25,
+    "color": "#BBE2F2",
+    "type": "Planet"
+  },
+  {
+    "name": "Neptune",
+    "center": "Sun",
+    "radius": 24764000,
+    "perihelion": 4460000000000,
+    "aphelion": 4540000000000,
+    "mass": 1.02e+26,
+    "color": "#5368A6",
+    "type": "Planet"
+  },
+  {
+    "name": "Ceres",
+    "center": "Sun",
+    "radius": 473000,
+    "perihelion": 381000000000,
+    "aphelion": 446000000000,
+    "mass": 939000000000000000000,
+    "color": "#626973",
+    "type": "Dwarf"
+  },
+  {
+    "name": "Pluto",
+    "center": "Sun",
+    "radius": 1190000,
+    "perihelion": 4436820000000,
+    "aphelion": 7375930000000,
+    "mass": 1.305e+22,
+    "color": "#626973",
+    "type": "Dwarf"
+  },
+  {
+    "name": "Haumea",
+    "center": "Sun",
+    "radius": 816000,
+    "perihelion": 5183100000000,
+    "aphelion": 7717000000000,
+    "mass": 4.01e+21,
+    "color": "#626973",
+    "type": "Dwarf"
+  },
+  {
+    "name": "Makemake",
+    "center": "Sun",
+    "radius": 715000,
+    "perihelion": 5700300000000,
+    "aphelion": 7892200000000,
+    "mass": 4.4e+21,
+    "color": "#626973",
+    "type": "Dwarf"
+  },
+  {
+    "name": "Eris",
+    "center": "Sun",
+    "radius": 1163000,
+    "perihelion": 5725000000000,
+    "aphelion": 14579000000000,
+    "mass": 1.7e+22,
+    "color": "#F24E29",
+    "type": "Dwarf"
+  },
+  {
+    "name": "Eros",
+    "center": "Sun",
+    "radius": 34400,
+    "perihelion": 169550000000,
+    "aphelion": 266660000000,
+    "mass": 6687000000000000,
+    "color": "#626973",
+    "type": "Dwarf"
+  },
+  {
+    "name": "Moon",
+    "center": "Earth",
+    "radius": 1737100,
+    "perihelion": 384400000,
+    "aphelion": 405500000,
+    "mass": 7.346e+22,
+    "color": "#F2F2F2",
+    "type": "Moon"
+  },
+  {
+    "name": "Phobos",
+    "center": "Mars",
+    "radius": 26800,
+    "perihelion": 9236000,
+    "aphelion": 9519000,
+    "mass": 10720000000000000,
+    "color": "#D9D9D9",
+    "type": "Moon"
+  },
+  {
+    "name": "Deimos",
+    "center": "Mars",
+    "radius": 15000,
+    "perihelion": 23451000,
+    "aphelion": 23467000,
+    "mass": 1800000000000000,
+    "color": "#D9D9D9",
+    "type": "Moon"
+  },
+  {
+    "name": "Io",
+    "center": "Jupiter",
+    "radius": 1821600,
+    "perihelion": 420100000,
+    "aphelion": 423500000,
+    "mass": 8.931938e+22,
+    "color": "#F2CF63",
+    "type": "Moon"
+  },
+  {
+    "name": "Europa",
+    "center": "Jupiter",
+    "radius": 1560800,
+    "perihelion": 665100000,
+    "aphelion": 677100000,
+    "mass": 4.8e+22,
+    "color": "#049DBF",
+    "type": "Moon"
+  },
+  {
+    "name": "Ganymede",
+    "center": "Jupiter",
+    "radius": 2634100,
+    "perihelion": 1069300000,
+    "aphelion": 1071500000,
+    "mass": 1.4819e+23,
+    "color": "#F2F0D8",
+    "type": "Moon"
+  },
+  {
+    "name": "Callisto",
+    "center": "Jupiter",
+    "radius": 2410300,
+    "perihelion": 1869500000,
+    "aphelion": 1895900000,
+    "mass": 1.0759e+23,
+    "color": "#8C7E6D",
+    "type": "Moon"
+  },
+  {
+    "name": "Mimas",
+    "center": "Saturn",
+    "radius": 198200,
+    "perihelion": 181902000,
+    "aphelion": 189176000,
+    "mass": 37463000000000000000,
+    "color": "#F2F0D8",
+    "type": "Moon"
+  },
+  {
+    "name": "Enceladus",
+    "center": "Saturn",
+    "radius": 252100,
+    "perihelion": 236950000,
+    "aphelion": 239090000,
+    "mass": 110000000000000000000,
+    "color": "#F2F0D8",
+    "type": "Moon"
+  },
+  {
+    "name": "Tethys",
+    "center": "Saturn",
+    "radius": 533000,
+    "perihelion": 294640000,
+    "aphelion": 294700000,
+    "mass": 618000000000000000000,
+    "color": "#F2F0D8",
+    "type": "Moon"
+  },
+  {
+    "name": "Dione",
+    "center": "Saturn",
+    "radius": 561700,
+    "perihelion": 376570000,
+    "aphelion": 378230000,
+    "mass": 1.1e+21,
+    "color": "#F2F0D8",
+    "type": "Moon"
+  },
+  {
+    "name": "Rhea",
+    "center": "Saturn",
+    "radius": 764300,
+    "perihelion": 526510000,
+    "aphelion": 517570000,
+    "mass": 2.31e+21,
+    "color": "#F2F0D8",
+    "type": "Moon"
+  },
+  {
+    "name": "Titan",
+    "center": "Saturn",
+    "radius": 2576000,
+    "perihelion": 1186150000,
+    "aphelion": 1257510000,
+    "mass": 1.345e+23,
+    "color": "#F2CF63",
+    "type": "Moon"
+  },
+  {
+    "name": "Hyperion",
+    "center": "Saturn",
+    "radius": 735600,
+    "perihelion": 1330000000,
+    "aphelion": 1640000000,
+    "mass": 5619900000000000000,
+    "color": "#F2F0D8",
+    "type": "Moon"
+  },
+  {
+    "name": "Iapetus",
+    "center": "Saturn",
+    "radius": 138600,
+    "perihelion": 3460500000,
+    "aphelion": 3662100000,
+    "mass": 1.81e+21,
+    "color": "#F2F0D8",
+    "type": "Moon"
+  },
+  {
+    "name": "Miranda",
+    "center": "Uranus",
+    "radius": 235800,
+    "perihelion": 129730000,
+    "aphelion": 130070000,
+    "mass": 65900000000000000000,
+    "color": "#F2F0D8",
+    "type": "Moon"
+  },
+  {
+    "name": "Ariel",
+    "center": "Uranus",
+    "radius": 578900,
+    "perihelion": 190670000,
+    "aphelion": 191130000,
+    "mass": 1.295e+21,
+    "color": "#F2F0D8",
+    "type": "Moon"
+  },
+  {
+    "name": "Umbriel",
+    "center": "Uranus",
+    "radius": 584000,
+    "perihelion": 265000000,
+    "aphelion": 267000000,
+    "mass": 1.221e+21,
+    "color": "#F2F0D8",
+    "type": "Moon"
+  },
+  {
+    "name": "Titania",
+    "center": "Uranus",
+    "radius": 788900,
+    "perihelion": 435800000,
+    "aphelion": 436800000,
+    "mass": 3.419e+21,
+    "color": "#F2F0D8",
+    "type": "Moon"
+  },
+  {
+    "name": "Oberon",
+    "center": "Uranus",
+    "radius": 761400,
+    "perihelion": 582700000,
+    "aphelion": 584300000,
+    "mass": 2.883e+21,
+    "color": "#F2F0D8",
+    "type": "Moon"
+  },
+  {
+    "name": "Triton",
+    "center": "Neptune",
+    "radius": 1353400,
+    "perihelion": 354753000,
+    "aphelion": 354765000,
+    "mass": 2.139e+22,
+    "color": "#F2C879",
+    "type": "Moon"
+  },
+  {
+    "name": "Charon",
+    "center": "Pluto",
+    "radius": 606000,
+    "perihelion": 19587000,
+    "aphelion": 19595000,
+    "mass": 1.586e+21,
+    "color": "#F2C879",
+    "type": "Moon"
+  }
+]
