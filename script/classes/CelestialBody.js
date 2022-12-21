@@ -4,80 +4,76 @@ class CelestialBody {
     name,
     center,
     radius,
-    distance,
-    velocity,
-    eccentricity,
+    periapsis,
+    apoapsis,
     mass,
     color,
     type
   ) {
-    // Real life Properties
     this.name = name;
     this.center = center;
-    this.radius = radius;
-    this.distance = distance;
-    this.velocity = velocity;
-    this.eccentricity = eccentricity;
-    this.mass = mass;
-    this.perihelion;
-    this.aphelion;
     this.color = color;
     this.type = type;
     this.symbol = symbols[name.toLowerCase()] || "";
     this.satelites = [];
 
-    // Calculated Properties
-    // RADIUS
-    this.r = this.radius * scaleR;
+    this.R = radius * scaleR;
+    this.M = center.m;
+    this.m = mass;
+    this.rp = periapsis;
+    this.ra = apoapsis;
+    this.a = (this.rp + this.ra) / 2;
 
-    // DISTANCE + center radius + planets radius
-    this.d = this.distance
-      ? this.distance * scaleD + (this.center.r + this.r)
-      : this.distance * scaleD;
-
-    // VELOCITY
-    this.v = this.velocity * scaleV;
-
-    // ECCENTRICITY
-    this.a = 1;
-    this.b = 1 - this.eccentricity;
+    this.E = -G * this.M * this.m / (2 * this.a)
+    this.L = Math.sqrt(2 * G * this.M * this.m ** 2 * ((this.rp * this.ra) / (this.ra + this.rp)));
+    this.p = this.L ** 2 / (G * this.M * this.m ** 2)
+    this.k = 2 * this.m * this.L ** 2 / (G * this.M * this.m ** 2) ** 2
+    this.eps = Math.sqrt(1 + this.k * this.E)
 
     // Initial angle of orbit : degrees / radian - "0" degrees is the right side
-    this.w = isNaN(initialDeg[this.name.toLowerCase()])
+    this.phi = isNaN(initialDeg[this.name.toLowerCase()])
       ? Math.random() * deg(360)
       : deg(initialDeg[this.name.toLowerCase()]);
+    this.r = this.p / (1 + this.eps * Math.cos(this.phi));
+    this.v = Math.sqrt(G * (this.M + this.m) * ((2 / this.r) - (1 / this.a)));
 
     // Initial position oriented around the assigned center object
-    this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
-    this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
+    this.x = this.r * Math.cos(this.phi);
+    this.y = this.r * Math.sin(this.phi);
 
     // flag for collision function
     this.isColliding = false;
   }
 
   run() {
-    this.rescale();
+    // this.rescale();
     // Physics for orbiting Bodies
-    this.w += this.v;
-    this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
-    this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
+    this.v = Math.sqrt(G * (this.M + this.m) * ((2 / this.r) - (1 / this.a)));
+    this.r = this.p / (1 + this.eps * Math.cos(this.phi));
+    this.w = this.v / this.r
+    this.phi += this.w * scaleT
+    this.x = this.center.x + this.r * Math.cos(this.phi);
+    this.y = this.center.y + this.r * Math.sin(this.phi);
+
+
+    // this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
+    // this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
     // Call the draw function to draw the body as filled circle on the canvas
     this.draw();
   }
-
   rescale() {
     // RESCALE TIME + DISTANCES + RADIUS + VELOCITIES
-    this.r = this.radius * scaleR;
+    this.R = this.radius * scaleR;
     scaleV = (1 / 60e6) * scaleT;
-    if (this.distance !== 0) this.v = (this.velocity / this.distance) * scaleV;
-    else this.v = this.velocity * scaleV;
+    // if (this.distance !== 0) this.v = (this.velocity / this.distance) * scaleV;
+    // else this.v = this.velocity * scaleV;
   }
 
   draw() {
     // DRAW ACTUAL BODY
     c.fillStyle = this.color;
     c.beginPath();
-    c.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    c.arc(this.x, this.y, this.R, 0, Math.PI * 2);
     c.closePath();
     c.fill();
   }
@@ -86,9 +82,9 @@ class CelestialBody {
     // Draw this body's diameter above this body
     c.fillStyle = this.color;
     c.fillRect(
-      this.x - this.r,
-      this.y - this.r - 10 / scale,
-      this.r * 2,
+      this.x - this.R,
+      this.y - this.R - 10 / scale,
+      this.R * 2,
       2 / scale
     );
 
@@ -101,7 +97,7 @@ class CelestialBody {
       copies[i].x = i < 1 ? this.x : copies[i - 1].x;
       copies[i].y =
         i < 1
-          ? this.y + this.r + 25 / scale + copies[i].r
+          ? this.y + this.R + 25 / scale + copies[i].r
           : copies[i - 1].y + copies[i - 1].r + 25 / scale + copies[i].r;
 
       // DRAW Other Body under this Body or below the other 'other' classes
@@ -116,7 +112,7 @@ class CelestialBody {
       if (i < 1)
         c.fillRect(
           this.x - copies[i].r,
-          this.y + this.r + 10 / scale,
+          this.y + this.R + 10 / scale,
           copies[i].r * 2,
           2 / scale
         );
@@ -131,20 +127,20 @@ class CelestialBody {
   }
 
   drawName() {
-    drawText(this.name, this.x + this.r, this.y, this.color, 13);
+    drawText(this.name, this.x + this.R, this.y, this.color, 13);
   }
 
   hover() {
-    this.r *= 5;
+    this.R *= 5;
     this.draw();
-    this.r = this.radius * scaleR;
+    this.R = this.radius * scaleR;
   }
 
   collision(other) {
     let distX = this.x - other.x;
     let distY = this.y - other.y;
     let distance = Math.hypot(distX, distY);
-    this.isColliding = distance < this.r + other.r;
+    this.isColliding = distance < this.R + other.r;
   }
 
   drawOrbit() {
@@ -169,26 +165,26 @@ class CelestialBody {
 
   info() {
     let distanceText =
-      toLy(this.distance) > 0
-        ? `\u2192 ${formatNumber(toLy(this.distance))} ly `
-        : `\u2192 ${formatNumber(this.distance * 1e6)} km `;
-    let textAbove = [`\u2205 ${formatNumber(this.radius * 2e6)} km`]; // DEFAULT TEXT ABOVE BODY IS DIAMETER
+      toLy(this.r) > 0
+        ? `\u2192 ${formatNumber(toLy(this.r))} ly `
+        : `\u2192 ${formatNumber(this.r)} km `;
+    let textAbove = [`\u2205 ${formatNumber(this.R * 2)} km`]; // DEFAULT TEXT ABOVE BODY IS DIAMETER
     let textAside = [
       `${this.name} ${this.symbol} ${this.type}`, // Display Symbols
-      `${formatNumber(this.velocity)} km/s `, // Display Velocity
+      `${formatNumber(this.v)} km/s `, // Display Velocity
       distanceText, // Display Distance
-      `Mass: ${formatNumber(this.mass.toExponential(0))} kg`, // Display Type
+      `Mass: ${formatNumber(this.m.toExponential(0))} kg`, // Display Type
     ];
 
     // CALL TEXT FUNCTION
     drawText(
       textAbove,
-      this.x - this.r * 2,
-      this.y - this.r - 25 / scale,
+      this.x - this.R * 2,
+      this.y - this.R - 25 / scale,
       this.color,
       13
     );
-    drawText(textAside, this.x + this.r, this.y, this.color, 13);
+    drawText(textAside, this.x + this.R, this.y, this.color, 13);
   }
 
   copy(copy) {
