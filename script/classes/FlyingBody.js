@@ -31,7 +31,7 @@ class FlyingBody extends CelestialBody {
     info() {
         let textAside = [
             `${this.name} ${this.symbol} ${this.type}`, // Display Symbols
-            `${formatNumber(this.velocity)} km/s `, // Display Velocity
+            `${formatNumber(this.v)} km/s `, // Display Velocity
         ];
         // CALL TEXT FUNCTION
         drawText(textAside, this.x + this.r, this.y, this.color, 13);

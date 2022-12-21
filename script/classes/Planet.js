@@ -1,5 +1,8 @@
 class Planet extends CelestialBody {
 
+    constructor(name, center, radius, periapsis, apoapsis, mass, color, type) {
+        super(name, center, radius, periapsis, apoapsis, mass, color, type);
+    }
     draw() {
 
         // draw the half of Saturn's rings first, so they appear behind Saturn
@@ -14,8 +17,8 @@ class Planet extends CelestialBody {
     saturnRings(front) {
 
         const rings = {
-            rx: this.r * 0.5,
-            ry: this.r * 2.5,
+            rx: this.R * 0.5,
+            ry: this.R * 2.5,
             angle: deg(80),
 
             start: front ? deg(270) : deg(90),

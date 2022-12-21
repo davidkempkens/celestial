@@ -4,7 +4,7 @@
 const stars = starsFactory(300);
 
 // Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color - Type
-const sun = new Sun("Sun", center, .696342, 0, 0, 0, 1.9855e30, "#F2A516", "Star");
+const sun = new Sun("Sun", Center, .696342, 0, 0, 0, 1.9855e30, "#F2A516", "Star");
 
 // Planets
 const mercury = new Planet("Mercury", sun, .00243964, 57.909175, 47.8725, 0.20563069, 3.302e23, "#BFB6AE", 'Planet');
@@ -17,8 +17,8 @@ const uranus = new Planet("Uranus", sun, .02555725, 2870.972200, 6.8352, 0.04716
 const neptune = new Planet("Neptune", sun, .02476636, 4498.252900, 5.4778, 0.00858587, 1.0244e26, "#5368A6", 'Planet');
 
 // Dwarfs and Minor Planets
-const pluto = new Planet("Pluto", sun, .001190, 5906.3800000, 4.7490, 0.24880766, 1.305e22, "#626973", 'Dwarf');
 const ceres = new Planet("Ceres", sun, .000473, 413.700000, 17.882, 0.080, 9.39e20, "#626973", 'Dwarf');
+const pluto = new Planet("Pluto", sun, .001190, 5906.3800000, 4.7490, 0.24880766, 1.305e22, "#626973", 'Dwarf');
 const haumea = new Planet("Haumea", sun, .000816, 6484.000000, 4.484, .18874, 4.01e21, "#626973", 'Dwarf');
 const makemake = new Planet("Makemake", sun, .000715, 6850.000000, 4.4, .159, 4.4e21, "#626973", 'Dwarf');
 const eris = new Planet("Eris", sun, .001163, 10210.000000, 3.436, .44177, 1.7e22, "#F24E29", 'Dwarf');
@@ -61,7 +61,7 @@ const kuiperBelt = asteroidFactory(1000, 'Kuiper Asteroid', sun, .001, .002, 30 
 const oortCloud = asteroidFactory(1000, 'Oort Cloud Asteroid', sun, .6, 1, 2000 * AU, 5000 * AU, -17, -25, 0, .1, 1e25, '#5E574F', 'Asteroid');
 
 // Space Probes
-const voyager1 = new Probe('Yoyager 1', center, .003, 152.2 * AU, 17, 0, 825.5, 'white', 'Probe');
+const voyager1 = new Probe('Yoyager 1', Center, .003, 152.2 * AU, 17, 0, 825.5, 'white', 'Probe');
 
 // Planets Array
 const planets = [
@@ -112,33 +112,33 @@ const moons = [
 ];
 
 // OBSERVABLE UNIVERSE SCALE Radius 46,5 billion light-years / 93 billion light-years
-const universe = new Galaxy('Observable Universe', center, 46.5e9 * LY, 0, 0, 0, 1.5e53, 'white', 'Universe');
+const universe = new Galaxy('Observable Universe', Center, 46.5e9 * LY, 0, 0, 0, 1.5e53, 'white', 'Universe');
 
 // BLACK HOLES
-const sagittariusA = new BlackHole('Sagittarius A*', center, 17 * SOLAR_RADIUS, -26673 * LY, 0, 0, 4e6 * SOLAR_MASS, '#3097BF', 'Black Hole', ["#59D9D9", "#4ECBD9", "#3097BF", "#024959", "#000000"]);
-const bLLacertae = new BlackHole('BL Lacertae*', center, 115 * SOLAR_RADIUS, -9e8 * LY, 0, 0, 1, 'white', 'Black Hole', ["#F2E7DC", "#A9D9D0", "#038C7F", '#027373', "#000"])
-const cygnusA = new BlackHole('Cygnus A', center, 14700, -760e6 * LY, 0, 0, 2.5e9 * SOLAR_MASS, 'white', 'Black Hole', ["#F24405", "#D90452", "#8C035C", "#090126", "#000000"])
-const m87 = new BlackHole('M87*', center, 19000, -53.49e6 * LY, 0, 0, 7.22e9 * SOLAR_MASS, 'white', 'Black Hole', ["#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"]);
-const ton618 = new BlackHole('TON 618', center,1.949e5,10.37e9 * LY,0,0,66e9 * SOLAR_MASS,'white','Black Hole', ["#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"]);
+const sagittariusA = new BlackHole('Sagittarius A*', Center, 17 * SOLAR_RADIUS, -26673 * LY, 0, 0, 4e6 * SOLAR_MASS, '#3097BF', 'Black Hole', ["#59D9D9", "#4ECBD9", "#3097BF", "#024959", "#000000"]);
+const bLLacertae = new BlackHole('BL Lacertae*', Center, 115 * SOLAR_RADIUS, -9e8 * LY, 0, 0, 1, 'white', 'Black Hole', ["#F2E7DC", "#A9D9D0", "#038C7F", '#027373', "#000"])
+const cygnusA = new BlackHole('Cygnus A', Center, 14700, -760e6 * LY, 0, 0, 2.5e9 * SOLAR_MASS, 'white', 'Black Hole', ["#F24405", "#D90452", "#8C035C", "#090126", "#000000"])
+const m87 = new BlackHole('M87*', Center, 19000, -53.49e6 * LY, 0, 0, 7.22e9 * SOLAR_MASS, 'white', 'Black Hole', ["#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"]);
+const ton618 = new BlackHole('TON 618', Center, 1.949e5, 10.37e9 * LY, 0, 0, 66e9 * SOLAR_MASS, 'white', 'Black Hole', ["#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"]);
 
 // GALAXIES
 const milkyWay = new Galaxy('Milky Way', sagittariusA, 185e3 * LY, 0, 0, 0, 1e12 * SOLAR_MASS, 'white', 'Galaxy');
 
 // SPEED OF LIGHT
-const lightRay = new Photon('C', sun, earth.r, 0, C, 0, 0, 'CYAN', 'Photon');
+const lightRay = new Photon('C', sun, earth.R, 0, C, 0, 0, 'CYAN', 'Photon');
 
 // Suns
-const barnard = new Sun('Barnard\'s Star', center, SOLAR_RADIUS * .2, 5.958 * LY, 0, 0, SOLAR_MASS * .144, '#D9042B', 'Star');
-const siriusA = new Sun('Sirius A', center, 1.711 * SOLAR_RADIUS, 8.611 * LY, 0, 0, 2.063 * SOLAR_MASS, '#52CBD9', 'Star');
-const betaCentauri = new Sun('Beta Centauri', center, 9 * SOLAR_RADIUS, 391.4 * LY, 0, 0, 12.02 * SOLAR_MASS, '#3037BF', 'Star');
-const r136a1 = new Sun('R136a1', center, 39.2 * SOLAR_RADIUS, 163000 * LY, 0, 0, 215 * SOLAR_MASS, '#79DCF2', 'Star');
-const gacrux = new Sun('Gacrux', center, 120 * SOLAR_RADIUS, 88.71 * LY, 0, 0, 1.5 * SOLAR_MASS, '#D91438', 'Star');
-const pistolStar = new Sun('Pistol Star', center, 420 * SOLAR_RADIUS, 26.090 * LY, 0, 0, 27.5 * SOLAR_MASS, '#0597F2', 'Star');
-const rhoCassiopeiae = new Sun('Rho Cassiopeiae', center, 981 * SOLAR_RADIUS, 3400 * LY, 0, 0, 40 * SOLAR_MASS, '#F5EFC8', 'Star');
-const stephenson218 = new Sun('Stephenson 2-18', center, 2150 * SOLAR_RADIUS, 19570 * LY, 0, 0, 1000 * SOLAR_MASS, '#F21905', 'Star');
+const barnard = new Sun('Barnard\'s Star', Center, SOLAR_RADIUS * .2, 5.958 * LY, 0, 0, SOLAR_MASS * .144, '#D9042B', 'Star');
+const siriusA = new Sun('Sirius A', Center, 1.711 * SOLAR_RADIUS, 8.611 * LY, 0, 0, 2.063 * SOLAR_MASS, '#52CBD9', 'Star');
+const betaCentauri = new Sun('Beta Centauri', Center, 9 * SOLAR_RADIUS, 391.4 * LY, 0, 0, 12.02 * SOLAR_MASS, '#3037BF', 'Star');
+const r136a1 = new Sun('R136a1', Center, 39.2 * SOLAR_RADIUS, 163000 * LY, 0, 0, 215 * SOLAR_MASS, '#79DCF2', 'Star');
+const gacrux = new Sun('Gacrux', Center, 120 * SOLAR_RADIUS, 88.71 * LY, 0, 0, 1.5 * SOLAR_MASS, '#D91438', 'Star');
+const pistolStar = new Sun('Pistol Star', Center, 420 * SOLAR_RADIUS, 26.090 * LY, 0, 0, 27.5 * SOLAR_MASS, '#0597F2', 'Star');
+const rhoCassiopeiae = new Sun('Rho Cassiopeiae', Center, 981 * SOLAR_RADIUS, 3400 * LY, 0, 0, 40 * SOLAR_MASS, '#F5EFC8', 'Star');
+const stephenson218 = new Sun('Stephenson 2-18', Center, 2150 * SOLAR_RADIUS, 19570 * LY, 0, 0, 1000 * SOLAR_MASS, '#F21905', 'Star');
 
 // Alpha Centauri
-const alphaCentauriA = new Sun('Alpha Centauri A', center, 1.2234 * SOLAR_RADIUS, 4.37 * LY, 0, 0, 1.1 * SOLAR_MASS, '#F2B05E', 'Star');
+const alphaCentauriA = new Sun('Alpha Centauri A', Center, 1.2234 * SOLAR_RADIUS, 4.37 * LY, 0, 0, 1.1 * SOLAR_MASS, '#F2B05E', 'Star');
 const alphaCentauriB = new Sun('Alpha Centauri B', alphaCentauriA, .8632 * SOLAR_RADIUS, 7, 0, .124, 35.6 * AU, '#D98F4E', 'Star');
 
 // SUN ARRAY
@@ -146,7 +146,7 @@ const suns = [barnard, siriusA, betaCentauri, r136a1, gacrux, pistolStar, rhoCas
 // ALPHA CENTAURI ARRAY
 const alphaCentauri = [alphaCentauriA, alphaCentauriB];
 
-const solarSystem = [sun, ...planets, ...dwarfs]
+// const solarSystem = [sun, ...planets, ...dwarfs]
 // Black Holes
 const blackHoles = [sagittariusA, bLLacertae, cygnusA, m87, ton618]
 // Galaxies
@@ -167,3 +167,29 @@ everything.forEach(p => {
         }
     });
 });
+
+const solarSystem = [];
+
+// Read celestial bodies from json file
+async function loadSolarSystemData() {
+    await fetch('file.json')
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(d => {
+                let c = solarSystem.find(c => c.name == d.center)
+                if (d.type == 'Star') {
+                    solarSystem.push(new Sun(d.name, Center, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type))
+                } else if (d.type == 'Planet') {
+                    solarSystem.push(new Planet(d.name, c, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type))
+                } else if (d.type == 'Dwarf') {
+                    solarSystem.push(new Planet(d.name, c, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type))
+                } else if (d.type == 'Moon') {
+                    solarSystem.push(new Moon(d.name, c, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type))
+                }
+            })
+            // console.log(solarSystem)
+        })
+}
+
+loadSolarSystemData()
+

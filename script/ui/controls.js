@@ -22,8 +22,8 @@ function down(e) {
     // cancel Camera sticking to current planet
     cameraBody = null;
 
-    startDragOffset.x = e.clientX / scale - center.x;
-    startDragOffset.y = e.clientY / scale - center.y;
+    startDragOffset.x = e.clientX / scale - Center.x;
+    startDragOffset.y = e.clientY / scale - Center.y;
 
     // Click on body to camera
     bigBodies.forEach(bB => {
@@ -36,8 +36,8 @@ function down(e) {
 function move(e) {
     e.preventDefault();
     if (mouseDown) {
-        center.x = e.clientX / scale - startDragOffset.x;
-        center.y = e.clientY / scale - startDragOffset.y;
+        Center.x = e.clientX / scale - startDragOffset.x;
+        Center.y = e.clientY / scale - startDragOffset.y;
     }
 
     // Collision detection on mouse over classes
@@ -49,10 +49,10 @@ function move(e) {
         x: (e.clientX - bCR.x - trans.x) / scale,
         y: (e.clientY - bCR.y - trans.y) / scale,
         // Distance needed to collide with Bodies etc.
-        r: 30 / scale,
+        R: 30 / scale,
     };
 
-    runCollisionDetection();
+    // runCollisionDetection();
 }
 
 // HANDLE KEYBOARD EVENTS
@@ -138,8 +138,8 @@ let currentListFrom = null;
 // HUD EVENTS
 cameraElement.addEventListener('click', () => {
     cameraBody = null;
-    center.x = canvas.width / 2;
-    center.y = canvas.height / 2;
+    Center.x = canvas.width / 2;
+    Center.y = canvas.height / 2;
 });
 zoomElement.addEventListener('click', () => scale = 1);
 stopElement.addEventListener('click', () => stopSpin = !stopSpin);
@@ -169,7 +169,7 @@ function controls() {
         x: (canvas.width / 2) - AU,
         w: AU,
         y: canvas.height - (canvas.height / 30),
-        r: 0
+        R: 0
     }
 
     // Draw Lines
@@ -182,7 +182,7 @@ function controls() {
 
     // Text above bar
     let km = formatNumber((AU * 1e6) / scale);
-    let au = formatNumber( 1 / scale);
+    let au = formatNumber(1 / scale);
     let ly = formatNumber((AU / LY) / scale);
     // 0,0000158125074 LY = 1 AU
 

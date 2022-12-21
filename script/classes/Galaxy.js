@@ -31,12 +31,12 @@ class Galaxy extends CelestialBody {
     info() {
         // Draw this body's diameter above this body
         c.fillStyle = this.color;
-        c.fillRect(this.x - this.r, this.y - this.r - (10 / scale), this.r * 2, 2 / scale);
+        c.fillRect(this.x - this.R, this.y - this.R - (10 / scale), this.R * 2, 2 / scale);
 
-        let textAbove = [`\u2205 ${formatNumber(toLy(this.radius * 2))} ly`]; // DEFAULT TEXT ABOVE BODY IS DIAMETER
+        let textAbove = [`\u2205 ${formatNumber(toLy(this.r * 2))} ly`]; // DEFAULT TEXT ABOVE BODY IS DIAMETER
         let textAside = [
             `${this.name}`, // Display Symbols
-            `Mass: ${formatNumber(this.mass.toExponential(0))} kg` // Display Type
+            `Mass: ${formatNumber(this.m)} kg` // Display Type
         ];
 
         // CALL TEXT FUNCTION

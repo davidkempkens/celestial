@@ -8,7 +8,6 @@ function start() {
     stars.forEach(s => s.spin());
 
     scaleDynamic();
-
     // camera planet
     camera(cameraBody);
     // Actually run Physics and draw everything
@@ -41,22 +40,26 @@ function runUniverse() {
 
     // RUN ALL BODIES
     // SOLAR SYSTEM BODIES
-    sun.run();
-    planets.forEach(p => p.run());
-    dwarfs.forEach(d => d.run());
-    moons.forEach(m => m.run());
-    if (scale > .01) asteroids.forEach(a => a.run());
-    oortCloud.forEach(o => o.run());
-    voyager1.run();
-    lightRay.run();
+    // sun.run();
+    // planets.forEach(p => p.run());
+    // dwarfs.forEach(d => d.run());
+    // moons.forEach(m => m.run());
+    solarSystem.forEach(s => {
+        s.run();
+        s.drawName();
+    })
+    // if (scale > .01) asteroids.forEach(a => a.run());
+    // oortCloud.forEach(o => o.run());
+    // voyager1.run();
+    // lightRay.run();
     // OTHER BODIES
-    suns.forEach(s => s.run());
-    alphaCentauri.forEach(a => a.run());
+    // suns.forEach(s => s.run());
+    // alphaCentauri.forEach(a => a.run());
     // m87.run();
     // sagittariusA.run()
-    blackHoles.forEach(bH => bH.run());
-    milkyWay.run();
-    universe.run();
+    // blackHoles.forEach(bH => bH.run());
+    // milkyWay.run();
+    // universe.run();
 
     // ON COLLISION DISPLAY COMPARE BODY AND ORBIT
     if (sun.isColliding)
@@ -117,12 +120,15 @@ function drawNames() {
         voyager1.drawName();
         if (voyager1.isColliding) voyager1.info();
     } else {
-        if (scale > 1e-16) drawText('Solar System', center.x, center.y - 50 * AU, 'white', 13);
+        if (scale > 1e-16) drawText('Solar System', Center.x, Center.y - 50 * AU, 'white', 13);
         if (scale > .00003) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
         // voyager1.drawName();
         if (voyager1.isColliding) voyager1.info();
     }
-
+    solarSystem.forEach(s => {
+        // s.run();
+        s.drawName();
+    })
     // OTHER BODIES
     suns.forEach(s => {
         if (scale > 1e-9) {
@@ -153,49 +159,11 @@ function drawNames() {
     }
 
     milkyWay.draw();
-    milkyWay.info();
+    // milkyWay.info();
     universe.drawName();
-    universe.info();
+    // universe.info();
     // if (universe.isColliding) universe.info();
 }
-
-
-function r(phi, center, satelite) {
-
-    let M = center.mass
-    let m = satelite.mass
-    let rp = satelite.perihelion
-    let ra = satelite.aphelion
-
-    let E = -G * M * m / (ra + rp);
-    let L = Math.sqrt(2 * G * M * m ** 2 * ((rp * ra) / (ra + rp)));
-    let p = L ** 2 / (G * M * m ** 2)
-    let k = 2 * m * L ** 2 / (G * M * m ** 2) ** 2
-    let eps = Math.sqrt(1 + k * E)
-
-    return p / (1 + eps * Math.cos(phi));
-}
-
-function v(r, center, satelite) {
-    let M = center.mass
-    let m = satelite.mass
-    let rp = satelite.perihelion
-    let ra = satelite.aphelion
-    let a = (rp + ra) / 2;
-
-    return Math.sqrt(G * (M + m) * ((2 / r) - (1 / a)))
-}
-
-function polarToCartesian(r, phi) {
-    return r * Math.cos(phi), r * Math.sin(phi);
-}
-
-
-
-earth.perihelion = 0.983 * AE;
-earth.aphelion = 1.017 * AE;
-console.log(r(Math.PI, sun, earth))
-console.log(v(r(Math.PI, sun, earth), sun, earth))
 
 // Center the canvas on a chosen body's position
 // Gets called every frame in the main loop
@@ -214,8 +182,8 @@ function camera(body) {
         y: body instanceof FlyingBody ? body.y : body.center.y + body.b * Math.sin(body.w + (scaleV * (body.velocity / body.distance))) * body.d
     }
 
-    center.x -= bodyPosition.x - centerOfScreen.x;
-    center.y -= bodyPosition.y - centerOfScreen.y + body.r;
+    Center.x -= bodyPosition.x - centerOfScreen.x;
+    Center.y -= bodyPosition.y - centerOfScreen.y + body.r;
 
 }
 

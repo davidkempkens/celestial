@@ -90,18 +90,20 @@ let frAId;
 let mouse = {
     x: 0,
     y: 0,
-    r: 30 / scale
+    R: 30 / scale
 };
 
 let startDragOffset = {};
 let mouseDown = false;
 
 // Center Object for as center of the "Universe / Solar System"
-const center = {
+const Center = {
     name: 'Center',
     x: canvas.width / 2,
     y: canvas.height / 2,
-    r: 0
+    r: 0,
+    mass: 1,
+    m: 1
 }
 
 // Parameter for camera function to center object on canvas
@@ -173,12 +175,12 @@ function deg(d) {
 }
 
 // Format Big Numbers
-function formatNumber(num, d) {
+function formatNumber(num) {
     // noinspection JSCheckFunctionSignatures
     return num.toLocaleString("en-US", {
         notation: "compact",
         compactDisplay: "long",
-        maximumSignificantDigits: d
+        maximumSignificantDigits: 4
     })
 }
 
@@ -254,4 +256,12 @@ function secToTime(s) {
 // km to light-years
 function toLy(km) {
     if (km > LY) return Math.floor(km / LY)
+}
+
+function polarToCartesian(r, phi) {
+    return r * Math.cos(phi), r * Math.sin(phi);
+}
+
+function cartesianToPolar(x, y) {
+    return Math.sqrt(x ** 2 + y ** 2), Math.atan2(y, x);
 }
