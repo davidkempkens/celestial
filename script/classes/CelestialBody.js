@@ -29,6 +29,7 @@ class CelestialBody {
     this.p = this.L ** 2 / (G * this.M * this.m ** 2)
     this.k = 2 * this.m * this.L ** 2 / (G * this.M * this.m ** 2) ** 2
     this.eps = Math.sqrt(1 + this.k * this.E)
+    this.b = this.a * Math.sqrt(1 - this.eps ** 2);
 
     // Initial angle of orbit : degrees / radian - "0" degrees is the right side
     this.phi = isNaN(initialDeg[this.name.toLowerCase()])
@@ -161,8 +162,8 @@ class CelestialBody {
     c.ellipse(
       this.center.x,
       this.center.y,
-      this.a * this.d,
-      this.b * this.d,
+      this.a,
+      this.b,
       rotation,
       0,
       Math.PI * 2

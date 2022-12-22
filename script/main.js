@@ -30,11 +30,11 @@ function runUniverse() {
 
     if (stopSpin) dt = 0;
     else dt = timeControl[i][1];
-    if (orbit && scale > .03) {
+    if (orbit && scale > 1e-12) {
         planets.forEach(p => p.drawOrbit());
     }
     if (scale < .01) {
-        solarSystem.forEach(s => s.drawOrbit())
+        // solarSystem.forEach(s => s.drawOrbit())
         // c.fillRect(center.x - 50 * AU, center.y, 100 * AU, 1 / scale);
     }
 
@@ -47,7 +47,7 @@ function runUniverse() {
     solarSystem.forEach(s => {
         s.run();
     })
-    // drawCenter();
+
     // if (scale > .01) asteroids.forEach(a => a.run());
     // oortCloud.forEach(o => o.run());
     // voyager1.run();
@@ -64,25 +64,27 @@ function runUniverse() {
     // ON COLLISION DISPLAY COMPARE BODY AND ORBIT
     // if (sun.isColliding)
     //     sun.compare(planets);
-    // planets.forEach(p => {
-    //     if (p.isColliding) {
-    //         p.drawOrbit();
-    //         p.compare([earth, moon]);
-    //     }
-    // });
-    // dwarfs.forEach(d => {
-    //     if (d.isColliding) {
-    //         d.drawOrbit();
-    //         d.compare([earth, moon])
-    //     }
-    // });
-    // moons.forEach(m => {
-    //     if (m.isColliding) {
-    //         m.drawOrbit();
-    //         m.compare([moon]);
-    //     }
-    //     if (scale > 5 && orbit) m.drawOrbit();
-    // });
+    planets.forEach(p => {
+        if (p.isColliding) {
+            p.drawOrbit();
+            // p.compare([earth, moon]);
+            // console.log(solarSystem.find(x => x.name == 'Earth'))
+        }
+
+    });
+    dwarfs.forEach(d => {
+        if (d.isColliding) {
+            d.drawOrbit();
+            // d.compare([earth, moon])
+        }
+    });
+    moons.forEach(m => {
+        if (m.isColliding) {
+            m.drawOrbit();
+            // m.compare([moon]);
+        }
+        if (scale > 1e-7 && orbit) m.drawOrbit();
+    });
     // asteroids.forEach(a => {
     //     if (a.isColliding && scale > .01) a.hover();
     // });
@@ -104,14 +106,14 @@ function drawNames() {
     // SOLAR SYSTEM BODIES
     if (scale > 1e-12) {
         solarSystem.forEach(s => {
-            if (s.type == 'Planet' || s.type == 'Star' || s.type == 'Dwarf') s.drawName();
+            if (s.type == 'Star' || s.type == 'Dwarf') s.drawName();
         });
         // sun.drawName();
         // if (sun.isColliding) sun.info();
-        // planets.forEach(p => {
-        //     p.drawName();
-        //     if (p.isColliding) p.info();
-        // });
+        planets.forEach(p => {
+            p.drawName();
+            if (p.isColliding) p.info();
+        });
         // dwarfs.forEach(d => {
         //     d.drawName();
         //     if (d.isColliding) d.info();
