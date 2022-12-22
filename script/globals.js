@@ -76,9 +76,9 @@ let frAId;
 let mouse = {
     x: 0,
     y: 0,
-    R: 30 / scale
+    R: 3e1 / scale
 };
-
+// console.log(mouse.R)
 let startDragOffset = {};
 let mouseDown = false;
 
@@ -198,7 +198,7 @@ function updateHUD(bodies, hud) {
         a.addEventListener('click', () => {
             scale = cameraBody === b ? 10 / b.R : 1e-6 / sun.R;
             cameraBody = b;
-            console.log(b)
+            // console.log(b)
         });
         // a.addEventListener('mouseover', () => {});
     });

@@ -36,7 +36,7 @@ class CelestialBody {
       : deg(initialDeg[this.name.toLowerCase()]);
     this.r = this.p / (1 + this.eps * Math.cos(this.phi));
     this.v = Math.sqrt(G * (this.M + this.m) * ((2 / this.r) - (1 / this.a)));
-
+    this.w = this.v / this.r
     // Initial position oriented around the assigned center object
     this.x = this.r * Math.cos(this.phi);
     this.y = this.r * Math.sin(this.phi);

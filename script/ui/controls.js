@@ -27,7 +27,6 @@ function down(e) {
 
     // Click on body to camera
     bigBodies.forEach(bB => {
-        console.log(bB.isColliding)
         if (bB.isColliding) {
             cameraBody = bB;
         }
@@ -53,7 +52,7 @@ function move(e) {
         R: 30 / scale,
     };
 
-    // runCollisionDetection();
+    runCollisionDetection();
 }
 
 // HANDLE KEYBOARD EVENTS

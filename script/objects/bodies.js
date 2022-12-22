@@ -8,8 +8,7 @@ const planets = [];
 const dwarfs = []
 const moons = [];
 const bigBodies = [];
-loadSolarSystemData()
-console.log(bigBodies)
+loadSolarSystemData();
 // Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color - Type
 // const sun = new Sun("Sun", Center, .696342, 0, 0, 0, 1.9855e30, "#F2A516", "Star");
 

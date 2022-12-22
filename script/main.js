@@ -46,7 +46,6 @@ function runUniverse() {
     // moons.forEach(m => m.run());
     solarSystem.forEach(s => {
         s.run();
-
     })
     // drawCenter();
     // if (scale > .01) asteroids.forEach(a => a.run());
@@ -195,10 +194,11 @@ function camera(body) {
 // RUN COLLISION DETECTION
 // SOLAR SYSTEM BODIES
 function runCollisionDetection() {
-    sun.collision(mouse);
-    planets.forEach(p => p.collision(mouse));
-    dwarfs.forEach(d => d.collision(mouse));
-    moons.forEach(m => m.collision(mouse));
+    // solarSystem[0].collision(mouse);
+    // planets.forEach(p => p.collision(mouse));
+    // dwarfs.forEach(d => d.collision(mouse));
+    // moons.forEach(m => m.collision(mouse));
+    solarSystem.forEach(s => s.collision(mouse));
     // if (scale > .01) asteroids.forEach(a => a.collision(mouse));
     // oortCloud.forEach(o => o.collision(mouse));
     // voyager1.collision(mouse);
