@@ -148,7 +148,7 @@ class CelestialBody {
     let distX = this.x - other.x;
     let distY = this.y - other.y;
     let distance = Math.hypot(distX, distY);
-    this.isColliding = distance < this.R + other.r;
+    this.isColliding = distance < this.R + other.R;
   }
 
   drawOrbit() {

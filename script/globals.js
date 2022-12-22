@@ -198,6 +198,7 @@ function updateHUD(bodies, hud) {
         a.addEventListener('click', () => {
             scale = cameraBody === b ? 10 / b.R : 1e-6 / sun.R;
             cameraBody = b;
+            console.log(b)
         });
         // a.addEventListener('mouseover', () => {});
     });

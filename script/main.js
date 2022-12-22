@@ -63,40 +63,40 @@ function runUniverse() {
     // universe.run();
 
     // ON COLLISION DISPLAY COMPARE BODY AND ORBIT
-    if (sun.isColliding)
-        sun.compare(planets);
-    planets.forEach(p => {
-        if (p.isColliding) {
-            p.drawOrbit();
-            p.compare([earth, moon]);
-        }
-    });
-    dwarfs.forEach(d => {
-        if (d.isColliding) {
-            d.drawOrbit();
-            d.compare([earth, moon])
-        }
-    });
-    moons.forEach(m => {
-        if (m.isColliding) {
-            m.drawOrbit();
-            m.compare([moon]);
-        }
-        if (scale > 5 && orbit) m.drawOrbit();
-    });
-    asteroids.forEach(a => {
-        if (a.isColliding && scale > .01) a.hover();
-    });
-    suns.forEach(s => {
-        if (s.isColliding) s.compare([sun, ...suns]);
-    });
-    alphaCentauri.forEach(a => {
-        if (a.isColliding) a.compare([sun]);
-    });
+    // if (sun.isColliding)
+    //     sun.compare(planets);
+    // planets.forEach(p => {
+    //     if (p.isColliding) {
+    //         p.drawOrbit();
+    //         p.compare([earth, moon]);
+    //     }
+    // });
+    // dwarfs.forEach(d => {
+    //     if (d.isColliding) {
+    //         d.drawOrbit();
+    //         d.compare([earth, moon])
+    //     }
+    // });
+    // moons.forEach(m => {
+    //     if (m.isColliding) {
+    //         m.drawOrbit();
+    //         m.compare([moon]);
+    //     }
+    //     if (scale > 5 && orbit) m.drawOrbit();
+    // });
+    // asteroids.forEach(a => {
+    //     if (a.isColliding && scale > .01) a.hover();
+    // });
+    // suns.forEach(s => {
+    //     if (s.isColliding) s.compare([sun, ...suns]);
+    // });
+    // alphaCentauri.forEach(a => {
+    //     if (a.isColliding) a.compare([sun]);
+    // });
 
-    blackHoles.forEach(bH => {
-        if (bH.isColliding) bH.compare([earth, sun, ...blackHoles])
-    })
+    // blackHoles.forEach(bH => {
+    //     if (bH.isColliding) bH.compare([earth, sun, ...blackHoles])
+    // })
     // if (m87.isColliding) m87.compare([sun, ...suns, ...blackHoles]);
     // if (universe.isColliding) universe.compare([m87]);
 }
@@ -121,47 +121,47 @@ function drawNames() {
         //     if (scale > 10) m.drawName();
         //     if (scale > 200 && m.isColliding) m.info();
         // });
-        voyager1.drawName();
-        if (voyager1.isColliding) voyager1.info();
+        // voyager1.drawName();
+        // if (voyager1.isColliding) voyager1.info();
     } else {
         if (scale > 1e-16) drawText('Solar System', Center.x, Center.y - 50 * AE, 'white', 13);
-        if (scale > .00003) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
+        // if (scale > .00003) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
         // voyager1.drawName();
-        if (voyager1.isColliding) voyager1.info();
+        // if (voyager1.isColliding) voyager1.info();
     }
 
     // OTHER BODIES
-    suns.forEach(s => {
-        if (scale > 1e-9) {
-            s.drawName();
-            if (s.isColliding) s.info();
-        }
-    })
+    // suns.forEach(s => {
+    //     if (scale > 1e-9) {
+    //         s.drawName();
+    //         if (s.isColliding) s.info();
+    //     }
+    // })
 
-    blackHoles.forEach(bh => {
-        if (scale > 1e-14) {
-            bh.drawName();
-            if (bh.isColliding) bh.info();
-        }
-    })
+    // blackHoles.forEach(bh => {
+    //     if (scale > 1e-14) {
+    //         bh.drawName();
+    //         if (bh.isColliding) bh.info();
+    //     }
+    // })
 
-    alphaCentauri.forEach(a => {
-        if (scale > 1e-9) {
-            a.drawName();
-            if (a.isColliding) a.info();
-        }
-    });
+    // alphaCentauri.forEach(a => {
+    //     if (scale > 1e-9) {
+    //         a.drawName();
+    //      if (a.isColliding) a.info();
+    //     }
+    // });
 
     // LIGHTSPEED TEST
-    lightRay.drawName();
-    if (lightRay.isColliding) {
-        lightRay.info();
-        // console.log(lightRay.d, scale)
-    }
+    // lightRay.drawName();
+    // if (lightRay.isColliding) {
+    //     lightRay.info();
+    // console.log(lightRay.d, scale)
+    // }
 
-    milkyWay.draw();
+    // milkyWay.draw();
     // milkyWay.info();
-    universe.drawName();
+    // universe.drawName();
     // universe.info();
     // if (universe.isColliding) universe.info();
 }
@@ -199,14 +199,14 @@ function runCollisionDetection() {
     planets.forEach(p => p.collision(mouse));
     dwarfs.forEach(d => d.collision(mouse));
     moons.forEach(m => m.collision(mouse));
-    if (scale > .01) asteroids.forEach(a => a.collision(mouse));
-    oortCloud.forEach(o => o.collision(mouse));
-    voyager1.collision(mouse);
-    lightRay.collision(mouse);
-    // OTHER BODIES
-    suns.forEach(s => s.collision(mouse));
-    alphaCentauri.forEach(a => a.collision(mouse));
-    blackHoles.forEach(bH => bH.collision(mouse));
+    // if (scale > .01) asteroids.forEach(a => a.collision(mouse));
+    // oortCloud.forEach(o => o.collision(mouse));
+    // voyager1.collision(mouse);
+    // lightRay.collision(mouse);
+    // // OTHER BODIES
+    // suns.forEach(s => s.collision(mouse));
+    // alphaCentauri.forEach(a => a.collision(mouse));
+    // blackHoles.forEach(bH => bH.collision(mouse));
     // m87.collision(mouse);
     // sagittariusA.collision(mouse)
     // universe.collision(mouse);

@@ -27,6 +27,7 @@ function down(e) {
 
     // Click on body to camera
     bigBodies.forEach(bB => {
+        console.log(bB.isColliding)
         if (bB.isColliding) {
             cameraBody = bB;
         }
@@ -74,7 +75,7 @@ window.addEventListener("keypress", e => {
             cameraBody = planets[Math.floor(Math.random() * planets.length)];
             break;
         case "a":
-            scale = 1e-4;
+            scale = 1e-9;
             break;
         case "c":
             cameraBody = null;
@@ -88,7 +89,7 @@ window.addEventListener("keypress", e => {
             zoomIn();
             break;
         case "z":
-            scale = 1;
+            scale = 1e-9;
             break;
         default:
             break;
@@ -142,7 +143,7 @@ cameraElement.addEventListener('click', () => {
     Center.x = canvas.width / 2;
     Center.y = canvas.height / 2;
 });
-zoomElement.addEventListener('click', () => scale = 1);
+zoomElement.addEventListener('click', () => scale = 1e-9);
 stopElement.addEventListener('click', () => stopSpin = !stopSpin);
 orbitElement.addEventListener('click', () => orbit = !orbit);
 plusElement.addEventListener('click', zoomIn);
@@ -167,8 +168,8 @@ function controls() {
     if (minusPressed) zoomOut();
     // BAR
     let bar = {
-        x: (canvas.width / 2) - AE,
-        w: AE,
+        x: (canvas.width / 2) - AE * 1e-9,
+        w: AE * 1e-9,
         y: canvas.height - (canvas.height / 30),
         R: 0
     }
