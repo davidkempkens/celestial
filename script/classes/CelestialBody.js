@@ -63,6 +63,7 @@ class CelestialBody {
     // Call the draw function to draw the body as filled circle on the canvas
     this.draw();
   }
+
   rescale() {
     // RESCALE TIME + DISTANCES + RADIUS + VELOCITIES
     scaleR *= scale

@@ -22,7 +22,7 @@ const pluto = new Planet("Pluto", sun, .001190, 5906.3800000, 4.7490, 0.24880766
 const haumea = new Planet("Haumea", sun, .000816, 6484.000000, 4.484, .18874, 4.01e21, "#626973", 'Dwarf');
 const makemake = new Planet("Makemake", sun, .000715, 6850.000000, 4.4, .159, 4.4e21, "#626973", 'Dwarf');
 const eris = new Planet("Eris", sun, .001163, 10210.000000, 3.436, .44177, 1.7e22, "#F24E29", 'Dwarf');
-const eros = new Planet('Eros', sun, .00000842, 1.4579 * AU, 24.36, .223, 7.2e15, '#626973', 'Dwarf');
+const eros = new Planet('Eros', sun, .00000842, 1.4579 * AE, 24.36, .223, 7.2e15, '#626973', 'Dwarf');
 
 // Moons
 // Earth Moon
@@ -57,59 +57,59 @@ const charon = new Moon("Charon", pluto, .0006035, .017536, 0.2, 0.0022, .152e22
 
 // Asteroid Belts - Sizes not to scale
 const mainBelt = asteroidFactory(200, 'Main Asteroid', sun, .001, .002, 600, 750, 17, 25, 0, .2, 10e10, '#5E574F', 'Asteroid');
-const kuiperBelt = asteroidFactory(1000, 'Kuiper Asteroid', sun, .001, .002, 30 * AU, 20 * AU, 17, 25, 0, .1, 10e10, '#5E574F', 'Asteroid');
-const oortCloud = asteroidFactory(1000, 'Oort Cloud Asteroid', sun, .6, 1, 2000 * AU, 5000 * AU, -17, -25, 0, .1, 1e25, '#5E574F', 'Asteroid');
+const kuiperBelt = asteroidFactory(1000, 'Kuiper Asteroid', sun, .001, .002, 30 * AE, 20 * AE, 17, 25, 0, .1, 10e10, '#5E574F', 'Asteroid');
+const oortCloud = asteroidFactory(1000, 'Oort Cloud Asteroid', sun, .6, 1, 2000 * AE, 5000 * AE, -17, -25, 0, .1, 1e25, '#5E574F', 'Asteroid');
 
 // Space Probes
-const voyager1 = new Probe('Yoyager 1', Center, .003, 152.2 * AU, 17, 0, 825.5, 'white', 'Probe');
+const voyager1 = new Probe('Yoyager 1', Center, .003, 152.2 * AE, 17, 0, 825.5, 'white', 'Probe');
 
 // Planets Array
-const planets = [
-    mercury,
-    venus,
-    earth,
-    mars,
-    jupiter,
-    saturn,
-    uranus,
-    neptune,
-];
+// const planets = [
+//     mercury,
+//     venus,
+//     earth,
+//     mars,
+//     jupiter,
+//     saturn,
+//     uranus,
+//     neptune,
+// ];
 
 // Dwarfs Array
-const dwarfs = [
-    pluto,
-    ceres,
-    haumea,
-    makemake,
-    eris,
-    eros
-]
+// const dwarfs = [
+//     pluto,
+//     ceres,
+//     haumea,
+//     makemake,
+//     eris,
+//     eros
+// ]
 
-// Moons Array
-const moons = [
-    moon,
-    deimos,
-    phobos,
-    io,
-    europa,
-    ganymede,
-    callisto,
-    mimas,
-    enceladus,
-    tethys,
-    dione,
-    rhea,
-    titan,
-    hyperion,
-    iapetus,
-    miranda,
-    ariel,
-    umbriel,
-    titania,
-    oberon,
-    triton,
-    charon
-];
+// // Moons Array
+// const moons = [
+//     moon,
+//     deimos,
+//     phobos,
+//     io,
+//     europa,
+//     ganymede,
+//     callisto,
+//     mimas,
+//     enceladus,
+//     tethys,
+//     dione,
+//     rhea,
+//     titan,
+//     hyperion,
+//     iapetus,
+//     miranda,
+//     ariel,
+//     umbriel,
+//     titania,
+//     oberon,
+//     triton,
+//     charon
+// ];
 
 // OBSERVABLE UNIVERSE SCALE Radius 46,5 billion light-years / 93 billion light-years
 const universe = new Galaxy('Observable Universe', Center, 46.5e9 * LY, 0, 0, 0, 1.5e53, 'white', 'Universe');
@@ -139,12 +139,18 @@ const stephenson218 = new Sun('Stephenson 2-18', Center, 2150 * SOLAR_RADIUS, 19
 
 // Alpha Centauri
 const alphaCentauriA = new Sun('Alpha Centauri A', Center, 1.2234 * SOLAR_RADIUS, 4.37 * LY, 0, 0, 1.1 * SOLAR_MASS, '#F2B05E', 'Star');
-const alphaCentauriB = new Sun('Alpha Centauri B', alphaCentauriA, .8632 * SOLAR_RADIUS, 7, 0, .124, 35.6 * AU, '#D98F4E', 'Star');
+const alphaCentauriB = new Sun('Alpha Centauri B', alphaCentauriA, .8632 * SOLAR_RADIUS, 7, 0, .124, 35.6 * AE, '#D98F4E', 'Star');
 
 // SUN ARRAY
 const suns = [barnard, siriusA, betaCentauri, r136a1, gacrux, pistolStar, rhoCassiopeiae, stephenson218];
 // ALPHA CENTAURI ARRAY
 const alphaCentauri = [alphaCentauriA, alphaCentauriB];
+
+const solarSystem = [];
+const planets = [];
+const dwarfs = []
+const moons = [];
+loadSolarSystemData()
 
 // const solarSystem = [sun, ...planets, ...dwarfs]
 // Black Holes
@@ -168,7 +174,6 @@ everything.forEach(p => {
     });
 });
 
-const solarSystem = [];
 
 // Read celestial bodies from json file
 async function loadSolarSystemData() {
@@ -176,20 +181,33 @@ async function loadSolarSystemData() {
         .then(res => res.json())
         .then(data => {
             data.forEach(d => {
-                let c = solarSystem.find(c => c.name == d.center)
+
+                let centerObject = solarSystem.find(c => c.name == d.center)
+
                 if (d.type == 'Star') {
                     solarSystem.push(new Sun(d.name, Center, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type))
                 } else if (d.type == 'Planet') {
-                    solarSystem.push(new Planet(d.name, c, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type))
+                    let p = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
+                    planets.push(p)
+                    solarSystem.push(p)
                 } else if (d.type == 'Dwarf') {
-                    solarSystem.push(new Planet(d.name, c, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type))
+                    let p = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
+                    dwarfs.push(p)
+                    solarSystem.push(p)
                 } else if (d.type == 'Moon') {
-                    solarSystem.push(new Moon(d.name, c, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type))
+                    let p = new Moon(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
+                    moons.push(p)
+                    solarSystem.push(p)
+
                 }
             })
-            // console.log(solarSystem)
+            updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
+            updateHUD([...alphaCentauri, ...suns], hudSuns);
+            updateHUD([...blackHoles, lightRay, voyager1, universe], hudOther);
         })
 }
 
-loadSolarSystemData()
+
+
+
 

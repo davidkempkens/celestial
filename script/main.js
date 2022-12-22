@@ -103,9 +103,10 @@ function runUniverse() {
 
 function drawNames() {
     // SOLAR SYSTEM BODIES
-    if (scale > 1e-9) {
-
-
+    if (scale > 1e-12) {
+        solarSystem.forEach(s => {
+            if (s.type == 'Planet' || s.type == 'Star' || s.type == 'Dwarf') s.drawName();
+        });
         // sun.drawName();
         // if (sun.isColliding) sun.info();
         // planets.forEach(p => {
@@ -123,14 +124,12 @@ function drawNames() {
         voyager1.drawName();
         if (voyager1.isColliding) voyager1.info();
     } else {
-        // if (scale > 1e-16) drawText('Solar System', Center.x, Center.y - 50 * AU, 'white', 13);
+        if (scale > 1e-16) drawText('Solar System', Center.x, Center.y - 50 * AU, 'white', 13);
         if (scale > .00003) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
         // voyager1.drawName();
         if (voyager1.isColliding) voyager1.info();
     }
-    solarSystem.forEach(s => {
-        if (s.type == 'Planet' || s.type == 'Star' || s.type == 'Dwarf') s.drawName();
-    });
+
     // OTHER BODIES
     suns.forEach(s => {
         if (scale > 1e-9) {
@@ -178,14 +177,18 @@ function camera(body) {
         x: canvas.width / 2,
         y: canvas.height / 2
     }
+    // let bodyPosition = {
+    //     x: body instanceof FlyingBody ? body.x + body.v : body.center.x + body.a * Math.cos(body.w + (scaleV * (body.velocity / body.distance))) * body.d,
+    //     y: body instanceof FlyingBody ? body.y : body.center.y + body.b * Math.sin(body.w + (scaleV * (body.velocity / body.distance))) * body.d
+    // }
 
     let bodyPosition = {
-        x: body instanceof FlyingBody ? body.x + body.v : body.center.x + body.a * Math.cos(body.w + (scaleV * (body.velocity / body.distance))) * body.d,
-        y: body instanceof FlyingBody ? body.y : body.center.y + body.b * Math.sin(body.w + (scaleV * (body.velocity / body.distance))) * body.d
+        x: body.x,
+        y: body.y
     }
 
     Center.x -= bodyPosition.x - centerOfScreen.x;
-    Center.y -= bodyPosition.y - centerOfScreen.y + body.r;
+    Center.y -= bodyPosition.y - centerOfScreen.y + body.R;
 
 }
 

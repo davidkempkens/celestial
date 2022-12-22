@@ -78,8 +78,8 @@ window.addEventListener("keypress", e => {
             break;
         case "c":
             cameraBody = null;
-            center.x = canvas.width / 2;
-            center.y = canvas.height / 2;
+            Center.x = canvas.width / 2;
+            Center.y = canvas.height / 2;
             break;
         case "-":
             zoomOut();
@@ -127,9 +127,10 @@ function toggleHUD() {
 }
 
 // FILL HUDS WITH BODIES + EVENT LISTENER ON EACH BODY
-updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
-updateHUD([...alphaCentauri, ...suns], hudSuns);
-updateHUD([...blackHoles, lightRay, voyager1, universe], hudOther);
+
+// updateHUD([...planets, ...dwarfs], hudPlanets);
+// updateHUD([...alphaCentauri, ...suns], hudSuns);
+// updateHUD([...blackHoles, lightRay, voyager1, universe], hudOther);
 
 // MOON LIST FILLED BOOLEAN
 let moonListFilled = false;
@@ -166,8 +167,8 @@ function controls() {
     if (minusPressed) zoomOut();
     // BAR
     let bar = {
-        x: (canvas.width / 2) - AU,
-        w: AU,
+        x: (canvas.width / 2) - AE,
+        w: AE,
         y: canvas.height - (canvas.height / 30),
         R: 0
     }
@@ -181,9 +182,9 @@ function controls() {
     c.closePath();
 
     // Text above bar
-    let km = formatNumber((AU * 1e6) / scale);
-    let au = formatNumber(1 / scale);
-    let ly = formatNumber((AU / LY) / scale);
+    let km = formatNumber(AE * 1e-12 / scale);
+    let au = formatNumber(1e-9 / scale);
+    let ly = formatNumber((AE * 1e-9 / LY) / scale);
     // 0,0000158125074 LY = 1 AU
 
     let text = [`${ly} light-years`, `${au} AU`, `${km} km`];

@@ -50,20 +50,16 @@ let clock = 0;
 let dt = 1;
 
 // SPEED OF LIGHT - C
-const C0 = 299792.458;
 const C = 299792458;
 
 // Gravitational Constant
 const G = 6.67430e-11;
 
-// AU - in Mio km
-const AU = 149.597870700;
 // AU - in m
 const AE = 149597870700;
 
 // Light year in Mio km
-const LY = 9460730.472580800;
-
+const LY = 9460730472580800;
 // Solar Mass in KG
 const SOLAR_MASS = 1.99e30;
 
@@ -192,6 +188,7 @@ function drawText(t, x, y, color, f) {
 }
 
 function updateHUD(bodies, hud) {
+    console.log(bodies[0])
     bodies.forEach(b => {
         const a = document.createElement('a');
         hud.appendChild(a);
@@ -199,7 +196,7 @@ function updateHUD(bodies, hud) {
         a.innerHTML = b.name;
         a.href = '#';
         a.addEventListener('click', () => {
-            scale = cameraBody === b ? 100 / b.r : 10 / sun.r;
+            scale = cameraBody === b ? 100 / b.R : 10 / sun.R;
             cameraBody = b;
         });
         // a.addEventListener('mouseover', () => {});
