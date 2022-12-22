@@ -124,7 +124,7 @@ function drawNames() {
         voyager1.drawName();
         if (voyager1.isColliding) voyager1.info();
     } else {
-        if (scale > 1e-16) drawText('Solar System', Center.x, Center.y - 50 * AU, 'white', 13);
+        if (scale > 1e-16) drawText('Solar System', Center.x, Center.y - 50 * AE, 'white', 13);
         if (scale > .00003) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
         // voyager1.drawName();
         if (voyager1.isColliding) voyager1.info();

@@ -188,7 +188,7 @@ function drawText(t, x, y, color, f) {
 }
 
 function updateHUD(bodies, hud) {
-    console.log(bodies[0])
+
     bodies.forEach(b => {
         const a = document.createElement('a');
         hud.appendChild(a);
@@ -196,7 +196,7 @@ function updateHUD(bodies, hud) {
         a.innerHTML = b.name;
         a.href = '#';
         a.addEventListener('click', () => {
-            scale = cameraBody === b ? 100 / b.R : 10 / sun.R;
+            scale = cameraBody === b ? 10 / b.R : 1e-6 / sun.R;
             cameraBody = b;
         });
         // a.addEventListener('mouseover', () => {});
