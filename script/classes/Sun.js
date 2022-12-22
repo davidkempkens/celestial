@@ -4,12 +4,6 @@ class Sun extends CelestialBody {
         super(name, center, radius, periapsis, apoapsis, mass, color, type);
     }
 
-
-    run() {
-        this.x = Center.x
-        this.y = Center.y
-        console.log(this.name, this.x, this.y)
-    }
     draw() {
         super.draw();
         this.sunShine()

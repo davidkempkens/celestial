@@ -17,7 +17,7 @@ class CelestialBody {
     this.symbol = symbols[name.toLowerCase()] || "";
     this.satelites = [];
 
-    this.R = radius * scaleR;
+    this.R = radius;
     this.M = center.m;
     this.m = mass;
     this.rp = periapsis;
@@ -51,11 +51,13 @@ class CelestialBody {
     this.v = Math.sqrt(G * (this.M + this.m) * ((2 / this.r) - (1 / this.a)));
     this.r = this.p / (1 + this.eps * Math.cos(this.phi));
     this.w = this.v / this.r
-    this.phi += this.w * scaleT
+    this.phi -= this.w * dt
     this.x = this.center.x + this.r * Math.cos(this.phi);
     this.y = this.center.y + this.r * Math.sin(this.phi);
 
-
+    // For Sun
+    this.x = isNaN(this.r) ? this.center.x : this.x;
+    this.y = isNaN(this.r) ? this.center.y : this.y;
     // this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
     // this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
     // Call the draw function to draw the body as filled circle on the canvas
@@ -63,8 +65,13 @@ class CelestialBody {
   }
   rescale() {
     // RESCALE TIME + DISTANCES + RADIUS + VELOCITIES
-    this.R = this.radius * scaleR;
-    scaleV = (1 / 60e6) * scaleT;
+    scaleR *= scale
+    this.R *= scaleR;
+    if (this.name == 'Sun')
+      console.log(scale)
+    this.R /= scaleR;
+    scaleR /= scale
+    // scaleV = (1 / 60e6) * scaleT;
     // if (this.distance !== 0) this.v = (this.velocity / this.distance) * scaleV;
     // else this.v = this.velocity * scaleV;
   }

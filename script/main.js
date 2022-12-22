@@ -28,8 +28,8 @@ function start() {
 // DRAW SUNS, PLANETS, MOONS, ORBITS AND COLLISION DETECTION
 function runUniverse() {
 
-    if (stopSpin) scaleT = 0;
-    else scaleT = timeControl[i][1];
+    if (stopSpin) dt = 0;
+    else dt = timeControl[i][1];
     if (orbit && scale > .03) {
         planets.forEach(p => p.drawOrbit());
     }
@@ -46,8 +46,9 @@ function runUniverse() {
     // moons.forEach(m => m.run());
     solarSystem.forEach(s => {
         s.run();
-        s.drawName();
+
     })
+    // drawCenter();
     // if (scale > .01) asteroids.forEach(a => a.run());
     // oortCloud.forEach(o => o.run());
     // voyager1.run();
@@ -102,33 +103,34 @@ function runUniverse() {
 
 function drawNames() {
     // SOLAR SYSTEM BODIES
-    if (scale > .01) {
-        sun.drawName();
-        if (sun.isColliding) sun.info();
-        planets.forEach(p => {
-            p.drawName();
-            if (p.isColliding) p.info();
-        });
-        dwarfs.forEach(d => {
-            d.drawName();
-            if (d.isColliding) d.info();
-        })
-        moons.forEach(m => {
-            if (scale > 10) m.drawName();
-            if (scale > 200 && m.isColliding) m.info();
-        });
+    if (scale > 1e-9) {
+
+
+        // sun.drawName();
+        // if (sun.isColliding) sun.info();
+        // planets.forEach(p => {
+        //     p.drawName();
+        //     if (p.isColliding) p.info();
+        // });
+        // dwarfs.forEach(d => {
+        //     d.drawName();
+        //     if (d.isColliding) d.info();
+        // })
+        // moons.forEach(m => {
+        //     if (scale > 10) m.drawName();
+        //     if (scale > 200 && m.isColliding) m.info();
+        // });
         voyager1.drawName();
         if (voyager1.isColliding) voyager1.info();
     } else {
-        if (scale > 1e-16) drawText('Solar System', Center.x, Center.y - 50 * AU, 'white', 13);
+        // if (scale > 1e-16) drawText('Solar System', Center.x, Center.y - 50 * AU, 'white', 13);
         if (scale > .00003) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
         // voyager1.drawName();
         if (voyager1.isColliding) voyager1.info();
     }
     solarSystem.forEach(s => {
-        // s.run();
-        s.drawName();
-    })
+        if (s.type == 'Planet' || s.type == 'Star' || s.type == 'Dwarf') s.drawName();
+    });
     // OTHER BODIES
     suns.forEach(s => {
         if (scale > 1e-9) {
@@ -210,7 +212,7 @@ function runCollisionDetection() {
 function runClock() {
     frames++;
     if (frames === 60) {
-        clock += scaleT;
+        clock += dt;
         frames = 0;
     }
 

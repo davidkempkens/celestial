@@ -16,19 +16,12 @@ let stopSpin = false;
 let orbit = true;
 
 // SCALING AND TRANSLATION GLOBALS
-
-let scale = 1;
+let scale = 1e-9;
 let scaleFactor = .9;
 let trans = {
     x: 0,
     y: 0
 }
-
-// Scale for radius
-let scaleR = 1;
-
-// Scale for distances
-let scaleD = 1;
 
 timeControl = [
     ['sec', 1],
@@ -53,32 +46,29 @@ const YEAR = 60 * 60 * 24 * 365;
 // Time in seconds - 94 days in 2022
 let clock = 0;
 
-let frames = 0;
-
 // Scale for time - 1 = REAL TIME 1s = 1s
-let scaleT = 1;
-
-// Scale for velocity 1 / 60e6
-let scaleV = (1 / 60e6) * scaleT;
+let dt = 1;
 
 // SPEED OF LIGHT - C
-const C = 299792.458;
+const C0 = 299792.458;
+const C = 299792458;
 
 // Gravitational Constant
 const G = 6.67430e-11;
 
 // AU - in Mio km
 const AU = 149.597870700;
+// AU - in m
 const AE = 149597870700;
 
 // Light year in Mio km
 const LY = 9460730.472580800;
 
 // Solar Mass in KG
-const SOLAR_MASS = 2e30;
+const SOLAR_MASS = 1.99e30;
 
-// Solar Radius in Mio km
-const SOLAR_RADIUS = .695700;
+// Solar Radius in m
+const SOLAR_RADIUS = 696342000;
 
 // BACKGROUND COLOR THAT GETS DRAWN EVERY FRAME TO CLEAR THE CANVAS
 const bg = '#050a10';
@@ -103,7 +93,8 @@ const Center = {
     y: canvas.height / 2,
     r: 0,
     mass: 1,
-    m: 1
+    m: 1,
+    R: SOLAR_RADIUS
 }
 
 // Parameter for camera function to center object on canvas
@@ -225,7 +216,7 @@ function zoomOut() {
 
 function toggleTime() {
     i = ++i % timeControl.length;
-    scaleT = timeControl[i][1];
+    dt = timeControl[i][1];
 }
 
 function secToTime(s) {
