@@ -196,7 +196,7 @@ function updateHUD(bodies, hud) {
         a.innerHTML = b.name;
         a.href = '#';
         a.addEventListener('click', () => {
-            scale = cameraBody === b ? 10 / b.R : 1e-6 / sun.R;
+            scale = cameraBody === b ? 10 / b.R : sun.R * 1e-16;
             cameraBody = b;
             // console.log(b)
         });
