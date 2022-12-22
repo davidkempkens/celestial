@@ -114,14 +114,14 @@ function drawNames() {
             p.drawName();
             if (p.isColliding) p.info();
         });
-        // dwarfs.forEach(d => {
-        //     d.drawName();
-        //     if (d.isColliding) d.info();
-        // })
-        // moons.forEach(m => {
-        //     if (scale > 10) m.drawName();
-        //     if (scale > 200 && m.isColliding) m.info();
-        // });
+        dwarfs.forEach(d => {
+            d.drawName();
+            if (d.isColliding) d.info();
+        })
+        moons.forEach(m => {
+            if (scale > 1e-7) m.drawName();
+            if (scale > 1e-7 && m.isColliding) m.info();
+        });
         // voyager1.drawName();
         // if (voyager1.isColliding) voyager1.info();
     } else {

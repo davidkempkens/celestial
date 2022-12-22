@@ -176,13 +176,13 @@ class CelestialBody {
     let distanceText =
       toLy(this.r) > 0
         ? `\u2192 ${formatNumber(toLy(this.r))} ly `
-        : `\u2192 ${formatNumber(this.r)} km `;
-    let textAbove = [`\u2205 ${formatNumber(this.R * 2)} km`]; // DEFAULT TEXT ABOVE BODY IS DIAMETER
+        : `\u2192 ${formatNumber(this.r * 1e-3)} km `;
+    let textAbove = [`\u2205 ${formatNumber(this.R * 2 * 1e-3)} km`]; // DEFAULT TEXT ABOVE BODY IS DIAMETER
     let textAside = [
       `${this.name} ${this.symbol} ${this.type}`, // Display Symbols
-      `${formatNumber(this.v)} km/s `, // Display Velocity
+      `${formatNumber(this.v * 1e-3)} km/s `, // Display Velocity
       distanceText, // Display Distance
-      `Mass: ${formatNumber(this.m.toExponential(0))} kg`, // Display Type
+      `Mass: ${formatNumber(this.m.toExponential(2))} kg`, // Display Type
     ];
 
     // CALL TEXT FUNCTION
