@@ -109,7 +109,7 @@ function drawNames() {
             if (s.type == 'Star' || s.type == 'Dwarf') s.drawName();
         });
         // sun.drawName();
-        // if (sun.isColliding) sun.info();
+        if (sun.isColliding) sun.info();
         planets.forEach(p => {
             p.drawName();
             if (p.isColliding) p.info();

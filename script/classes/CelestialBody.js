@@ -24,20 +24,20 @@ class CelestialBody {
     this.ra = apoapsis;
     this.a = (this.rp + this.ra) / 2;
 
-    this.E = -G * this.M * this.m / (2 * this.a)
+    this.E = -G * this.M * this.m / (2 * this.a);
     this.L = Math.sqrt(2 * G * this.M * this.m ** 2 * ((this.rp * this.ra) / (this.ra + this.rp)));
-    this.p = this.L ** 2 / (G * this.M * this.m ** 2)
-    this.k = 2 * this.m * this.L ** 2 / (G * this.M * this.m ** 2) ** 2
-    this.eps = Math.sqrt(1 + this.k * this.E)
+    this.p = this.L ** 2 / (G * this.M * this.m ** 2);
+    this.k = 2 * this.m * this.L ** 2 / (G * this.M * this.m ** 2) ** 2;
+    this.eps = Math.sqrt(1 + this.k * this.E);
     this.b = this.a * Math.sqrt(1 - this.eps ** 2);
-
+    this.e = Math.sqrt(this.a ** 2 - this.b ** 2);
     // Initial angle of orbit : degrees / radian - "0" degrees is the right side
     this.phi = isNaN(initialDeg[this.name.toLowerCase()])
       ? Math.random() * deg(360)
       : deg(initialDeg[this.name.toLowerCase()]);
     this.r = this.p / (1 + this.eps * Math.cos(this.phi));
     this.v = Math.sqrt(G * (this.M + this.m) * ((2 / this.r) - (1 / this.a)));
-    this.w = this.v / this.r
+    this.w = this.v / this.r;
     // Initial position oriented around the assigned center object
     this.x = this.r * Math.cos(this.phi);
     this.y = this.r * Math.sin(this.phi);
@@ -157,10 +157,10 @@ class CelestialBody {
 
     c.beginPath();
     c.strokeStyle = this.color;
-    c.lineWidth = 0.1 / scale;
+    c.lineWidth = 0.3 / scale;
     // ellipses center coords (x,y), (Major) x-radius, (Minor) y-radius, rotation, start, end
     c.ellipse(
-      this.center.x,
+      this.center.x - this.e,
       this.center.y,
       this.a,
       this.b,
