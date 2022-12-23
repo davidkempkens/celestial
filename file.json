@@ -368,5 +368,25 @@
     "mass": 1.586e+21,
     "color": "#F2C879",
     "type": "Moon"
+  },
+  {
+    "name": "Halley",
+    "center": "Sun",
+    "radius": 15e3,
+    "periapsis": 88678625793,
+    "apoapsis": 5256869176398,
+    "mass": 2.2e+14,
+    "color": "#50B4F2",
+    "type": "Dwarf"
+  },
+  {
+    "name": "Elisabeth",
+    "center": "Sun",
+    "radius": 1e9,
+    "periapsis": 5e10,
+    "apoapsis": 5e11,
+    "mass": 1e24,
+    "color": "#F26F63",
+    "type": "Planet"
   }
 ]
