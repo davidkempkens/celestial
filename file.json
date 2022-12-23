@@ -383,8 +383,8 @@
     "name": "Elisabeth",
     "center": "Sun",
     "radius": 1.2,
-    "periapsis": 5e10,
-    "apoapsis": 5e11,
+    "periapsis": 5e12,
+    "apoapsis": 5e13,
     "mass": 25,
     "color": "#6DFF2E",
     "type": "Dwarf"
@@ -393,8 +393,8 @@
     "name": "Rosalie",
     "center": "Sun",
     "radius": 1.1,
-    "periapsis": 3e10,
-    "apoapsis": 3e11,
+    "periapsis": 3e12,
+    "apoapsis": 3e13,
     "mass": 18,
     "color": "#FF8FDA",
     "type": "Dwarf"

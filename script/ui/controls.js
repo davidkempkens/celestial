@@ -195,7 +195,7 @@ function controls() {
     // HUD
     timeElement.innerHTML = `<b>T</b>ime/s 1 ${timeControl[i][0]}`;
     clockElement.innerHTML = `${secToTime(clock)}`
-    zoomElement.innerHTML = `<b>Z</b>oom: ${formatNumber(scale)}`;
+    zoomElement.innerHTML = `<b>Z</b>oom: ${formatNumber(scale.toExponential(2))}`;
     stopElement.innerHTML = stopSpin ? `<b>S</b>tart` : `<b>S</b>top`;
     stopElement.style.color = stopSpin ? 'green' : 'red';
     // show current planets that gets follow by the camera in the hud
