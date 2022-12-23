@@ -8,6 +8,7 @@ const planets = [];
 const dwarfs = []
 const moons = [];
 const bigBodies = [];
+let mainBelt = []
 // let sun;
 loadSolarSystemData();
 // Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color - Type
@@ -166,6 +167,8 @@ loadSolarSystemData();
 
 // ASTEROIDS ARRAYS
 // const asteroids = [...mainBelt, ...kuiperBelt, ...oortCloud];
+const asteroids = mainBelt;
+
 
 // EVERYTHING ARRAY FOR EASY HANDLING
 // const everything = [...bigBodies, ...asteroids];
@@ -231,7 +234,14 @@ async function loadSolarSystemData() {
                     solarSystem.push(p)
                     bigBodies.push(p);
                 }
-            })
+            });
+
+            // count - name - center - min. radius(Mio km) - max. radius(Mio km)- min. distance(Mio km) - max. distance(Mio km)
+            // - min. velocity(km/s) - max. velocity(km/s) - eccentricity - mass - color - type
+            asteroidFactory(200, 'Main Asteroid', sun, 1e6, 2e6, 600e9, 750e9, 10e10, '#5E574F', 'Asteroid')
+                .forEach(a => {
+                    mainBelt.push(a);
+                });
             // sun = solarSystem.find(o => o.name == 'Sun');
             updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
             // updateHUD([...alphaCentauri, ...suns], hudSuns);

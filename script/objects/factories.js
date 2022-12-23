@@ -1,16 +1,17 @@
 // INITIALIZES ASTEROIDS AS CELESTIAL BODY OBJECTS AND RETURNS ARRAY OF ASTEROIDS
 // count - name - center - min. radius(Mio km) - max. radius(Mio km)- min. distance(Mio km) - max. distance(Mio km)
 // - min. velocity(km/s) - max. velocity(km/s) - eccentricity - mass - color - type
-function asteroidFactory(count, name, center, minRadius, maxRadius, minDistance, maxDistance, minVelocity, maxVelocity, minEccentricity, maxEccentricity, mass, color, type) {
+function asteroidFactory(count, name, center, minRadius, maxRadius, minDistance, maxDistance, mass, color, type) {
     let belt = [];
     for (let i = 0; i < count; i++) {
         let n = i + ". " + name;
-        let r = (minRadius + (Math.random() * (maxRadius - minRadius))) * 500;
+        let r = (minRadius + (Math.random() * (maxRadius - minRadius))) * 5e2;
         let d = minDistance + (Math.random() * (maxDistance - minDistance));
-        let v = minVelocity + (Math.random() * (maxVelocity - minVelocity));
-        let e = minEccentricity + (Math.random() * (maxEccentricity - minEccentricity));
+        // let v = minVelocity + (Math.random() * (maxVelocity - minVelocity));
+        // let e = minEccentricity + (Math.random() * (maxEccentricity - minEccentricity));
         // Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color - Type
-        belt.push(new Asteroid(n, center, r, d, v, e, mass, color, type));
+        // Name - Center - Radius(m) - Periapsis(m) - Apoapsis(m) - Mass(kg) - Color - Type
+        belt.push(new Asteroid(n, center, r, d, d, mass, color, type));
     }
     return belt;
 }

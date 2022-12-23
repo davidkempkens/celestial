@@ -31,9 +31,9 @@ function runUniverse() {
     if (stopSpin) dt = 0;
     else dt = timeControl[i][1] * 1 / 60;
     if (orbit && scale > 1e-12) {
-        planets.forEach(p => p.drawOrbit());
     }
-    if (scale < .01) {
+    planets.forEach(p => p.drawOrbit());
+    if (scale < 1e12) {
         // solarSystem.forEach(s => s.drawOrbit())
         // c.fillRect(center.x - 50 * AU, center.y, 100 * AU, 1 / scale);
     }
@@ -48,7 +48,8 @@ function runUniverse() {
         s.run();
     })
 
-    // if (scale > .01) asteroids.forEach(a => a.run());
+    if (scale > 1e-12)
+        asteroids.forEach(a => a.run());
     // oortCloud.forEach(o => o.run());
     // voyager1.run();
     // lightRay.run();
@@ -67,8 +68,10 @@ function runUniverse() {
     planets.forEach(p => {
         if (p.isColliding) {
             p.drawOrbit();
-            // p.compare([earth, moon]);
+            let e = solarSystem.find(x => x.name == 'Earth');
+            let m = solarSystem.find(x => x.name == 'Moon');
             // console.log(solarSystem.find(x => x.name == 'Earth'))
+            p.compare([e, m]);
         }
 
     });
@@ -85,9 +88,13 @@ function runUniverse() {
         }
         if (scale > 1e-7 && orbit) m.drawOrbit();
     });
-    // asteroids.forEach(a => {
-    //     if (a.isColliding && scale > .01) a.hover();
-    // });
+    asteroids.forEach(a => {
+        if (a.isColliding && scale > 1e-12) {
+            a.hover();
+            a.info();
+            a.drawOrbit();
+        }
+    });
     // suns.forEach(s => {
     //     if (s.isColliding) s.compare([sun, ...suns]);
     // });
@@ -104,7 +111,7 @@ function runUniverse() {
 
 function drawNames() {
     // SOLAR SYSTEM BODIES
-    if (scale > 1e-12) {
+    if (scale > 1e-12 || true) {
         // solarSystem.forEach(s => {
         //     if (s.type == 'Star' || s.type == 'Dwarf') s.drawName();
         // });

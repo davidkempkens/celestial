@@ -1,4 +1,4 @@
-// Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color - Type
+// Name - Center - Radius(m) - Periapsis(m) - Apoapsis(m) - Mass(kg) - Color - Type
 class CelestialBody {
   constructor(
     name,
@@ -115,9 +115,8 @@ class CelestialBody {
       copies[i].x = i < 1 ? this.x : copies[i - 1].x;
       copies[i].y =
         i < 1
-          ? this.y + this.R + 25 / scale + copies[i].r
-          : copies[i - 1].y + copies[i - 1].r + 25 / scale + copies[i].r;
-
+          ? this.y + this.R + 25 / scale + copies[i].R
+          : copies[i - 1].y + copies[i - 1].R + 25 / scale + copies[i].R;
       // DRAW Other Body under this Body or below the other 'other' classes
       c.fillStyle = copies[i].color;
       copies[i].draw();
@@ -129,16 +128,16 @@ class CelestialBody {
       if (copies.length > 2) continue;
       if (i < 1)
         c.fillRect(
-          this.x - copies[i].r,
+          this.x - copies[i].R,
           this.y + this.R + 10 / scale,
-          copies[i].r * 2,
+          copies[i].R * 2,
           2 / scale
         );
       else
         c.fillRect(
-          copies[i - 1].x - copies[i].r,
-          copies[i - 1].y + copies[i - 1].r + (10 / scale) * i,
-          copies[i].r * 2,
+          copies[i - 1].x - copies[i].R,
+          copies[i - 1].y + copies[i - 1].R + (10 / scale) * i,
+          copies[i].R * 2,
           2 / scale
         );
     }
@@ -151,7 +150,8 @@ class CelestialBody {
   hover() {
     this.R *= 5;
     this.draw();
-    this.R = this.radius * scaleR;
+    this.R /= 5;
+    // this.radius * scaleR;
   }
 
   collision(other) {
@@ -223,10 +223,9 @@ class CelestialBody {
     return new CelestialBody(
       copy.name,
       copy.center,
-      copy.radius,
-      copy.distance,
-      copy.velocity,
-      copy.eccentricity,
+      copy.R,
+      copy.rp,
+      copy.ra,
       copy.mass,
       copy.color,
       copy.type
