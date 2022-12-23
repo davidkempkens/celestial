@@ -217,7 +217,7 @@ function runCollisionDetection() {
 function runClock() {
     frames++;
     if (frames === 60) {
-        clock += dt;
+        clock += dt * 60;
         frames = 0;
     }
 

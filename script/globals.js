@@ -45,7 +45,7 @@ const YEAR = 60 * 60 * 24 * 365;
 
 // Time in seconds - 94 days in 2022
 let clock = 0;
-
+let frames = 0;
 // Scale for time - 1 = REAL TIME 1s = 1s
 let dt = 1 / 60;
 
@@ -214,7 +214,6 @@ function zoomOut() {
 function toggleTime() {
     i = ++i % timeControl.length;
     dt = timeControl[i][1] * 1 / 60;
-    console.log(dt)
 }
 
 function secToTime(s) {
