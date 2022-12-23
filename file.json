@@ -372,7 +372,7 @@
   {
     "name": "Halley",
     "center": "Sun",
-    "radius": 15e3,
+    "radius": 5.5e3,
     "periapsis": 88678625793,
     "apoapsis": 5256869176398,
     "mass": 2.2e+14,
