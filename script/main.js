@@ -22,14 +22,14 @@ function start() {
     // controls
     controls();
     // frameAnimation ID
-    frAId = window.requestAnimationFrame(start);
+    // frAId = window.requestAnimationFrame(start);
 }
-
+setInterval(start, 1000 / 60);
 // DRAW SUNS, PLANETS, MOONS, ORBITS AND COLLISION DETECTION
 function runUniverse() {
 
     if (stopSpin) dt = 0;
-    else dt = timeControl[i][1];
+    else dt = timeControl[i][1] * 1 / 60;
     if (orbit && scale > 1e-12) {
         planets.forEach(p => p.drawOrbit());
     }

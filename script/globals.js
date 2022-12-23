@@ -47,7 +47,7 @@ const YEAR = 60 * 60 * 24 * 365;
 let clock = 0;
 
 // Scale for time - 1 = REAL TIME 1s = 1s
-let dt = 1;
+let dt = 1 / 60;
 
 // SPEED OF LIGHT - C
 const C = 299792458;
@@ -198,7 +198,6 @@ function updateHUD(bodies, hud) {
         a.addEventListener('click', () => {
             scale = cameraBody === b ? 10 / b.R : sun.R * 1e-16;
             cameraBody = b;
-            // console.log(b)
         });
         // a.addEventListener('mouseover', () => {});
     });
@@ -214,7 +213,8 @@ function zoomOut() {
 
 function toggleTime() {
     i = ++i % timeControl.length;
-    dt = timeControl[i][1];
+    dt = timeControl[i][1] * 1 / 60;
+    console.log(dt)
 }
 
 function secToTime(s) {
