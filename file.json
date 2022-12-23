@@ -382,11 +382,21 @@
   {
     "name": "Elisabeth",
     "center": "Sun",
-    "radius": 1e9,
+    "radius": 1.2,
     "periapsis": 5e10,
     "apoapsis": 5e11,
-    "mass": 1e24,
-    "color": "#F26F63",
+    "mass": 25,
+    "color": "#6DFF2E",
+    "type": "Planet"
+  },
+  {
+    "name": "Rosalie",
+    "center": "Sun",
+    "radius": 1.1,
+    "periapsis": 3e10,
+    "apoapsis": 3e11,
+    "mass": 18,
+    "color": "#FF8FDA",
     "type": "Planet"
   }
 ]
