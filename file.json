@@ -387,7 +387,7 @@
     "apoapsis": 5e11,
     "mass": 25,
     "color": "#6DFF2E",
-    "type": "Planet"
+    "type": "Dwarf"
   },
   {
     "name": "Rosalie",
@@ -397,6 +397,6 @@
     "apoapsis": 3e11,
     "mass": 18,
     "color": "#FF8FDA",
-    "type": "Planet"
+    "type": "Dwarf"
   }
 ]

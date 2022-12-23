@@ -105,10 +105,10 @@ function runUniverse() {
 function drawNames() {
     // SOLAR SYSTEM BODIES
     if (scale > 1e-12) {
-        solarSystem.forEach(s => {
-            if (s.type == 'Star' || s.type == 'Dwarf') s.drawName();
-        });
-        // sun.drawName();
+        // solarSystem.forEach(s => {
+        //     if (s.type == 'Star' || s.type == 'Dwarf') s.drawName();
+        // });
+        sun.drawName();
         if (sun.isColliding) sun.info();
         planets.forEach(p => {
             p.drawName();

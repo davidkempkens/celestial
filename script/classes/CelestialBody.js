@@ -24,21 +24,30 @@ class CelestialBody {
     this.ra = apoapsis;
     this.a = (this.rp + this.ra) / 2;
 
+    // Parameter p, k, eps
     this.E = -G * this.M * this.m / (2 * this.a);
     this.L = Math.sqrt(2 * G * this.M * this.m ** 2 * ((this.rp * this.ra) / (this.ra + this.rp)));
     this.p = this.L ** 2 / (G * this.M * this.m ** 2);
     this.k = 2 * this.m * this.L ** 2 / (G * this.M * this.m ** 2) ** 2;
     this.eps = Math.sqrt(1 + this.k * this.E);
+
+    // Ellipse Properties
     this.b = this.a * Math.sqrt(1 - this.eps ** 2);
     this.e = Math.sqrt(this.a ** 2 - this.b ** 2);
     // Initial angle of orbit : degrees / radian - "0" degrees is the right side
+
     this.phi = isNaN(initialDeg[this.name.toLowerCase()])
       ? Math.random() * deg(360)
       : deg(initialDeg[this.name.toLowerCase()]);
+    // r(phi)=p/(1+eps cos phi)
     this.r = this.p / (1 + this.eps * Math.cos(this.phi));
+
+    // Orbital velocity
     this.v = Math.sqrt(G * (this.M + this.m) * ((2 / this.r) - (1 / this.a)));
+    // Angular velocity
     this.w = this.v / this.r;
-    // Initial position oriented around the assigned center object
+
+    // Cartesion coordinates
     this.x = this.r * Math.cos(this.phi);
     this.y = this.r * Math.sin(this.phi);
 

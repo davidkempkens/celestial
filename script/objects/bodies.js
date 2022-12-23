@@ -8,6 +8,7 @@ const planets = [];
 const dwarfs = []
 const moons = [];
 const bigBodies = [];
+// let sun;
 loadSolarSystemData();
 // Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color - Type
 // const sun = new Sun("Sun", Center, .696342, 0, 0, 0, 1.9855e30, "#F2A516", "Star");
@@ -208,7 +209,7 @@ async function loadSolarSystemData() {
         .then(data => {
             data.forEach(d => {
 
-                let centerObject = solarSystem.find(c => c.name == d.center)
+                let centerObject = solarSystem.find(c => c.name == d.center);
 
                 if (d.type == 'Star') {
                     sun = new Sun(d.name, Center, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
@@ -231,6 +232,7 @@ async function loadSolarSystemData() {
                     bigBodies.push(p);
                 }
             })
+            // sun = solarSystem.find(o => o.name == 'Sun');
             updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
             // updateHUD([...alphaCentauri, ...suns], hudSuns);
             // updateHUD([...blackHoles, lightRay, voyager1, universe], hudOther);
