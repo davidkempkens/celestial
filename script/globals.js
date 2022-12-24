@@ -12,8 +12,8 @@ canvas.height = window.innerHeight;
 
 
 // Booleans to toggle in main loop - for user input
-let stopSpin = false;
-let orbit = true;
+let stopTime = false;
+let showTrajectories = false;
 
 // SCALING AND TRANSLATION GLOBALS
 let scale = 1e-9;
@@ -78,7 +78,7 @@ let mouse = {
     y: 0,
     R: 3e1 / scale
 };
-// console.log(mouse.R)
+
 let startDragOffset = {};
 let mouseDown = false;
 

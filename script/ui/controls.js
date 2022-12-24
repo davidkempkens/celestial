@@ -65,10 +65,10 @@ window.addEventListener("keypress", e => {
             toggleHUD();
             break;
         case "s":
-            stopSpin = !stopSpin;
+            stopTime = !stopTime;
             break;
         case "o":
-            orbit = !orbit;
+            showTrajectories = !showTrajectories;
             break;
         case "f":
             cameraBody = planets[Math.floor(Math.random() * planets.length)];
@@ -143,8 +143,8 @@ cameraElement.addEventListener('click', () => {
     Center.y = canvas.height / 2;
 });
 zoomElement.addEventListener('click', () => scale = 1e-9);
-stopElement.addEventListener('click', () => stopSpin = !stopSpin);
-orbitElement.addEventListener('click', () => orbit = !orbit);
+stopElement.addEventListener('click', () => stopTime = !stopTime);
+orbitElement.addEventListener('click', () => showTrajectories = !showTrajectories);
 plusElement.addEventListener('click', zoomIn);
 minusElement.addEventListener('click', zoomOut);
 
@@ -196,8 +196,8 @@ function controls() {
     timeElement.innerHTML = `<b>T</b>ime/s 1 ${timeControl[i][0]}`;
     clockElement.innerHTML = `${secToTime(clock)}`
     zoomElement.innerHTML = `<b>Z</b>oom: ${formatNumber(scale.toExponential(2))}`;
-    stopElement.innerHTML = stopSpin ? `<b>S</b>tart` : `<b>S</b>top`;
-    stopElement.style.color = stopSpin ? 'green' : 'red';
+    stopElement.innerHTML = stopTime ? `<b>S</b>tart` : `<b>S</b>top`;
+    stopElement.style.color = stopTime ? 'green' : 'red';
     // show current planets that gets follow by the camera in the hud
     if (cameraBody !== null) {
         cameraElement.innerHTML = cameraBody.name;
@@ -247,6 +247,3 @@ function controls() {
         cameraElement.style.color = 'white';
     }
 }
-
-// RUN MAIN LOOP
-// start();

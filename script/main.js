@@ -25,6 +25,7 @@ function start() {
     // frameAnimation ID
     // frAId = window.requestAnimationFrame(start);
 }
+
 async function setup() {
     await loadSolarSystemData();
     setInterval(start, 1000 / 60);
@@ -32,15 +33,15 @@ async function setup() {
 // DRAW SUNS, PLANETS, MOONS, ORBITS AND COLLISION DETECTION
 function runUniverse() {
 
-    if (stopSpin) dt = 0;
+    if (stopTime) dt = 0;
     else dt = timeControl[i][1] * 1 / 60;
-    if (orbit && scale > 1e-12) {
+    if (showTrajectories && scale > 1e-12) {
+        solarSystem.forEach(s => s.drawOrbit())
     }
     let earth = solarSystem.find(x => x.name == 'Earth');
     let moon = solarSystem.find(x => x.name == 'Moon');
     planets.forEach(p => p.drawOrbit());
     if (scale < 1e12) {
-        // solarSystem.forEach(s => s.drawOrbit())
         // c.fillRect(center.x - 50 * AU, center.y, 100 * AU, 1 / scale);
     }
 
@@ -89,7 +90,7 @@ function runUniverse() {
             m.drawOrbit();
             m.compare([moon]);
         }
-        if (scale > 1e-7 && orbit) m.drawOrbit();
+        if (scale > 1e-7 && showTrajectories) m.drawOrbit();
     });
     asteroids.forEach(a => {
         if (a.isColliding && scale > 1e-14) {
@@ -189,9 +190,16 @@ function camera(body) {
     //     y: body instanceof FlyingBody ? body.y : body.center.y + body.b * Math.sin(body.w + (scaleV * (body.velocity / body.distance))) * body.d
     // }
 
+    // let bodyPosition = {
+    //     x: body instanceof FlyingBody ? body.x + body.v : body.center.x + body.a * Math.cos(body.w + (scaleV * (body.velocity / body.distance))) * body.d,
+    //     y: body instanceof FlyingBody ? body.y : body.center.y + body.b * Math.sin(body.w + (scaleV * (body.velocity / body.distance))) * body.d
+    // };
+
+
+
     let bodyPosition = {
-        x: body.x,
-        y: body.y
+        x: body.center.x + body.r * Math.cos(body.phi + body.w),
+        y: body.center.y + body.r * Math.sin(body.phi + body.w)
     }
 
     Center.x -= bodyPosition.x - centerOfScreen.x;
@@ -235,7 +243,7 @@ function scaleDynamic() {
     // Save Transformation Matrix
     c.save();
 
-    // Translate corresponding to the current scale - MAGIC NUMBER FOR NOW
+    // Translate corresponding to the current scale
     trans = {
         x: (canvas.width / 2) * (1 - scale),
         y: (canvas.height / 2) * (1 - scale)
