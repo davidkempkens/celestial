@@ -36,10 +36,10 @@ class CelestialBody {
     this.e = Math.sqrt(this.a ** 2 - this.b ** 2);
     // Initial angle of orbit : degrees / radian - "0" degrees is the right side
 
+    // Distance r in dependence of angle phi - r(phi)=p/(1+eps cos phi)
     this.phi = isNaN(initialDeg[this.name.toLowerCase()])
       ? Math.random() * deg(360)
       : deg(initialDeg[this.name.toLowerCase()]);
-    // r(phi)=p/(1+eps cos phi)
     this.r = this.p / (1 + this.eps * Math.cos(this.phi));
 
     // Orbital velocity
@@ -56,8 +56,7 @@ class CelestialBody {
   }
 
   run() {
-    // this.rescale();
-    // Physics for orbiting Bodies
+    // Physics for orbiting Bodies - Update angular velocity
     this.v = Math.sqrt(G * (this.M + this.m) * ((2 / this.r) - (1 / this.a)));
     this.r = this.p / (1 + this.eps * Math.cos(this.phi));
     this.w = this.v / this.r
@@ -65,30 +64,13 @@ class CelestialBody {
     this.x = this.center.x + this.r * Math.cos(this.phi);
     this.y = this.center.y + this.r * Math.sin(this.phi);
 
-    // For Sun
-    this.x = isNaN(this.r) ? this.center.x : this.x;
-    this.y = isNaN(this.r) ? this.center.y : this.y;
-    // this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
-    // this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
     // Call the draw function to draw the body as filled circle on the canvas
     this.draw();
   }
 
-  rescale() {
-    // RESCALE TIME + DISTANCES + RADIUS + VELOCITIES
-    scaleR *= scale
-    this.R *= scaleR;
-    if (this.name == 'Sun')
-      console.log(scale)
-    this.R /= scaleR;
-    scaleR /= scale
-    // scaleV = (1 / 60e6) * scaleT;
-    // if (this.distance !== 0) this.v = (this.velocity / this.distance) * scaleV;
-    // else this.v = this.velocity * scaleV;
-  }
+
 
   draw() {
-    // DRAW ACTUAL BODY
     c.fillStyle = this.color;
     c.beginPath();
     c.arc(this.x, this.y, this.R, 0, Math.PI * 2);
@@ -151,7 +133,6 @@ class CelestialBody {
     this.R *= 5;
     this.draw();
     this.R /= 5;
-    // this.radius * scaleR;
   }
 
   collision(other) {
@@ -195,13 +176,7 @@ class CelestialBody {
     ];
 
     // CALL TEXT FUNCTION
-    drawText(
-      textAbove,
-      this.x - this.R * 2,
-      this.y - this.R - 25 / scale,
-      this.color,
-      13
-    );
+    drawText(textAbove, this.x - this.R * 2, this.y - this.R - 25 / scale, this.color, 13);
     drawText(textAside, this.x + this.R, this.y, this.color, 13);
   }
 

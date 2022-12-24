@@ -32,6 +32,8 @@ function runUniverse() {
     else dt = timeControl[i][1] * 1 / 60;
     if (orbit && scale > 1e-12) {
     }
+    let earth = solarSystem.find(x => x.name == 'Earth');
+    let moon = solarSystem.find(x => x.name == 'Moon');
     planets.forEach(p => p.drawOrbit());
     if (scale < 1e12) {
         // solarSystem.forEach(s => s.drawOrbit())
@@ -68,10 +70,7 @@ function runUniverse() {
     planets.forEach(p => {
         if (p.isColliding) {
             p.drawOrbit();
-            let e = solarSystem.find(x => x.name == 'Earth');
-            let m = solarSystem.find(x => x.name == 'Moon');
-            // console.log(solarSystem.find(x => x.name == 'Earth'))
-            p.compare([e, m]);
+            p.compare([earth, moon]);
         }
 
     });
@@ -90,9 +89,8 @@ function runUniverse() {
     });
     asteroids.forEach(a => {
         if (a.isColliding && scale > 1e-12) {
-            a.hover();
-            a.info();
             a.drawOrbit();
+            a.hover();
         }
     });
     // suns.forEach(s => {
@@ -111,10 +109,7 @@ function runUniverse() {
 
 function drawNames() {
     // SOLAR SYSTEM BODIES
-    if (scale > 1e-12 || true) {
-        // solarSystem.forEach(s => {
-        //     if (s.type == 'Star' || s.type == 'Dwarf') s.drawName();
-        // });
+    if (scale > 1e-12) {
         sun.drawName();
         if (sun.isColliding) sun.info();
         planets.forEach(p => {
@@ -208,7 +203,8 @@ function runCollisionDetection() {
     // dwarfs.forEach(d => d.collision(mouse));
     // moons.forEach(m => m.collision(mouse));
     solarSystem.forEach(s => s.collision(mouse));
-    // if (scale > .01) asteroids.forEach(a => a.collision(mouse));
+    if (scale > 1e-12)
+        asteroids.forEach(a => a.collision(mouse));
     // oortCloud.forEach(o => o.collision(mouse));
     // voyager1.collision(mouse);
     // lightRay.collision(mouse);
