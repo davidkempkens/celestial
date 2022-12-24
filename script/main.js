@@ -10,6 +10,7 @@ function start() {
     scaleDynamic();
     // camera planet
     camera(cameraBody);
+
     // Actually run Physics and draw everything
     runUniverse();
 
@@ -24,7 +25,10 @@ function start() {
     // frameAnimation ID
     // frAId = window.requestAnimationFrame(start);
 }
-setInterval(start, 1000 / 60);
+async function setup() {
+    await loadSolarSystemData();
+    setInterval(start, 1000 / 60);
+}
 // DRAW SUNS, PLANETS, MOONS, ORBITS AND COLLISION DETECTION
 function runUniverse() {
 
@@ -42,13 +46,13 @@ function runUniverse() {
 
     // RUN ALL BODIES
     // SOLAR SYSTEM BODIES
-    // sun.run();
-    // planets.forEach(p => p.run());
-    // dwarfs.forEach(d => d.run());
-    // moons.forEach(m => m.run());
-    solarSystem.forEach(s => {
-        s.run();
-    })
+    sun.run();
+    planets.forEach(p => p.run());
+    dwarfs.forEach(d => d.run());
+    moons.forEach(m => m.run());
+    // solarSystem.forEach(s => {
+    //     s.run();
+    // })
 
     if (scale > 1e-12)
         asteroids.forEach(a => a.run());
@@ -246,3 +250,5 @@ function rescaleDynamic() {
     // Reset Transformation Matrix
     c.restore();
 }
+
+setup();

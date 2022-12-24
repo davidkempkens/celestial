@@ -62,7 +62,7 @@ const kuiperBelt = [];
 const oortCloud = [];
 let asteroids = [];
 // let sun;
-loadSolarSystemData();
+// loadSolarSystemData();
 
 // ASTEROIDS ARRAYS
 // Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color - Type
@@ -238,7 +238,7 @@ async function loadCSVFile() {
             console.log(csvToJSON(data))
         })
 }
-// loadCSVFile()
+
 //var csv is the CSV file with headers
 function csvToJSON(csv) {
     var lines = csv.split("\r\n");

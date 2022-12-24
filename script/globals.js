@@ -58,10 +58,10 @@ const G = 6.67430e-11;
 // AU - in m
 const AE = 149597870700;
 
-// Light year in Mio km
+// Light year in m
 const LY = 9460730472580800;
 // Solar Mass in KG
-const SOLAR_MASS = 1.99e30;
+const SOLAR_MASS = 1.9885e30;
 
 // Solar Radius in m
 const SOLAR_RADIUS = 696342000;

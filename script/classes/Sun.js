@@ -2,6 +2,8 @@ class Sun extends CelestialBody {
 
     constructor(name, center, radius, periapsis, apoapsis, mass, color, type) {
         super(name, center, radius, periapsis, apoapsis, mass, color, type);
+        this.r = 26600 * LY;
+        this.v = 251000;
     }
 
     run() {

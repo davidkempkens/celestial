@@ -249,4 +249,4 @@ function controls() {
 }
 
 // RUN MAIN LOOP
-start();
+// start();
