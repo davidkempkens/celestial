@@ -3,14 +3,68 @@
 // STARS ARRAY
 const stars = starsFactory(300);
 
+// Read celestial bodies from json file
+async function loadSolarSystemData() {
+    await fetch('file.json')
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(d => {
+
+                let centerObject = solarSystem.find(c => c.name == d.center);
+
+                if (d.type == 'Star') {
+                    sun = new Sun(d.name, Center, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
+                    solarSystem.push(sun)
+                    bigBodies.push(sun);
+                } else if (d.type == 'Planet') {
+                    let p = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
+                    planets.push(p)
+                    solarSystem.push(p)
+                    bigBodies.push(p);
+                } else if (d.type == 'Dwarf') {
+                    let p = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
+                    dwarfs.push(p)
+                    solarSystem.push(p)
+                    bigBodies.push(p);
+                } else if (d.type == 'Moon') {
+                    let p = new Moon(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
+                    moons.push(p)
+                    solarSystem.push(p)
+                    bigBodies.push(p);
+                }
+            });
+
+            // count - name - center - min. radius(m) - max. radius(m)- min. distance(m) - max. distance(m)
+            // mass(kg) - color - type
+            asteroidFactory(200, 'Main Asteroid', sun, 1e6, 2e6, 600e9, 750e9, 10e10, '#5E574F', 'Asteroid')
+                .forEach(a => mainBelt.push(a));
+
+            asteroidFactory(1000, 'Kuiper Asteroid', sun, 1e6, 2e6, 30 * AE, 20 * AE, 10e10, '#5E574F', 'Asteroid')
+                .forEach(a => kuiperBelt.push(a));
+            asteroidFactory(1000, 'Oort Cloud Asteroid', sun, 1e7, 1e8, 2000 * AE, 5000 * AE, 1e25, '#5E574F', 'Asteroid')
+                .forEach(a => oortCloud.push(a))
+            asteroids = [...mainBelt, ...kuiperBelt, ...oortCloud];
+            // sun = solarSystem.find(o => o.name == 'Sun');
+            updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
+            // updateHUD([...alphaCentauri, ...suns], hudSuns);
+            // updateHUD([...blackHoles, lightRay, voyager1, universe], hudOther);
+        })
+}
+
+
 const solarSystem = [];
 const planets = [];
 const dwarfs = []
 const moons = [];
 const bigBodies = [];
-let mainBelt = []
+const mainBelt = [];
+const kuiperBelt = [];
+const oortCloud = [];
+let asteroids = [];
 // let sun;
 loadSolarSystemData();
+
+// ASTEROIDS ARRAYS
 // Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color - Type
 // const sun = new Sun("Sun", Center, .696342, 0, 0, 0, 1.9855e30, "#F2A516", "Star");
 
@@ -165,10 +219,6 @@ loadSolarSystemData();
 // BIG BODIES ARRAY WITHOUT ASTEROIDS
 // const bigBodies = [sun, ...moons, ...planets, ...dwarfs, ...blackHoles, ...galaxies, universe, voyager1, lightRay, ...suns, ...alphaCentauri];
 
-// ASTEROIDS ARRAYS
-// const asteroids = [...mainBelt, ...kuiperBelt, ...oortCloud];
-const asteroids = mainBelt;
-
 
 // EVERYTHING ARRAY FOR EASY HANDLING
 // const everything = [...bigBodies, ...asteroids];
@@ -205,49 +255,6 @@ function csvToJSON(csv) {
     return JSON.stringify(result);
 }
 
-// Read celestial bodies from json file
-async function loadSolarSystemData() {
-    await fetch('file.json')
-        .then(res => res.json())
-        .then(data => {
-            data.forEach(d => {
-
-                let centerObject = solarSystem.find(c => c.name == d.center);
-
-                if (d.type == 'Star') {
-                    sun = new Sun(d.name, Center, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
-                    solarSystem.push(sun)
-                    bigBodies.push(sun);
-                } else if (d.type == 'Planet') {
-                    let p = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
-                    planets.push(p)
-                    solarSystem.push(p)
-                    bigBodies.push(p);
-                } else if (d.type == 'Dwarf') {
-                    let p = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
-                    dwarfs.push(p)
-                    solarSystem.push(p)
-                    bigBodies.push(p);
-                } else if (d.type == 'Moon') {
-                    let p = new Moon(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
-                    moons.push(p)
-                    solarSystem.push(p)
-                    bigBodies.push(p);
-                }
-            });
-
-            // count - name - center - min. radius(Mio km) - max. radius(Mio km)- min. distance(Mio km) - max. distance(Mio km)
-            // - min. velocity(km/s) - max. velocity(km/s) - eccentricity - mass - color - type
-            asteroidFactory(200, 'Main Asteroid', sun, 1e6, 2e6, 600e9, 750e9, 10e10, '#5E574F', 'Asteroid')
-                .forEach(a => {
-                    mainBelt.push(a);
-                });
-            // sun = solarSystem.find(o => o.name == 'Sun');
-            updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
-            // updateHUD([...alphaCentauri, ...suns], hudSuns);
-            // updateHUD([...blackHoles, lightRay, voyager1, universe], hudOther);
-        })
-}
 
 
 

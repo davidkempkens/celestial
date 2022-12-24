@@ -65,8 +65,8 @@ function runUniverse() {
     // universe.run();
 
     // ON COLLISION DISPLAY COMPARE BODY AND ORBIT
-    // if (sun.isColliding)
-    //     sun.compare(planets);
+    if (sun.isColliding)
+        sun.compare(planets);
     planets.forEach(p => {
         if (p.isColliding) {
             p.drawOrbit();
@@ -77,19 +77,19 @@ function runUniverse() {
     dwarfs.forEach(d => {
         if (d.isColliding) {
             d.drawOrbit();
-            // d.compare([earth, moon])
+            d.compare([earth, moon])
         }
     });
     moons.forEach(m => {
         if (m.isColliding) {
             m.drawOrbit();
-            // m.compare([moon]);
+            m.compare([moon]);
         }
         if (scale > 1e-7 && orbit) m.drawOrbit();
     });
     asteroids.forEach(a => {
-        if (a.isColliding && scale > 1e-12) {
-            a.drawOrbit();
+        if (a.isColliding && scale > 1e-14) {
+            // a.drawOrbit();
             a.hover();
         }
     });

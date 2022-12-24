@@ -7,6 +7,7 @@ class Sun extends CelestialBody {
     run() {
         this.x = this.center.x;
         this.y = this.center.y;
+        this.draw();
     }
 
     draw() {
