@@ -194,12 +194,12 @@ function camera(body) {
         y: body.center.y + body.r * Math.sin(body.phi - body.w * dt)
     }
 
-    // if (this.name == 'Sun') {
-    //     bodyPosition = {
-    //         x: body.x,
-    //         y: body.y
-    //     };
-    // }
+    if (body.name == 'Sun') {
+        bodyPosition = {
+            x: body.x,
+            y: body.y
+        };
+    }
 
 
     Center.x -= bodyPosition.x - centerOfScreen.x;
