@@ -157,14 +157,14 @@ function createInstance(className, d) {
         throw new Error(`Class not found: ${className}`);
     }
 
-    let centerObject = solarSystem.find(c => c.name == d.center);
-    console.log(centerObject)
-    return new Class(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type);
+    // let centerObject = solarSystem.find(c => c.name == d.center);
+    cl = new Class(d.name, d.center, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type);
+    console.log(cl)
+    return cl
+    // return new Class(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type);
 }
 
 // Create an instance of the MyClass class
-let instance = createInstance('Planet', { name: 'Test', center: '', radius: 1, periapsis: 1, apoapsis: 1, mass: 1, color: 'red', type: 'Planet' });
+// let instance = createInstance('Planet', { name: 'Test', center: '', radius: 1, periapsis: 1, apoapsis: 1, mass: 1, color: 'red', type: 'Planet' });
 
-
-// let test = new this['CelestialBody']();
-console.log(instance)
+// console.log(instance)

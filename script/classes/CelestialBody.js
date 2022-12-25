@@ -202,7 +202,7 @@ class CelestialBody {
         copy.type,
         copy.colBH
       );
-    console.log(createInstance('Planet'));
+    console.log(createInstance(copy.type, copy));
     return new CelestialBody(
       copy.name,
       copy.center,
