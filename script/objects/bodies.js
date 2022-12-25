@@ -36,14 +36,13 @@ async function loadSolarSystemData() {
 
             // count - name - center - min. radius(m) - max. radius(m)- min. distance(m) - max. distance(m)
             // mass(kg) - color - type
-            asteroidFactory(200, 'Main Asteroid', sun, 1e6, 2e6, 600e9, 750e9, 10e10, '#5E574F', 'Asteroid')
+            asteroidFactory(200, 'Main Asteroid', sun, 1e6, 2e6, 2 * AE, 3.4 * AE, 10e10, '#5E574F', 'Asteroid')
                 .forEach(a => mainBelt.push(a));
             asteroidFactory(1000, 'Kuiper Asteroid', sun, 1e6, 2e6, 30 * AE, 20 * AE, 10e10, '#5E574F', 'Asteroid')
                 .forEach(a => kuiperBelt.push(a));
             asteroidFactory(1000, 'Oort Cloud Asteroid', sun, 1e8, 1e9, 2000 * AE, 5000 * AE, 1e25, '#5E574F', 'Asteroid')
                 .forEach(a => oortCloud.push(a))
             asteroids = [...mainBelt, ...kuiperBelt, ...oortCloud];
-            // sun = solarSystem.find(o => o.name == 'Sun');
             updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
             // updateHUD([...alphaCentauri, ...suns], hudSuns);
             // updateHUD([...blackHoles, lightRay, voyager1, universe], hudOther);
@@ -146,7 +145,26 @@ function csvToJSON(csv) {
 }
 
 
+function createInstance(className, d) {
+    const classes = {
+        Planet: Planet,
+        Dwarf: Planet
+        // ...
+    };
+
+    const Class = classes[className];
+    if (!Class) {
+        throw new Error(`Class not found: ${className}`);
+    }
+
+    let centerObject = solarSystem.find(c => c.name == d.center);
+    console.log(centerObject)
+    return new Class(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type);
+}
+
+// Create an instance of the MyClass class
+let instance = createInstance('Planet', { name: 'Test', center: '', radius: 1, periapsis: 1, apoapsis: 1, mass: 1, color: 'red', type: 'Planet' });
 
 
-
-
+// let test = new this['CelestialBody']();
+console.log(instance)

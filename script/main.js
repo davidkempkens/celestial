@@ -190,17 +190,15 @@ function camera(body) {
     //     y: body instanceof FlyingBody ? body.y : body.center.y + body.b * Math.sin(body.w + (scaleV * (body.velocity / body.distance))) * body.d
     // }
 
-    // let bodyPosition = {
-    //     x: body instanceof FlyingBody ? body.x + body.v : body.center.x + body.a * Math.cos(body.w + (scaleV * (body.velocity / body.distance))) * body.d,
-    //     y: body instanceof FlyingBody ? body.y : body.center.y + body.b * Math.sin(body.w + (scaleV * (body.velocity / body.distance))) * body.d
-    // };
-
-
-
     let bodyPosition = {
-        x: body.center.x + body.r * Math.cos(body.phi + body.w),
-        y: body.center.y + body.r * Math.sin(body.phi + body.w)
-    }
+        x: body.x,
+        y: body.y
+    };
+
+    // let bodyPosition = {
+    //     x: body.center.x + body.r * Math.cos(body.phi + body.w),    
+    //     y: body.center.y + body.r * Math.sin(body.phi + body.w)
+    // }
 
     Center.x -= bodyPosition.x - centerOfScreen.x;
     Center.y -= bodyPosition.y - centerOfScreen.y + body.R;

@@ -22,21 +22,27 @@ class CelestialBody {
     this.m = mass;
     this.rp = periapsis;
     this.ra = apoapsis;
-    this.a = (this.rp + this.ra) / 2;
-
-    // Parameter p, k, eps
-    this.E = -G * this.M * this.m / (2 * this.a);
-    this.L = Math.sqrt(2 * G * this.M * this.m ** 2 * ((this.rp * this.ra) / (this.ra + this.rp)));
-    this.p = this.L ** 2 / (G * this.M * this.m ** 2);
-    this.k = 2 * this.m * this.L ** 2 / (G * this.M * this.m ** 2) ** 2;
-    this.eps = Math.sqrt(1 + this.k * this.E);
 
     // Ellipse Properties
+    this.a = (this.rp + this.ra) / 2;
     this.b = this.a * Math.sqrt(1 - this.eps ** 2);
     this.e = Math.sqrt(this.a ** 2 - this.b ** 2);
-    // Initial angle of orbit : degrees / radian - "0" degrees is the right side
+
+    // Energy
+    this.E = -G * this.M * this.m / (2 * this.a);
+
+    // Angular momentum
+    this.L = Math.sqrt(2 * G * this.M * this.m ** 2 * ((this.rp * this.ra) / (this.ra + this.rp)));
+
+    // Parameter p, k, eps
+    this.p = this.L ** 2 / (G * this.M * this.m ** 2);
+    this.k = 2 * this.m * this.L ** 2 / (G * this.M * this.m ** 2) ** 2;
+
+    // Eccentricity
+    this.eps = Math.sqrt(1 + this.k * this.E);
 
     // Distance r in dependence of angle phi - r(phi)=p/(1+eps cos phi)
+    // Polar coordinates
     this.phi = isNaN(initialDeg[this.name.toLowerCase()])
       ? Math.random() * deg(360)
       : deg(initialDeg[this.name.toLowerCase()]);
@@ -44,6 +50,7 @@ class CelestialBody {
 
     // Orbital velocity
     this.v = Math.sqrt(G * (this.M + this.m) * ((2 / this.r) - (1 / this.a)));
+
     // Angular velocity
     this.w = this.v / this.r;
 
@@ -195,6 +202,7 @@ class CelestialBody {
         copy.type,
         copy.colBH
       );
+    console.log(createInstance('Planet'));
     return new CelestialBody(
       copy.name,
       copy.center,
