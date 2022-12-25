@@ -23,10 +23,8 @@ class CelestialBody {
     this.rp = periapsis;
     this.ra = apoapsis;
 
-    // Ellipse Properties
+    // Semi-major axis
     this.a = (this.rp + this.ra) / 2;
-    this.b = this.a * Math.sqrt(1 - this.eps ** 2);
-    this.e = Math.sqrt(this.a ** 2 - this.b ** 2);
 
     // Energy
     this.E = -G * this.M * this.m / (2 * this.a);
@@ -38,10 +36,15 @@ class CelestialBody {
     this.p = this.L ** 2 / (G * this.M * this.m ** 2);
     this.k = 2 * this.m * this.L ** 2 / (G * this.M * this.m ** 2) ** 2;
 
-    // Eccentricity
+    // Numerical eccentricity
     this.eps = Math.sqrt(1 + this.k * this.E);
 
-    // Distance r in dependence of angle phi - r(phi)=p/(1+eps cos phi)
+    // Semi-minor axis
+    this.b = this.a * Math.sqrt(1 - this.eps ** 2);
+
+    // Linear eccentricity
+    this.e = Math.sqrt(this.a ** 2 - this.b ** 2);
+
     // Polar coordinates
     this.phi = isNaN(initialDeg[this.name.toLowerCase()])
       ? Math.random() * deg(360)
@@ -202,7 +205,7 @@ class CelestialBody {
         copy.type,
         copy.colBH
       );
-    console.log(createInstance(copy.type, copy));
+    // console.log(createInstance(copy.type, copy));
     return new CelestialBody(
       copy.name,
       copy.center,
