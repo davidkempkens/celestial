@@ -38,10 +38,9 @@ async function loadSolarSystemData() {
             // mass(kg) - color - type
             asteroidFactory(200, 'Main Asteroid', sun, 1e6, 2e6, 600e9, 750e9, 10e10, '#5E574F', 'Asteroid')
                 .forEach(a => mainBelt.push(a));
-
             asteroidFactory(1000, 'Kuiper Asteroid', sun, 1e6, 2e6, 30 * AE, 20 * AE, 10e10, '#5E574F', 'Asteroid')
                 .forEach(a => kuiperBelt.push(a));
-            asteroidFactory(1000, 'Oort Cloud Asteroid', sun, 1e7, 1e8, 2000 * AE, 5000 * AE, 1e25, '#5E574F', 'Asteroid')
+            asteroidFactory(1000, 'Oort Cloud Asteroid', sun, 1e8, 1e9, 2000 * AE, 5000 * AE, 1e25, '#5E574F', 'Asteroid')
                 .forEach(a => oortCloud.push(a))
             asteroids = [...mainBelt, ...kuiperBelt, ...oortCloud];
             // sun = solarSystem.find(o => o.name == 'Sun');
@@ -61,118 +60,9 @@ const mainBelt = [];
 const kuiperBelt = [];
 const oortCloud = [];
 let asteroids = [];
-// let sun;
-// loadSolarSystemData();
-
-// ASTEROIDS ARRAYS
-// Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color - Type
-// const sun = new Sun("Sun", Center, .696342, 0, 0, 0, 1.9855e30, "#F2A516", "Star");
-
-
-// Planets
-// const mercury = new Planet("Mercury", sun, .00243964, 57.909175, 47.8725, 0.20563069, 3.302e23, "#BFB6AE", 'Planet');
-// const venus = new Planet("Venus", sun, .00605159, 108.208930, 35.0214, 0.00677323, 4.869e24, "#F2C879", 'Planet');
-// const earth = new Planet("Earth", sun, .0063781, 149.597890, 29.7859, 0.01671022, 5.972e24, "#03588C", 'Planet');
-// const mars = new Planet("Mars", sun, .00339700, 227.936640, 24.1309, 0.09341233, 6.4191e23, "#F24E29", 'Planet');
-// const jupiter = new Planet("Jupiter", sun, .07149268, 778.412010, 13.0697, 0.04839266, 1.8987e27, "#D96C0D", 'Planet');
-// const saturn = new Planet("Saturn", sun, .06026714, 1426.725400, 9.6726, 0.05415060, 5.6851e26, "#D9CAAD", 'Planet');
-// const uranus = new Planet("Uranus", sun, .02555725, 2870.972200, 6.8352, 0.04716771, 8.6849e25, "#BBE2F2", 'Planet');
-// const neptune = new Planet("Neptune", sun, .02476636, 4498.252900, 5.4778, 0.00858587, 1.0244e26, "#5368A6", 'Planet');
-
-// // Dwarfs and Minor Planets
-// const ceres = new Planet("Ceres", sun, .000473, 413.700000, 17.882, 0.080, 9.39e20, "#626973", 'Dwarf');
-// const pluto = new Planet("Pluto", sun, .001190, 5906.3800000, 4.7490, 0.24880766, 1.305e22, "#626973", 'Dwarf');
-// const haumea = new Planet("Haumea", sun, .000816, 6484.000000, 4.484, .18874, 4.01e21, "#626973", 'Dwarf');
-// const makemake = new Planet("Makemake", sun, .000715, 6850.000000, 4.4, .159, 4.4e21, "#626973", 'Dwarf');
-// const eris = new Planet("Eris", sun, .001163, 10210.000000, 3.436, .44177, 1.7e22, "#F24E29", 'Dwarf');
-// const eros = new Planet('Eros', sun, .00000842, 1.4579 * AE, 24.36, .223, 7.2e15, '#626973', 'Dwarf');
-
-// Moons
-// Earth Moon
-// const moon = new Moon("Moon", earth, .0017371, .384399, 1.022, 0.0549, 7.3477e22, "#F2F2F2", "Moon");
-// // Mars Moons
-// const phobos = new Moon("Phobos", mars, .0000111, .009270, 2.138, 0.0151, 1.08e16, "#D9D9D9", "Moon");
-// const deimos = new Moon("Deimos", mars, .0000062, .023460, 1.3513, 0.00033, 2e15, "#D9D9D9", "Moon");
-// // Jupiter Moons
-// const io = new Moon("Io", jupiter, .001815, .421600, 17.34, 0.00410, 8.94e22, "#F2CF63", "Moon");
-// const europa = new Moon("Europa", jupiter, .001569, .670900, 13.74, 0.009, 4.8e22, "#049DBF", "Moon");
-// const ganymede = new Moon("Ganymede", jupiter, .0026341, 1.070400, 10.880, 0.0013, 14.819e22, "#F2F0D8", "Moon");
-// const callisto = new Moon("Callisto", jupiter, .0024103, 1.882700, 8.204, 0.0074, 10.758e22, "#8C7E6D", "Moon");
-// // Saturn Moons
-// const mimas = new Moon("Mimas", saturn, .0001983, .185520, 14.32, 0.0202, 0.00375e22, "#F2F0D8", "Moon");
-// const enceladus = new Moon("Enceladus", saturn, .0002521, .238020, 12.63, 0.0047, 0.0108e22, "#F2F0D8", "Moon");
-// const tethys = new Moon("Tethys", saturn, .000533, .294619, 11.35, 0.02, .06174e22, "#F2F0D8", "Moon");
-// const dione = new Moon("Dione", saturn, .0005617, .377396, 10.03, 0.002, .1095e22, "#F2F0D8", "Moon");
-// const rhea = new Moon("Rhea", saturn, .0007643, .527108, 8.48, 0.001, .2306e22, "#F2F0D8", "Moon");
-// const titan = new Moon("Titan", saturn, .002576, 1.221870, 5.57, 0.0288, 13.452e22, "#F2CF63", "Moon");
-// const hyperion = new Moon("Hyperion", saturn, .0001386, 1.841000, 5.00, 0.123006, 5.6199e18, "#F2F0D8", "Moon");
-// const iapetus = new Moon("Iapetus", saturn, .0007356, 3.560820, 3.265, 0.0286, .18053e22, "#F2F0D8", "Moon");
-// // Uranus Moons
-// const miranda = new Moon("Miranda", uranus, .0002358, .129390, 6.657, 0.0013, .00659e22, "#F2F0D8", "Moon");
-// const ariel = new Moon("Ariel", uranus, .0005789, .190900, 5.50898, 0.0012, .135e22, "#F2F0D8", "Moon");
-// const umbriel = new Moon("Umbriel", uranus, .0005847, .265970, 4.66797, 0.005, .12e22, "#F2F0D8", "Moon");
-// const titania = new Moon("Titania", uranus, .0007889, .435840, 3.644, 0.0011, .35e22, "#F2F0D8", "Moon");
-// const oberon = new Moon("Oberon", uranus, .0007614, .583519, 3.152, 0.0014, .3014e22, "#F2F0D8", "Moon");
-// // Neptune Moon
-// const triton = new Moon("Triton", neptune, .0013534, .354759, 4.39, 0.00002, 2.14e22, "#F2C879", "Moon");
-// // Pluto Moon
-// const charon = new Moon("Charon", pluto, .0006035, .017536, 0.2, 0.0022, .152e22, "#F2C879", "Moon");
-
-// Asteroid Belts - Sizes not to scale
-// const mainBelt = asteroidFactory(200, 'Main Asteroid', sun, .001, .002, 600, 750, 17, 25, 0, .2, 10e10, '#5E574F', 'Asteroid');
-// const kuiperBelt = asteroidFactory(1000, 'Kuiper Asteroid', sun, .001, .002, 30 * AE, 20 * AE, 17, 25, 0, .1, 10e10, '#5E574F', 'Asteroid');
-// const oortCloud = asteroidFactory(1000, 'Oort Cloud Asteroid', sun, .6, 1, 2000 * AE, 5000 * AE, -17, -25, 0, .1, 1e25, '#5E574F', 'Asteroid');
 
 // Space Probes
 // const voyager1 = new Probe('Yoyager 1', Center, .003, 152.2 * AE, 17, 0, 825.5, 'white', 'Probe');
-
-// Planets Array
-// const planets = [
-//     mercury,
-//     venus,
-//     earth,
-//     mars,
-//     jupiter,
-//     saturn,
-//     uranus,
-//     neptune,
-// ];
-
-// Dwarfs Array
-// const dwarfs = [
-//     pluto,
-//     ceres,
-//     haumea,
-//     makemake,
-//     eris,
-//     eros
-// ]
-
-// // Moons Array
-// const moons = [
-//     moon,
-//     deimos,
-//     phobos,
-//     io,
-//     europa,
-//     ganymede,
-//     callisto,
-//     mimas,
-//     enceladus,
-//     tethys,
-//     dione,
-//     rhea,
-//     titan,
-//     hyperion,
-//     iapetus,
-//     miranda,
-//     ariel,
-//     umbriel,
-//     titania,
-//     oberon,
-//     triton,
-//     charon
-// ];
 
 // OBSERVABLE UNIVERSE SCALE Radius 46,5 billion light-years / 93 billion light-years
 // const universe = new Galaxy('Observable Universe', Center, 46.5e9 * LY, 0, 0, 0, 1.5e53, 'white', 'Universe');

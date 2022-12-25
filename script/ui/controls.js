@@ -74,7 +74,7 @@ window.addEventListener("keypress", e => {
             cameraBody = planets[Math.floor(Math.random() * planets.length)];
             break;
         case "a":
-            scale = 1e-9;
+            scale *= 1e-1;
             break;
         case "c":
             cameraBody = null;
