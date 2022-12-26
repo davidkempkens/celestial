@@ -54,7 +54,7 @@ class Planet extends CelestialBody {
         this.v = Math.sqrt(G * (this.M + this.m) * ((2 / this.r) - (1 / this.a)));
         this.r = this.p / (1 + this.eps * Math.cos(this.phi));
         this.w = this.v / this.r
-        this.phi -= this.w * dt;
+        this.phi -= this.w * dt / fps;
         this.x = this.center.x + this.r * Math.cos(this.phi);
         this.y = this.center.y + this.r * Math.sin(this.phi);
 

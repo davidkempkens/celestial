@@ -9,8 +9,6 @@ const img = document.getElementById('img');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-
-
 // Booleans to toggle in main loop - for user input
 let stopTime = false;
 let showTrajectories = false;
@@ -51,11 +49,13 @@ const WEEK = 60 * 60 * 24 * 7;
 const MONTH = 60 * 60 * 24 * 30;
 const YEAR = 60 * 60 * 24 * 365;
 
-// Time in seconds - 94 days in 2022
+// Time in seconds
 let clock = 0;
 let frames = 0;
+
 // Scale for time - 1 = REAL TIME 1s = 1s
-let dt = 1 / 60;
+let fps = 60;
+let dt = 1;
 
 // SPEED OF LIGHT - C
 const C = 299792458;
@@ -221,7 +221,7 @@ function zoomOut() {
 
 function toggleTime() {
     i = ++i % timeControl.length;
-    dt = timeControl[i][1] * 1 / 60;
+    dt = timeControl[i][1] * 1 / fps;
 }
 
 function secToTime(s) {

@@ -61,7 +61,7 @@ const oortCloud = [];
 let asteroids = [];
 
 // Space Probes
-// const voyager1 = new Probe('Yoyager 1', Center, .003, 152.2 * AE, 17, 0, 825.5, 'white', 'Probe');
+const voyager1 = new Probe('Yoyager 1', Center, .003, 152.2 * AE, 17, 0, 825.5, 'white', 'Probe');
 
 // OBSERVABLE UNIVERSE SCALE Radius 46,5 billion light-years / 93 billion light-years
 // const universe = new Galaxy('Observable Universe', Center, 46.5e9 * LY, 0, 0, 0, 1.5e53, 'white', 'Universe');

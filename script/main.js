@@ -28,13 +28,14 @@ function start() {
 
 async function setup() {
     await loadSolarSystemData();
-    setInterval(start, 1000 / 60);
+    setInterval(start, 1000 / fps);
 }
+
 // DRAW SUNS, PLANETS, MOONS, ORBITS AND COLLISION DETECTION
 function runUniverse() {
 
     if (stopTime) dt = 0;
-    else dt = timeControl[i][1] * 1 / 60;
+    else dt = timeControl[i][1];
     if (showTrajectories && scale > 1e-12) {
         solarSystem.forEach(s => s.drawOrbit())
     }
@@ -237,8 +238,8 @@ function runCollisionDetection() {
 
 function runClock() {
     frames++;
-    if (frames === 60) {
-        clock += dt * 60;
+    if (frames === fps) {
+        clock += dt;
         frames = 0;
     }
 
