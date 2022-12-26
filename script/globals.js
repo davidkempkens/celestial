@@ -23,6 +23,14 @@ let trans = {
     y: 0
 }
 
+const scales = {
+    fullSun: 5e-7,
+    inner: 1e-9,
+    outer: 5e-11,
+    oort: 1e-12,
+    out: 1e-14
+}
+
 timeControl = [
     ['sec', 1],
     ['min', 60],

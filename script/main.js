@@ -41,8 +41,14 @@ function runUniverse() {
     let earth = solarSystem.find(x => x.name == 'Earth');
     let moon = solarSystem.find(x => x.name == 'Moon');
     planets.forEach(p => p.drawOrbit());
-    if (scale < 1e12) {
-        // c.fillRect(center.x - 50 * AU, center.y, 100 * AU, 1 / scale);
+    if (scale < 1e-12) {
+        // c.fillRect(Center.x - 50 * AE, Center.y, 100 * AE, 1 / scale);
+        planets.forEach(p => {
+            p.drawOrbit();
+        });
+        oortCloud.forEach(o => {
+            o.run();
+        });
     }
 
     // RUN ALL BODIES
@@ -132,8 +138,8 @@ function drawNames() {
         // voyager1.drawName();
         // if (voyager1.isColliding) voyager1.info();
     } else {
-        if (scale > 1e-16) drawText('Solar System', Center.x, Center.y - 50 * AE, 'white', 13);
-        // if (scale > .00003) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
+        if (scale > 1e-15) drawText('Solar System', Center.x, Center.y - 50 * AE, 'white', 13);
+        if (scale > 1e-15) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
         // voyager1.drawName();
         // if (voyager1.isColliding) voyager1.info();
     }

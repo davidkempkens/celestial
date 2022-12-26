@@ -140,9 +140,12 @@ class CelestialBody {
   }
 
   hover() {
-    this.R *= 5;
+    this.R *= 2;
+    let col = this.color;
+    this.color = 'white';
     this.draw();
-    this.R /= 5;
+    this.color = col;
+    this.R /= 2;
   }
 
   collision(other) {

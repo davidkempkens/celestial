@@ -5,7 +5,7 @@ function asteroidFactory(count, name, center, minRadius, maxRadius, minDistance,
     let belt = [];
     for (let i = 0; i < count; i++) {
         let n = i + ". " + name;
-        let r = (minRadius + (Math.random() * (maxRadius - minRadius))) * 1e3;
+        let r = (minRadius + (Math.random() * (maxRadius - minRadius))) * 8e2;
         let d1 = minDistance + (Math.random() * (maxDistance - minDistance));
         let d2 = minDistance + (Math.random() * (maxDistance - minDistance));
 
