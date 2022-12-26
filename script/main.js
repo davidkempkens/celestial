@@ -36,11 +36,14 @@ function runUniverse() {
 
     if (stopTime) dt = 0;
     else dt = timeControl[i][1];
+
+    let earth = solarSystem.find(x => x.name == 'Earth');
+    let moon = solarSystem.find(x => x.name == 'Moon');
+
+
     if (showTrajectories && scale > 1e-12) {
         solarSystem.forEach(s => s.drawOrbit())
     }
-    let earth = solarSystem.find(x => x.name == 'Earth');
-    let moon = solarSystem.find(x => x.name == 'Moon');
     planets.forEach(p => p.drawOrbit());
     if (scale < 1e-12) {
         // c.fillRect(Center.x - 50 * AE, Center.y, 100 * AE, 1 / scale);
@@ -65,7 +68,7 @@ function runUniverse() {
     if (scale > 1e-12)
         asteroids.forEach(a => a.run());
     // oortCloud.forEach(o => o.run());
-    // voyager1.run();
+    voyager1.run();
     // lightRay.run();
     // OTHER BODIES
     // suns.forEach(s => s.run());
@@ -136,8 +139,8 @@ function drawNames() {
             if (scale > 1e-7) m.drawName();
             if (scale > 1e-7 && m.isColliding) m.info();
         });
-        // voyager1.drawName();
-        // if (voyager1.isColliding) voyager1.info();
+        voyager1.drawName();
+        if (voyager1.isColliding) voyager1.info();
     } else {
         if (scale > 1e-15) drawText('Solar System', Center.x, Center.y - 50 * AE, 'white', 13);
         if (scale > 1e-15) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
@@ -196,12 +199,19 @@ function camera(body) {
     //     x: body instanceof FlyingBody ? body.x + body.v : body.center.x + body.a * Math.cos(body.w + (scaleV * (body.velocity / body.distance))) * body.d,
     //     y: body instanceof FlyingBody ? body.y : body.center.y + body.b * Math.sin(body.w + (scaleV * (body.velocity / body.distance))) * body.d
     // }
+
     let bodyPosition = {
         x: body.center.x + body.r * Math.cos(body.phi - body.w * dt),
         y: body.center.y + body.r * Math.sin(body.phi - body.w * dt)
     }
 
     if (body.name == 'Sun') {
+        bodyPosition = {
+            x: body.x,
+            y: body.y
+        };
+    } else if (body instanceof FlyingBody) {
+        console.log(body)
         bodyPosition = {
             x: body.x,
             y: body.y
@@ -217,7 +227,7 @@ function camera(body) {
 // RUN COLLISION DETECTION
 // SOLAR SYSTEM BODIES
 function runCollisionDetection() {
-    // solarSystem[0].collision(mouse);
+    // sun.collision(mouse);
     // planets.forEach(p => p.collision(mouse));
     // dwarfs.forEach(d => d.collision(mouse));
     // moons.forEach(m => m.collision(mouse));
@@ -225,7 +235,7 @@ function runCollisionDetection() {
     if (scale > 1e-12)
         asteroids.forEach(a => a.collision(mouse));
     // oortCloud.forEach(o => o.collision(mouse));
-    // voyager1.collision(mouse);
+    voyager1.collision(mouse);
     // lightRay.collision(mouse);
     // // OTHER BODIES
     // suns.forEach(s => s.collision(mouse));

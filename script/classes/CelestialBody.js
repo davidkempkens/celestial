@@ -1,15 +1,17 @@
 // Name - Center - Radius(m) - Periapsis(m) - Apoapsis(m) - Mass(kg) - Color - Type
+/** 
+* Create a celestial body
+* @param {String} name Name
+* @param {String} center The name of the center body.
+* @param {Number} radius The Radius of the body.
+* @param {Number} distance Distance to the other body in meters.
+* @param {Number} velocity Velocity relative to its center body in meters per second.
+* @param {Number} mass Mass of the body in kg.
+* @param {String} color Color
+* @param {String} type Type of the body.
+*/
 class CelestialBody {
-  constructor(
-    name,
-    center,
-    radius,
-    distance,
-    velocity,
-    mass,
-    color,
-    type
-  ) {
+  constructor(name, center, radius, distance, velocity, mass, color, type) {
     this.name = name;
     this.center = center;
     this.color = color;

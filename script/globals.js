@@ -121,18 +121,6 @@ const symbols = {
     c: '\u03B3'
 };
 
-const colors = {
-    sun: "#F2A516",
-    mercury: "#BFB6AE",
-    venus: "#F2C879",
-    earth: "#03588C",
-    mars: "#F24E29",
-    jupiter: "#D96C0D",
-    saturn: "#D9CAAD",
-    uranus: "#BBE2F2",
-    neptune: "#5368A6"
-};
-
 const initialDeg = {
     mercury: 180,
     venus: 300,
