@@ -1,8 +1,67 @@
 class Planet extends CelestialBody {
 
     constructor(name, center, radius, periapsis, apoapsis, mass, color, type) {
-        super(name, center, radius, periapsis, apoapsis, mass, color, type);
+        super(name, center, radius, 0, 0, mass, color, type);
+        this.M = center.m;
+        this.m = mass;
+        this.rp = periapsis;
+        this.ra = apoapsis;
+
+        // Semi-major axis
+        this.a = (this.rp + this.ra) / 2;
+
+        // Energy
+        this.E = -G * this.M * this.m / (2 * this.a);
+
+        // Angular momentum
+        this.L = Math.sqrt(2 * G * this.M * this.m ** 2 * ((this.rp * this.ra) / (this.ra + this.rp)));
+
+        // Parameter p, k, eps
+        this.p = this.L ** 2 / (G * this.M * this.m ** 2);
+        this.k = 2 * this.m * this.L ** 2 / (G * this.M * this.m ** 2) ** 2;
+
+        // Numerical eccentricity
+        this.eps = Math.sqrt(1 + this.k * this.E);
+
+        // Semi-minor axis
+        this.b = this.a * Math.sqrt(1 - this.eps ** 2);
+
+        // Linear eccentricity
+        this.e = Math.sqrt(this.a ** 2 - this.b ** 2);
+
+        // Polar coordinates
+        this.phi = isNaN(initialDeg[this.name.toLowerCase()])
+            ? Math.random() * deg(360)
+            : deg(initialDeg[this.name.toLowerCase()]);
+        this.r = this.p / (1 + this.eps * Math.cos(this.phi));
+
+        // Orbital velocity
+        this.v = Math.sqrt(G * (this.M + this.m) * ((2 / this.r) - (1 / this.a)));
+
+        // Angular velocity
+        this.w = this.v / this.r;
+
+        // Cartesion coordinates
+        this.x = this.r * Math.cos(this.phi);
+        this.y = this.r * Math.sin(this.phi);
+
+        // flag for collision function
+        this.isColliding = false;
     }
+
+    run() {
+        // Physics for orbiting Bodies - Update angular velocity
+        this.v = Math.sqrt(G * (this.M + this.m) * ((2 / this.r) - (1 / this.a)));
+        this.r = this.p / (1 + this.eps * Math.cos(this.phi));
+        this.w = this.v / this.r
+        this.phi -= this.w * dt;
+        this.x = this.center.x + this.r * Math.cos(this.phi);
+        this.y = this.center.y + this.r * Math.sin(this.phi);
+
+        // Call the draw function to draw the body as filled circle on the canvas
+        this.draw();
+    }
+
     draw() {
 
         // draw the half of Saturn's rings first, so they appear behind Saturn

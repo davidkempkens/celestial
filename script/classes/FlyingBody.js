@@ -15,7 +15,7 @@ class FlyingBody extends CelestialBody {
         c.beginPath();
         c.strokeStyle = this.color;
         c.lineWidth = .3 / scale;
-        c.moveTo(this.center.x + this.center.r, this.center.y);
+        c.moveTo(this.center.x + this.center.R, this.center.y);
         c.lineTo(this.x, this.y);
         c.stroke();
         c.closePath();

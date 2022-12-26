@@ -1,4 +1,4 @@
-class Asteroid extends CelestialBody {
+class Asteroid extends Planet {
 
     tail(w, l) {
         let rotation = deg(0);
@@ -9,5 +9,14 @@ class Asteroid extends CelestialBody {
         c.ellipse(this.center.x, this.center.y, this.a * this.d, this.b * this.d, rotation, this.w, this.w + deg(l));
         c.stroke();
         c.closePath();
+    }
+
+    hover() {
+        this.R *= 2;
+        let col = this.color;
+        this.color = 'white';
+        this.draw();
+        this.color = col;
+        this.R /= 2;
     }
 }

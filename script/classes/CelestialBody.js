@@ -4,8 +4,8 @@ class CelestialBody {
     name,
     center,
     radius,
-    periapsis,
-    apoapsis,
+    distance,
+    velocity,
     mass,
     color,
     type
@@ -20,57 +20,31 @@ class CelestialBody {
     this.R = radius;
     this.M = center.m;
     this.m = mass;
-    this.rp = periapsis;
-    this.ra = apoapsis;
 
-    // Semi-major axis
-    this.a = (this.rp + this.ra) / 2;
+    // Distance
+    this.d = distance;
 
-    // Energy
-    this.E = -G * this.M * this.m / (2 * this.a);
-
-    // Angular momentum
-    this.L = Math.sqrt(2 * G * this.M * this.m ** 2 * ((this.rp * this.ra) / (this.ra + this.rp)));
-
-    // Parameter p, k, eps
-    this.p = this.L ** 2 / (G * this.M * this.m ** 2);
-    this.k = 2 * this.m * this.L ** 2 / (G * this.M * this.m ** 2) ** 2;
-
-    // Numerical eccentricity
-    this.eps = Math.sqrt(1 + this.k * this.E);
-
-    // Semi-minor axis
-    this.b = this.a * Math.sqrt(1 - this.eps ** 2);
-
-    // Linear eccentricity
-    this.e = Math.sqrt(this.a ** 2 - this.b ** 2);
+    // Velocity
+    this.v = velocity;
 
     // Polar coordinates
     this.phi = isNaN(initialDeg[this.name.toLowerCase()])
       ? Math.random() * deg(360)
       : deg(initialDeg[this.name.toLowerCase()]);
-    this.r = this.p / (1 + this.eps * Math.cos(this.phi));
-
-    // Orbital velocity
-    this.v = Math.sqrt(G * (this.M + this.m) * ((2 / this.r) - (1 / this.a)));
-
-    // Angular velocity
-    this.w = this.v / this.r;
+    this.r = this.d;
 
     // Cartesion coordinates
-    this.x = this.r * Math.cos(this.phi);
-    this.y = this.r * Math.sin(this.phi);
+    this.x = this.center.x + this.r * Math.cos(this.phi);
+    this.y = this.center.y + this.r * Math.sin(this.phi);
 
     // flag for collision function
     this.isColliding = false;
   }
 
   run() {
-    // Physics for orbiting Bodies - Update angular velocity
-    this.v = Math.sqrt(G * (this.M + this.m) * ((2 / this.r) - (1 / this.a)));
-    this.r = this.p / (1 + this.eps * Math.cos(this.phi));
-    this.w = this.v / this.r
-    this.phi -= this.w * dt;
+
+    this.r = this.d;
+
     this.x = this.center.x + this.r * Math.cos(this.phi);
     this.y = this.center.y + this.r * Math.sin(this.phi);
 
@@ -113,10 +87,6 @@ class CelestialBody {
       c.fillStyle = copies[i].color;
       copies[i].draw();
 
-      // rescaleDynamic()
-      // copies[i].drawName();
-      // scaleDynamic()
-
       if (copies.length > 2) continue;
       if (i < 1)
         c.fillRect(
@@ -137,15 +107,6 @@ class CelestialBody {
 
   drawName() {
     drawText(this.name, this.x + this.R, this.y, this.color, 13);
-  }
-
-  hover() {
-    this.R *= 2;
-    let col = this.color;
-    this.color = 'white';
-    this.draw();
-    this.color = col;
-    this.R /= 2;
   }
 
   collision(other) {
