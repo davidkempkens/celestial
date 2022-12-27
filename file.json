@@ -505,7 +505,75 @@
     "radius": 19e12,
     "distance": 53.49e6,
     "velocity": 0,
-    "mass": 7.22e9,
+    "mass": 6.6e9,
+    "color": "white",
+    "type": "Black Hole",
+    "colors": [
+      "#F2B705",
+      "#F29F05",
+      "#BF3604",
+      "#591E08",
+      "#000000"
+    ]
+  },
+  {
+    "name": "Sagittarius A*",
+    "center": "Center",
+    "radius": 24.5e9,
+    "distance": 26673,
+    "velocity": 0,
+    "mass": 4.154e6,
+    "color": "white",
+    "type": "Black Hole",
+    "colors": [
+      "#59D9D9",
+      "#4ECBD9",
+      "#3097BF",
+      "#024959",
+      "#000000"
+    ]
+  },
+  {
+    "name": "BL Lacertae*",
+    "center": "Center",
+    "radius": 115e9,
+    "distance": 900e6,
+    "velocity": 0,
+    "mass": 30e6,
+    "color": "white",
+    "type": "Black Hole",
+    "colors": [
+      "#F2E7DC",
+      "#A9D9D0",
+      "#038C7F",
+      "#027373",
+      "#000"
+    ]
+  },
+  {
+    "name": "Cygnus A",
+    "center": "Center",
+    "radius": 14700e9,
+    "distance": 760e6,
+    "velocity": 0,
+    "mass": 2.5e9,
+    "color": "white",
+    "type": "Black Hole",
+    "colors": [
+      "#F24405",
+      "#D90452",
+      "#8C035C",
+      "#090126",
+      "#000000"
+    ]
+  },
+  {
+    "name": "TON 618",
+    "center": "Center",
+    "radius": 1.949e12,
+    "distance": 10.37e9,
+    "velocity": 0,
+    "mass": 66e9,
     "color": "white",
     "type": "Black Hole",
     "colors": [

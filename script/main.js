@@ -97,7 +97,7 @@ function runUniverse() {
             m.drawTrajectory()
             m.compare([moon]);
         }
-        if (scale > 1e-7 && showTrajectories) m.drawTrajectory()
+        if (scale > 1e-8) m.drawTrajectory()
     });
     asteroids.forEach(a => {
         if (a.isColliding && scale > 1e-14) {

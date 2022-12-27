@@ -73,6 +73,7 @@ class CelestialBody {
     let copies = other
       .filter((o) => o.name !== this.name)
       .map((o) => this.copy(o));
+    // console.log(copies)
     for (let i = 0; i < copies.length; i++) {
       // Copy other body to alter the x,y position, without changing the orbit of the other body
       copies[i].x = i < 1 ? this.x : copies[i - 1].x;
@@ -87,9 +88,6 @@ class CelestialBody {
       rescaleDynamic();
       copies[i].drawName();
       scaleDynamic();
-
-      if (cameraBody == this) {
-      }
 
       if (copies.length > 2) continue;
       if (i < 1)
@@ -159,20 +157,23 @@ class CelestialBody {
   }
 
   copy(copy) {
-    // return Object.create(copy);
-    if (copy instanceof BlackHole)
-      return new BlackHole(
-        copy.name,
-        copy.center,
-        copy.radius,
-        copy.distance,
-        copy.velocity,
-        copy.eccentricity,
-        copy.mass,
-        copy.color,
-        copy.type,
-        copy.colBH
-      );
+    return Object.create(copy);
+    if (copy instanceof BlackHole) {
+      let o =
+        new BlackHole(
+          copy.name,
+          copy.center,
+          copy.radius,
+          copy.distance,
+          copy.velocity,
+          copy.mass,
+          copy.color,
+          copy.type,
+          copy.colBH
+        );
+      console.log(o)
+      return o;
+    }
     // console.log(createInstance(copy.type, copy));
     return new CelestialBody(
       copy.name,

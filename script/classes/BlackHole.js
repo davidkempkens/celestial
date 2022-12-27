@@ -15,10 +15,8 @@ class BlackHole extends CelestialBody {
 
     constructor(name, center, radius, distance, velocity, mass, color, type, colors) {
         super(name, center, radius, distance * LY, velocity, mass * SOLAR_MASS, color, type);
-        // this.w = 0;
-
+        this.R = (2 * G * this.m) / (C ** 2)
         this.colBH = colors;
-        // this.colBH = ["#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"];
 
         // PARTICLE PROPERTIES
         this.particle = {
@@ -48,7 +46,10 @@ class BlackHole extends CelestialBody {
             this.particle.maxD,
             this.particle.m,
             this.particle.color,
-            this.particle.t);
+            this.particle.t)
+        this.particles.forEach(p => {
+            p.color = this.particle.colors[Math.floor(Math.random() * this.particle.colors.length)]
+        });
     }
 
 
@@ -69,7 +70,6 @@ class BlackHole extends CelestialBody {
         for (let i = 0; i < this.colBH.length; i++) {
             c.fillStyle = this.colBH[i];
             c.beginPath();
-            // this.R * 1 - i * 1e-1;
             c.arc(this.x, this.y, this.R * (1 - (i * 1e-2)), 0, Math.PI * 2);
             c.closePath();
             c.fill();
@@ -77,35 +77,9 @@ class BlackHole extends CelestialBody {
     }
 
     vortex() {
-        let minSpeed = (this.particle.minV / this.particle.minD) * dt;
-        let maxSpeed = (this.particle.maxV / this.particle.maxD) * dt;
-        let rate = (maxSpeed - minSpeed) * .1;
         this.particles.forEach(p => {
-
-            if (p.v <= maxSpeed) {
-                if (!stopTime) p.v += rate;
-                let interval = (maxSpeed - minSpeed) / this.particle.colors.length;
-                let accumulated = p.v - minSpeed;
-                let idx = this.particle.colors.length - Math.floor(accumulated / interval);
-                if (!isNaN(idx)) p.color = this.particle.colors[idx];
-            }
-            // if (!stopTime) p.r -= p.r / 3000;
-            // if (p.d < p.center.r) {
-            //     let i = this.particles.indexOf(p);
-            //     if (i > -1) this.particles.splice(i, 1);
-            //     let newParticle = asteroidFactory(1, this.particle.name, this, this.particle.minR, this.particle.maxR, this.particle.minD, this.particle.maxD, this.particle.minV, this.particle.maxV, this.particle.minE, this.particle.maxE, this.particle.m, this.particle.color, this.particle.t);
-            //     newParticle.forEach(nP => this.particles.push(nP));
-
-            // }
-            // p.rp += 1e3 * dt;
             p.tail(p.R, 10);
-            // p.drawTrajectory()
             p.run();
-            // p.color = 'white'
-            rescaleDynamic();
-            // p.drawName();
-            // if (p.name == '0. Asteroid of M87*') p.info();
-            scaleDynamic();
         });
     }
 
