@@ -106,7 +106,7 @@ function runUniverse() {
         }
     });
     suns.forEach(s => {
-        if (s.isColliding) s.compare([sun, ...suns]);
+        if (s.isColliding) s.compare([sun, ...suns, ...blackHoles]);
     });
     // alphaCentauri.forEach(a => {
     //     if (a.isColliding) a.compare([sun]);
