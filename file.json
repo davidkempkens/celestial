@@ -418,5 +418,85 @@
     "mass": 0.9092,
     "color": "#D98F4E",
     "type": "Star"
+  },
+  {
+    "name": "Barnard's Star",
+    "center": "Center",
+    "radius": 0.2,
+    "distance": 5.958,
+    "velocity": 0,
+    "mass": 0.144,
+    "color": "#D9042B",
+    "type": "Star"
+  },
+  {
+    "name": "Sirius A",
+    "center": "Center",
+    "radius": 1.711,
+    "distance": 8.611,
+    "velocity": 0,
+    "mass": 2.063,
+    "color": "#52CBD9",
+    "type": "Star"
+  },
+  {
+    "name": "Beta Centauri",
+    "center": "Center",
+    "radius": 9,
+    "distance": 391.4,
+    "velocity": 0,
+    "mass": 12.02,
+    "color": "#3037BF",
+    "type": "Star"
+  },
+  {
+    "name": "R136a1",
+    "center": "Center",
+    "radius": 39.2,
+    "distance": 163000,
+    "velocity": 0,
+    "mass": 215,
+    "color": "#79DCF2",
+    "type": "Star"
+  },
+  {
+    "name": "Gacrux",
+    "center": "Center",
+    "radius": 120,
+    "distance": 88.71,
+    "velocity": 0,
+    "mass": 1.5,
+    "color": "#D91438",
+    "type": "Star"
+  },
+  {
+    "name": "Pistol Star",
+    "center": "Center",
+    "radius": 420,
+    "distance": 26.090,
+    "velocity": 0,
+    "mass": 27.5,
+    "color": "#0597F2",
+    "type": "Star"
+  },
+  {
+    "name": "Rho Cassiopeiae",
+    "center": "Center",
+    "radius": 981,
+    "distance": 3400,
+    "velocity": 0,
+    "mass": 40,
+    "color": "#F5EFC8",
+    "type": "Star"
+  },
+  {
+    "name": "Stephenson 2-18",
+    "center": "Center",
+    "radius": 2150,
+    "distance": 19570,
+    "velocity": 0,
+    "mass": 1000,
+    "color": "#F21905",
+    "type": "Star"
   }
 ]

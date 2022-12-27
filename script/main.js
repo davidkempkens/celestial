@@ -105,9 +105,9 @@ function runUniverse() {
             a.hover();
         }
     });
-    // suns.forEach(s => {
-    //     if (s.isColliding) s.compare([sun, ...suns]);
-    // });
+    suns.forEach(s => {
+        if (s.isColliding) s.compare([sun, ...suns]);
+    });
     // alphaCentauri.forEach(a => {
     //     if (a.isColliding) a.compare([sun]);
     // });
@@ -148,8 +148,8 @@ function drawNames() {
     // OTHER BODIES
     suns.forEach(s => {
         s.drawName();
+        if (s.isColliding) s.info();
         if (scale < 1e-9) {
-            if (s.isColliding) s.info();
         }
     })
 

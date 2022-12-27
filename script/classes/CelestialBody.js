@@ -84,6 +84,12 @@ class CelestialBody {
       c.fillStyle = copies[i].color;
       copies[i].draw();
 
+      rescaleDynamic();
+      copies[i].drawName();
+      scaleDynamic();
+      if (cameraBody == this) {
+      }
+
       if (copies.length > 2) continue;
       if (i < 1)
         c.fillRect(

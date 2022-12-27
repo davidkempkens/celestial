@@ -17,9 +17,9 @@ async function loadSolarSystemData() {
                     if (d.name == 'Sun') {
                         solarSystem.push(s);
                         sun = s;
+                    } else {
+                        suns.push(s);
                     }
-                    suns.push(s);
-
                     if (s.name == 'Alpha Centauri B') {
                         s.center = suns.find(ss => ss.name == 'Alpha Centauri A');
                         s.r = 35.8 * AE;
@@ -50,7 +50,7 @@ async function loadSolarSystemData() {
             asteroids = [...mainBelt, ...kuiperBelt, ...oortCloud];
 
             updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
-            // updateHUD([...alphaCentauri, ...suns], hudSuns);
+            updateHUD([...suns], hudSuns);
             // updateHUD([...blackHoles, lightRay, voyager1, universe], hudOther);
 
             // Space Probes
