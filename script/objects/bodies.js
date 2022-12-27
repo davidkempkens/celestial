@@ -36,6 +36,9 @@ async function loadSolarSystemData() {
                     let p = new Moon(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
                     moons.push(p)
                     solarSystem.push(p)
+                } else if (d.type == 'Black Hole') {
+                    m87 = new BlackHole(d.name, Center, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.colors);
+                    blackHoles.push(m87);
                 }
             });
 
@@ -49,15 +52,17 @@ async function loadSolarSystemData() {
                 .forEach(a => oortCloud.push(a))
             asteroids = [...mainBelt, ...kuiperBelt, ...oortCloud];
 
-            updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
-            updateHUD([...suns], hudSuns);
-            // updateHUD([...blackHoles, lightRay, voyager1, universe], hudOther);
-
             // Space Probes
             voyager1 = new Probe('Yoyager 1', Center, 3e6, 152.2 * AE, 17000, 825.5, 'white', 'Probe');
             // SPEED OF LIGHT
             lightRay = new Photon('C', sun, 1e6, sun.R, C, 0, 'cyan', 'Photon');
-            bigBodies = [sun, ...planets, ...dwarfs, ...moons, voyager1, lightRay, ...suns]
+
+            bigBodies = [sun, ...planets, ...dwarfs, ...moons, voyager1, lightRay, ...suns, ...blackHoles]
+            updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
+            updateHUD([...suns], hudSuns);
+            updateHUD([...blackHoles, lightRay, voyager1], hudOther);
+            // updateHUD([...blackHoles, lightRay, voyager1, universe], hudOther);
+
         })
 }
 
@@ -75,8 +80,8 @@ let asteroids = [];
 let voyager1;
 let lightRay;
 const suns = [];
-
-
+let m87;
+const blackHoles = []
 // OBSERVABLE UNIVERSE SCALE Radius 46,5 billion light-years / 93 billion light-years
 // const universe = new Galaxy('Observable Universe', Center, 46.5e9 * LY, 0, 0, 0, 1.5e53, 'white', 'Universe');
 
@@ -84,7 +89,7 @@ const suns = [];
 // const sagittariusA = new BlackHole('Sagittarius A*', Center, 17 * SOLAR_RADIUS, -26673 * LY, 0, 0, 4e6 * SOLAR_MASS, '#3097BF', 'Black Hole', ["#59D9D9", "#4ECBD9", "#3097BF", "#024959", "#000000"]);
 // const bLLacertae = new BlackHole('BL Lacertae*', Center, 115 * SOLAR_RADIUS, -9e8 * LY, 0, 0, 1, 'white', 'Black Hole', ["#F2E7DC", "#A9D9D0", "#038C7F", '#027373', "#000"])
 // const cygnusA = new BlackHole('Cygnus A', Center, 14700, -760e6 * LY, 0, 0, 2.5e9 * SOLAR_MASS, 'white', 'Black Hole', ["#F24405", "#D90452", "#8C035C", "#090126", "#000000"])
-// const m87 = new BlackHole('M87*', Center, 19000, -53.49e6 * LY, 0, 0, 7.22e9 * SOLAR_MASS, 'white', 'Black Hole', ["#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"]);
+// const m87 = new BlackHole('M87*', Center, 19e12, -53.49e6 * LY, 0, 7.22e9 * SOLAR_MASS, 'white', 'Black Hole', ["#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"]);
 // const ton618 = new BlackHole('TON 618', Center, 1.949e5, 10.37e9 * LY, 0, 0, 66e9 * SOLAR_MASS, 'white', 'Black Hole', ["#F2B705", "#F29F05", "#BF3604", "#591E08", "#000000"]);
 
 // GALAXIES

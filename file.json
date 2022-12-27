@@ -498,5 +498,22 @@
     "mass": 1000,
     "color": "#F21905",
     "type": "Star"
+  },
+  {
+    "name": "M87*",
+    "center": "Center",
+    "radius": 19e12,
+    "distance": 53.49e6,
+    "velocity": 0,
+    "mass": 7.22e9,
+    "color": "white",
+    "type": "Black Hole",
+    "colors": [
+      "#F2B705",
+      "#F29F05",
+      "#BF3604",
+      "#591E08",
+      "#000000"
+    ]
   }
 ]

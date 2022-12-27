@@ -87,6 +87,7 @@ class CelestialBody {
       rescaleDynamic();
       copies[i].drawName();
       scaleDynamic();
+
       if (cameraBody == this) {
       }
 

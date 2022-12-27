@@ -62,6 +62,27 @@ class Planet extends CelestialBody {
     }
 
     run() {
+        // Semi-major axis
+        this.a = (this.rp + this.ra) / 2;
+
+        // Energy
+        this.E = -G * this.M * this.m / (2 * this.a);
+
+        // Angular momentum
+        this.L = Math.sqrt(2 * G * this.M * this.m ** 2 * ((this.rp * this.ra) / (this.ra + this.rp)));
+
+        // Parameter p, k, eps
+        this.p = this.L ** 2 / (G * this.M * this.m ** 2);
+        this.k = 2 * this.m * this.L ** 2 / (G * this.M * this.m ** 2) ** 2;
+
+        // Numerical eccentricity
+        this.eps = Math.sqrt(1 + this.k * this.E);
+
+        // Semi-minor axis
+        this.b = this.a * Math.sqrt(1 - this.eps ** 2);
+
+        // Linear eccentricity
+        this.e = Math.sqrt(this.a ** 2 - this.b ** 2);
         // Physics for orbiting Bodies - Update angular velocity
         this.v = Math.sqrt(G * (this.M + this.m) * ((2 / this.r) - (1 / this.a)));
         this.r = this.p / (1 + this.eps * Math.cos(this.phi));

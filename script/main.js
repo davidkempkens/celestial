@@ -72,7 +72,7 @@ function runUniverse() {
     // alphaCentauri.forEach(a => a.run());
     // m87.run();
     // sagittariusA.run()
-    // blackHoles.forEach(bH => bH.run());
+    blackHoles.forEach(bH => bH.run());
     // milkyWay.run();
     // universe.run();
 
@@ -112,9 +112,9 @@ function runUniverse() {
     //     if (a.isColliding) a.compare([sun]);
     // });
 
-    // blackHoles.forEach(bH => {
-    //     if (bH.isColliding) bH.compare([earth, sun, ...blackHoles])
-    // })
+    blackHoles.forEach(bH => {
+        if (bH.isColliding) bH.compare([earth, sun, ...blackHoles])
+    })
     // if (m87.isColliding) m87.compare([sun, ...suns, ...blackHoles]);
     // if (universe.isColliding) universe.compare([m87]);
 }
@@ -149,16 +149,12 @@ function drawNames() {
     suns.forEach(s => {
         s.drawName();
         if (s.isColliding) s.info();
-        if (scale < 1e-9) {
-        }
     })
 
-    // blackHoles.forEach(bh => {
-    //     if (scale > 1e-14) {
-    //         bh.drawName();
-    //         if (bh.isColliding) bh.info();
-    //     }
-    // })
+    blackHoles.forEach(bh => {
+        bh.drawName();
+        if (bh.isColliding) bh.info();
+    })
 
     // alphaCentauri.forEach(a => {
     //     if (scale > 1e-9) {
@@ -201,7 +197,7 @@ function camera(body) {
         y: body.center.y + body.r * Math.sin(body.phi - body.w * dt)
     }
 
-    if (body.type == 'Star') {
+    if (body.type == 'Star' || body.type == 'Black Hole') {
         bodyPosition = {
             x: body.x,
             y: body.y
@@ -235,7 +231,7 @@ function runCollisionDetection() {
     // // OTHER BODIES
     suns.forEach(s => s.collision(mouse));
     // alphaCentauri.forEach(a => a.collision(mouse));
-    // blackHoles.forEach(bH => bH.collision(mouse));
+    blackHoles.forEach(bH => bH.collision(mouse));
     // m87.collision(mouse);
     // sagittariusA.collision(mouse)
     // universe.collision(mouse);
