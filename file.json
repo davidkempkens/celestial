@@ -500,23 +500,6 @@
     "type": "Star"
   },
   {
-    "name": "M87*",
-    "center": "Center",
-    "radius": 19e12,
-    "distance": 53.49e6,
-    "velocity": 0,
-    "mass": 6.6e9,
-    "color": "white",
-    "type": "Black Hole",
-    "colors": [
-      "#F2B705",
-      "#F29F05",
-      "#BF3604",
-      "#591E08",
-      "#000000"
-    ]
-  },
-  {
     "name": "Sagittarius A*",
     "center": "Center",
     "radius": 24.5e9,
@@ -564,6 +547,23 @@
       "#D90452",
       "#8C035C",
       "#090126",
+      "#000000"
+    ]
+  },
+  {
+    "name": "M87*",
+    "center": "Center",
+    "radius": 19e12,
+    "distance": 53.49e6,
+    "velocity": 0,
+    "mass": 6.6e9,
+    "color": "white",
+    "type": "Black Hole",
+    "colors": [
+      "#F2B705",
+      "#F29F05",
+      "#BF3604",
+      "#591E08",
       "#000000"
     ]
   },
