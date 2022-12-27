@@ -2,10 +2,10 @@
   {
     "name": "Sun",
     "center": "Center",
-    "radius": 696000000,
-    "periapsis": 0,
-    "apoapsis": 0,
-    "mass": 1.9885e+30,
+    "radius": 1,
+    "distance": 0,
+    "velocity": 0,
+    "mass": 1,
     "color": "#F2A516",
     "type": "Star"
   },
@@ -86,7 +86,7 @@
     "periapsis": 4460000000000,
     "apoapsis": 4540000000000,
     "mass": 1.02e+26,
-    "color": "#3552F2",
+    "color": "#5368A6",
     "type": "Planet"
   },
   {
@@ -398,5 +398,25 @@
     "mass": 18,
     "color": "#FF8FDA",
     "type": "Dwarf"
+  },
+  {
+    "name": "Alpha Centauri A",
+    "center": "Center",
+    "radius": 1.2234,
+    "distance": 4.37,
+    "velocity": 0,
+    "mass": 1.1,
+    "color": "#F2B05E",
+    "type": "Star"
+  },
+  {
+    "name": "Alpha Centauri B",
+    "center": "Center",
+    "radius": 0.8632,
+    "distance": 4.37,
+    "velocity": 0,
+    "mass": 0.9092,
+    "color": "#D98F4E",
+    "type": "Star"
   }
 ]

@@ -13,24 +13,29 @@ async function loadSolarSystemData() {
                 let centerObject = solarSystem.find(c => c.name == d.center);
 
                 if (d.type == 'Star') {
-                    sun = new Sun(d.name, Center, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
-                    solarSystem.push(sun)
-                    bigBodies.push(sun);
+                    let s = new Sun(d.name, Center, d.radius, d.distance, d.velocity, d.mass, d.color, d.type)
+                    if (d.name == 'Sun') {
+                        solarSystem.push(s);
+                        sun = s;
+                    }
+                    suns.push(s);
+
+                    if (s.name == 'Alpha Centauri B') {
+                        s.center = suns.find(ss => ss.name == 'Alpha Centauri A');
+                        s.r = 35.8 * AE;
+                    }
                 } else if (d.type == 'Planet') {
                     let p = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
                     planets.push(p)
                     solarSystem.push(p)
-                    bigBodies.push(p);
                 } else if (d.type == 'Dwarf') {
                     let p = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
                     dwarfs.push(p)
                     solarSystem.push(p)
-                    bigBodies.push(p);
                 } else if (d.type == 'Moon') {
                     let p = new Moon(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
                     moons.push(p)
                     solarSystem.push(p)
-                    bigBodies.push(p);
                 }
             });
 
@@ -43,26 +48,35 @@ async function loadSolarSystemData() {
             asteroidFactory(1000, 'Oort Cloud Asteroid', sun, 1e8, 1e9, 2000 * AE, 5000 * AE, 1e25, '#5E574F', 'Asteroid')
                 .forEach(a => oortCloud.push(a))
             asteroids = [...mainBelt, ...kuiperBelt, ...oortCloud];
+
             updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
             // updateHUD([...alphaCentauri, ...suns], hudSuns);
             // updateHUD([...blackHoles, lightRay, voyager1, universe], hudOther);
+
+            // Space Probes
+            voyager1 = new Probe('Yoyager 1', Center, 3e6, 152.2 * AE, 17000, 825.5, 'white', 'Probe');
+            // SPEED OF LIGHT
+            lightRay = new Photon('C', sun, 1e6, sun.R, C, 0, 'cyan', 'Photon');
+            bigBodies = [sun, ...planets, ...dwarfs, ...moons, voyager1, lightRay, ...suns]
         })
 }
 
 
 const solarSystem = [];
+let sun;
 const planets = [];
 const dwarfs = []
 const moons = [];
-const bigBodies = [];
+let bigBodies = [];
 const mainBelt = [];
 const kuiperBelt = [];
 const oortCloud = [];
 let asteroids = [];
+let voyager1;
+let lightRay;
+const suns = [];
 
-// Space Probes
-const voyager1 = new Probe('Yoyager 1', Center, 3e6, 152.2 * AE, 17000, 0, 825.5, 'white', 'Probe');
-bigBodies.push(voyager1)
+
 // OBSERVABLE UNIVERSE SCALE Radius 46,5 billion light-years / 93 billion light-years
 // const universe = new Galaxy('Observable Universe', Center, 46.5e9 * LY, 0, 0, 0, 1.5e53, 'white', 'Universe');
 
@@ -76,8 +90,6 @@ bigBodies.push(voyager1)
 // GALAXIES
 // const milkyWay = new Galaxy('Milky Way', sagittariusA, 185e3 * LY, 0, 0, 0, 1e12 * SOLAR_MASS, 'white', 'Galaxy');
 
-// SPEED OF LIGHT
-// const lightRay = new Photon('C', sun, earth.R, 0, C, 0, 0, 'CYAN', 'Photon');
 
 // Suns
 // const barnard = new Sun('Barnard\'s Star', Center, SOLAR_RADIUS * .2, 5.958 * LY, 0, 0, SOLAR_MASS * .144, '#D9042B', 'Star');

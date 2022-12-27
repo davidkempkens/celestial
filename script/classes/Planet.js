@@ -1,3 +1,15 @@
+/**
+* Create a Planet-like body orbiting its center body
+* @param {String} name Name
+* @param {String} center The name of the center body.
+* @param {Number} radius The Radius of the body in meters (m).
+* @param {Number} periapsis Nearest point point in the orbit to its center body in meters (m).
+* @param {Number} apoapsis Farthest point point in the orbit to its center body in meters (m).
+* @param {Number} mass Mass of the body in Kilogramm (kg).
+* @param {String} color Color as String, e.g.: #0F2D23, 'white', 'rgb(0,255,0)'
+* @param {String} type Type of Planet-like body, e.g. Planet, Dwarf, Asteroid
+* @returns {Planet} planet Returns a Planet Object.
+*/
 class Planet extends CelestialBody {
 
     constructor(name, center, radius, periapsis, apoapsis, mass, color, type) {

@@ -1,14 +1,14 @@
-// Name - Center - Radius(m) - Periapsis(m) - Apoapsis(m) - Mass(kg) - Color - Type
 /** 
 * Create a celestial body
 * @param {String} name Name
 * @param {String} center The name of the center body.
-* @param {Number} radius The Radius of the body.
-* @param {Number} distance Distance to the other body in meters.
-* @param {Number} velocity Velocity relative to its center body in meters per second.
-* @param {Number} mass Mass of the body in kg.
-* @param {String} color Color
-* @param {String} type Type of the body.
+* @param {Number} radius The Radius of the body in meters (m).
+* @param {Number} distance Distance to the other body in meters (m).
+* @param {Number} velocity Velocity relative to its center body in meters per second (m/s).
+* @param {Number} mass Mass of the body in Kilogramm (kg).
+* @param {String} color Color as String, e.g.: #0F2D23, 'white', 'rgb(0,255,0)'
+* @param {String} type Type of the body, e.g. Planet, Dwarf, Asteroid
+* @returns {CelestialBody} body Returns an CelestialBody Object.
 */
 class CelestialBody {
   constructor(name, center, radius, distance, velocity, mass, color, type) {
@@ -23,9 +23,6 @@ class CelestialBody {
     this.M = center.m;
     this.m = mass;
 
-    // Distance
-    this.d = distance;
-
     // Velocity
     this.v = velocity;
 
@@ -33,7 +30,7 @@ class CelestialBody {
     this.phi = isNaN(initialDeg[this.name.toLowerCase()])
       ? Math.random() * deg(360)
       : deg(initialDeg[this.name.toLowerCase()]);
-    this.r = this.d;
+    this.r = distance;
 
     // Cartesion coordinates
     this.x = this.center.x + this.r * Math.cos(this.phi);
@@ -44,8 +41,6 @@ class CelestialBody {
   }
 
   run() {
-
-    this.r = this.d;
 
     this.x = this.center.x + this.r * Math.cos(this.phi);
     this.y = this.center.y + this.r * Math.sin(this.phi);
@@ -118,7 +113,7 @@ class CelestialBody {
     this.isColliding = distance < this.R + other.R;
   }
 
-  drawOrbit() {
+  drawTrajectory() {
     let rotation = deg(0);
 
     c.beginPath();

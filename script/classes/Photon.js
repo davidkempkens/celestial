@@ -8,19 +8,31 @@ class Photon extends FlyingBody {
 
     draw() {
         super.draw();
-        this.drawOrbit()
+        this.circle()
         this.flightPath();
-        this.radioWave();
+        // this.radioWave();
+
+    }
+
+    circle() {
+
+        c.beginPath();
+        c.strokeStyle = this.color;
+        c.lineWidth = 0.8 / scale;
+        c.arc(this.center.x, this.center.y, this.r, 0, Math.PI * 2);
+        c.stroke();
+        c.closePath();
+
     }
 
     radioWave() {
         // length of sine curve
-        let d = this.d % .5;
+        let r = this.r % .5;
         let wave = {
-            x: this.x - d,
+            x: this.x - r,
             y: this.y,
             // Amplitude of sine curve
-            h: this.r,
+            h: this.R,
             // Thickness of line
             line: 1 / scale,
             // Points per period
@@ -33,7 +45,7 @@ class Photon extends FlyingBody {
         c.strokeStyle = 'red';
         c.lineWidth = wave.line;
         c.moveTo(wave.x, wave.y);
-        for (let i = 0; i < d; i += wave.i) {
+        for (let i = 0; i < r; i += wave.i) {
             c.moveTo(wave.x + i - wave.i, wave.y + Math.sin((i - wave.i) * wave.m) * wave.h);
             c.lineTo(wave.x + i, wave.y + Math.sin(i * wave.m) * wave.h);
         }
@@ -44,7 +56,7 @@ class Photon extends FlyingBody {
         c.strokeStyle = 'blue';
         c.lineWidth = wave.line;
         c.moveTo(wave.x, wave.y);
-        for (let i = 0; i < d; i += wave.i) {
+        for (let i = 0; i < r; i += wave.i) {
             c.moveTo(wave.x + i - wave.i, wave.y - Math.sin((i - wave.i) * wave.m) * wave.h);
             c.lineTo(wave.x + i, wave.y - Math.sin(i * wave.m) * wave.h);
         }
@@ -60,9 +72,9 @@ class Photon extends FlyingBody {
             `299 792 458 m/s `, // Display Velocity
         ];
         // CALL TEXT FUNCTION
-        drawText(textAside, this.x + this.r, this.y, this.color, 13);
-        let textAbove = toLy(this.d) > 0 ? `\u2192 ${formatNumber(toLy(this.d))} ly` : `\u2192 ${formatNumber(this.d * 1e6)} km`;
+        drawText(textAside, this.x + this.R, this.y, this.color, 13);
+        let textAbove = toLy(this.r) > 0 ? `\u2192 ${formatNumber(toLy(this.r))} ly` : `\u2192 ${formatNumber(this.r * 1e-3)} km`;
         // CALL TEXT FUNCTION
-        drawText(textAbove, this.x - this.r * 2, this.y - this.r - (25 / scale), this.color, 13);
+        drawText(textAbove, this.x - this.R * 2, this.y - this.R - (25 / scale), this.color, 13);
     }
 }

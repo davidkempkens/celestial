@@ -22,7 +22,9 @@ let trans = {
 }
 
 const scales = {
+    earthMoon: 1e-6,
     fullSun: 5e-7,
+    saturnMoons: 1e-7,
     inner: 1e-9,
     outer: 5e-11,
     oort: 1e-12,
@@ -69,10 +71,9 @@ const AE = 149597870700;
 // Light year in m
 const LY = 9460730472580800;
 // Solar Mass in KG
-const SOLAR_MASS = 1.9885e30;
-
+const SOLAR_MASS = 1.98847e30;
 // Solar Radius in m
-const SOLAR_RADIUS = 696342000;
+const SOLAR_RADIUS = 6.96342e8;
 
 // BACKGROUND COLOR THAT GETS DRAWN EVERY FRAME TO CLEAR THE CANVAS
 const bg = '#050a10';
@@ -84,7 +85,7 @@ let frAId;
 let mouse = {
     x: 0,
     y: 0,
-    R: 3e1 / scale
+    R: 30 / scale
 };
 
 let startDragOffset = {};
