@@ -66,12 +66,10 @@ function runUniverse() {
     iss.run();
     // OTHER BODIES
     suns.forEach(s => s.run());
-    // alphaCentauri.forEach(a => a.run());
-    // m87.run();
-    // sagittariusA.run()
     blackHoles.forEach(bH => bH.run());
-    // milkyWay.run();
+    milkyWay.run();
     // universe.run();
+
 
     // ON COLLISION DISPLAY COMPARE BODY AND ORBIT
     if (sun.isColliding)
@@ -115,6 +113,7 @@ function runUniverse() {
     })
     // if (m87.isColliding) m87.compare([sun, ...suns, ...blackHoles]);
     // if (universe.isColliding) universe.compare([m87]);
+
 }
 
 function drawNames() {
@@ -140,6 +139,7 @@ function drawNames() {
         }
         voyager1.drawName();
         if (voyager1.isColliding) voyager1.info();
+
     } else {
         if (scale > 1e-15) drawText('Solar System', Center.x, Center.y - 50 * AE, 'white', 13);
         if (scale > 1e-15) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
@@ -171,8 +171,8 @@ function drawNames() {
         lightRay.info();
     }
 
-    // milkyWay.draw();
-    // milkyWay.info();
+    milkyWay.draw();
+    milkyWay.info();
     // universe.drawName();
     // universe.info();
     // if (universe.isColliding) universe.info();
@@ -202,7 +202,7 @@ function camera(body) {
         y: body.center.y + body.r * Math.sin(body.phi - w * dt / fps)
     }
 
-    if (body.type == 'Star' || body.type == 'Black Hole') {
+    if (body.type == 'Star' || body.type == 'Black Hole' || body.type == 'Galaxy') {
         bodyPosition = {
             x: body.x,
             y: body.y

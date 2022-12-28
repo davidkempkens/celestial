@@ -39,8 +39,9 @@ async function loadSolarSystemData() {
                     moons.push(p)
                     solarSystem.push(p)
                 } else if (d.type == 'Black Hole') {
-                    m87 = new BlackHole(d.name, Center, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.colors);
-                    blackHoles.push(m87);
+                    let bh = new BlackHole(d.name, Center, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.colors);
+                    blackHoles.push(bh);
+                    if (bh.name == 'Sagittarius A*') sagittariusA = bh;
                 }
             });
 
@@ -61,10 +62,12 @@ async function loadSolarSystemData() {
             // Satellite
             iss = new Satellite('ISS', earth, 100, earth.R + 413000, earth.R + 422000, 444.615, 'white', 'Satellite');
 
+            milkyWay = new Galaxy('Milky Way', sagittariusA, 185e3 * LY, 0, 0, 1e12 * SOLAR_MASS, 'white', 'Galaxy');
+
             bigBodies = [sun, ...planets, ...dwarfs, ...moons, voyager1, iss, lightRay, ...suns, ...blackHoles]
             updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
             updateHUD([...suns], hudSuns);
-            updateHUD([...blackHoles, lightRay, voyager1, iss], hudOther);
+            updateHUD([...blackHoles, lightRay, voyager1, iss, milkyWay], hudOther);
             // updateHUD([...blackHoles, lightRay, voyager1, universe], hudOther);
 
         })
@@ -75,6 +78,7 @@ const solarSystem = [];
 let sun;
 let earth;
 let moon;
+let sagittariusA;
 const planets = [];
 const dwarfs = []
 const moons = [];
@@ -89,7 +93,8 @@ let iss;
 let lightRay;
 const suns = [];
 let m87;
-const blackHoles = []
+const blackHoles = [];
+let milkyWay;
 // OBSERVABLE UNIVERSE SCALE Radius 46,5 billion light-years / 93 billion light-years
 // const universe = new Galaxy('Observable Universe', Center, 46.5e9 * LY, 0, 0, 0, 1.5e53, 'white', 'Universe');
 
