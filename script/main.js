@@ -36,10 +36,6 @@ function runUniverse() {
     if (stopTime) dt = 0;
     else dt = timeControl[i][1];
 
-    let earth = solarSystem.find(x => x.name == 'Earth');
-    let moon = solarSystem.find(x => x.name == 'Moon');
-
-
     if (showTrajectories && scale > 1e-12) {
         solarSystem.forEach(s => s.drawTrajectory());
     }
@@ -67,6 +63,7 @@ function runUniverse() {
     // oortCloud.forEach(o => o.run());
     voyager1.run();
     lightRay.run();
+    iss.run();
     // OTHER BODIES
     suns.forEach(s => s.run());
     // alphaCentauri.forEach(a => a.run());
@@ -99,6 +96,7 @@ function runUniverse() {
         }
         if (scale > 1e-8) m.drawTrajectory()
     });
+    if (scale > 1e-7) iss.drawTrajectory()
     asteroids.forEach(a => {
         if (a.isColliding && scale > 1e-14) {
             // a.drawTrajectory()
@@ -136,6 +134,10 @@ function drawNames() {
             if (scale > 1e-7) m.drawName();
             if (scale > 1e-7 && m.isColliding) m.info();
         });
+        if (scale > 1e-7) {
+            iss.drawName();
+            if (iss.isColliding) iss.info()
+        }
         voyager1.drawName();
         if (voyager1.isColliding) voyager1.info();
     } else {
@@ -191,10 +193,13 @@ function camera(body) {
     //     x: body instanceof FlyingBody ? body.x + body.v : body.center.x + body.a * Math.cos(body.w + (scaleV * (body.velocity / body.distance))) * body.d,
     //     y: body instanceof FlyingBody ? body.y : body.center.y + body.b * Math.sin(body.w + (scaleV * (body.velocity / body.distance))) * body.d
     // }
-
+    // Physics for orbiting Bodies - Update angular velocity
+    let v = Math.sqrt(G * (body.M + body.m) * ((2 / body.r) - (1 / body.a)));
+    let r = body.p / (1 + body.eps * Math.cos(body.phi + body.w * dt / fps));
+    let w = v / r;
     let bodyPosition = {
-        x: body.center.x + body.r * Math.cos(body.phi - body.w * dt),
-        y: body.center.y + body.r * Math.sin(body.phi - body.w * dt)
+        x: body.center.x + body.r * Math.cos(body.phi - w * dt / fps),
+        y: body.center.y + body.r * Math.sin(body.phi - w * dt / fps)
     }
 
     if (body.type == 'Star' || body.type == 'Black Hole') {
@@ -227,6 +232,7 @@ function runCollisionDetection() {
         asteroids.forEach(a => a.collision(mouse));
     // oortCloud.forEach(o => o.collision(mouse));
     voyager1.collision(mouse);
+    iss.collision(mouse);
     lightRay.collision(mouse);
     // // OTHER BODIES
     suns.forEach(s => s.collision(mouse));

@@ -9,53 +9,55 @@
 </head>
 
 <body>
-<div class="container">
-    <canvas id="canvas"></canvas>
-    <div class="hide-hud">
-        <a id="hideElement" href="#"><b>H</b>UD</a>
+    <div class="container">
+        <canvas id="canvas"></canvas>
+        <div class="hide-hud">
+            <a id="hideElement" href="#"><b>H</b>UD</a>
+        </div>
+        <div class="hud" id="nav-hud">
+            <a id="camera" href="#">Solar System</a>
+            <hr>
+            <a id="orbitElement" href="#"><b>O</b>rbit</a>
+            <hr>
+            <a id="minusElement" href="#"><b>-</b></a>
+            <a id="plusElement" href="#"><b>+</b></a>
+            <a id="zoomElement" href="#"><b>Z</b>oom: 1</a>
+        </div>
+        <div class="hud" id="time-hud">
+            <a id="clockElement" href="#"><b>C</b>lock</a>
+            <hr>
+            <a id="stopElement" href="#">Stop</a>
+            <hr>
+            <a id="timeElement" href="#"><b>U</b>nit</a>
+        </div>
+        <div class="hud" id="hud-planets"></div>
+        <div class="hud" id="hud-moons"></div>
+        <div class="hud" id="hud-suns"></div>
+        <div class="hud" id="hud-other"></div>
     </div>
-    <div class="hud" id="nav-hud">
-        <a id="camera" href="#">Solar System</a>
-        <hr>
-        <a id="orbitElement" href="#"><b>O</b>rbit</a>
-        <hr>
-        <a id="minusElement" href="#"><b>-</b></a>
-        <a id="plusElement" href="#"><b>+</b></a>
-        <a id="zoomElement" href="#"><b>Z</b>oom: 1</a>
+    <div style="display:none;">
+        <img id="img" src="img/voyager.png" alt="Voyager clip art">
+        <img id="satellite" src="img/satellite.png" alt="Satellite clip art">
     </div>
-    <div class="hud" id="time-hud">
-        <a id="clockElement" href="#"><b>C</b>lock</a>
-        <hr>
-        <a id="stopElement" href="#">Stop</a>
-        <hr>
-        <a id="timeElement" href="#"><b>U</b>nit</a>
-    </div>
-    <div class="hud" id="hud-planets"></div>
-    <div class="hud" id="hud-moons"></div>
-    <div class="hud" id="hud-suns"></div>
-    <div class="hud" id="hud-other"></div>
-</div>
-<div style="display:none;">
-    <img id="img" src="img/voyager.png" alt="Voyager clip art">
-</div>
-<script src="script/globals.js"></script>
-<script src="script/classes/CelestialBody.js"></script>
-<script src="script/classes/Sun.js"></script>
-<script src="script/classes/Planet.js"></script>
-<script src="script/classes/Moon.js"></script>
-<script src="script/classes/Asteroid.js"></script>
-<script src="script/classes/BlackHole.js"></script>
-<script src="script/classes/FlyingBody.js"></script>
-<script src="script/classes/Photon.js"></script>
-<script src="script/classes/Probe.js"></script>
-<script src="script/classes/Star.js"></script>
-<script src="script/classes/Galaxy.js"></script>
-<script src="script/objects/factories.js"></script>
-<script src="script/objects/bodies.js"></script>
-<script src="script/test/test.js"></script>
-<script src="script/main.js"></script>
-<script src="script/ui/controls.js"></script>
-<script src="script/ui/touch.js"></script>
+    <script src="script/globals.js"></script>
+    <script src="script/classes/CelestialBody.js"></script>
+    <script src="script/classes/Sun.js"></script>
+    <script src="script/classes/Planet.js"></script>
+    <script src="script/classes/Moon.js"></script>
+    <script src="script/classes/Asteroid.js"></script>
+    <script src="script/classes/Satellite.js"></script>
+    <script src="script/classes/BlackHole.js"></script>
+    <script src="script/classes/FlyingBody.js"></script>
+    <script src="script/classes/Photon.js"></script>
+    <script src="script/classes/Probe.js"></script>
+    <script src="script/classes/Star.js"></script>
+    <script src="script/classes/Galaxy.js"></script>
+    <script src="script/objects/factories.js"></script>
+    <script src="script/objects/bodies.js"></script>
+    <script src="script/test/test.js"></script>
+    <script src="script/main.js"></script>
+    <script src="script/ui/controls.js"></script>
+    <script src="script/ui/touch.js"></script>
 </body>
 
 </html>

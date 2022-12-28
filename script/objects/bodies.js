@@ -25,15 +25,17 @@ async function loadSolarSystemData() {
                         s.r = 35.8 * AE;
                     }
                 } else if (d.type == 'Planet') {
-                    let p = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
+                    let p = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type);
+                    if (d.name == 'Earth') earth = p;
                     planets.push(p)
                     solarSystem.push(p)
                 } else if (d.type == 'Dwarf') {
-                    let p = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
+                    let p = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type);
                     dwarfs.push(p)
                     solarSystem.push(p)
                 } else if (d.type == 'Moon') {
-                    let p = new Moon(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type)
+                    let p = new Moon(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type);
+                    if (d.name == 'Moon') moon = p;
                     moons.push(p)
                     solarSystem.push(p)
                 } else if (d.type == 'Black Hole') {
@@ -56,11 +58,13 @@ async function loadSolarSystemData() {
             voyager1 = new Probe('Yoyager 1', Center, 3e6, 152.2 * AE, 17000, 825.5, 'white', 'Probe');
             // SPEED OF LIGHT
             lightRay = new Photon('C', sun, 1e6, sun.R, C, 0, 'cyan', 'Photon');
+            // Satellite
+            iss = new Satellite('ISS', earth, 100, earth.R + 413000, earth.R + 422000, 444.615, 'white', 'Satellite');
 
-            bigBodies = [sun, ...planets, ...dwarfs, ...moons, voyager1, lightRay, ...suns, ...blackHoles]
+            bigBodies = [sun, ...planets, ...dwarfs, ...moons, voyager1, iss, lightRay, ...suns, ...blackHoles]
             updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
             updateHUD([...suns], hudSuns);
-            updateHUD([...blackHoles, lightRay, voyager1], hudOther);
+            updateHUD([...blackHoles, lightRay, voyager1, iss], hudOther);
             // updateHUD([...blackHoles, lightRay, voyager1, universe], hudOther);
 
         })
@@ -69,15 +73,19 @@ async function loadSolarSystemData() {
 
 const solarSystem = [];
 let sun;
+let earth;
+let moon;
 const planets = [];
 const dwarfs = []
 const moons = [];
+const satellites = [];
 let bigBodies = [];
 const mainBelt = [];
 const kuiperBelt = [];
 const oortCloud = [];
 let asteroids = [];
 let voyager1;
+let iss;
 let lightRay;
 const suns = [];
 let m87;
