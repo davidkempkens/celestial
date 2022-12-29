@@ -41,14 +41,22 @@ async function loadSolarSystemData() {
                     solarSystem.push(p)
                 } else if (d.type == 'Black Hole') {
                     let bh = new BlackHole(d.name, Center, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.colors);
-                    blackHoles.push(bh);
                     if (bh.name == 'Sagittarius A*') sagittariusA = bh;
+                    if (bh.name == 'God') {
+                        god = bh;
+                        god.phi = -Math.PI / 180 * 90;
+                        galaxies.push(god);
+
+                    } else blackHoles.push(bh);
                 } else if (d.type == 'Galaxy') {
                     let gal = new Galaxy(d.name, Center, d.radius, d.distance, d.velocity, d.mass, d.color, d.type);
                     galaxies.push(gal);
                     if (gal.name == 'Milky Way') {
                         milkyWay = gal;
                         milkyWay.center = sagittariusA;
+                    }
+                    if (gal.name == 'Observable Universe') {
+                        universe = gal;
                     }
                 }
             });
@@ -74,10 +82,6 @@ async function loadSolarSystemData() {
             geostationary = new Satellite('Geostationary Satellite', earth, 50, earth.R + 38000e3, earth.R + 38000e3, 400, 'grey', 'Satellite');
             satellites.push(iss, geostationary);
 
-            // Galaxies
-            // milkyWay = new Galaxy('Milky Way', sagittariusA, 185e3 * LY, 0, 0, 1e12 * SOLAR_MASS, 'white', 'Galaxy');
-            // universe = new Galaxy('Observable Universe', Center, 46.5e9 * LY, 0, 0, 1.5e53, 'white', 'Galaxy');
-            // galaxies.push(milkyWay, universe);
             bigBodies = [sun, ...planets, ...dwarfs, ...moons, voyager1, iss, lightRay, ...suns, ...blackHoles];
 
         })
@@ -106,6 +110,8 @@ const suns = [];
 const blackHoles = [];
 const galaxies = [];
 let milkyWay;
+let universe;
+let god;
 
 // EVERYTHING ARRAY FOR EASY HANDLING
 // const everything = [...bigBodies, ...asteroids];

@@ -28,9 +28,9 @@ function start() {
 
 async function setup() {
     await loadSolarSystemData();
-    updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
-    updateHUD([...suns], hudSuns);
-    updateHUD([lightRay, voyager1, ...satellites, ...blackHoles, ...galaxies], hudOther);
+    updateHUD([sun, ...planets, ...dwarfs, god], hudPlanets);
+    updateHUD([...suns, ...blackHoles], hudSuns);
+    updateHUD([lightRay, voyager1, ...satellites, , ...galaxies], hudOther);
     setInterval(start, 1000 / fps);
 }
 
@@ -117,11 +117,14 @@ function drawNames() {
         if (bB.r * scale > 25) bB.drawName();
         if (bB.isColliding && scale * bB.R > 25) bB.info();
     });
-    if (lightRay.r * scale > 25) lightRay.info();
+    if (lightRay.r * scale > 35) lightRay.info();
+    if (voyager1.r * scale > 35) voyager1.info();
+
     if (scale > 1e-12) { sun.drawName(); }
     else {
         if (scale * milkyWay.R > 25) drawText('Solar System', Center.x, Center.y - 50 * AE, 'white', 13);
-        drawText('Milky Way', Center.x, Center.y - milkyWay.R, 'white', 13);
+        if (scale * universe.R > 25) drawText('Milky Way', Center.x, Center.y - milkyWay.R, 'white', 13);
+        drawText('Universe', Center.x, Center.y - universe.R, 'white', 13);
         if (scale > 5e-14) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
     }
 

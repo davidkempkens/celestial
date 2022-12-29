@@ -15,7 +15,8 @@ class BlackHole extends CelestialBody {
 
     constructor(name, center, radius, distance, velocity, mass, color, type, colors) {
         super(name, center, radius, distance * LY, velocity, mass * SOLAR_MASS, color, type);
-        this.R = (2 * G * this.m) / (C ** 2)
+        // Schwarzschild radius
+        this.R = (2 * G * this.m) / (C ** 2);
         this.colBH = colors;
 
         // PARTICLE PROPERTIES
@@ -26,13 +27,9 @@ class BlackHole extends CelestialBody {
             maxR: this.R * 1e-5,
             minD: this.R * (1 + .01),
             maxD: this.R * (1 + .3),
-            minV: 0,
-            maxV: C * .4,
-            minE: .0,
-            maxE: .0,
             m: 1e10,
-            color: "#000000",
-            colors: ["#FFFFFF", ...this.colBH],
+            color: this.color,
+            colors: this.colBH,
             t: 'Particle'
         };
 
@@ -46,7 +43,8 @@ class BlackHole extends CelestialBody {
             this.particle.maxD,
             this.particle.m,
             this.particle.color,
-            this.particle.t)
+            this.particle.t);
+
         this.particles.forEach(p => {
             p.color = this.particle.colors[Math.floor(Math.random() * this.particle.colors.length)]
         });
@@ -55,11 +53,11 @@ class BlackHole extends CelestialBody {
 
     draw() {
 
-        c.fillStyle = this.color;
         c.beginPath();
+        c.fillStyle = this.color;
         c.arc(this.x, this.y, this.R, 0, Math.PI * 2);
-        c.closePath();
         c.fill();
+        c.closePath();
 
         // DRAW EVENT HORIZON FOR BLACK HOLES
         this.eventHorizon();
@@ -68,11 +66,11 @@ class BlackHole extends CelestialBody {
 
     eventHorizon() {
         for (let i = 0; i < this.colBH.length; i++) {
-            c.fillStyle = this.colBH[i];
             c.beginPath();
+            c.fillStyle = this.colBH[i];
             c.arc(this.x, this.y, this.R * (1 - (i * 1e-2)), 0, Math.PI * 2);
-            c.closePath();
             c.fill();
+            c.closePath();
         }
     }
 
@@ -82,6 +80,5 @@ class BlackHole extends CelestialBody {
             p.run();
         });
     }
-
 
 }

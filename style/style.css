@@ -94,7 +94,7 @@ body {
 #hud-other {
     position: fixed;
     flex-direction: column;
-    top: 55%;
+    top: 60%;
     right: 1%;
 }
 

@@ -585,6 +585,25 @@
     ]
   },
   {
+    "name": "God",
+    "center": "Center",
+    "radius": 1,
+    "distance": 1e12,
+    "velocity": 0,
+    "mass": 1e24,
+    "color": "white",
+    "type": "Black Hole",
+    "colors": [
+      "#BF1304",
+      "#F2490C",
+      "#F2CB05",
+      "#4E8C0F",
+      "#0597D5",
+      "#033E8C",
+      "white"
+    ]
+  },
+  {
     "name": "Heliosphere",
     "center": "Center",
     "radius": 1.195e13,
