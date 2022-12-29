@@ -152,11 +152,15 @@ function deg(d) {
 // Format Big Numbers
 function formatNumber(num) {
     // noinspection JSCheckFunctionSignatures
-    return num.toLocaleString("en-US", {
-        notation: "compact",
-        compactDisplay: "long",
-        maximumSignificantDigits: 4
-    })
+    try {
+        return num.toLocaleString("en-US", {
+            notation: "compact",
+            compactDisplay: "long",
+            maximumSignificantDigits: 4
+        });
+    } catch (error) {
+        return 'Format Error' + error
+    }
 }
 
 // DRAW Text at scale and translated coords
@@ -231,8 +235,8 @@ function secToTime(s) {
 }
 
 // km to light-years
-function toLy(km) {
-    if (km > LY) return Math.floor(km / LY)
+function toLy(m) {
+    if (m > LY) return Math.floor(m / LY);
 }
 
 function polarToCartesian(r, phi) {

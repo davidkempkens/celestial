@@ -122,13 +122,14 @@ function drawNames() {
         sun.drawName();
     } else {
         if (scale * milkyWay.R > 25) drawText('Solar System', Center.x, Center.y - 50 * AE, 'white', 13);
-        // drawText('Milky Way', Center.x, Center.y - milkyWay.R, 'white', 13);
+        drawText('Milky Way', Center.x, Center.y - milkyWay.R, 'white', 13);
         if (scale > 5e-14) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
     }
 
     galaxies.forEach(g => {
-        // g.drawName();
-        if (g.R * scale < 1000) g.info();
+        if (g.R * scale > 30)
+            // g.drawName();
+            if (g.R * scale < 1000) g.info();
     });
 }
 

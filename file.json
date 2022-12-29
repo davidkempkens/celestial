@@ -583,5 +583,15 @@
       "#591E08",
       "#000000"
     ]
+  },
+  {
+    "name": "Heliosphere",
+    "center": "Center",
+    "radius": 1.195e13,
+    "distance": 0,
+    "velocity": 0,
+    "mass": 2e30,
+    "color": "#F2A516",
+    "type": "Galaxy"
   }
 ]

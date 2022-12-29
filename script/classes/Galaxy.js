@@ -26,29 +26,34 @@ class Galaxy extends CelestialBody {
     draw() {
         c.beginPath();
         c.strokeStyle = this.color;
-        c.lineWidth = this.R / 10;
+        c.lineWidth = 0.5 / scale;
         c.arc(this.center.x, this.center.y, this.R, 0, Math.PI * 2);
         c.stroke();
         c.closePath();
     }
 
     drawName() {
-        drawText(this.name, this.x + this.R, this.y, this.color, 13);
+        drawText(this.name, this.x + this.R / Math.sqrt(2), this.y + this.R / Math.sqrt(2), this.color, 13);
     }
 
     info() {
         // Draw this body's diameter above this body
         c.fillStyle = this.color;
-        c.fillRect(this.x - this.R, this.y - this.R - (10 / scale), this.R * 2, 2 / scale);
+        // c.fillRect(this.x - this.R, this.y - this.R - (1 / scale), this.R * 2, 2 / scale);
 
-        let textAbove = [`\u2205 ${formatNumber(toLy(this.R * 2))} ly`]; // DEFAULT TEXT ABOVE BODY IS DIAMETER
+        // 
+        let textAbove =
+            toLy(this.R * 2) > 0
+                ? `\u2205 ${formatNumber(toLy(this.R * 2))} ly `
+                : `\u2205 ${formatNumber(this.R * 2 * 1e-3)} km `;
+
         let textAside = [
-            `${this.name}`, // Display Symbols
+            `${this.name} `, // Display Symbols
             `Mass: ${formatNumber(this.m.toExponential(2))} kg` // Display Type
         ];
 
         // CALL TEXT FUNCTION
         drawText(textAbove, this.x - this.R * 2, this.y - this.R - (25 / scale), this.color, 13);
-        drawText(textAside, this.x + this.R, this.y, this.color, 13);
+        drawText(textAside, this.x + this.R / Math.sqrt(2), this.y + this.R / Math.sqrt(2), this.color, 13);
     }
 }
