@@ -74,7 +74,7 @@ async function loadSolarSystemData() {
             milkyWay = new Galaxy('Milky Way', sagittariusA, 185e3 * LY, 0, 0, 1e12 * SOLAR_MASS, 'white', 'Galaxy');
             universe = new Galaxy('Observable Universe', Center, 46.5e9 * LY, 0, 0, 1.5e53, 'white', 'Galaxy');
             galaxies.push(milkyWay, universe);
-            bigBodies = [sun, ...planets, ...dwarfs, ...moons, voyager1, iss, lightRay, ...suns, ...blackHoles, ...galaxies];
+            bigBodies = [sun, ...planets, ...dwarfs, ...moons, voyager1, iss, lightRay, ...suns, ...blackHoles];
 
         })
 }

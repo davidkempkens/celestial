@@ -58,26 +58,22 @@ function runUniverse() {
 
     voyager1.run();
     lightRay.run();
-    iss.run();
     satellites.forEach(s => {
         s.run();
     });
     // OTHER BODIES
     suns.forEach(s => s.run());
     blackHoles.forEach(bH => bH.run());
-    milkyWay.run();
-    // universe.run();
+    galaxies.forEach(g => g.run());
 
 
     // ON COLLISION DISPLAY COMPARE BODY AND ORBIT
     if (sun.isColliding) sun.compare(planets);
-
     planets.forEach(p => {
         if (p.isColliding) {
             p.drawTrajectory();
             p.compare([earth, moon]);
         }
-
     });
 
     dwarfs.forEach(d => {
@@ -109,7 +105,7 @@ function runUniverse() {
     });
 
     blackHoles.forEach(bH => {
-        if (bH.isColliding) bH.compare([earth, sun, ...blackHoles])
+        if (bH.isColliding) bH.compare([earth, sun, ...suns, ...blackHoles])
     })
 
 
@@ -126,13 +122,13 @@ function drawNames() {
         sun.drawName();
     } else {
         if (scale * milkyWay.R > 25) drawText('Solar System', Center.x, Center.y - 50 * AE, 'white', 13);
-        drawText('Milky Way', Center.x, Center.y - milkyWay.R, 'white', 13);
+        // drawText('Milky Way', Center.x, Center.y - milkyWay.R, 'white', 13);
         if (scale > 5e-14) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
     }
 
     galaxies.forEach(g => {
-        g.drawName();
-        // g.info();
+        // g.drawName();
+        if (g.R * scale < 1000) g.info();
     });
 }
 

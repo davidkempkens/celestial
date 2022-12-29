@@ -24,19 +24,16 @@ class Galaxy extends CelestialBody {
     }
 
     draw() {
-        let rotation = deg(0);
-
         c.beginPath();
         c.strokeStyle = this.color;
-        c.lineWidth = 0.3 / scale;
-        // ellipses center coords (x,y), (Major) x-radius, (Minor) y-radius, rotation, start, end
-        c.ellipse(this.center.x, this.center.y, this.R, this.R, rotation, 0, Math.PI * 2);
+        c.lineWidth = this.R / 10;
+        c.arc(this.center.x, this.center.y, this.R, 0, Math.PI * 2);
         c.stroke();
         c.closePath();
     }
 
     drawName() {
-        // drawText(this.name, this.x + this.r, this.y, this.color, 13);
+        drawText(this.name, this.x + this.R, this.y, this.color, 13);
     }
 
     info() {
