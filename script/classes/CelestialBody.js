@@ -1,83 +1,60 @@
-// Name - Center - Radius(Mio km) - Distance(Mio km) - Velocity(km/s) - Eccentricity - Mass - Color - Type
+/** 
+* Create a celestial body
+* @param {String} name Name
+* @param {String} center The name of the center body.
+* @param {Number} radius The Radius of the body in meters (m).
+* @param {Number} distance Distance to the other body in meters (m).
+* @param {Number} velocity Velocity relative to its center body in meters per second (m/s).
+* @param {Number} mass Mass of the body in Kilogramm (kg).
+* @param {String} color Color as String, e.g.: #0F2D23, 'white', 'rgb(0,255,0)'
+* @param {String} type Type of the body, e.g. Planet, Dwarf, Asteroid
+* @returns {CelestialBody} body Returns an CelestialBody Object.
+*/
 class CelestialBody {
-  constructor(
-    name,
-    center,
-    radius,
-    distance,
-    velocity,
-    eccentricity,
-    mass,
-    color,
-    type
-  ) {
-    // Real life Properties
+  constructor(name, center, radius, distance, velocity, mass, color, type) {
     this.name = name;
     this.center = center;
-    this.radius = radius;
-    this.distance = distance;
-    this.velocity = velocity;
-    this.eccentricity = eccentricity;
-    this.mass = mass;
-    this.perihelion;
-    this.aphelion;
     this.color = color;
     this.type = type;
     this.symbol = symbols[name.toLowerCase()] || "";
     this.satelites = [];
 
-    // Calculated Properties
-    // RADIUS
-    this.r = this.radius * scaleR;
+    this.R = radius;
+    this.M = center.m;
+    this.m = mass;
 
-    // DISTANCE + center radius + planets radius
-    this.d = this.distance
-      ? this.distance * scaleD + (this.center.r + this.r)
-      : this.distance * scaleD;
+    // Velocity
+    this.v = velocity;
 
-    // VELOCITY
-    this.v = this.velocity * scaleV;
-
-    // ECCENTRICITY
-    this.a = 1;
-    this.b = 1 - this.eccentricity;
-
-    // Initial angle of orbit : degrees / radian - "0" degrees is the right side
-    this.w = isNaN(initialDeg[this.name.toLowerCase()])
+    // Polar coordinates
+    this.phi = isNaN(initialDeg[this.name.toLowerCase()])
       ? Math.random() * deg(360)
       : deg(initialDeg[this.name.toLowerCase()]);
+    this.r = distance;
 
-    // Initial position oriented around the assigned center object
-    this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
-    this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
+    // Cartesion coordinates
+    this.x = this.center.x + this.r * Math.cos(this.phi);
+    this.y = this.center.y + this.r * Math.sin(this.phi);
 
     // flag for collision function
     this.isColliding = false;
   }
 
   run() {
-    this.rescale();
-    // Physics for orbiting Bodies
-    this.w += this.v;
-    this.x = this.center.x + this.a * Math.cos(this.w) * this.d;
-    this.y = this.center.y + this.b * Math.sin(this.w) * this.d;
+
+    this.x = this.center.x + this.r * Math.cos(this.phi);
+    this.y = this.center.y + this.r * Math.sin(this.phi);
+
     // Call the draw function to draw the body as filled circle on the canvas
     this.draw();
   }
 
-  rescale() {
-    // RESCALE TIME + DISTANCES + RADIUS + VELOCITIES
-    this.r = this.radius * scaleR;
-    scaleV = (1 / 60e6) * scaleT;
-    if (this.distance !== 0) this.v = (this.velocity / this.distance) * scaleV;
-    else this.v = this.velocity * scaleV;
-  }
+
 
   draw() {
-    // DRAW ACTUAL BODY
     c.fillStyle = this.color;
     c.beginPath();
-    c.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    c.arc(this.x, this.y, this.R, 0, Math.PI * 2);
     c.closePath();
     c.fill();
   }
@@ -86,9 +63,9 @@ class CelestialBody {
     // Draw this body's diameter above this body
     c.fillStyle = this.color;
     c.fillRect(
-      this.x - this.r,
-      this.y - this.r - 10 / scale,
-      this.r * 2,
+      this.x - this.R,
+      this.y - this.R - 10 / scale,
+      this.R * 2,
       2 / scale
     );
 
@@ -101,64 +78,59 @@ class CelestialBody {
       copies[i].x = i < 1 ? this.x : copies[i - 1].x;
       copies[i].y =
         i < 1
-          ? this.y + this.r + 25 / scale + copies[i].r
-          : copies[i - 1].y + copies[i - 1].r + 25 / scale + copies[i].r;
-
+          ? this.y + this.R + 25 / scale + copies[i].R
+          : copies[i - 1].y + copies[i - 1].R + 25 / scale + copies[i].R;
       // DRAW Other Body under this Body or below the other 'other' classes
       c.fillStyle = copies[i].color;
       copies[i].draw();
 
-      // rescaleDynamic()
-      // copies[i].drawName();
-      // scaleDynamic()
+      if (copies[i].y * scale > 100 && this.R * scale > 30) {
+        rescaleDynamic();
+        copies[i].drawName();
+        scaleDynamic();
+      }
 
       if (copies.length > 2) continue;
       if (i < 1)
         c.fillRect(
-          this.x - copies[i].r,
-          this.y + this.r + 10 / scale,
-          copies[i].r * 2,
+          this.x - copies[i].R,
+          this.y + this.R + 10 / scale,
+          copies[i].R * 2,
           2 / scale
         );
       else
         c.fillRect(
-          copies[i - 1].x - copies[i].r,
-          copies[i - 1].y + copies[i - 1].r + (10 / scale) * i,
-          copies[i].r * 2,
+          copies[i - 1].x - copies[i].R,
+          copies[i - 1].y + copies[i - 1].R + (10 / scale) * i,
+          copies[i].R * 2,
           2 / scale
         );
     }
   }
 
   drawName() {
-    drawText(this.name, this.x + this.r, this.y, this.color, 13);
-  }
-
-  hover() {
-    this.r *= 5;
-    this.draw();
-    this.r = this.radius * scaleR;
+    drawText(this.name, this.x + this.R, this.y, this.color, 13);
   }
 
   collision(other) {
     let distX = this.x - other.x;
     let distY = this.y - other.y;
     let distance = Math.hypot(distX, distY);
-    this.isColliding = distance < this.r + other.r;
+    this.isColliding = distance < this.R + other.R;
   }
 
-  drawOrbit() {
+  drawTrajectory() {
     let rotation = deg(0);
 
     c.beginPath();
     c.strokeStyle = this.color;
-    c.lineWidth = 0.1 / scale;
+    c.lineWidth = 0.3 / scale;
     // ellipses center coords (x,y), (Major) x-radius, (Minor) y-radius, rotation, start, end
     c.ellipse(
-      this.center.x,
+      this.center.x - this.e,
       this.center.y,
-      this.a * this.d,
-      this.b * this.d,
+      this.a,
+      this.b,
       rotation,
       0,
       Math.PI * 2
@@ -169,53 +141,23 @@ class CelestialBody {
 
   info() {
     let distanceText =
-      toLy(this.distance) > 0
-        ? `\u2192 ${formatNumber(toLy(this.distance))} ly `
-        : `\u2192 ${formatNumber(this.distance * 1e6)} km `;
-    let textAbove = [`\u2205 ${formatNumber(this.radius * 2e6)} km`]; // DEFAULT TEXT ABOVE BODY IS DIAMETER
+      toLy(this.r) > 0
+        ? `\u2192 ${formatNumber(toLy(this.r))} ly `
+        : `\u2192 ${formatNumber(this.r * 1e-3)} km `;
+    let textAbove = [`\u2205 ${formatNumber(this.R * 2 * 1e-3)} km`]; // DEFAULT TEXT ABOVE BODY IS DIAMETER
     let textAside = [
       `${this.name} ${this.symbol} ${this.type}`, // Display Symbols
-      `${formatNumber(this.velocity)} km/s `, // Display Velocity
+      `${formatNumber(this.v * 1e-3)} km/s `, // Display Velocity
       distanceText, // Display Distance
-      `Mass: ${formatNumber(this.mass.toExponential(0))} kg`, // Display Type
+      `Mass: ${formatNumber(this.m.toExponential(2))} kg`, // Display Type
     ];
 
     // CALL TEXT FUNCTION
-    drawText(
-      textAbove,
-      this.x - this.r * 2,
-      this.y - this.r - 25 / scale,
-      this.color,
-      13
-    );
-    drawText(textAside, this.x + this.r, this.y, this.color, 13);
+    drawText(textAbove, this.x - this.R * 2, this.y - this.R - 25 / scale, this.color, 13);
+    drawText(textAside, this.x + this.R, this.y, this.color, 13);
   }
 
   copy(copy) {
-    // return Object.create(copy);
-    if (copy instanceof BlackHole)
-      return new BlackHole(
-        copy.name,
-        copy.center,
-        copy.radius,
-        copy.distance,
-        copy.velocity,
-        copy.eccentricity,
-        copy.mass,
-        copy.color,
-        copy.type,
-        copy.colBH
-      );
-    return new CelestialBody(
-      copy.name,
-      copy.center,
-      copy.radius,
-      copy.distance,
-      copy.velocity,
-      copy.eccentricity,
-      copy.mass,
-      copy.color,
-      copy.type
-    );
+    return Object.create(copy);
   }
 }

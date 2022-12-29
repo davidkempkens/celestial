@@ -1,3 +1,3 @@
-class Moon extends CelestialBody {
+class Moon extends Planet {
 
 }

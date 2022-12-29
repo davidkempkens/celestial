@@ -1,4 +1,99 @@
+/**
+* Create a Planet-like body orbiting its center body
+* @param {String} name Name
+* @param {String} center The name of the center body.
+* @param {Number} radius The Radius of the body in meters (m).
+* @param {Number} periapsis Nearest point point in the orbit to its center body in meters (m).
+* @param {Number} apoapsis Farthest point point in the orbit to its center body in meters (m).
+* @param {Number} mass Mass of the body in Kilogramm (kg).
+* @param {String} color Color as String, e.g.: #0F2D23, 'white', 'rgb(0,255,0)'
+* @param {String} type Type of Planet-like body, e.g. Planet, Dwarf, Asteroid
+* @returns {Planet} planet Returns a Planet Object.
+*/
 class Planet extends CelestialBody {
+
+    constructor(name, center, radius, periapsis, apoapsis, mass, color, type) {
+        super(name, center, radius, 0, 0, mass, color, type);
+        this.M = center.m;
+        this.m = mass;
+        this.rp = periapsis;
+        this.ra = apoapsis;
+
+        // Semi-major axis
+        this.a = (this.rp + this.ra) / 2;
+
+        // Energy
+        this.E = -G * this.M * this.m / (2 * this.a);
+
+        // Angular momentum
+        this.L = Math.sqrt(2 * G * this.M * this.m ** 2 * ((this.rp * this.ra) / (this.ra + this.rp)));
+
+        // Parameter p, k, eps
+        this.p = this.L ** 2 / (G * this.M * this.m ** 2);
+        this.k = 2 * this.m * this.L ** 2 / (G * this.M * this.m ** 2) ** 2;
+
+        // Numerical eccentricity
+        this.eps = Math.sqrt(1 + this.k * this.E);
+
+        // Semi-minor axis
+        this.b = this.a * Math.sqrt(1 - this.eps ** 2);
+
+        // Linear eccentricity
+        this.e = Math.sqrt(this.a ** 2 - this.b ** 2);
+
+        // Polar coordinates
+        this.phi = isNaN(initialDeg[this.name.toLowerCase()])
+            ? Math.random() * deg(360)
+            : deg(initialDeg[this.name.toLowerCase()]);
+        this.r = this.p / (1 + this.eps * Math.cos(this.phi));
+
+        // Orbital velocity
+        this.v = Math.sqrt(G * (this.M + this.m) * ((2 / this.r) - (1 / this.a)));
+
+        // Angular velocity
+        this.w = this.v / this.r;
+
+        // Cartesion coordinates
+        this.x = this.r * Math.cos(this.phi);
+        this.y = this.r * Math.sin(this.phi);
+
+        // flag for collision function
+        this.isColliding = false;
+    }
+
+    run() {
+        // Semi-major axis
+        this.a = (this.rp + this.ra) / 2;
+
+        // Energy
+        this.E = -G * this.M * this.m / (2 * this.a);
+
+        // Angular momentum
+        this.L = Math.sqrt(2 * G * this.M * this.m ** 2 * ((this.rp * this.ra) / (this.ra + this.rp)));
+
+        // Parameter p, k, eps
+        this.p = this.L ** 2 / (G * this.M * this.m ** 2);
+        this.k = 2 * this.m * this.L ** 2 / (G * this.M * this.m ** 2) ** 2;
+
+        // Numerical eccentricity
+        this.eps = Math.sqrt(1 + this.k * this.E);
+
+        // Semi-minor axis
+        this.b = this.a * Math.sqrt(1 - this.eps ** 2);
+
+        // Linear eccentricity
+        this.e = Math.sqrt(this.a ** 2 - this.b ** 2);
+        // Physics for orbiting Bodies - Update angular velocity
+        this.v = Math.sqrt(G * (this.M + this.m) * ((2 / this.r) - (1 / this.a)));
+        this.r = this.p / (1 + this.eps * Math.cos(this.phi));
+        this.w = this.v / this.r
+        this.phi -= this.w * dt / fps;
+        this.x = this.center.x + this.r * Math.cos(this.phi);
+        this.y = this.center.y + this.r * Math.sin(this.phi);
+
+        // Call the draw function to draw the body as filled circle on the canvas
+        this.draw();
+    }
 
     draw() {
 
@@ -14,8 +109,8 @@ class Planet extends CelestialBody {
     saturnRings(front) {
 
         const rings = {
-            rx: this.r * 0.5,
-            ry: this.r * 2.5,
+            rx: this.R * 0.5,
+            ry: this.R * 2.5,
             angle: deg(80),
 
             start: front ? deg(270) : deg(90),
