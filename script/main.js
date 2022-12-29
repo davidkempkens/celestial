@@ -64,6 +64,9 @@ function runUniverse() {
     voyager1.run();
     lightRay.run();
     iss.run();
+    satellites.forEach(s => {
+        s.run();
+    });
     // OTHER BODIES
     suns.forEach(s => s.run());
     blackHoles.forEach(bH => bH.run());
@@ -94,7 +97,9 @@ function runUniverse() {
         }
         if (scale > 1e-8) m.drawTrajectory()
     });
-    if (scale > 1e-7) iss.drawTrajectory()
+    if (scale > 1e-7) {
+        satellites.forEach(s => s.drawTrajectory())
+    }
     asteroids.forEach(a => {
         if (a.isColliding && scale > 1e-14) {
             // a.drawTrajectory()
@@ -133,10 +138,13 @@ function drawNames() {
             if (scale > 1e-7) m.drawName();
             if (scale > 1e-7 && m.isColliding) m.info();
         });
-        if (scale > 1e-7) {
-            iss.drawName();
-            if (iss.isColliding) iss.info()
-        }
+        satellites.forEach(s => {
+            if (scale > 1e-7) {
+                s.drawName();
+                if (s.isColliding) s.info()
+            }
+        });
+
         voyager1.drawName();
         if (voyager1.isColliding) voyager1.info();
 
@@ -231,6 +239,7 @@ function runCollisionDetection() {
     if (scale > 1e-12)
         asteroids.forEach(a => a.collision(mouse));
     // oortCloud.forEach(o => o.collision(mouse));
+    satellites.forEach(s => s.collision(mouse))
     voyager1.collision(mouse);
     iss.collision(mouse);
     lightRay.collision(mouse);

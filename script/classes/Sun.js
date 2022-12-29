@@ -16,7 +16,7 @@ class Sun extends CelestialBody {
         super(name, center, radius * SOLAR_RADIUS, distance * LY, velocity, mass * SOLAR_MASS, color, type);
         // this.r = 26600 * LY;
         // this.v = 251000;
-        // this.phi = 0;
+        this.phi = 0;
     }
 
     draw() {

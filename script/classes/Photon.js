@@ -1,5 +1,11 @@
 class Photon extends FlyingBody {
 
+
+    constructor(name, center, radius, distance, veloctiy, mass, color, type) {
+        super(name, center, radius, distance, veloctiy, mass, color, type);
+        this.rainbow = ['#2F00AA', '#0000FF', '#00A9FF', '#00FFF5', '#48FF00', '#FFFF00', '#FF7F00', '#FF0000'].reverse();
+    }
+
     run() {
         super.run();
         this.draw();
@@ -8,21 +14,32 @@ class Photon extends FlyingBody {
 
     draw() {
         super.draw();
-        this.circle()
+        if (scale > 1e7) this.white();
+        else this.spectrum();
         this.flightPath();
         // this.radioWave();
 
     }
 
-    circle() {
+    spectrum() {
+        this.rainbow.forEach((col, i, rain) => {
+            c.beginPath();
+            c.strokeStyle = col;
+            c.lineWidth = 2 / scale;
+            c.arc(this.center.x, this.center.y, Math.abs(this.r - (rain.length - i) * 1e9), 0, Math.PI * 2);
+            c.stroke();
+            c.closePath();
+        });
 
+    }
+
+    white() {
         c.beginPath();
         c.strokeStyle = this.color;
-        c.lineWidth = 0.8 / scale;
+        c.lineWidth = 2 / scale;
         c.arc(this.center.x, this.center.y, this.r, 0, Math.PI * 2);
         c.stroke();
         c.closePath();
-
     }
 
     radioWave() {

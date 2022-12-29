@@ -56,18 +56,20 @@ async function loadSolarSystemData() {
             asteroids = [...mainBelt, ...kuiperBelt, ...oortCloud];
 
             // Space Probes
-            voyager1 = new Probe('Yoyager 1', Center, 3e6, 152.2 * AE, 17000, 825.5, 'white', 'Probe');
+            voyager1 = new Probe('Yoyager 1', Center, 3e6, 158.79 * AE, 17000, 825.5, 'white', 'Probe');
             // SPEED OF LIGHT
-            lightRay = new Photon('C', sun, 1e6, sun.R, C, 0, 'cyan', 'Photon');
+            lightRay = new Photon('C', sun, 1e6, sun.R, C, 0, 'white', 'Photon');
             // Satellite
             iss = new Satellite('ISS', earth, 100, earth.R + 413000, earth.R + 422000, 444.615, 'white', 'Satellite');
-
+            geostationary = new Satellite('Geostationary Satellite', earth, 50, earth.R + 38000e3, earth.R + 38000e3, 400, 'grey', 'Satellite')
+            satellites.push(iss);
+            satellites.push(geostationary);
             milkyWay = new Galaxy('Milky Way', sagittariusA, 185e3 * LY, 0, 0, 1e12 * SOLAR_MASS, 'white', 'Galaxy');
 
             bigBodies = [sun, ...planets, ...dwarfs, ...moons, voyager1, iss, lightRay, ...suns, ...blackHoles]
             updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
             updateHUD([...suns], hudSuns);
-            updateHUD([...blackHoles, lightRay, voyager1, iss, milkyWay], hudOther);
+            updateHUD([...blackHoles, lightRay, voyager1, iss, geostationary, milkyWay], hudOther);
             // updateHUD([...blackHoles, lightRay, voyager1, universe], hudOther);
 
         })
