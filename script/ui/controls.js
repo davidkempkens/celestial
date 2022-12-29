@@ -126,12 +126,6 @@ function toggleHUD() {
     });
 }
 
-// FILL HUDS WITH BODIES + EVENT LISTENER ON EACH BODY
-
-// updateHUD([...planets, ...dwarfs], hudPlanets);
-// updateHUD([...alphaCentauri, ...suns], hudSuns);
-// updateHUD([...blackHoles, lightRay, voyager1, universe], hudOther);
-
 // MOON LIST FILLED BOOLEAN
 let moonListFilled = false;
 let moonCount = 0;

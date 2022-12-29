@@ -84,9 +84,11 @@ class CelestialBody {
       c.fillStyle = copies[i].color;
       copies[i].draw();
 
-      rescaleDynamic();
-      copies[i].drawName();
-      scaleDynamic();
+      if (copies[i].y * scale > 100 && this.R * scale > 30) {
+        rescaleDynamic();
+        copies[i].drawName();
+        scaleDynamic();
+      }
 
       if (copies.length > 2) continue;
       if (i < 1)

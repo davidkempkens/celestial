@@ -22,16 +22,6 @@ let trans = {
     y: 0
 }
 
-const scales = {
-    earthMoon: 1e-6,
-    fullSun: 5e-7,
-    saturnMoons: 1e-7,
-    inner: 1e-9,
-    outer: 5e-11,
-    oort: 1e-12,
-    out: 1e-14
-}
-
 timeControl = [
     ['sec', 1],
     ['min', 60],
@@ -194,7 +184,8 @@ function updateHUD(bodies, hud) {
         a.innerHTML = b.name;
         a.href = '#';
         a.addEventListener('click', () => {
-            scale = cameraBody === b ? 10 / b.R : sun.R * 1e-16;
+            // scale = cameraBody === b ? 10 / b.R : sun.R * 1e-16;
+            scale = 40 / b.R;
             cameraBody = b;
         });
         // a.addEventListener('mouseover', () => {});

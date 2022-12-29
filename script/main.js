@@ -28,6 +28,9 @@ function start() {
 
 async function setup() {
     await loadSolarSystemData();
+    updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
+    updateHUD([...suns], hudSuns);
+    updateHUD([voyager1, ...blackHoles, ...satellites, ...galaxies, lightRay], hudOther);
     setInterval(start, 1000 / fps);
 }
 
@@ -40,27 +43,19 @@ function runUniverse() {
         solarSystem.forEach(s => s.drawTrajectory());
     }
 
-    planets.forEach(p => p.drawTrajectory());
-    if (scale < 1e-12) {
-        // c.fillRect(Center.x - 50 * AE, Center.y, 100 * AE, 1 / scale);
-        planets.forEach(p => {
-            p.drawTrajectory();
-        });
-        oortCloud.forEach(o => {
-            o.run();
-        });
-    }
-
     // RUN ALL BODIES
     // SOLAR SYSTEM BODIES
     sun.run();
-    planets.forEach(p => p.run());
+    planets.forEach(p => {
+        p.run();
+        p.drawTrajectory();
+    });
     dwarfs.forEach(d => d.run());
     moons.forEach(m => m.run());
 
-    if (scale > 1e-12)
-        asteroids.forEach(a => a.run());
-    // oortCloud.forEach(o => o.run());
+    if (scale > 1e-12) asteroids.forEach(a => a.run());
+    else if (scale > 5e-14) oortCloud.forEach(o => o.run());
+
     voyager1.run();
     lightRay.run();
     iss.run();
@@ -75,8 +70,8 @@ function runUniverse() {
 
 
     // ON COLLISION DISPLAY COMPARE BODY AND ORBIT
-    if (sun.isColliding)
-        sun.compare(planets);
+    if (sun.isColliding) sun.compare(planets);
+
     planets.forEach(p => {
         if (p.isColliding) {
             p.drawTrajectory();
@@ -84,12 +79,14 @@ function runUniverse() {
         }
 
     });
+
     dwarfs.forEach(d => {
         if (d.isColliding) {
             d.drawTrajectory()
             d.compare([earth, moon])
         }
     });
+
     moons.forEach(m => {
         if (m.isColliding) {
             m.drawTrajectory()
@@ -97,93 +94,46 @@ function runUniverse() {
         }
         if (scale > 1e-8) m.drawTrajectory()
     });
+
     if (scale > 1e-7) {
         satellites.forEach(s => s.drawTrajectory())
     }
+
     asteroids.forEach(a => {
         if (a.isColliding && scale > 1e-14) {
-            // a.drawTrajectory()
             a.hover();
         }
     });
     suns.forEach(s => {
         if (s.isColliding) s.compare([sun, ...suns, ...blackHoles]);
     });
-    // alphaCentauri.forEach(a => {
-    //     if (a.isColliding) a.compare([sun]);
-    // });
 
     blackHoles.forEach(bH => {
         if (bH.isColliding) bH.compare([earth, sun, ...blackHoles])
     })
-    // if (m87.isColliding) m87.compare([sun, ...suns, ...blackHoles]);
-    // if (universe.isColliding) universe.compare([m87]);
+
 
 }
 
 function drawNames() {
-    // SOLAR SYSTEM BODIES
+
+    bigBodies.forEach(bB => {
+        if (bB.r * scale > 25) bB.drawName();
+        if (bB.isColliding && scale * bB.R > 25) bB.info();
+    });
+
     if (scale > 1e-12) {
         sun.drawName();
-        if (sun.isColliding) sun.info();
-        planets.forEach(p => {
-            p.drawName();
-            if (p.isColliding) p.info();
-        });
-        dwarfs.forEach(d => {
-            d.drawName();
-            if (d.isColliding) d.info();
-        })
-        moons.forEach(m => {
-            if (scale > 1e-7) m.drawName();
-            if (scale > 1e-7 && m.isColliding) m.info();
-        });
-        satellites.forEach(s => {
-            if (scale > 1e-7) {
-                s.drawName();
-                if (s.isColliding) s.info()
-            }
-        });
-
-        voyager1.drawName();
-        if (voyager1.isColliding) voyager1.info();
-
     } else {
-        if (scale > 1e-15) drawText('Solar System', Center.x, Center.y - 50 * AE, 'white', 13);
-        if (scale > 1e-15) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
-        voyager1.drawName();
-        if (voyager1.isColliding) voyager1.info();
+        if (scale * milkyWay.R > 25) drawText('Solar System', Center.x, Center.y - 50 * AE, 'white', 13);
+        drawText('Milky Way', Center.x, Center.y - milkyWay.R, 'white', 13);
+        if (scale > 5e-14) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
     }
 
-    // OTHER BODIES
-    suns.forEach(s => {
-        s.drawName();
-        if (s.isColliding) s.info();
-    })
-
-    blackHoles.forEach(bh => {
-        bh.drawName();
-        if (bh.isColliding) bh.info();
-    })
-
-    // alphaCentauri.forEach(a => {
-    //     if (scale > 1e-9) {
-    //         a.drawName();
-    //      if (a.isColliding) a.info();
-    //     }
-    // });
-
-    // LIGHTSPEED TEST
-    lightRay.drawName();
-    if (lightRay.isColliding) {
-        lightRay.info();
-    }
-
-    milkyWay.draw();
-    milkyWay.info();
-    // universe.drawName();
-    // universe.info();
-    // if (universe.isColliding) universe.info();
+    galaxies.forEach(g => {
+        g.drawName();
+        // g.info();
+    });
 }
 
 // Center the canvas on a chosen body's position
@@ -197,6 +147,7 @@ function camera(body) {
         x: canvas.width / 2,
         y: canvas.height / 2
     }
+
     // let bodyPosition = {
     //     x: body instanceof FlyingBody ? body.x + body.v : body.center.x + body.a * Math.cos(body.w + (scaleV * (body.velocity / body.distance))) * body.d,
     //     y: body instanceof FlyingBody ? body.y : body.center.y + body.b * Math.sin(body.w + (scaleV * (body.velocity / body.distance))) * body.d
@@ -205,19 +156,20 @@ function camera(body) {
     let v = Math.sqrt(G * (body.M + body.m) * ((2 / body.r) - (1 / body.a)));
     let r = body.p / (1 + body.eps * Math.cos(body.phi + body.w * dt / fps));
     let w = v / r;
+
     let bodyPosition = {
         x: body.center.x + body.r * Math.cos(body.phi - w * dt / fps),
         y: body.center.y + body.r * Math.sin(body.phi - w * dt / fps)
     }
 
-    if (body.type == 'Star' || body.type == 'Black Hole' || body.type == 'Galaxy') {
-        bodyPosition = {
-            x: body.x,
-            y: body.y
-        };
-    } else if (body instanceof FlyingBody) {
+    if (body instanceof FlyingBody) {
         bodyPosition = {
             x: body.x + body.v * dt / fps,
+            y: body.y
+        };
+    } else {
+        bodyPosition = {
+            x: body.x,
             y: body.y
         };
     }
@@ -229,27 +181,15 @@ function camera(body) {
 }
 
 // RUN COLLISION DETECTION
-// SOLAR SYSTEM BODIES
 function runCollisionDetection() {
-    // sun.collision(mouse);
-    // planets.forEach(p => p.collision(mouse));
-    // dwarfs.forEach(d => d.collision(mouse));
-    // moons.forEach(m => m.collision(mouse));
-    solarSystem.forEach(s => s.collision(mouse));
-    if (scale > 1e-12)
-        asteroids.forEach(a => a.collision(mouse));
-    // oortCloud.forEach(o => o.collision(mouse));
-    satellites.forEach(s => s.collision(mouse))
+    if (scale > 1e-12) asteroids.forEach(a => a.collision(mouse));
+    satellites.forEach(s => s.collision(mouse));
     voyager1.collision(mouse);
     iss.collision(mouse);
     lightRay.collision(mouse);
-    // // OTHER BODIES
     suns.forEach(s => s.collision(mouse));
-    // alphaCentauri.forEach(a => a.collision(mouse));
     blackHoles.forEach(bH => bH.collision(mouse));
-    // m87.collision(mouse);
-    // sagittariusA.collision(mouse)
-    // universe.collision(mouse);
+    solarSystem.forEach(s => s.collision(mouse));
 }
 
 function runClock() {

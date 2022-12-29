@@ -1,3 +1,15 @@
+/** 
+* Create a Galaxy
+* @param {String} name Name
+* @param {String} center The name of the center body.
+* @param {Number} radius The Radius of the body in meters (m).
+* @param {Number} distance Distance to the other body in meters (m).
+* @param {Number} velocity Velocity relative to its center body in meters per second (m/s).
+* @param {Number} mass Mass of the body in Kilogramm (kg).
+* @param {String} color Color as String, e.g.: #0F2D23, 'white', 'rgb(0,255,0)'
+* @param {String} type Type of the body, e.g. Planet, Dwarf, Asteroid
+* @returns {Galaxy} body Returns an Galaxy Object.
+*/
 class Galaxy extends CelestialBody {
 
     constructor(name, center, radius, distance, velocity, mass, color, type) {

@@ -13,9 +13,9 @@ class Photon extends FlyingBody {
 
 
     draw() {
-        super.draw();
-        if (scale > 1e7) this.white();
-        else this.spectrum();
+        // super.draw();
+        this.white();
+        // this.spectrum();
         this.flightPath();
         // this.radioWave();
 
@@ -23,10 +23,11 @@ class Photon extends FlyingBody {
 
     spectrum() {
         this.rainbow.forEach((col, i, rain) => {
+
             c.beginPath();
             c.strokeStyle = col;
             c.lineWidth = 2 / scale;
-            c.arc(this.center.x, this.center.y, Math.abs(this.r - (rain.length - i) * 1e9), 0, Math.PI * 2);
+            c.arc(this.center.x, this.center.y, Math.abs(this.r - (rain.length - i) * 1e10), 0, Math.PI * 2);
             c.stroke();
             c.closePath();
         });
