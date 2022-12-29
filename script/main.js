@@ -117,18 +117,15 @@ function drawNames() {
         if (bB.r * scale > 25) bB.drawName();
         if (bB.isColliding && scale * bB.R > 25) bB.info();
     });
-
-    if (scale > 1e-12) {
-        sun.drawName();
-    } else {
+    if (lightRay.r * scale > 25) lightRay.info();
+    if (scale > 1e-12) { sun.drawName(); }
+    else {
         if (scale * milkyWay.R > 25) drawText('Solar System', Center.x, Center.y - 50 * AE, 'white', 13);
         drawText('Milky Way', Center.x, Center.y - milkyWay.R, 'white', 13);
         if (scale > 5e-14) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
     }
 
-    galaxies.forEach(g => {
-        if (g.R * scale > 30 && g.R * scale < 1000) g.info();
-    });
+    galaxies.forEach(g => { if (g.R * scale > 30 && g.R * scale < 1000) g.info(); });
 }
 
 // Center the canvas on a chosen body's position
@@ -178,13 +175,14 @@ function camera(body) {
 // RUN COLLISION DETECTION
 function runCollisionDetection() {
     if (scale > 1e-12) asteroids.forEach(a => a.collision(mouse));
-    satellites.forEach(s => s.collision(mouse));
-    voyager1.collision(mouse);
-    iss.collision(mouse);
-    lightRay.collision(mouse);
-    suns.forEach(s => s.collision(mouse));
-    blackHoles.forEach(bH => bH.collision(mouse));
-    solarSystem.forEach(s => s.collision(mouse));
+    // satellites.forEach(s => s.collision(mouse));
+    // voyager1.collision(mouse);
+    // iss.collision(mouse);
+    // lightRay.collision(mouse);
+    // suns.forEach(s => s.collision(mouse));
+    // blackHoles.forEach(bH => bH.collision(mouse));
+    // solarSystem.forEach(s => s.collision(mouse));
+    bigBodies.forEach(b => b.collision(mouse));
 }
 
 function runClock() {
