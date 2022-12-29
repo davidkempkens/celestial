@@ -590,8 +590,88 @@
     "radius": 1.195e13,
     "distance": 0,
     "velocity": 0,
-    "mass": 2e30,
+    "mass": 0,
     "color": "#F2A516",
+    "type": "Galaxy"
+  },
+  {
+    "name": "Local Interstellar Cloud",
+    "center": "Center",
+    "radius": 2.42e17,
+    "distance": 0,
+    "velocity": 0,
+    "mass": 0,
+    "color": "white",
+    "type": "Galaxy"
+  },
+  {
+    "name": "Orion Arm",
+    "center": "Center",
+    "radius": 4.63e19,
+    "distance": 0,
+    "velocity": 0,
+    "mass": 0,
+    "color": "white",
+    "type": "Galaxy"
+  },
+  {
+    "name": "Milky Way",
+    "center": "Center",
+    "radius": 4.63e20,
+    "distance": 0,
+    "velocity": 0,
+    "mass": 0,
+    "color": "white",
+    "type": "Galaxy"
+  },
+  {
+    "name": "Local Group",
+    "center": "Center",
+    "radius": 4.63e22,
+    "distance": 0,
+    "velocity": 0,
+    "mass": 0,
+    "color": "white",
+    "type": "Galaxy"
+  },
+  {
+    "name": "Virgo Supercluster",
+    "center": "Center",
+    "radius": 4.63e23,
+    "distance": 0,
+    "velocity": 0,
+    "mass": 0,
+    "color": "white",
+    "type": "Galaxy"
+  },
+  {
+    "name": "Laniakea Supercluster",
+    "center": "Center",
+    "radius": 2.32e24,
+    "distance": 0,
+    "velocity": 0,
+    "mass": 0,
+    "color": "white",
+    "type": "Galaxy"
+  },
+  {
+    "name": "Pisces-Cetus Supercluster Complex",
+    "center": "Center",
+    "radius": 5e25,
+    "distance": 0,
+    "velocity": 0,
+    "mass": 0,
+    "color": "white",
+    "type": "Galaxy"
+  },
+  {
+    "name": "Observable Universe",
+    "center": "Center",
+    "radius": 4.395e26,
+    "distance": 0,
+    "velocity": 0,
+    "mass": 0,
+    "color": "white",
     "type": "Galaxy"
   }
 ]

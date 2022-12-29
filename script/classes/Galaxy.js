@@ -51,7 +51,7 @@ class Galaxy extends CelestialBody {
             `${this.name} `, // Display Symbols
             `Mass: ${formatNumber(this.m.toExponential(2))} kg` // Display Type
         ];
-
+        if (this.m == 0) textAside = this.name; // Display Symbols
         // CALL TEXT FUNCTION
         drawText(textAbove, this.x - this.R * 2, this.y - this.R - (25 / scale), this.color, 13);
         drawText(textAside, this.x + this.R / Math.sqrt(2), this.y + this.R / Math.sqrt(2), this.color, 13);

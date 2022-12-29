@@ -46,6 +46,10 @@ async function loadSolarSystemData() {
                 } else if (d.type == 'Galaxy') {
                     let gal = new Galaxy(d.name, Center, d.radius, d.distance, d.velocity, d.mass, d.color, d.type);
                     galaxies.push(gal);
+                    if (gal.name == 'Milky Way') {
+                        milkyWay = gal;
+                        milkyWay.center = sagittariusA;
+                    }
                 }
             });
 
@@ -71,9 +75,9 @@ async function loadSolarSystemData() {
             satellites.push(iss, geostationary);
 
             // Galaxies
-            milkyWay = new Galaxy('Milky Way', sagittariusA, 185e3 * LY, 0, 0, 1e12 * SOLAR_MASS, 'white', 'Galaxy');
-            universe = new Galaxy('Observable Universe', Center, 46.5e9 * LY, 0, 0, 1.5e53, 'white', 'Galaxy');
-            galaxies.push(milkyWay, universe);
+            // milkyWay = new Galaxy('Milky Way', sagittariusA, 185e3 * LY, 0, 0, 1e12 * SOLAR_MASS, 'white', 'Galaxy');
+            // universe = new Galaxy('Observable Universe', Center, 46.5e9 * LY, 0, 0, 1.5e53, 'white', 'Galaxy');
+            // galaxies.push(milkyWay, universe);
             bigBodies = [sun, ...planets, ...dwarfs, ...moons, voyager1, iss, lightRay, ...suns, ...blackHoles];
 
         })

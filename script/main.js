@@ -30,7 +30,7 @@ async function setup() {
     await loadSolarSystemData();
     updateHUD([sun, ...planets, ...dwarfs], hudPlanets);
     updateHUD([...suns], hudSuns);
-    updateHUD([voyager1, ...blackHoles, ...satellites, ...galaxies, lightRay], hudOther);
+    updateHUD([lightRay, voyager1, ...satellites, ...blackHoles, ...galaxies], hudOther);
     setInterval(start, 1000 / fps);
 }
 
@@ -127,9 +127,7 @@ function drawNames() {
     }
 
     galaxies.forEach(g => {
-        if (g.R * scale > 30)
-            // g.drawName();
-            if (g.R * scale < 1000) g.info();
+        if (g.R * scale > 30 && g.R * scale < 1000) g.info();
     });
 }
 
