@@ -37,7 +37,7 @@ class Photon extends FlyingBody {
     white() {
         c.beginPath();
         c.strokeStyle = this.color;
-        c.lineWidth = 2 / scale;
+        c.lineWidth = 0.5 / scale;
         c.arc(this.center.x, this.center.y, this.r, 0, Math.PI * 2);
         c.stroke();
         c.closePath();

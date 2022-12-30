@@ -52,15 +52,14 @@ function runUniverse() {
     });
     dwarfs.forEach(d => d.run());
     moons.forEach(m => m.run());
+    satellites.forEach(s => s.run());
 
     if (scale > 1e-12) asteroids.forEach(a => a.run());
     else if (scale > 5e-14) oortCloud.forEach(o => o.run());
 
     voyager1.run();
     lightRay.run();
-    satellites.forEach(s => {
-        s.run();
-    });
+
     // OTHER BODIES
     suns.forEach(s => s.run());
     blackHoles.forEach(bH => bH.run());
@@ -124,12 +123,11 @@ function drawNames() {
         sun.drawName();
         galaxies[0].details();
     } else {
-        galaxies.filter(g => g.R * scale < 35).pop().details();
+        galaxies.filter(g => g.R * scale < 45).pop().details();
+        if (galaxies.filter(g => g.R * scale > 45).shift() !== undefined)
+            galaxies.filter(g => g.R * scale > 45).shift().details();
         if (scale > 5e-14) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
     }
-    // galaxies.forEach(g => {
-    //     if (g.R * scale > 25 && g.R * scale < 1000) g.details();
-    // });
 
 }
 
