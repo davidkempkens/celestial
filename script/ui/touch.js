@@ -6,6 +6,7 @@ document.body.addEventListener("touchstart", e => {
         x: e.touches[0].clientX - canvas.getBoundingClientRect().left,
         y: e.touches[0].clientY - canvas.getBoundingClientRect().top
     };
+
     let mE = new MouseEvent("mousedown", {
         clientX: touch.x,
         clientY: touch.y,

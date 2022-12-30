@@ -122,11 +122,10 @@ hideHUDElement.addEventListener('click', toggleHUD);
 function toggleHUD() {
     hideHUD = !hideHUD;
     hudElements.forEach(h => {
-        h.style.display = hideHUD ? 'none' : 'flex';
-        // h.classList.toggle('hidden')
-        // console.log(h)
+        if (h.id !== 'nav-hud' && h.id !== 'time-hud')
+            h.style.display = hideHUD ? 'none' : 'flex';
     });
-    console.log(hudElements)
+    // console.log(hudElements)
 }
 
 // MOON LIST FILLED BOOLEAN
