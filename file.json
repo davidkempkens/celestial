@@ -370,6 +370,16 @@
     "type": "Moon"
   },
   {
+    "name": "Dysnomia",
+    "center": "Eris",
+    "radius": 350000,
+    "periapsis": 37310000,
+    "apoapsis": 37610000,
+    "mass": 1e19,
+    "color": "#F2C879",
+    "type": "Moon"
+  },
+  {
     "name": "Halley",
     "center": "Sun",
     "radius": 5.5e3,
