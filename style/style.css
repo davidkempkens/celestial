@@ -53,8 +53,8 @@ body {
     background-color: var(--bg-color);
     position: fixed;
     display: flex;
-    top: 1%;
-    right: 1%;
+    top: 1vh;
+    right: 1vw;
 }
 
 #nav-hud {
@@ -114,10 +114,11 @@ body {
     #nav-hud {
         left: unset;
         top: unset;
-        right: 1%;
-        bottom: 1%;
+        right: 1vw;
+        bottom: 1vh;
         flex-direction: column-reverse;
-        width: 180px;
+        /* width: 180px; */
+        max-height: max-content;
     }
 
     #hud-planets {
@@ -132,7 +133,9 @@ body {
     }
 
     #hud-suns {
-        top: 8%;
+        top: 8vh;
+        /* bottom: 3vh; */
+        /* overflow: hidden; */
     }
 
     #hud-other {
@@ -144,9 +147,13 @@ body {
     }
 
     #time-hud {
-        top: 1%;
-        right: 1%;
-        left: auto;
+        top: 1vh;
+        right: 1vh;
+        /* max-height: min-content; */
+        left: 1vw;
+        /* max-height: min-content; */
+        padding: 0;
+
     }
 
     #plusElement,
@@ -155,8 +162,23 @@ body {
         font-size: 20px;
     }
 
+    #clockElement {
+        margin: 0;
+        width: max-content;
+    }
+
+    #stopElement {
+        margin: 0;
+    }
+
+    #timeElement {
+        width: 150px;
+    }
+
     .hide-hud {
-        top: 73vh;
+        top: unset;
+        bottom: 26vh;
+        z-index: 1;
     }
 }
 

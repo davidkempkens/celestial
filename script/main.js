@@ -29,7 +29,7 @@ function start() {
 async function setup() {
     await loadSolarSystemData();
     updateHUD([sun, ...planets, ...dwarfs, god], hudPlanets);
-    updateHUD([...suns, ...blackHoles], hudSuns);
+    updateHUD([...blackHoles, ...suns], hudSuns);
     updateHUD([lightRay, voyager1, ...satellites, , ...galaxies], hudOther);
     setInterval(start, 1000 / fps);
 }
