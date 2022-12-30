@@ -80,5 +80,4 @@ class BlackHole extends CelestialBody {
             p.run();
         });
     }
-
 }

@@ -83,7 +83,7 @@ class Photon extends FlyingBody {
 
     }
 
-    info() {
+    details() {
         // super.info()
         let textAside = [
             `${this.name} ${this.symbol} ${this.type}`, // Display Symbols

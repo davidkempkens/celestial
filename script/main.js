@@ -115,20 +115,26 @@ function drawNames() {
 
     bigBodies.forEach(bB => {
         if (bB.r * scale > 25) bB.drawName();
-        if (bB.isColliding && scale * bB.R > 25) bB.info();
+        if (bB.isColliding && scale * bB.r > 25) bB.details();
     });
-    if (lightRay.r * scale > 35) lightRay.info();
-    if (voyager1.r * scale > 35) voyager1.info();
+    if (lightRay.r * scale > 35) lightRay.details();
+    if (voyager1.r * scale > 35) voyager1.details();
 
-    if (scale > 1e-12) { sun.drawName(); }
-    else {
-        if (scale * milkyWay.R > 25) drawText('Solar System', Center.x, Center.y - 50 * AE, 'white', 13);
-        if (scale * universe.R > 25) drawText('Milky Way', Center.x, Center.y - milkyWay.R, 'white', 13);
-        drawText('Universe', Center.x, Center.y - universe.R, 'white', 13);
+    if (scale > 1e-12) {
+        sun.drawName();
+        galaxies.filter(g => g.R * scale < 300).pop().details();
+    } else {
+        galaxies.filter(g => g.R * scale < 35).pop().details();
+        // if (scale * milkyWay.R > 25) drawText('Solar System', Center.x, Center.y - 50 * AE, 'white', 13);
+        // if (scale * universe.R > 25) drawText('Milky Way', Center.x, Center.y - milkyWay.R, 'white', 13);
+        // drawText('Universe', Center.x, Center.y - universe.R, 'white', 13);
         if (scale > 5e-14) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
+        // if (scale > 5e-14) oortCloud[0].details();
     }
+    // galaxies.forEach(g => {
+    //     if (g.R * scale > 25 && g.R * scale < 1000) g.details();
+    // });
 
-    galaxies.forEach(g => { if (g.R * scale > 30 && g.R * scale < 1000) g.info(); });
 }
 
 // Center the canvas on a chosen body's position

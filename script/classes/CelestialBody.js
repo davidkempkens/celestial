@@ -125,34 +125,30 @@ class CelestialBody {
     c.beginPath();
     c.strokeStyle = this.color;
     c.lineWidth = 0.3 / scale;
-    // ellipses center coords (x,y), (Major) x-radius, (Minor) y-radius, rotation, start, end
-    c.ellipse(
-      this.center.x - this.e,
-      this.center.y,
-      this.a,
-      this.b,
-      rotation,
-      0,
-      Math.PI * 2
-    );
+    c.ellipse(this.center.x - this.e, this.center.y, this.a, this.b, rotation, 0, Math.PI * 2);
     c.stroke();
     c.closePath();
   }
 
-  info() {
+  details() {
+
+    let diameterText = toLy(this.R * 2) > 0
+      ? `\u2205 ${formatNumber(toLy(this.R * 2))} ly `
+      : `\u2205 ${formatNumber(this.R * 2 * 1e-3)} km `;
+
+    let textAbove = [diameterText];
+
     let distanceText =
       toLy(this.r) > 0
         ? `\u2192 ${formatNumber(toLy(this.r))} ly `
         : `\u2192 ${formatNumber(this.r * 1e-3)} km `;
-    let textAbove = [`\u2205 ${formatNumber(this.R * 2 * 1e-3)} km`]; // DEFAULT TEXT ABOVE BODY IS DIAMETER
-    let textAside = [
-      `${this.name} ${this.symbol} ${this.type}`, // Display Symbols
-      `${formatNumber(this.v * 1e-3)} km/s `, // Display Velocity
-      distanceText, // Display Distance
-      `Mass: ${formatNumber(this.m.toExponential(2))} kg`, // Display Type
-    ];
 
-    // CALL TEXT FUNCTION
+    let textAside = (this.type != 'Galaxy') ? [`${this.name} ${this.symbol} ${this.type}`] : [`${this.name} ${this.symbol}`];
+    if (this.v > 0) textAside.push(`${formatNumber(this.v * 1e-3)} km/s `);
+    if (this.r > 0) textAside.push(distanceText);
+    if (this.m > 0) textAside.push(`Mass: ${formatNumber(this.m.toExponential(2))} kg`);
+
+
     drawText(textAbove, this.x - this.R * 2, this.y - this.R - 25 / scale, this.color, 13);
     drawText(textAside, this.x + this.R, this.y, this.color, 13);
   }

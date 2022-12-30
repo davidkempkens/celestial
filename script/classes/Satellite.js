@@ -4,7 +4,7 @@ class Satellite extends Planet {
         c.drawImage(sat, this.x, this.y - this.R / 2, this.R, this.R);
     }
 
-    info() {
+    details() {
         let distanceText =
             toLy(this.r) > 0
                 ? `\u2192 ${formatNumber(toLy(this.r))} ly `

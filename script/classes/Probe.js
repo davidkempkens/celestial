@@ -10,8 +10,8 @@ class Probe extends FlyingBody {
         this.flightPath();
     }
 
-    info() {
-        super.info()
+    details() {
+        super.details()
         // let textAbove = [`\u2192 ${(this.d / 150).toPrecision(14)} AU`];
         // if(toLy(this.d) > 0) {
         //     textAbove = [`\u2192 ${formatNumber(toLy(this.d))} ly`];

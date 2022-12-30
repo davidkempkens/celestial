@@ -34,7 +34,7 @@ class FlyingBody extends CelestialBody {
         c.closePath();
     }
 
-    info() {
+    details() {
         let textAside = [
             `${this.name} ${this.symbol} ${this.type}`, // Display Symbols
             `${formatNumber(this.v * 1e-3)} km/s `, // Display Velocity
