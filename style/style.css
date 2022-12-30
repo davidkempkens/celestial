@@ -99,14 +99,15 @@ body {
 
 }
 
-/* @media only screen and (max-width: 600px) {
+
+@media only screen and (max-width: 600px) {
     .hud {
         background-color: var(--bg-color-opaque);
     }
 
     a {
         opacity: .7;
-        padding: 1px;
+        padding: 0px;
         background-color: var(--bg-color);
     }
 
@@ -120,7 +121,9 @@ body {
     }
 
     #hud-planets {
-        top: 1%;
+        top: 8vh;
+        max-height: 33vh;
+        overflow: hidden;
     }
 
     #hud-moons {
@@ -133,7 +136,11 @@ body {
     }
 
     #hud-other {
-        top: 50%;
+        top: 42vh;
+        bottom: 1vh;
+        left: 1vw;
+        max-width: min-content;
+        overflow-y: hidden;
     }
 
     #time-hud {
@@ -144,13 +151,12 @@ body {
 
     #plusElement,
     #minusElement {
-        padding: 5px;
+        padding: 5px 50px;
         font-size: 20px;
     }
 
     .hide-hud {
-        top: 1%;
-        right: 50%;
+        top: 73vh;
     }
 }
 
@@ -164,55 +170,52 @@ body {
 
     a {
         opacity: .7;
-        /* padding: 1px; */
-/* background-color: var(--bg-color);
-}
+        padding: 1px;
+        background-color: var(--bg-color);
+    }
 
-#nav-hud {
-    top: unset;
-    left: unset;
-    right: 1%;
-    bottom: 1%;
-    max-width: 330px;
-}
+    #nav-hud {
+        top: unset;
+        left: unset;
+        right: 1%;
+        bottom: 1%;
+        max-width: 330px;
+    }
 
-#hud-planets {
-    top: auto;
-    bottom: 1%;
-}
+    #hud-planets {
+        top: 30vh;
+        bottom: 1%;
+    }
 
-#hud-moons {
-    top: unset;
-    bottom: 1%;
-    left: 15%;
-}
+    #hud-moons {
+        top: unset;
+        bottom: 1%;
+        left: 15%;
+    }
 
-#hud-suns {
-    top: 1%;
-}
+    #hud-suns {
+        top: 1%;
+    }
 
-#hud-other {
-    top: 1%;
-    right: 25%;
-}
+    #hud-other {
+        top: 1%;
+        right: 25%;
+    }
 
-#time-hud {
-    top: 1%;
-    left: 25%;
-}
+    #time-hud {
+        top: 1%;
+        left: 25%;
+    }
 
-#plusElement,
-#minusElement {
-    padding: 5px;
-    font-size: 20px;
-}
+    #plusElement,
+    #minusElement {
+        padding: 5px;
+        font-size: 20px;
+    }
 
-.hide-hud {
-    top: 1%;
-    right: unset;
-    left: 1%;
+    .hide-hud {
+        top: 1%;
+        right: unset;
+        left: 1%;
+    }
 }
-}
-
-*/
-*/
