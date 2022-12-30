@@ -194,14 +194,17 @@ function controls() {
     zoomElement.innerHTML = `<b>Z</b>oom: ${formatNumber(scale.toExponential(2))}`;
     stopElement.innerHTML = stopTime ? `<b>S</b>tart` : `<b>S</b>top`;
     stopElement.style.color = stopTime ? 'green' : 'red';
+
     // show current planets that gets follow by the camera in the hud
     if (cameraBody !== null) {
         cameraElement.innerHTML = cameraBody.name;
         cameraElement.style.color = cameraBody.color;
         // FILL LIST ON THE RIGHT SIDE
         // IF LIST IS CURRENTLY EMPTY
+
         if (!moonListFilled) {
-            moons.forEach(m => {
+            let arr = [...moons, ...satellites];
+            arr.forEach(m => {
                 if (m.center === cameraBody) {
                     moonCount++;
                     currentListFrom = m.center;

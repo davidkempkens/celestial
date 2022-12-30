@@ -28,9 +28,9 @@ function start() {
 
 async function setup() {
     await loadSolarSystemData();
-    updateHUD([sun, ...planets, ...dwarfs, god], hudPlanets);
+    updateHUD([sun, ...planets, ...dwarfs, god, lightRay, voyager1], hudPlanets);
     updateHUD([...blackHoles, ...suns], hudSuns);
-    updateHUD([lightRay, voyager1, ...satellites, , ...galaxies], hudOther);
+    updateHUD([...galaxies], hudOther);
     setInterval(start, 1000 / fps);
 }
 
@@ -121,6 +121,7 @@ function drawNames() {
 
     if (scale > 1e-12) {
         sun.drawName();
+        if (sun.isColliding) sun.details()
         galaxies[0].details();
     } else {
         galaxies.filter(g => g.R * scale < 45).pop().details();

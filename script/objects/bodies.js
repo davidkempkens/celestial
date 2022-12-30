@@ -80,10 +80,10 @@ async function loadSolarSystemData() {
 
             // Satellites
             iss = new Satellite('ISS', earth, 100, earth.R + 413000, earth.R + 422000, 444.615, 'white', 'Satellite');
-            geostationary = new Satellite('Geostationary Satellite', earth, 50, earth.R + 38000e3, earth.R + 38000e3, 400, 'grey', 'Satellite');
+            geostationary = new Satellite('GOES-16', earth, 50, earth.R + 35780.2e3, earth.R + 35793.1e3, 2857, 'grey', 'Satellite');
             satellites.push(iss, geostationary);
 
-            bigBodies = [sun, ...planets, ...dwarfs, ...moons, voyager1, iss, lightRay, ...suns, ...blackHoles];
+            bigBodies = [sun, ...planets, ...dwarfs, ...moons, voyager1, iss, lightRay, ...suns, ...blackHoles, ...satellites];
 
         })
 }

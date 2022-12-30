@@ -1,6 +1,7 @@
 :root {
     --bg-color: rgba(255, 255, 255, .05);
     --bg-color-opaque: rgba(255, 255, 255, .1);
+    --bg-color-transparent: rgba(255, 255, 255, 0);
 }
 
 * {
@@ -103,6 +104,7 @@ body {
 @media only screen and (max-width: 600px) {
     .hud {
         background-color: var(--bg-color-opaque);
+        /* background-color: var(--bg-color-transparent); */
     }
 
     a {
@@ -125,11 +127,16 @@ body {
         top: 8vh;
         max-height: 33vh;
         overflow: hidden;
+        max-width: 65px;
+        /* align-items: flex-start; */
     }
 
     #hud-moons {
-        left: 1%;
-        top: 63%;
+        left: 72px;
+        top: 8vh;
+        max-width: max-content;
+        padding: 0;
+        margin: 0;
     }
 
     #hud-suns {
