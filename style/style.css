@@ -104,7 +104,7 @@ body {
 @media only screen and (max-width: 600px) {
     .hud {
         background-color: var(--bg-color-opaque);
-        /* background-color: var(--bg-color-transparent); */
+        background-color: var(--bg-color-transparent);
     }
 
     a {
@@ -120,62 +120,68 @@ body {
         bottom: 1vh;
         flex-direction: column-reverse;
         /* width: 180px; */
-        max-height: max-content;
+        /* max-height: max-content; */
     }
 
     #hud-planets {
+        font-size: small;
         top: 8vh;
-        max-height: 33vh;
+        max-height: 34vh;
         overflow: hidden;
         max-width: 65px;
         /* align-items: flex-start; */
     }
 
     #hud-moons {
+        font-size: small;
         left: 72px;
         top: 8vh;
-        max-width: max-content;
+        max-width: 80px;
         padding: 0;
         margin: 0;
     }
 
     #hud-suns {
+        font-size: x-small;
         top: 8vh;
+        /* max-width: min-content; */
         /* bottom: 3vh; */
         /* overflow: hidden; */
     }
 
     #hud-other {
-        top: 42vh;
-        bottom: 1vh;
+        font-size: x-small;
+        top: 50vh;
+        bottom: 19vh;
         left: 1vw;
-        max-width: min-content;
+        max-width: 150px;
         overflow-y: hidden;
     }
 
     #time-hud {
+        font-size: small;
         top: 1vh;
         right: 1vh;
         /* max-height: min-content; */
         left: 1vw;
         /* max-height: min-content; */
-        padding: 0;
+        /* padding: 0; */
 
     }
 
     #plusElement,
     #minusElement {
         padding: 5px 50px;
-        font-size: 20px;
+        /* font-size: 20px; */
     }
 
     #clockElement {
-        margin: 0;
-        width: max-content;
+        margin: 3px;
+        width: 400px;
     }
 
     #stopElement {
-        margin: 0;
+        margin: 1px;
     }
 
     #timeElement {
