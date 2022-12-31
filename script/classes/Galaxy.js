@@ -14,26 +14,60 @@ class Galaxy extends CelestialBody {
 
     constructor(name, center, radius, distance, velocity, mass, color, type) {
         super(name, center, radius, distance, velocity, mass, color, type);
-    }
 
+        // this.m = 1e36;
+
+        this.star = {
+            count: 600,
+            name: 'Star of ' + this.name,
+            minR: this.R * 1e-3,
+            maxR: this.R * 2e-3,
+            minD: this.R * .1,
+            maxD: this.R * .99,
+            m: SOLAR_MASS,
+            color: this.color,
+            t: 'Star'
+        };
+
+        this.stars = galaxiesFactory(
+            this.star.count,
+            this.star.name,
+            this,
+            this.star.minR,
+            this.star.maxR,
+            this.star.minD,
+            this.star.maxD,
+            this.star.m,
+            this.star.color,
+            this.star.t);
+    }
 
     run() {
         this.x = this.center.x;
         this.y = this.center.y;
         this.draw();
+        if (this.m != 0)
+            this.spiral();
     }
 
     draw() {
         c.beginPath();
         c.strokeStyle = this.color;
         c.lineWidth = 0.5 / scale;
-        c.arc(this.center.x, this.center.y, this.R, 0, Math.PI * 2);
+        c.arc(this.x, this.y, this.R, 0, Math.PI * 2);
         c.stroke();
         c.closePath();
     }
 
+    spiral() {
+        this.stars.forEach(s => {
+            s.run();
+            s.shine();
+        });
+    }
+
     drawName() {
-        drawText(this.name, this.x + this.R / Math.sqrt(2), this.y + this.R / Math.sqrt(2), this.color, 13);
+        drawText(this.name, this.x + this.R / Math.SQRT2, this.y + this.R / Math.SQRT2, this.color, 13);
     }
 
 }

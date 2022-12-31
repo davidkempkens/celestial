@@ -42,6 +42,8 @@ class CelestialBody {
 
   run() {
 
+    // this.w = this.v / this.r;
+    // this.phi += this.w;
     this.x = this.center.x + this.r * Math.cos(this.phi);
     this.y = this.center.y + this.r * Math.sin(this.phi);
 

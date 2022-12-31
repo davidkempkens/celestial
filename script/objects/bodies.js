@@ -45,8 +45,8 @@ async function loadSolarSystemData() {
                     if (bh.name == 'God') {
                         god = bh;
                         god.phi = -Math.PI / 180 * 90;
-                        god.type = 'Galaxy';
-                        galaxies.push(god);
+                        god.type = 'God';
+                        // galaxies.push(god);
 
                     } else blackHoles.push(bh);
                 } else if (d.type == 'Galaxy') {

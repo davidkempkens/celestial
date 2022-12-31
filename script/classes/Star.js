@@ -17,17 +17,21 @@ class Star {
     }
 
     spin() {
-            this.w -= this.v;
-            this.x = Math.cos(this.w) * this.d + this.center.x;
-            this.y = Math.sin(this.w) * this.d + this.center.y;
-            this.draw();
-        }
+        this.w -= this.v;
+        this.x = Math.cos(this.w) * this.d + this.center.x;
+        this.y = Math.sin(this.w) * this.d + this.center.y;
+        this.draw();
+    }
 
     draw() {
-            c.fillStyle = this.color;
-            c.beginPath();
-            c.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-            c.closePath();
-            c.fill();
-        }
+        c.fillStyle = this.color;
+        c.beginPath();
+        c.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        c.closePath();
+        c.fill();
+    }
+
+    shine() {
+
+    }
 }

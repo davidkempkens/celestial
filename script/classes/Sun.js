@@ -18,7 +18,7 @@ class Sun extends CelestialBody {
 
     draw() {
         super.draw();
-        this.sunShine()
+        this.sunShine();
     }
 
     sunShine() {

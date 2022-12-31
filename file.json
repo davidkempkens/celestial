@@ -396,7 +396,7 @@
     "periapsis": 5e12,
     "apoapsis": 5e13,
     "mass": 25,
-    "color": "#6DFF2E",
+    "color": "green",
     "type": "Dwarf"
   },
   {
@@ -620,7 +620,7 @@
     "radius": 2.42e17,
     "distance": 0,
     "velocity": 0,
-    "mass": 0,
+    "mass": 2.01e30,
     "color": "white",
     "type": "Galaxy"
   },
@@ -630,7 +630,7 @@
     "radius": 4.63e19,
     "distance": 0,
     "velocity": 0,
-    "mass": 0,
+    "mass": 8.2e36,
     "color": "white",
     "type": "Galaxy"
   },
@@ -640,7 +640,7 @@
     "radius": 4.63e20,
     "distance": 0,
     "velocity": 0,
-    "mass": 0,
+    "mass": 1.15e42,
     "color": "white",
     "type": "Galaxy"
   },
@@ -650,7 +650,7 @@
     "radius": 4.63e22,
     "distance": 0,
     "velocity": 0,
-    "mass": 0,
+    "mass": 4e42,
     "color": "white",
     "type": "Galaxy"
   },
@@ -660,7 +660,7 @@
     "radius": 4.63e23,
     "distance": 0,
     "velocity": 0,
-    "mass": 0,
+    "mass": 2.96e45,
     "color": "white",
     "type": "Galaxy"
   },
@@ -670,7 +670,7 @@
     "radius": 2.32e24,
     "distance": 0,
     "velocity": 0,
-    "mass": 0,
+    "mass": 2e47,
     "color": "white",
     "type": "Galaxy"
   },
@@ -680,7 +680,7 @@
     "radius": 5e25,
     "distance": 0,
     "velocity": 0,
-    "mass": 0,
+    "mass": 2e48,
     "color": "white",
     "type": "Galaxy"
   },
@@ -690,7 +690,7 @@
     "radius": 4.395e26,
     "distance": 0,
     "velocity": 0,
-    "mass": 0,
+    "mass": 1.5e53,
     "color": "white",
     "type": "Galaxy"
   },

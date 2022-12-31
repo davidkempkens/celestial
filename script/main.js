@@ -63,8 +63,15 @@ function runUniverse() {
     // OTHER BODIES
     suns.forEach(s => s.run());
     blackHoles.forEach(bH => bH.run());
-    galaxies.forEach(g => g.run());
-
+    galaxies.forEach(g => {
+        // console.log(g.name, g.star)
+        // if (g.star.minR * scale < canvas.width) g.run()
+    });
+    if (galaxies.filter(g => g.R * scale < 45).pop() !== undefined)
+        galaxies.filter(g => g.R * scale < 45).pop().run();
+    if (galaxies.filter(g => g.R * scale > 45).shift() !== undefined)
+        galaxies.filter(g => g.R * scale > 45).shift().run();
+    god.run();
 
     // ON COLLISION DISPLAY COMPARE BODY AND ORBIT
     if (sun.isColliding) sun.compare(planets);
