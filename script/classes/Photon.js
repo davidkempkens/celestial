@@ -6,19 +6,9 @@ class Photon extends FlyingBody {
         this.rainbow = ['#2F00AA', '#0000FF', '#00A9FF', '#00FFF5', '#48FF00', '#FFFF00', '#FF7F00', '#FF0000'].reverse();
     }
 
-    run() {
-        super.run();
-        this.draw();
-    }
-
-
     draw() {
-        // super.draw();
         this.white();
-        // this.spectrum();
         this.flightPath();
-        // this.radioWave();
-
     }
 
     spectrum() {

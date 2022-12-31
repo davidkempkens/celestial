@@ -27,11 +27,11 @@ class CelestialBody {
     this.v = velocity;
 
     // Polar coordinates
+    this.r = distance;
     this.phi = isNaN(initialDeg[this.name.toLowerCase()])
       ? Math.random() * deg(360)
       : deg(initialDeg[this.name.toLowerCase()]);
-    this.r = distance;
-
+    this.w = 0;
     // Cartesion coordinates
     this.x = this.center.x + this.r * Math.cos(this.phi);
     this.y = this.center.y + this.r * Math.sin(this.phi);
@@ -42,8 +42,10 @@ class CelestialBody {
 
   run() {
 
-    // this.w = this.v / this.r;
-    // this.phi += this.w;
+    if (this.r !== 0) {
+      this.w = this.v / this.r;
+      this.phi += this.w;
+    }
     this.x = this.center.x + this.r * Math.cos(this.phi);
     this.y = this.center.y + this.r * Math.sin(this.phi);
 

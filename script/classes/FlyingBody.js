@@ -20,6 +20,7 @@ class FlyingBody extends CelestialBody {
         this.r += this.v * dt / fps;
         this.x = this.center.x + this.r;
         this.y = this.center.y;
+        this.draw()
     }
 
     flightPath() {

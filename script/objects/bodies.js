@@ -22,6 +22,7 @@ async function loadSolarSystemData() {
                         suns.push(s);
                     }
                     if (s.name == 'Alpha Centauri B') {
+                        // Special case because Alpha Centauri A is the Center of B
                         s.center = suns.find(ss => ss.name == 'Alpha Centauri A');
                         s.r = 35.8 * AE;
                     }
@@ -46,8 +47,6 @@ async function loadSolarSystemData() {
                         god = bh;
                         god.phi = -Math.PI / 180 * 90;
                         god.type = 'God';
-                        // galaxies.push(god);
-
                     } else blackHoles.push(bh);
                 } else if (d.type == 'Galaxy') {
                     let gal = new Galaxy(d.name, Center, d.radius, d.distance, d.velocity, d.mass, d.color, d.type);
@@ -74,7 +73,6 @@ async function loadSolarSystemData() {
             // Photon
             lightRay = new Photon('C', sun, 1e7, sun.R, C, 0, 'white', 'Photon');
 
-
             // Space Probes
             voyager1 = new Probe('Yoyager 1', Center, 3e6, 158.79 * AE, 17000, 825.5, 'white', 'Probe');
 
@@ -83,7 +81,7 @@ async function loadSolarSystemData() {
             geostationary = new Satellite('GOES-16', earth, 50, earth.R + 35780.2e3, earth.R + 35793.1e3, 2857, 'grey', 'Satellite');
             satellites.push(iss, geostationary);
 
-            bigBodies = [sun, ...planets, ...dwarfs, ...moons, voyager1, iss, lightRay, ...suns, ...blackHoles, ...satellites];
+            bigBodies = [sun, ...planets, ...dwarfs, ...moons, ...satellites, lightRay, ...suns, ...blackHoles, ...satellites];
 
         })
 }

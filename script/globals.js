@@ -72,6 +72,9 @@ const bg = '#050a10';
 // Frame Animation ID - used to cancel / start frame animations
 let frAId;
 
+
+let renderDistance = canvas.height;
+
 // Mouse objects and booleans - for user input via mouse
 let mouse = {
     x: 0,

@@ -596,7 +596,7 @@
   },
   {
     "name": "Heliosphere",
-    "center": "Center",
+    "center": "Sun",
     "radius": 1.195e13,
     "distance": 0,
     "velocity": 0,
@@ -606,7 +606,7 @@
   },
   {
     "name": "Hill Sphere",
-    "center": "Center",
+    "center": "Sun",
     "radius": 1.9e16,
     "distance": 0,
     "velocity": 0,
