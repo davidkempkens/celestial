@@ -11,63 +11,74 @@ async function loadSolarSystemData() {
         .then(data => {
             data.forEach(d => {
 
-                let centerObject = solarSystem.find(c => c.name == d.center);
+                let centerObject = everything.find(c => c.name === d.center);
+                let newBody;
 
-                if (d.type == 'Star') {
-                    let s = new Sun(d.name, Center, d.radius, d.distance, d.velocity, d.mass, d.color, d.type)
-                    if (d.name == 'Sun') {
-                        solarSystem.push(s);
-                        sun = s;
-                    } else {
-                        suns.push(s);
-                    }
-                    if (s.name == 'Alpha Centauri B') {
-                        // Special case because Alpha Centauri A is the Center of B
-                        s.center = suns.find(ss => ss.name == 'Alpha Centauri A');
-                        s.r = 35.8 * AE;
-                    }
-                } else if (d.type == 'Planet') {
-                    let p = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type);
-                    if (d.name == 'Earth') earth = p;
-                    planets.push(p)
-                    solarSystem.push(p)
-                } else if (d.type == 'Dwarf') {
-                    let p = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type);
-                    dwarfs.push(p)
-                    solarSystem.push(p)
-                } else if (d.type == 'Moon') {
-                    let p = new Moon(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type);
-                    if (d.name == 'Moon') moon = p;
-                    moons.push(p)
-                    solarSystem.push(p)
-                } else if (d.type == 'Black Hole') {
-                    let bh = new BlackHole(d.name, Center, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.colors);
-                    if (bh.name == 'Sagittarius A*') sagittariusA = bh;
-                    if (bh.name == 'God') {
-                        god = bh;
+                switch (d.type) {
+                    case 'Star':
+                        newBody = new Sun(d.name, centerObject, d.radius, d.distance, d.velocity, d.mass, d.color, d.type);
+                        if (d.name == 'Sun') {
+                            solarSystem.push(newBody);
+                            sun = newBody;
+                        } else {
+                            suns.push(newBody);
+                        }
+                        break;
+                    case 'Planet':
+                        newBody = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type);
+                        if (d.name == 'Earth') earth = newBody;
+                        planets.push(newBody);
+                        solarSystem.push(newBody);
+                        break;
+                    case 'Dwarf':
+                        newBody = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type);
+                        dwarfs.push(newBody);
+                        solarSystem.push(newBody);
+                        break;
+                    case 'Moon':
+                        newBody = new Moon(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type);
+                        if (d.name == 'Moon') moon = newBody;
+                        moons.push(newBody);
+                        solarSystem.push(newBody);
+                        break;
+                    case 'Black Hole':
+                        newBody = new BlackHole(d.name, centerObject, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.colors);
+                        if (newBody.name == 'Sagittarius A*') sagittariusA = newBody;
+                        blackHoles.push(newBody);
+                    case 'God':
+                        newBody = new BlackHole(d.name, centerObject, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.colors);
+                        god = newBody;
                         god.phi = -Math.PI / 180 * 90;
-                        god.type = 'God';
-                    } else blackHoles.push(bh);
-                } else if (d.type == 'Galaxy') {
-                    let gal = new Galaxy(d.name, Center, d.radius, d.distance, d.velocity, d.mass, d.color, d.type);
-                    galaxies.push(gal);
-                    if (gal.name == 'Milky Way') {
-                        milkyWay = gal;
-                        milkyWay.center = sagittariusA;
-                    }
-                    if (gal.name == 'Observable Universe') {
-                        universe = gal;
-                    }
-                }
+                        break;
+                    case 'Galaxy':
+                        newBody = new Galaxy(d.name, centerObject, d.radius, d.distance, d.velocity, d.mass, d.color, d.type);
+                        galaxies.push(newBody);
+                        if (newBody.name == 'Observable Universe') universe = newBody
+                        break;
+                    default:
+                        break;
+                };
+
+                everything.push(newBody)
             });
 
             // Asteroids
             asteroidFactory(200, 'Main Asteroid', sun, 1e6, 2e6, 2 * AE, 3.4 * AE, 10e10, '#5E574F', 'Asteroid')
-                .forEach(a => mainBelt.push(a));
+                .forEach(a => {
+                    mainBelt.push(a);
+                    everything.push(a);
+                });
             asteroidFactory(1000, 'Kuiper Asteroid', sun, 1e6, 2e6, 30 * AE, 20 * AE, 10e10, '#5E574F', 'Asteroid')
-                .forEach(a => kuiperBelt.push(a));
+                .forEach(a => {
+                    kuiperBelt.push(a);
+                    everything.push(a);
+                });
             asteroidFactory(1000, 'Oort Cloud Asteroid', sun, 1e8, 1e9, 2000 * AE, 5000 * AE, 1e25, '#5E574F', 'Asteroid')
-                .forEach(a => oortCloud.push(a))
+                .forEach(a => {
+                    oortCloud.push(a);
+                    everything.push(a);
+                });
+
             asteroids = [...mainBelt, ...kuiperBelt, ...oortCloud];
 
             // Photon
@@ -82,6 +93,7 @@ async function loadSolarSystemData() {
             satellites.push(iss, geostationary);
 
             bigBodies = [sun, ...planets, ...dwarfs, ...moons, ...satellites, lightRay, ...suns, ...blackHoles, ...satellites];
+            everything.push(iss, geostationary, lightRay, voyager1);
 
         })
 }
@@ -113,7 +125,7 @@ let universe;
 let god;
 
 // EVERYTHING ARRAY FOR EASY HANDLING
-// const everything = [...bigBodies, ...asteroids];
+const everything = [Center];
 
 // RELATIONSHIP OF BODIES TO ITS SATELLITES
 // everything.forEach(p => {

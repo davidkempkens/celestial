@@ -30,7 +30,7 @@ function asteroidFactory(count, name, center, minRadius, maxRadius, minDistance,
 function starsFactory(amount) {
     let stars = [];
     for (let i = 0; i < amount; i++) {
-        stars.push(new Star(canvas.width, canvas.height));
+        stars.push(new Stars(canvas.width, canvas.height));
     }
     return stars;
 }
@@ -44,7 +44,7 @@ function galaxiesFactory(count, name, center, minRadius, maxRadius, minDistance,
         let d2 = minDistance + (Math.random() * (maxDistance - minDistance));
 
         // Name - Center - Radius(m) - Periapsis(m) - Apoapsis(m) - Mass(kg) - Color - Type
-        arm.push(new Asteroid(n, center, r, d1, d2, mass, color, type));
+        arm.push(new Star(n, center, r, d1, d2, mass, color, type));
     }
     return arm;
 }

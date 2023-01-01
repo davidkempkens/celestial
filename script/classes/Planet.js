@@ -13,7 +13,7 @@
 class Planet extends CelestialBody {
 
     constructor(name, center, radius, periapsis, apoapsis, mass, color, type) {
-        super(name, center, radius, 0, 0, mass, color, type);
+        super(name, center, radius, periapsis + apoapsis / 2, Math.sqrt(G * (center.m + mass) * ((1 / periapsis + apoapsis / 2))), mass, color, type);
         this.M = center.m;
         this.m = mass;
         this.rp = periapsis;

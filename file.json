@@ -421,9 +421,9 @@
   },
   {
     "name": "Alpha Centauri B",
-    "center": "Center",
+    "center": "Alpha Centauri A",
     "radius": 0.8632,
-    "distance": 4.37,
+    "distance": 5.660877935e-4,
     "velocity": 0,
     "mass": 0.9092,
     "color": "#D98F4E",
@@ -636,7 +636,7 @@
   },
   {
     "name": "Milky Way",
-    "center": "Center",
+    "center": "Sagittarius A*",
     "radius": 4.63e20,
     "distance": 0,
     "velocity": 0,
@@ -702,7 +702,7 @@
     "velocity": 0,
     "mass": 1e24,
     "color": "white",
-    "type": "Black Hole",
+    "type": "God",
     "colors": [
       "#BF1304",
       "#F2490C",
