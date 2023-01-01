@@ -637,7 +637,7 @@
   {
     "name": "Milky Way",
     "center": "Sagittarius A*",
-    "radius": 4.63e20,
+    "radius": 9.46073e20,
     "distance": 0,
     "velocity": 0,
     "mass": 1.15e42,
@@ -707,7 +707,7 @@
   {
     "name": "Andromeda",
     "center": "Center",
-    "radius": 1.1892146e21,
+    "radius": 9.46073e20,
     "distance": 2.3651825e22,
     "velocity": 0,
     "mass": 5e42,
