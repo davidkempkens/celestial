@@ -131,7 +131,7 @@ function drawNames() {
     if (lightRay.r * scale > maxRenderDistance) lightRay.details();
     if (voyager1.r * scale > maxRenderDistance) voyager1.details();
 
-    if (scale > 1e-15) {
+    if (scale > 1e-12) {
         sun.drawName();
         if (sun.isColliding) sun.details()
         galaxies[0].details();
