@@ -63,13 +63,14 @@ function runUniverse() {
     lightRay.run();
 
     suns.forEach(s => s.run());
-    blackHoles.forEach(bH => bH.run());
 
     try {
         galaxies.filter(g => g.R * scale < maxRenderDistance && g.R * scale > minRenderDistance).forEach(g => g.run());
+
     } catch (error) {
         console.log(error)
     }
+    blackHoles.forEach(bH => bH.run());
 
     god.run();
 
@@ -141,7 +142,6 @@ function drawNames() {
                 .filter(g => g.R * scale < maxRenderDistance && g.R * scale > minRenderDistance)
                 .forEach(g => {
                     g.details();
-                    console.log(g.name, (g.R * scale).toFixed(0))
                 });
             // console.log(galaxies.filter(g => g.R * scale < maxRenderDistance))
             // let largerGalaxy = galaxies.filter(g => g.R * scale < maxRenderDistance).pop();
@@ -163,7 +163,7 @@ function drawNames() {
 // Uses global variable "cameraBody" as argument
 // Does nothing if cameraBody is set to null
 function camera(body) {
-    if (body instanceof Galaxy) return;
+    // if (body instanceof Galaxy) return;
     if (body === null) return;
 
     let centerOfScreen = {
@@ -171,14 +171,14 @@ function camera(body) {
         y: canvas.height / 2
     }
 
-    let v = Math.sqrt(G * (body.M + body.m) * ((2 / body.r) - (1 / body.a)));
-    let r = body.p / (1 + body.eps * Math.cos(body.phi + body.w * dt / fps));
-    let w = v / r;
+    // let v = Math.sqrt(G * (body.M + body.m) * ((2 / body.r) - (1 / body.a)));
+    // let r = body.p / (1 + body.eps * Math.cos(body.phi + body.w * dt / fps));
+    // let w = v / r;
 
-    let cameraPosition = {
-        x: body.center.x + body.r * Math.cos(body.phi - w * dt / fps),
-        y: body.center.y + body.r * Math.sin(body.phi - w * dt / fps)
-    }
+    // let cameraPosition = {
+    //     x: body.center.x + body.r * Math.cos(body.phi - w * dt / fps),
+    //     y: body.center.y + body.r * Math.sin(body.phi - w * dt / fps)
+    // }
 
     if (body instanceof FlyingBody) {
         cameraPosition = {
@@ -193,7 +193,7 @@ function camera(body) {
     }
 
     Center.x -= cameraPosition.x - centerOfScreen.x;
-    Center.y -= cameraPosition.y - centerOfScreen.y + body.R;
+    Center.y -= (body instanceof Galaxy) ? cameraPosition.y - centerOfScreen.y : cameraPosition.y - centerOfScreen.y + body.R;
 
 }
 

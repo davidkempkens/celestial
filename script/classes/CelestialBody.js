@@ -41,7 +41,10 @@ class CelestialBody {
   }
 
   run() {
-
+    // if (this.name === 'Sagittarius A*') console.log(this.x)
+    if (this.center !== Center) {
+      this.center.run();
+    }
     if (this.r !== 0) {
       this.w = this.v / this.r
       this.phi -= this.w * dt / fps;
