@@ -8,11 +8,13 @@ function start() {
     stars.forEach(s => s.spin());
 
     scaleDynamic();
-    // camera planet
+
     camera(cameraBody);
 
     // Actually run Physics and draw everything
     runUniverse();
+
+    compareBodies();
 
     rescaleDynamic();
     // SHOW NAMES AND INFOS ON MOUSE OVER
@@ -63,15 +65,19 @@ function runUniverse() {
     suns.forEach(s => s.run());
     blackHoles.forEach(bH => bH.run());
 
-    if (galaxies.filter(g => g.R * scale < renderDistance).pop() !== undefined)
-        galaxies.filter(g => g.R * scale < renderDistance).pop().run();
-    if (galaxies.filter(g => g.R * scale > renderDistance).shift() !== undefined)
-        galaxies.filter(g => g.R * scale > renderDistance).shift().run();
+    try {
+        galaxies.filter(g => g.R * scale < maxRenderDistance && g.R * scale > minRenderDistance).forEach(g => g.run());
+    } catch (error) {
+        console.log(error)
+    }
 
     god.run();
 
-    // ON COLLISION DISPLAY COMPARE BODY AND ORBIT
-    if (sun.isColliding) sun.compare(planets);
+}
+
+function compareBodies() {
+    if (sun.isColliding)
+        sun.compare(planets);
     planets.forEach(p => {
         if (p.isColliding) {
             p.drawTrajectory();
@@ -81,21 +87,22 @@ function runUniverse() {
 
     dwarfs.forEach(d => {
         if (d.isColliding) {
-            d.drawTrajectory()
-            d.compare([earth, moon])
+            d.drawTrajectory();
+            d.compare([earth, moon]);
         }
     });
 
     moons.forEach(m => {
         if (m.isColliding) {
-            m.drawTrajectory()
+            m.drawTrajectory();
             m.compare([moon]);
         }
-        if (scale > 1e-8) m.drawTrajectory()
+        if (scale > 1e-8)
+            m.drawTrajectory();
     });
 
     if (scale > 1e-7) {
-        satellites.forEach(s => s.drawTrajectory())
+        satellites.forEach(s => s.drawTrajectory());
     }
 
     asteroids.forEach(a => {
@@ -104,14 +111,14 @@ function runUniverse() {
         }
     });
     suns.forEach(s => {
-        if (s.isColliding) s.compare([sun, ...suns, ...blackHoles]);
+        if (s.isColliding)
+            s.compare([sun, ...suns, ...blackHoles]);
     });
 
     blackHoles.forEach(bH => {
-        if (bH.isColliding) bH.compare([earth, sun, ...suns, ...blackHoles])
-    })
-
-
+        if (bH.isColliding)
+            bH.compare([earth, sun, ...suns, ...blackHoles]);
+    });
 }
 
 function drawNames() {
@@ -120,19 +127,33 @@ function drawNames() {
         if (bB.r * scale > 25) bB.drawName();
         if (bB.isColliding && scale * bB.r > 25) bB.details();
     });
-    if (lightRay.r * scale > renderDistance) lightRay.details();
-    if (voyager1.r * scale > renderDistance) voyager1.details();
+    if (lightRay.r * scale > maxRenderDistance) lightRay.details();
+    if (voyager1.r * scale > maxRenderDistance) voyager1.details();
 
     if (scale > 1e-12) {
         sun.drawName();
         if (sun.isColliding) sun.details()
         galaxies[0].details();
     } else {
-        galaxies.filter(g => g.R * scale < renderDistance).pop().details();
-        if (galaxies.filter(g => g.R * scale > renderDistance).shift() !== undefined)
-            galaxies.filter(g => g.R * scale > renderDistance).shift().details();
+
+        try {
+            galaxies
+                .filter(g => g.R * scale < maxRenderDistance && g.R * scale > minRenderDistance)
+                .forEach(g => {
+                    g.details();
+                    console.log(g.name, (g.R * scale).toFixed(0))
+                });
+            // console.log(galaxies.filter(g => g.R * scale < maxRenderDistance))
+            // let largerGalaxy = galaxies.filter(g => g.R * scale < maxRenderDistance).pop();
+            // galaxies.filter(g => g.R * scale > maxRenderDistance).shift().details();
+        } catch (error) {
+            console.log(error)
+        }
+        // galaxies.filter(g => g.R * scale < maxRenderDistance).pop().details();
+        // if (galaxies.filter(g => g.R * scale > maxRenderDistance).shift() !== undefined)
+        //     galaxies.filter(g => g.R * scale > maxRenderDistance).shift().details();
         if (scale > 5e-14) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
-        if (god.R * scale < canvas.width) god.details();
+        if (god.R * scale < maxRenderDistance) god.details();
     }
 
 }
@@ -142,7 +163,6 @@ function drawNames() {
 // Uses global variable "cameraBody" as argument
 // Does nothing if cameraBody is set to null
 function camera(body) {
-    // if (body instanceof Galaxy) return;
     if (body === null) return;
 
     let centerOfScreen = {
@@ -154,25 +174,25 @@ function camera(body) {
     let r = body.p / (1 + body.eps * Math.cos(body.phi + body.w * dt / fps));
     let w = v / r;
 
-    let bodyPosition = {
+    let cameraPosition = {
         x: body.center.x + body.r * Math.cos(body.phi - w * dt / fps),
         y: body.center.y + body.r * Math.sin(body.phi - w * dt / fps)
     }
 
     if (body instanceof FlyingBody) {
-        bodyPosition = {
+        cameraPosition = {
             x: body.x + body.v * dt / fps,
             y: body.y
         };
     } else {
-        bodyPosition = {
+        cameraPosition = {
             x: body.x,
             y: body.y
         };
     }
 
-    Center.x -= bodyPosition.x - centerOfScreen.x;
-    Center.y -= bodyPosition.y - centerOfScreen.y + body.R;
+    Center.x -= cameraPosition.x - centerOfScreen.x;
+    Center.y -= body instanceof Galaxy ? cameraPosition.y - centerOfScreen.y + body.R : cameraPosition.y - centerOfScreen.y;
 
 }
 

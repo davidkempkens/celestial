@@ -73,7 +73,8 @@ const bg = '#050a10';
 let frAId;
 
 
-let renderDistance = canvas.height;
+let maxRenderDistance = canvas.width;
+let minRenderDistance = 5;
 
 // Mouse objects and booleans - for user input via mouse
 let mouse = {

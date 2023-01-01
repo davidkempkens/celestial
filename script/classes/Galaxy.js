@@ -41,14 +41,6 @@ class Galaxy extends CelestialBody {
             this.star.t);
     }
 
-    run() {
-        // this.x = this.center.x;
-        // this.y = this.center.y;
-        this.draw();
-        if (this.m != 0)
-            this.spiral();
-    }
-
     draw() {
         c.beginPath();
         c.strokeStyle = this.color;
@@ -56,6 +48,9 @@ class Galaxy extends CelestialBody {
         c.arc(this.x, this.y, this.R, 0, Math.PI * 2);
         c.stroke();
         c.closePath();
+
+        if (this.m != 0)
+            this.spiral();
     }
 
     spiral() {

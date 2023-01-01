@@ -15,6 +15,7 @@ class BlackHole extends CelestialBody {
 
     constructor(name, center, radius, distance, velocity, mass, color, type, colors) {
         super(name, center, radius, distance * LY, velocity, mass * SOLAR_MASS, color, type);
+
         // Schwarzschild radius
         this.R = (2 * G * this.m) / (C ** 2);
         this.colBH = colors;
@@ -52,13 +53,7 @@ class BlackHole extends CelestialBody {
 
 
     draw() {
-
-        c.beginPath();
-        c.fillStyle = this.color;
-        c.arc(this.x, this.y, this.R, 0, Math.PI * 2);
-        c.fill();
-        c.closePath();
-
+        super.draw();
         // DRAW EVENT HORIZON FOR BLACK HOLES
         this.eventHorizon();
         this.vortex();
