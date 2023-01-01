@@ -695,6 +695,26 @@
     "type": "Galaxy"
   },
   {
+    "name": "M87",
+    "center": "M87*",
+    "radius": 1.248e21,
+    "distance": 0,
+    "velocity": 0,
+    "mass": 1.2e43,
+    "color": "white",
+    "type": "Galaxy"
+  },
+  {
+    "name": "Andromeda",
+    "center": "Center",
+    "radius": 1.1892146e21,
+    "distance": 2.3651825e22,
+    "velocity": 0,
+    "mass": 5e42,
+    "color": "white",
+    "type": "Galaxy"
+  },
+  {
     "name": "God",
     "center": "Center",
     "radius": 1,

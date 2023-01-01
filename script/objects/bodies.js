@@ -45,6 +45,7 @@ async function loadSolarSystemData() {
                         newBody = new BlackHole(d.name, centerObject, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.colors);
                         if (newBody.name == 'Sagittarius A*') sagittariusA = newBody;
                         blackHoles.push(newBody);
+                        break;
                     case 'God':
                         newBody = new BlackHole(d.name, centerObject, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.colors);
                         god = newBody;
