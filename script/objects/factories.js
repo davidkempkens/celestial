@@ -35,13 +35,14 @@ function starsFactory(amount) {
     return stars;
 }
 
-function galaxiesFactory(count, name, center, minRadius, maxRadius, minDistance, maxDistance, mass, color, type) {
+function galaxiesFactory(count, name, center, minRadius, maxRadius, minDistance, maxDistance, mass, colors, type) {
     let arm = [];
     for (let i = 0; i < count; i++) {
         let n = i + ". " + name;
         let r = (minRadius + (Math.random() * (maxRadius - minRadius)));
         let d1 = minDistance + (Math.random() * (maxDistance - minDistance));
         let d2 = minDistance + (Math.random() * (maxDistance - minDistance));
+        let color = colors[Math.floor(Math.random() * colors.length)];
 
         // Name - Center - Radius(m) - Periapsis(m) - Apoapsis(m) - Mass(kg) - Color - Type
         arm.push(new Star(n, center, r, d1, d2, mass, color, type));

@@ -24,7 +24,7 @@ class Galaxy extends CelestialBody {
             maxD: this.R * .99,
             m: SOLAR_MASS,
             color: this.color,
-            colors: [],
+            colors: ['#FFF', '#F2D6BD', '#8FCBD9', '#F2AE2E', '#F27D16'],
             t: 'Star'
         };
 
@@ -37,7 +37,7 @@ class Galaxy extends CelestialBody {
             this.star.minD,
             this.star.maxD,
             this.star.m,
-            this.star.color,
+            this.star.colors,
             this.star.t);
     }
 

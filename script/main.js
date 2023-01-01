@@ -163,6 +163,7 @@ function drawNames() {
 // Uses global variable "cameraBody" as argument
 // Does nothing if cameraBody is set to null
 function camera(body) {
+    if (body instanceof Galaxy) return;
     if (body === null) return;
 
     let centerOfScreen = {
@@ -192,7 +193,7 @@ function camera(body) {
     }
 
     Center.x -= cameraPosition.x - centerOfScreen.x;
-    Center.y -= body instanceof Galaxy ? cameraPosition.y - centerOfScreen.y + body.R : cameraPosition.y - centerOfScreen.y;
+    Center.y -= cameraPosition.y - centerOfScreen.y + body.R;
 
 }
 
