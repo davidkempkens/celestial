@@ -43,9 +43,9 @@ function galaxiesFactory(count, name, center, minRadius, maxRadius, minDistance,
         let d1 = minDistance + (Math.random() * (maxDistance - minDistance));
         let d2 = minDistance + (Math.random() * (maxDistance - minDistance));
         let color = colors[Math.floor(Math.random() * colors.length)];
-
+        let m = mass / count;
         // Name - Center - Radius(m) - Periapsis(m) - Apoapsis(m) - Mass(kg) - Color - Type
-        arm.push(new Star(n, center, r, d1, d2, mass, color, type));
+        arm.push(new Star(n, center, r, d1, d2, m, color, type));
     }
     return arm;
 }

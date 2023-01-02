@@ -12,14 +12,14 @@
 */
 class Galaxy extends CelestialBody {
 
-    constructor(name, center, radius, distance, velocity, mass, color, type) {
+    constructor(name, center, radius, distance, velocity, mass, color, type, count = 120) {
         super(name, center, radius, distance, velocity, mass, color, type);
 
         this.star = {
-            count: 200,
+            count: count,
             name: 'Star of ' + this.name,
             minR: this.R * 1e-3,
-            maxR: this.R * 2e-3,
+            maxR: this.R * 5e-3,
             minD: this.R * .05,
             maxD: this.R * .99,
             m: SOLAR_MASS,
@@ -62,6 +62,14 @@ class Galaxy extends CelestialBody {
 
         if (this.m != 0)
             this.spiral();
+
+        // c.fillStyle = this.color;
+        // c.fillRect(
+        //     this.x - this.R,
+        //     this.y - this.R - 10 / scale,
+        //     this.R * 2,
+        //     2 / scale
+        // );
     }
 
     spiral() {

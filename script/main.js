@@ -5,7 +5,7 @@ function start() {
     // Clear Canvas each frame
     clearCanvas();
     // Draw Stars before transformation to fill the whole canvas
-    // stars.forEach(s => s.spin());
+    stars.forEach(s => s.spin());
 
     scaleDynamic();
 
@@ -41,16 +41,9 @@ function runUniverse() {
     if (stopTime) dt = 0;
     else dt = timeControl[i][1];
 
-    if (showTrajectories && scale > 1e-12) {
-        solarSystem.forEach(s => s.drawTrajectory());
-    }
-
-    // RUN ALL BODIES
-    // SOLAR SYSTEM BODIES
     sun.run();
     planets.forEach(p => {
         p.run();
-        p.drawTrajectory();
     });
     dwarfs.forEach(d => d.run());
     moons.forEach(m => m.run());
@@ -77,6 +70,13 @@ function runUniverse() {
 }
 
 function compareBodies() {
+
+    if (showTrajectories && scale > 1e-12)
+        solarSystem
+            .forEach(s => s.drawTrajectory())
+    planets
+        .forEach(p => p.drawTrajectory());
+
     if (sun.isColliding)
         sun.compare(planets);
     planets.forEach(p => {
@@ -141,7 +141,7 @@ function drawNames() {
     if (lightRay.r * scale > maxRenderDistance) lightRay.details();
     if (voyager1.r * scale > maxRenderDistance) voyager1.details();
 
-    sun.drawName();
+    if (!sun.isColliding || scale < 1e-12) sun.drawName();
     if (scale > 1e-12) {
         if (sun.isColliding) sun.details()
         galaxies[0].details();

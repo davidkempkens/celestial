@@ -115,8 +115,8 @@ const symbols = {
     ceres: '\u26B3',
     pluto: '\u2647',
     moon: '\u263D',
-    sun: '\u{1F31E}',
-    c: '\u03B3'
+    sun: '\u2609',
+    c: '\u03B3',
 };
 
 const initialDeg = {
@@ -162,7 +162,7 @@ function formatNumber(num) {
         return num.toLocaleString("en-US", {
             notation: "compact",
             compactDisplay: "long",
-            maximumSignificantDigits: 4
+            maximumSignificantDigits: 3
         });
     } catch (error) {
         return 'Format Error' + error
