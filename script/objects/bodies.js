@@ -1,7 +1,31 @@
-// Instantiating all Celestial Objects
-
 // STARS ARRAY
 const stars = starsFactory(300);
+
+const solarSystem = [];
+let sun;
+let earth;
+let moon;
+let sagittariusA;
+const planets = [];
+const dwarfs = []
+const moons = [];
+const satellites = [];
+let bigBodies = [];
+const mainBelt = [];
+const kuiperBelt = [];
+const oortCloud = [];
+let asteroids = [];
+let voyager1;
+let iss;
+let lightRay;
+let m87;
+const suns = [];
+const blackHoles = [];
+const galaxies = [];
+let milkyWay;
+let universe;
+let god;
+const everything = [Center];
 
 // Read celestial bodies from json file
 async function loadSolarSystemData() {
@@ -59,8 +83,7 @@ async function loadSolarSystemData() {
                     default:
                         break;
                 };
-
-                everything.push(newBody)
+                everything.push(newBody);
             });
 
             // Asteroids
@@ -95,93 +118,5 @@ async function loadSolarSystemData() {
 
             bigBodies = [sun, ...planets, ...dwarfs, ...moons, ...satellites, lightRay, ...suns, ...blackHoles, ...satellites, voyager1];
             everything.push(iss, geostationary, lightRay, voyager1);
-
-        })
+        });
 }
-
-
-const solarSystem = [];
-let sun;
-let earth;
-let moon;
-let sagittariusA;
-const planets = [];
-const dwarfs = []
-const moons = [];
-const satellites = [];
-let bigBodies = [];
-const mainBelt = [];
-const kuiperBelt = [];
-const oortCloud = [];
-let asteroids = [];
-let voyager1;
-let iss;
-let lightRay;
-let m87;
-const suns = [];
-const blackHoles = [];
-const galaxies = [];
-let milkyWay;
-let universe;
-let god;
-
-// EVERYTHING ARRAY FOR EASY HANDLING
-const everything = [Center];
-
-// RELATIONSHIP OF BODIES TO ITS SATELLITES
-// everything.forEach(p => {
-//     everything.forEach(m => {
-//         if (m.center === p) {
-//             p.satelites.push(m);
-//         }
-//     });
-// });
-
-async function loadCSVFile() {
-    await fetch('file.csv')
-        .then(res => res.text())
-        .then(data => {
-            console.log(csvToJSON(data))
-        })
-}
-
-//var csv is the CSV file with headers
-function csvToJSON(csv) {
-    var lines = csv.split("\r\n");
-    var result = [];
-    var headers = lines[0].split(";");
-    for (var i = 1; i < lines.length; i++) {
-        var obj = {};
-        var currentline = lines[i].split(";");
-        for (var j = 0; j < headers.length; j++) {
-            obj[headers[j]] = currentline[j];
-        }
-        result.push(obj);
-    }
-    return JSON.stringify(result);
-}
-
-
-function createInstance(className, d) {
-    const classes = {
-        Planet: Planet,
-        Dwarf: Planet
-        // ...
-    };
-
-    const Class = classes[className];
-    if (!Class) {
-        throw new Error(`Class not found: ${className}`);
-    }
-
-    // let centerObject = solarSystem.find(c => c.name == d.center);
-    cl = new Class(d.name, d.center, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type);
-    console.log(cl)
-    return cl
-    // return new Class(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type);
-}
-
-// Create an instance of the MyClass class
-// let instance = createInstance('Planet', { name: 'Test', center: '', radius: 1, periapsis: 1, apoapsis: 1, mass: 1, color: 'red', type: 'Planet' });
-
-// console.log(instance)

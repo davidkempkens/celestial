@@ -20,7 +20,6 @@ function asteroidFactory(count, name, center, minRadius, maxRadius, minDistance,
         let d1 = minDistance + (Math.random() * (maxDistance - minDistance));
         let d2 = minDistance + (Math.random() * (maxDistance - minDistance));
 
-        // Name - Center - Radius(m) - Periapsis(m) - Apoapsis(m) - Mass(kg) - Color - Type
         belt.push(new Asteroid(n, center, r, d1, d2, mass, color, type));
     }
     return belt;

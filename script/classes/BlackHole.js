@@ -20,7 +20,6 @@ class BlackHole extends CelestialBody {
         this.R = (2 * G * this.m) / (C ** 2);
         this.colBH = colors;
 
-        // PARTICLE PROPERTIES
         this.particle = {
             count: 300,
             name: 'Asteroid of ' + this.name,
@@ -54,7 +53,6 @@ class BlackHole extends CelestialBody {
 
     draw() {
         super.draw();
-        // DRAW EVENT HORIZON FOR BLACK HOLES
         this.eventHorizon();
         this.vortex();
     }

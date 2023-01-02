@@ -5,7 +5,7 @@ class Star extends Asteroid {
             c.fillStyle = this.color;
             c.globalAlpha = .01 - .001 * i;
             c.beginPath();
-            c.arc(this.x, this.y, this.R + (this.R * 5 * i / 3), 0, Math.PI * 2);
+            c.arc(this.x, this.y, this.R + (this.R * 8 * i / 3), 0, Math.PI * 2);
             c.closePath();
             c.fill();
             c.globalAlpha = 1;

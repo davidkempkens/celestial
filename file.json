@@ -472,6 +472,28 @@
     "phi": 30
   },
   {
+    "name": "Proxima Centauri b",
+    "center": "Proxima Centauri",
+    "radius": 6888000,
+    "periapsis": 6973000000,
+    "apoapsis": 7555000000,
+    "mass": 6.387e24,
+    "color": "#F2C879",
+    "type": "Planet",
+    "symbol": "🜨"
+  },
+  {
+    "name": "Proxima Centauri c",
+    "center": "Proxima Centauri",
+    "radius": 11470000,
+    "periapsis": 213841180293,
+    "apoapsis": 231661278651,
+    "mass": 5.7e+25,
+    "color": "#F2C879",
+    "type": "Planet",
+    "symbol": "🜨"
+  },
+  {
     "name": "Barnard's Star",
     "center": "Center",
     "radius": 0.2,

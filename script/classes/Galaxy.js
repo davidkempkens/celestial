@@ -62,14 +62,6 @@ class Galaxy extends CelestialBody {
 
         if (this.m != 0)
             this.spiral();
-
-        // c.fillStyle = this.color;
-        // c.fillRect(
-        //     this.x - this.R,
-        //     this.y - this.R - 10 / scale,
-        //     this.R * 2,
-        //     2 / scale
-        // );
     }
 
     spiral() {
@@ -78,9 +70,4 @@ class Galaxy extends CelestialBody {
             s.shine();
         });
     }
-
-    drawName() {
-        drawText(this.name, this.x + this.R / Math.SQRT2, this.y + this.R / Math.SQRT2, this.color, 13);
-    }
-
 }

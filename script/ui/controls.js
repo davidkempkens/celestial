@@ -76,6 +76,9 @@ window.addEventListener("keypress", e => {
         case "a":
             scale *= 1e-1;
             break;
+        case "d":
+            scale /= 1e-1;
+            break;
         case "c":
             cameraBody = null;
             Center.x = canvas.width / 2;
@@ -125,7 +128,6 @@ function toggleHUD() {
         if (h.id !== 'nav-hud' && h.id !== 'time-hud')
             h.style.display = hideHUD ? 'none' : 'flex';
     });
-    // console.log(hudElements)
 }
 
 // MOON LIST FILLED BOOLEAN
@@ -181,7 +183,7 @@ function controls() {
     let km = formatNumber(AE * 1e-12 / scale);
     let au = formatNumber(1e-9 / scale);
     let ly = formatNumber((AE * 1e-9 / LY) / scale);
-    // 0,0000158125074 LY = 1 AU
+    // 0.0000158125074 LY = 1 AU
 
     let text = [`${ly} light-years`, `${au} AU`, `${km} km`];
     for (let i = 0; i < text.length; i++) {

@@ -13,10 +13,7 @@ class Asteroid extends Planet {
 
     hover() {
         this.R *= 2;
-        // let col = this.color;
-        // this.color = 'white';
         this.draw();
-        // this.color = col;
         this.R /= 2;
     }
 

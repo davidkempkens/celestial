@@ -40,7 +40,7 @@ class CelestialBody {
   }
 
   run() {
-    // if (this.name === 'Sagittarius A*') console.log(this.x)
+
     if (this.center !== Center) {
       this.center.run();
     }
@@ -53,7 +53,6 @@ class CelestialBody {
     this.x = this.center.x + this.r * Math.cos(this.phi);
     this.y = this.center.y + this.r * Math.sin(this.phi);
 
-    // Call the draw function to draw the body as filled circle on the canvas
     this.draw();
   }
 
@@ -79,8 +78,8 @@ class CelestialBody {
 
     // Draw Compares classes
     let copies = other
-      .filter((o) => o.name !== this.name)
-      .map((o) => this.copy(o));
+      .filter(o => o.name !== this.name)
+      .map(o => Object.create(o));
     for (let i = 0; i < copies.length; i++) {
       // Copy other body to alter the x,y position, without changing the orbit of the other body
       copies[i].x = i < 1 ? this.x : copies[i - 1].x;
@@ -165,9 +164,5 @@ class CelestialBody {
 
     if (this.type !== 'Galaxy' && this.type !== 'God') drawText(textAbove, this.x - this.R, this.y - this.R - 25 / scale, this.color, 13);
     drawText(textAside, this.x + this.R / Math.SQRT2, this.y + this.R / Math.SQRT2, this.color, 13);
-  }
-
-  copy(copy) {
-    return Object.create(copy);
   }
 }
