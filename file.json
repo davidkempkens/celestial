@@ -446,7 +446,8 @@
     "velocity": 0,
     "mass": 1.1,
     "color": "#F2B05E",
-    "type": "Star"
+    "type": "Star",
+    "phi": 210
   },
   {
     "name": "Alpha Centauri B",
@@ -456,7 +457,19 @@
     "velocity": 0,
     "mass": 0.9092,
     "color": "#D98F4E",
-    "type": "Star"
+    "type": "Star",
+    "phi": 210
+  },
+  {
+    "name": "Proxima Centauri",
+    "center": "Alpha Centauri A",
+    "radius": 0.154,
+    "distance": 0.2,
+    "velocity": 0,
+    "mass": 0.122,
+    "color": "#ffd870",
+    "type": "Star",
+    "phi": 30
   },
   {
     "name": "Barnard's Star",
@@ -466,7 +479,8 @@
     "velocity": 0,
     "mass": 0.144,
     "color": "#D9042B",
-    "type": "Star"
+    "type": "Star",
+    "phi": 180
   },
   {
     "name": "Sirius A",
@@ -476,7 +490,8 @@
     "velocity": 0,
     "mass": 2.063,
     "color": "#52CBD9",
-    "type": "Star"
+    "type": "Star",
+    "phi": 340
   },
   {
     "name": "Beta Centauri",

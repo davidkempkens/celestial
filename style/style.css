@@ -101,7 +101,7 @@ body {
 }
 
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
     .hud {
         background-color: var(--bg-color-opaque);
         background-color: var(--bg-color-transparent);
@@ -152,7 +152,7 @@ body {
     #hud-other {
         font-size: x-small;
         top: 50vh;
-        bottom: 19vh;
+        /* bottom: 19vh; */
         left: 1vw;
         max-width: 150px;
         overflow-y: hidden;

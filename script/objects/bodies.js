@@ -86,7 +86,7 @@ async function loadSolarSystemData() {
             lightRay = new Photon('C', sun, 1e7, sun.R, C, 0, 'white', 'Photon', '', 0);
 
             // Space Probes
-            voyager1 = new Probe('Yoyager 1', Center, 3e6, 158.79 * AE, 17000, 825.5, 'white', 'Probe', '', 340);
+            voyager1 = new Probe('Yoyager 1', Center, 3e6, 158.79 * AE, 17000, 825.5, 'white', 'Probe', '', 350);
 
             // Satellites
             iss = new Satellite('ISS', earth, 100, earth.R + 413000, earth.R + 422000, 444.615, 'white', 'Satellite');
