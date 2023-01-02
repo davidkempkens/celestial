@@ -16,7 +16,7 @@ class Galaxy extends CelestialBody {
         super(name, center, radius, distance, velocity, mass, color, type);
 
         this.star = {
-            count: 400,
+            count: 200,
             name: 'Star of ' + this.name,
             minR: this.R * 1e-3,
             maxR: this.R * 2e-3,

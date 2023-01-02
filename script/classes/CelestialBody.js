@@ -157,14 +157,14 @@ class CelestialBody {
         ? `${formatNumber(this.v * 1e-3)} km/s `
         : `${formatNumber(this.v)} m/s `;
 
-    let textAside = (this.type != 'Galaxy') ? [`${this.name} ${this.symbol} ${this.type}`] : [`${this.name} ${this.symbol}`];
+    let textAside = (this.type != 'Galaxy' && this.type != 'God') ? [`${this.name} ${this.symbol} ${this.type}`] : [`${this.name} ${this.symbol}`];
     if (this.v > 0) textAside.push(velocityText);
     if (this.r > 0) textAside.push(distanceText);
     if (this.m > 0) textAside.push(`Mass: ${formatNumber(this.m.toExponential(2))} kg`);
 
 
     drawText(textAbove, this.x - this.R * 2, this.y - this.R - 25 / scale, this.color, 13);
-    drawText(textAside, this.x + this.R, this.y, this.color, 13);
+    drawText(textAside, this.x + this.R / Math.SQRT2, this.y + this.R / Math.SQRT2, this.color, 13);
   }
 
   copy(copy) {

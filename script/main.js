@@ -5,7 +5,7 @@ function start() {
     // Clear Canvas each frame
     clearCanvas();
     // Draw Stars before transformation to fill the whole canvas
-    stars.forEach(s => s.spin());
+    // stars.forEach(s => s.spin());
 
     scaleDynamic();
 
@@ -111,6 +111,16 @@ function compareBodies() {
             a.hover();
         }
     });
+
+    galaxies
+        .filter(g => g.R * scale < maxRenderDistance && g.R * scale > minRenderDistance)
+        .forEach(g => g.stars
+            .forEach(star => {
+                star.collision(mouse);
+                if (showTrajectories) star.drawTrajectory();
+                if (star.isColliding) star.hover();
+            }));
+
     suns.forEach(s => {
         if (s.isColliding)
             s.compare([sun, ...suns, ...blackHoles]);
@@ -131,8 +141,8 @@ function drawNames() {
     if (lightRay.r * scale > maxRenderDistance) lightRay.details();
     if (voyager1.r * scale > maxRenderDistance) voyager1.details();
 
+    sun.drawName();
     if (scale > 1e-12) {
-        sun.drawName();
         if (sun.isColliding) sun.details()
         galaxies[0].details();
     } else {
