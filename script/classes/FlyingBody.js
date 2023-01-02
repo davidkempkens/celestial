@@ -10,17 +10,27 @@
 * @param {String} type Type: Probe, Photon
 */
 class FlyingBody extends CelestialBody {
-    constructor(name, center, radius, distance, veloctiy, mass, color, type) {
-        super(name, center, radius, distance, veloctiy, mass, color, type);
+    constructor(name, center, radius, distance, veloctiy, mass, color, type, symbol, phi) {
+        super(name, center, radius, distance, veloctiy, mass, color, type, symbol, phi);
+
+        this.rx = this.r * Math.cos(phi);
+        this.ry = this.r * Math.sin(phi);
+
+        this.vx = this.v * Math.cos(phi);
+        this.vy = this.v * Math.sin(phi);
     }
 
     run() {
 
         // Physics for Bodies flying in a straight line
-        this.r += this.v * dt / fps;
-        this.x = this.center.x + this.r;
-        this.y = this.center.y;
-        this.draw()
+        this.rx += this.vx * dt / fps;
+        this.ry += this.vy * dt / fps;
+
+        this.x = this.center.x + this.rx;
+        this.y = this.center.y + this.ry;
+
+        this.r = Math.sqrt(this.rx ** 2 + this.ry ** 2);
+        this.draw();
     }
 
     flightPath() {

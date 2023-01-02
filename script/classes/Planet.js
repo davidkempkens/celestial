@@ -12,10 +12,8 @@
 */
 class Planet extends CelestialBody {
 
-    constructor(name, center, radius, periapsis, apoapsis, mass, color, type) {
-        super(name, center, radius, periapsis + apoapsis / 2, Math.sqrt(G * (center.m + mass) * ((1 / periapsis + apoapsis / 2))), mass, color, type);
-        this.M = center.m;
-        this.m = mass;
+    constructor(name, center, radius, periapsis, apoapsis, mass, color, type, symbol, phi) {
+        super(name, center, radius, periapsis + apoapsis / 2, Math.sqrt(G * (center.m + mass) * ((1 / periapsis + apoapsis / 2))), mass, color, type, symbol, phi);
         this.rp = periapsis;
         this.ra = apoapsis;
 
@@ -42,9 +40,6 @@ class Planet extends CelestialBody {
         this.e = Math.sqrt(this.a ** 2 - this.b ** 2);
 
         // Polar coordinates
-        this.phi = isNaN(initialDeg[this.name.toLowerCase()])
-            ? Math.random() * deg(360)
-            : deg(initialDeg[this.name.toLowerCase()]);
         this.r = this.p / (1 + this.eps * Math.cos(this.phi));
 
         // Orbital velocity

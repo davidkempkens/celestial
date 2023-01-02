@@ -102,22 +102,6 @@ const Center = {
 // Parameter for camera function to center object on canvas
 let cameraBody = null;
 
-// Symbols as Unicode for the planets in the solar system
-const symbols = {
-    mercury: '\u263F',
-    venus: '\u2640',
-    earth: '\u{1F728}',
-    mars: '\u2642',
-    jupiter: '\u2643',
-    saturn: '\u2644',
-    uranus: '\u26E2',
-    neptune: '\u2646',
-    ceres: '\u26B3',
-    pluto: '\u2647',
-    moon: '\u263D',
-    sun: '\u2609',
-    c: '\u03B3',
-};
 
 const initialDeg = {
     mercury: 180,

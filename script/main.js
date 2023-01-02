@@ -135,11 +135,11 @@ function compareBodies() {
 function drawNames() {
 
     bigBodies.forEach(bB => {
-        if (bB.r * scale > 25) bB.drawName();
+        if (bB.r * scale > 25 && !bB.isColliding) bB.drawName();
         if (bB.isColliding && scale * bB.r > 25) bB.details();
     });
-    if (lightRay.r * scale > maxRenderDistance) lightRay.details();
-    if (voyager1.r * scale > maxRenderDistance) voyager1.details();
+    if (lightRay.r * scale > minRenderDistance) lightRay.details();
+    if (voyager1.r * scale > minRenderDistance) voyager1.details();
 
     if (!sun.isColliding || scale < 1e-12) sun.drawName();
     if (scale > 1e-12) {

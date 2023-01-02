@@ -11,12 +11,12 @@
 * @returns {CelestialBody} body Returns an CelestialBody Object.
 */
 class CelestialBody {
-  constructor(name, center, radius, distance, velocity, mass, color, type) {
+  constructor(name, center, radius, distance, velocity, mass, color, type, symbol = '', phi = Math.random() * 360) {
     this.name = name;
     this.center = center;
     this.color = color;
     this.type = type;
-    this.symbol = symbols[name.toLowerCase()] || "";
+    this.symbol = symbol;
     this.satelites = [];
 
     this.R = radius;
@@ -28,9 +28,8 @@ class CelestialBody {
 
     // Polar coordinates
     this.r = distance;
-    this.phi = isNaN(initialDeg[this.name.toLowerCase()])
-      ? Math.random() * deg(360)
-      : deg(initialDeg[this.name.toLowerCase()]);
+
+    this.phi = -deg(phi);
     this.w = 0;
     // Cartesion coordinates
     this.x = this.center.x + this.r * Math.cos(this.phi);

@@ -1,8 +1,8 @@
 class Photon extends FlyingBody {
 
 
-    constructor(name, center, radius, distance, veloctiy, mass, color, type) {
-        super(name, center, radius, distance, veloctiy, mass, color, type);
+    constructor(name, center, radius, distance, veloctiy, mass, color, type, symbol, phi) {
+        super(name, center, radius, distance, veloctiy, mass, color, type, symbol, phi);
         this.rainbow = ['#2F00AA', '#0000FF', '#00A9FF', '#00FFF5', '#48FF00', '#FFFF00', '#FF7F00', '#FF0000'].reverse();
     }
 

@@ -12,8 +12,8 @@
 */
 class Galaxy extends CelestialBody {
 
-    constructor(name, center, radius, distance, velocity, mass, color, type, count = 120) {
-        super(name, center, radius, distance, velocity, mass, color, type);
+    constructor(name, center, radius, distance, velocity, mass, color, type, count = 120, symbol, phi) {
+        super(name, center, radius, distance, velocity, mass, color, type, symbol, phi);
 
         this.star = {
             count: count,

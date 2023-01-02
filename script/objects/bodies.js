@@ -16,7 +16,7 @@ async function loadSolarSystemData() {
 
                 switch (d.type) {
                     case 'Star':
-                        newBody = new Sun(d.name, centerObject, d.radius, d.distance, d.velocity, d.mass, d.color, d.type);
+                        newBody = new Sun(d.name, centerObject, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.symbol, d.phi);
                         if (d.name == 'Sun') {
                             solarSystem.push(newBody);
                             sun = newBody;
@@ -25,34 +25,34 @@ async function loadSolarSystemData() {
                         }
                         break;
                     case 'Planet':
-                        newBody = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type);
+                        newBody = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type, d.symbol, d.phi);
                         if (d.name == 'Earth') earth = newBody;
                         planets.push(newBody);
                         solarSystem.push(newBody);
                         break;
                     case 'Dwarf':
-                        newBody = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type);
+                        newBody = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type, d.symbol, d.phi);
                         dwarfs.push(newBody);
                         solarSystem.push(newBody);
                         break;
                     case 'Moon':
-                        newBody = new Moon(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type);
+                        newBody = new Moon(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type, d.symbol, d.phi);
                         if (d.name == 'Moon') moon = newBody;
                         moons.push(newBody);
                         solarSystem.push(newBody);
                         break;
                     case 'Black Hole':
-                        newBody = new BlackHole(d.name, centerObject, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.colors);
+                        newBody = new BlackHole(d.name, centerObject, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.colors, d.symbol, d.phi);
                         if (newBody.name == 'Sagittarius A*') sagittariusA = newBody;
                         blackHoles.push(newBody);
                         break;
                     case 'God':
-                        newBody = new BlackHole(d.name, centerObject, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.colors);
+                        newBody = new BlackHole(d.name, centerObject, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.colors, d.symbol, d.phi);
                         god = newBody;
                         god.phi = -Math.PI / 180 * 90;
                         break;
                     case 'Galaxy':
-                        newBody = new Galaxy(d.name, centerObject, d.radius, d.distance, d.velocity, d.mass, d.color, d.type);
+                        newBody = new Galaxy(d.name, centerObject, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.symbol, d.phi);
                         galaxies.push(newBody);
                         if (newBody.name == 'Observable Universe') universe = newBody
                         break;
@@ -83,17 +83,17 @@ async function loadSolarSystemData() {
             asteroids = [...mainBelt, ...kuiperBelt, ...oortCloud];
 
             // Photon
-            lightRay = new Photon('C', sun, 1e7, sun.R, C, 0, 'white', 'Photon');
+            lightRay = new Photon('C', sun, 1e7, sun.R, C, 0, 'white', 'Photon', '', 0);
 
             // Space Probes
-            voyager1 = new Probe('Yoyager 1', Center, 3e6, 158.79 * AE, 17000, 825.5, 'white', 'Probe');
+            voyager1 = new Probe('Yoyager 1', Center, 3e6, 158.79 * AE, 17000, 825.5, 'white', 'Probe', '', 340);
 
             // Satellites
             iss = new Satellite('ISS', earth, 100, earth.R + 413000, earth.R + 422000, 444.615, 'white', 'Satellite');
             geostationary = new Satellite('GOES-16', earth, 50, earth.R + 35780.2e3, earth.R + 35793.1e3, 2857, 'grey', 'Satellite');
             satellites.push(iss, geostationary);
 
-            bigBodies = [sun, ...planets, ...dwarfs, ...moons, ...satellites, lightRay, ...suns, ...blackHoles, ...satellites];
+            bigBodies = [sun, ...planets, ...dwarfs, ...moons, ...satellites, lightRay, ...suns, ...blackHoles, ...satellites, voyager1];
             everything.push(iss, geostationary, lightRay, voyager1);
 
         })

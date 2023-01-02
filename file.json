@@ -7,7 +7,8 @@
     "velocity": 0,
     "mass": 1,
     "color": "#F2A516",
-    "type": "Star"
+    "type": "Star",
+    "symbol": "☉︎"
   },
   {
     "name": "Mercury",
@@ -17,7 +18,9 @@
     "apoapsis": 69816900000,
     "mass": 3.3e+23,
     "color": "#BFB6AE",
-    "type": "Planet"
+    "type": "Planet",
+    "symbol": "☿",
+    "phi": 170
   },
   {
     "name": "Venus",
@@ -27,7 +30,9 @@
     "apoapsis": 108939000000,
     "mass": 4.87e+24,
     "color": "#F2C879",
-    "type": "Planet"
+    "type": "Planet",
+    "symbol": "♀",
+    "phi": 45
   },
   {
     "name": "Earth",
@@ -37,7 +42,9 @@
     "apoapsis": 152100000000,
     "mass": 5.97e+24,
     "color": "#03588C",
-    "type": "Planet"
+    "type": "Planet",
+    "symbol": "🜨",
+    "phi": 180
   },
   {
     "name": "Mars",
@@ -47,7 +54,9 @@
     "apoapsis": 249261000000,
     "mass": 6.42e+23,
     "color": "#F24E29",
-    "type": "Planet"
+    "type": "Planet",
+    "symbol": "♂",
+    "phi": 170
   },
   {
     "name": "Jupiter",
@@ -57,7 +66,9 @@
     "apoapsis": 816363000000,
     "mass": 1.9e+27,
     "color": "#D96C0D",
-    "type": "Planet"
+    "type": "Planet",
+    "symbol": "♃",
+    "phi": 90
   },
   {
     "name": "Saturn",
@@ -67,7 +78,9 @@
     "apoapsis": 1514500000000,
     "mass": 5.69e+26,
     "color": "#D9CAAD",
-    "type": "Planet"
+    "type": "Planet",
+    "symbol": "♄",
+    "phi": 50
   },
   {
     "name": "Uranus",
@@ -77,7 +90,9 @@
     "apoapsis": 3006390000000,
     "mass": 8.68e+25,
     "color": "#BBE2F2",
-    "type": "Planet"
+    "type": "Planet",
+    "symbol": "⛢",
+    "phi": 135
   },
   {
     "name": "Neptune",
@@ -87,7 +102,9 @@
     "apoapsis": 4540000000000,
     "mass": 1.02e+26,
     "color": "#5368A6",
-    "type": "Planet"
+    "type": "Planet",
+    "symbol": "♆",
+    "phi": 80
   },
   {
     "name": "Ceres",
@@ -97,7 +114,9 @@
     "apoapsis": 446000000000,
     "mass": 939000000000000000000,
     "color": "#626973",
-    "type": "Dwarf"
+    "type": "Dwarf",
+    "symbol": "⚳",
+    "phi": 250
   },
   {
     "name": "Pluto",
@@ -107,7 +126,9 @@
     "apoapsis": 7375930000000,
     "mass": 1.305e+22,
     "color": "#626973",
-    "type": "Dwarf"
+    "type": "Dwarf",
+    "symbol": "♇",
+    "phi": 0
   },
   {
     "name": "Haumea",
@@ -117,7 +138,8 @@
     "apoapsis": 7717000000000,
     "mass": 4.01e+21,
     "color": "#626973",
-    "type": "Dwarf"
+    "type": "Dwarf",
+    "phi": 290
   },
   {
     "name": "Makemake",
@@ -127,7 +149,8 @@
     "apoapsis": 7892200000000,
     "mass": 4.4e+21,
     "color": "#626973",
-    "type": "Dwarf"
+    "type": "Dwarf",
+    "phi": 270
   },
   {
     "name": "Eris",
@@ -137,7 +160,8 @@
     "apoapsis": 14579000000000,
     "mass": 1.7e+22,
     "color": "#F24E29",
-    "type": "Dwarf"
+    "type": "Dwarf",
+    "phi": 180
   },
   {
     "name": "Eros",
@@ -147,7 +171,8 @@
     "apoapsis": 266660000000,
     "mass": 6687000000000000,
     "color": "#626973",
-    "type": "Dwarf"
+    "type": "Dwarf",
+    "phi": 290
   },
   {
     "name": "Moon",
@@ -157,7 +182,9 @@
     "apoapsis": 405500000,
     "mass": 7.346e+22,
     "color": "#F2F2F2",
-    "type": "Moon"
+    "type": "Moon",
+    "symbol": "☽︎",
+    "phi": 135
   },
   {
     "name": "Phobos",
@@ -387,7 +414,9 @@
     "apoapsis": 5256869176398,
     "mass": 2.2e+14,
     "color": "#50B4F2",
-    "type": "Dwarf"
+    "type": "Dwarf",
+    "symbol": "☄",
+    "phi": 181
   },
   {
     "name": "Elisabeth",
@@ -524,7 +553,8 @@
       "#3097BF",
       "#024959",
       "#000000"
-    ]
+    ],
+    "symbol": "♐︎"
   },
   {
     "name": "BL Lacertae*",

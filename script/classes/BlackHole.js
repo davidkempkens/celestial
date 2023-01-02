@@ -13,8 +13,8 @@
 */
 class BlackHole extends CelestialBody {
 
-    constructor(name, center, radius, distance, velocity, mass, color, type, colors) {
-        super(name, center, radius, distance * LY, velocity, mass * SOLAR_MASS, color, type);
+    constructor(name, center, radius, distance, velocity, mass, color, type, colors, symbol, phi) {
+        super(name, center, radius, distance * LY, velocity, mass * SOLAR_MASS, color, type, symbol, phi);
 
         // Schwarzschild radius
         this.R = (2 * G * this.m) / (C ** 2);
