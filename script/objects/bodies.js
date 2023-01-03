@@ -15,6 +15,7 @@ const mainBelt = [];
 const kuiperBelt = [];
 const oortCloud = [];
 let asteroids = [];
+const exoplanets = [];
 let voyager1;
 let iss;
 let lightRay;
@@ -51,8 +52,10 @@ async function loadSolarSystemData() {
                     case 'Planet':
                         newBody = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type, d.symbol, d.phi);
                         if (d.name == 'Earth') earth = newBody;
-                        planets.push(newBody);
-                        solarSystem.push(newBody);
+                        if (centerObject == sun) {
+                            planets.push(newBody);
+                            solarSystem.push(newBody);
+                        } else exoplanets.push(newBody);
                         break;
                     case 'Dwarf':
                         newBody = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type, d.symbol, d.phi);
@@ -116,7 +119,7 @@ async function loadSolarSystemData() {
             geostationary = new Satellite('GOES-16', earth, 50, earth.R + 35780.2e3, earth.R + 35793.1e3, 2857, 'grey', 'Satellite');
             satellites.push(iss, geostationary);
 
-            bigBodies = [sun, ...planets, ...dwarfs, ...moons, ...satellites, lightRay, ...suns, ...blackHoles, ...satellites, voyager1];
+            bigBodies = [sun, ...planets, ...dwarfs, ...moons, ...satellites, lightRay, ...suns, ...blackHoles, ...satellites, voyager1, ...exoplanets];
             everything.push(iss, geostationary, lightRay, voyager1);
         });
 }

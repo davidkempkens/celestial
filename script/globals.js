@@ -17,6 +17,8 @@ let showTrajectories = false;
 // SCALING AND TRANSLATION GLOBALS
 let scale = 1e-9;
 let scaleFactor = .9;
+
+let showGrid = false;
 let trans = {
     x: 0,
     y: 0

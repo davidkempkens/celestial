@@ -16,7 +16,9 @@ function start() {
 
     compareBodies();
 
+    if (showGrid) debug()
     rescaleDynamic();
+    if (showGrid) debugUnscaled();
     // SHOW NAMES AND INFOS ON MOUSE OVER
     // DRAW UNSCALED
     drawNames();
@@ -51,7 +53,7 @@ function runUniverse() {
 
     if (scale > 1e-12) asteroids.forEach(a => a.run());
     else if (scale > 5e-14) oortCloud.forEach(o => o.run());
-
+    exoplanets.forEach(e => e.run());
     voyager1.run();
     lightRay.run();
 
@@ -83,6 +85,13 @@ function compareBodies() {
         if (p.isColliding) {
             p.drawTrajectory();
             p.compare([earth, moon]);
+        }
+    });
+
+    exoplanets.forEach(e => {
+        if (e.isColliding) {
+            e.drawTrajectory();
+            e.compare([earth, moon]);
         }
     });
 

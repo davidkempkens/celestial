@@ -51,8 +51,7 @@ function move(e) {
         // Distance needed to collide with Bodies etc.
         R: 30 / scale,
     };
-
-    runCollisionDetection();
+    if (!showGrid) runCollisionDetection();
 }
 
 // HANDLE KEYBOARD EVENTS
@@ -63,6 +62,9 @@ window.addEventListener("keypress", e => {
             break;
         case "h":
             toggleHUD();
+            break;
+        case "g":
+            showGrid = !showGrid;
             break;
         case "s":
             stopTime = !stopTime;
@@ -79,10 +81,15 @@ window.addEventListener("keypress", e => {
         case "d":
             scale /= 1e-1;
             break;
+        case "1":
+            scale = 1;
+            break;
         case "c":
             cameraBody = null;
             Center.x = canvas.width / 2;
             Center.y = canvas.height / 2;
+            // Center.x = 0;
+            // Center.y = 0;
             break;
         case "-":
             zoomOut();
