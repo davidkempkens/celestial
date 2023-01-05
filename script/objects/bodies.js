@@ -50,6 +50,7 @@ async function loadSolarSystemData() {
                         }
                         break;
                     case 'Planet':
+                    case 'Exoplanet':
                         newBody = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type, d.symbol, d.phi);
                         if (d.name == 'Earth') earth = newBody;
                         if (centerObject == sun) {

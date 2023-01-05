@@ -479,8 +479,7 @@
     "apoapsis": 7555000000,
     "mass": 6.387e24,
     "color": "#F2C879",
-    "type": "Planet",
-    "symbol": "🜨"
+    "type": "Exoplanet"
   },
   {
     "name": "Proxima Centauri c",
@@ -490,8 +489,7 @@
     "apoapsis": 231661278651,
     "mass": 5.7e+25,
     "color": "#F2C879",
-    "type": "Planet",
-    "symbol": "🜨"
+    "type": "Exoplanet"
   },
   {
     "name": "Barnard's Star",

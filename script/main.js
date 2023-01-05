@@ -182,8 +182,9 @@ function drawNames() {
 // Uses global variable "cameraBody" as argument
 // Does nothing if cameraBody is set to null
 function camera(body) {
-    // if (body instanceof Galaxy) return;
     if (body === null) return;
+    // TODO FIX Camera
+    if (body.type == 'Exoplanet') return;
 
     let centerOfScreen = {
         x: canvas.width / 2,
@@ -238,6 +239,7 @@ function runClock() {
 
 }
 
+// TODO Check Translation
 // Scale Canvas for Running Physics
 function scaleDynamic() {
     // Save Transformation Matrix
