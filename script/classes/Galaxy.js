@@ -8,6 +8,9 @@
 * @param {Number} mass Mass of the body in Kilogramm (kg).
 * @param {String} color Color as String, e.g.: #0F2D23, 'white', 'rgb(0,255,0)'
 * @param {String} type Type of the body, e.g. Planet, Dwarf, Asteroid
+* @param {Number} count Count of stars shown in Galaxy.
+* @param {String} symbol Symbol
+* @param {Number} phi Initial angle: 0 - 2π / 0 - 360°
 * @returns {Galaxy} body Returns an Galaxy Object.
 */
 class Galaxy extends CelestialBody {

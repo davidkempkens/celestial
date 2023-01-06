@@ -80,7 +80,7 @@ async function loadSolarSystemData() {
                         god.phi = -Math.PI / 180 * 90;
                         break;
                     case 'Galaxy':
-                        newBody = new Galaxy(d.name, centerObject, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.symbol, d.phi);
+                        newBody = new Galaxy(d.name, centerObject, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.count, d.symbol, d.phi);
                         galaxies.push(newBody);
                         if (newBody.name == 'Observable Universe') universe = newBody
                         break;
@@ -113,7 +113,7 @@ async function loadSolarSystemData() {
             lightRay = new Photon('C', sun, 1e7, sun.R, C, 0, 'white', 'Photon', '', 0);
 
             // Space Probes
-            voyager1 = new Probe('Yoyager 1', Center, 3e6, 158.79 * AE, 17000, 825.5, 'white', 'Probe', '', 350);
+            voyager1 = new Probe('Yoyager 1', Center, 3e6, 158.79 * AE, 17000, 825.5, 'white', 'Probe', '', deg(20));
 
             // Satellites
             iss = new Satellite('ISS', earth, 100, earth.R + 413000, earth.R + 422000, 444.615, 'white', 'Satellite');

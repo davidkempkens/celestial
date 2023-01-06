@@ -687,7 +687,8 @@
     "velocity": 0,
     "mass": 2.01e30,
     "color": "white",
-    "type": "Galaxy"
+    "type": "Galaxy",
+    "count": 50
   },
   {
     "name": "Orion Arm",

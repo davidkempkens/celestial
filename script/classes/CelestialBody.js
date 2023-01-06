@@ -8,6 +8,8 @@
 * @param {Number} mass Mass of the body in Kilogramm (kg).
 * @param {String} color Color as String, e.g.: #0F2D23, 'white', 'rgb(0,255,0)'
 * @param {String} type Type of the body, e.g. Planet, Dwarf, Asteroid
+* @param {String} symbol Symbol
+* @param {Number} phi Initial angle: 0 - 2π / 0 - 360°
 * @returns {CelestialBody} body Returns an CelestialBody Object.
 */
 class CelestialBody {
@@ -29,7 +31,7 @@ class CelestialBody {
     // Polar coordinates
     this.r = distance;
 
-    this.phi = -deg(phi);
+    this.phi = deg(phi);
     this.w = 0;
     // Cartesion coordinates
     this.x = this.center.x + this.r * Math.cos(this.phi);

@@ -8,6 +8,9 @@
 * @param {Number} mass Mass of the body in Kilogramm (kg).
 * @param {String} color Color as String, e.g.: #0F2D23, 'white', 'rgb(0,255,0)'
 * @param {String} type Type: Probe, Photon
+* @param {String} symbol Symbol
+* @param {Number} phi Initial angle: 0 - 2π / 0 - 360°
+* @returns {FlyingBody} body
 */
 class FlyingBody extends CelestialBody {
     constructor(name, center, radius, distance, veloctiy, mass, color, type, symbol, phi) {
