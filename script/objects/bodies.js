@@ -27,6 +27,7 @@ let milkyWay;
 let universe;
 let god;
 const everything = [Center];
+let bodies = []
 
 // Read celestial bodies from json file
 async function loadSolarSystemData() {
@@ -45,6 +46,7 @@ async function loadSolarSystemData() {
                         if (d.name == 'Sun') {
                             solarSystem.push(newBody);
                             sun = newBody;
+                            bodies.push(newBody)
                         } else {
                             suns.push(newBody);
                         }
@@ -56,6 +58,7 @@ async function loadSolarSystemData() {
                         if (centerObject == sun) {
                             planets.push(newBody);
                             solarSystem.push(newBody);
+                            bodies.push(newBody)
                         } else exoplanets.push(newBody);
                         break;
                     case 'Dwarf':

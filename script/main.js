@@ -44,9 +44,9 @@ function runUniverse() {
     else dt = timeControl[i][1];
 
     sun.run();
-    planets.forEach(p => {
-        p.run();
-    });
+    // planets.forEach(p => {
+    //     p.run();
+    // });
     dwarfs.forEach(d => d.run());
     moons.forEach(m => m.run());
     satellites.forEach(s => s.run());
@@ -68,6 +68,24 @@ function runUniverse() {
     blackHoles.forEach(bH => bH.run());
 
     god.run();
+
+    if (!stopTime) {
+        bodies.forEach(b1 => {
+            b1.ax = 0
+            b1.ay = 0
+            if (b1 !== sun) bodies.forEach(b2 => { if (b1 !== b2) b1.updateAcceleration(b2) })
+        })
+
+        bodies.forEach(b => {
+            if (b !== sun) {
+                b.updateVelocitiy()
+                b.updatePosition()
+                b.drawVelocityVector()
+                b.drawForceVector()
+            }
+        })
+    }
+
 
 }
 

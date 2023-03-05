@@ -53,7 +53,8 @@ let frames = 0;
 // Scale for time - 1 = REAL TIME 1s = 1s
 let fps = 60;
 let dt = 1;
-
+let softening = 1
+let gravityOn = true
 // SPEED OF LIGHT - C
 const C = 299792458;
 
@@ -237,4 +238,42 @@ function polarToCartesian(r, phi) {
 
 function cartesianToPolar(x, y) {
     return Math.sqrt(x ** 2 + y ** 2), Math.atan2(y, x);
+}
+
+function drawArrow(from, to, length, color) {
+
+    let k = 12 / scale
+    let dx = to.x - from.x
+    let dy = to.y - from.y
+
+    let theta = Math.atan2(dy, dx)
+    let phi = 20 * Math.PI / 180
+    let beta = Math.PI / 2 - theta - phi
+
+    let tip = {
+        x: from.x + length * Math.cos(theta),
+        y: from.y + length * Math.sin(theta)
+    }
+
+    let leftTip = {
+        x: tip.x - k * Math.sin(beta),
+        y: tip.y - k * Math.cos(beta)
+    }
+
+    let rightTip = {
+        x: tip.x - k * Math.cos(phi - theta),
+        y: tip.y + k * Math.sin(phi - theta)
+    }
+
+    c.lineWidth = 2 / scale
+    c.strokeStyle = color
+    c.beginPath()
+    c.moveTo(from.x, from.y)
+    c.lineTo(tip.x, tip.y)
+    c.moveTo(tip.x, tip.y)
+    c.lineTo(leftTip.x, leftTip.y)
+    c.moveTo(tip.x, tip.y)
+    c.lineTo(rightTip.x, rightTip.y)
+    c.stroke()
+    c.closePath()
 }

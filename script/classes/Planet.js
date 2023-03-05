@@ -45,6 +45,8 @@ class Planet extends CelestialBody {
         // Orbital velocity
         this.v = Math.sqrt(G * (this.M + this.m) * ((2 / this.r) - (1 / this.a)));
 
+        this.vx = this.v * Math.cos(this.phi + Math.PI / 2)
+        this.vy = this.v * Math.sin(this.phi + Math.PI / 2)
         // Angular velocity
         this.w = this.v / this.r;
 
@@ -81,6 +83,60 @@ class Planet extends CelestialBody {
         this.draw();
     }
 
+    updateAcceleration(other) {
+
+        let rx = other.x - this.x
+        let ry = other.y - this.y
+        let theta = Math.atan2(ry, rx)
+
+        let r = Math.sqrt(rx ** 2 + ry ** 2 + softening)
+
+        if (gravityOn) {
+            this.ax += (G * other.m) / (r ** 2) * Math.cos(theta)
+            this.ay += (G * other.m) / (r ** 2) * Math.sin(theta)
+        } else {
+            this.ax = 0
+            this.ay = 0
+        }
+
+        this.a = Math.sqrt(this.ax ** 2 + this.ay ** 2)
+
+        this.fx = this.ax * this.m
+        this.fy = this.ay * this.m
+
+        this.f = Math.sqrt(this.fx ** 2 + this.fy ** 2)
+    }
+
+    updateVelocitiy() {
+
+        if (this.v > C) {
+            this.color = 'cyan'
+            let theta = Math.atan2(this.vy, this.vx)
+            this.vx = C * Math.cos(theta)
+            this.vy = C * Math.sin(theta)
+        } else {
+            this.vx += this.ax * dt
+            this.vy += this.ay * dt
+        }
+        this.v = Math.sqrt(this.vx ** 2 + this.vy ** 2)
+    }
+
+    updatePosition() {
+        this.x += this.vx * dt
+        this.y += this.vy * dt
+    }
+
+    drawVelocityVector() {
+        drawArrow(this, { x: this.x + this.vx, y: this.y + this.vy }, 50 / scale, 'green')
+    }
+
+    drawAccelerationVector() {
+        drawArrow(this, { x: this.x + this.ax, y: this.y + this.ay }, 50 / scale, 'pink')
+    }
+
+    drawForceVector() {
+        drawArrow(this, { x: this.x + this.fx, y: this.y + this.fy }, 50 / scale, 'red')
+    }
     draw() {
 
         // draw the half of Saturn's rings first, so they appear behind Saturn
