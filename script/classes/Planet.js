@@ -60,8 +60,7 @@ class Planet extends CelestialBody {
 
     run() {
 
-        // Recalc all parameter, in case something changes
-        this.a = (this.rp + this.ra) / 2;
+        this.acc = (this.rp + this.ra) / 2;
         this.E = -G * this.M * this.m / (2 * this.a);
         this.L = Math.sqrt(2 * G * this.M * this.m ** 2 * ((this.rp * this.ra) / (this.ra + this.rp)));
         this.p = this.L ** 2 / (G * this.M * this.m ** 2);
@@ -99,7 +98,7 @@ class Planet extends CelestialBody {
             this.ay = 0
         }
 
-        this.a = Math.sqrt(this.ax ** 2 + this.ay ** 2)
+        this.acc = Math.sqrt(this.ax ** 2 + this.ay ** 2)
 
         this.fx = this.ax * this.m
         this.fy = this.ay * this.m
@@ -109,21 +108,23 @@ class Planet extends CelestialBody {
 
     updateVelocitiy() {
 
+        this.color = this.originalColor
+        this.vx += this.ax * dt / fps
+        this.vy += this.ay * dt / fps
+
         if (this.v > C) {
             this.color = 'cyan'
             let theta = Math.atan2(this.vy, this.vx)
             this.vx = C * Math.cos(theta)
             this.vy = C * Math.sin(theta)
-        } else {
-            this.vx += this.ax * dt
-            this.vy += this.ay * dt
         }
         this.v = Math.sqrt(this.vx ** 2 + this.vy ** 2)
     }
 
     updatePosition() {
-        this.x += this.vx * dt
-        this.y += this.vy * dt
+        this.x += this.vx * dt / fps
+        this.y += this.vy * dt / fps
+
     }
 
     drawVelocityVector() {
@@ -137,6 +138,7 @@ class Planet extends CelestialBody {
     drawForceVector() {
         drawArrow(this, { x: this.x + this.fx, y: this.y + this.fy }, 50 / scale, 'red')
     }
+
     draw() {
 
         // draw the half of Saturn's rings first, so they appear behind Saturn

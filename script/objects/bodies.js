@@ -46,10 +46,11 @@ async function loadSolarSystemData() {
                         if (d.name == 'Sun') {
                             solarSystem.push(newBody);
                             sun = newBody;
-                            bodies.push(newBody)
+                            // bodies.push(newBody)
                         } else {
                             suns.push(newBody);
                         }
+                        bodies.push(newBody)
                         break;
                     case 'Planet':
                     case 'Exoplanet':
@@ -65,6 +66,7 @@ async function loadSolarSystemData() {
                         newBody = new Planet(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type, d.symbol, d.phi);
                         dwarfs.push(newBody);
                         solarSystem.push(newBody);
+                        bodies.push(newBody)
                         break;
                     case 'Moon':
                         newBody = new Moon(d.name, centerObject, d.radius, d.periapsis, d.apoapsis, d.mass, d.color, d.type, d.symbol, d.phi);
@@ -76,6 +78,7 @@ async function loadSolarSystemData() {
                         newBody = new BlackHole(d.name, centerObject, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.colors, d.symbol, d.phi);
                         if (newBody.name == 'Sagittarius A*') sagittariusA = newBody;
                         blackHoles.push(newBody);
+                        bodies.push(newBody)
                         break;
                     case 'God':
                         newBody = new BlackHole(d.name, centerObject, d.radius, d.distance, d.velocity, d.mass, d.color, d.type, d.colors, d.symbol, d.phi);

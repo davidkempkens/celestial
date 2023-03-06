@@ -47,7 +47,7 @@ function runUniverse() {
     // planets.forEach(p => {
     //     p.run();
     // });
-    dwarfs.forEach(d => d.run());
+    // dwarfs.forEach(d => d.run());
     moons.forEach(m => m.run());
     satellites.forEach(s => s.run());
 
@@ -73,11 +73,11 @@ function runUniverse() {
         bodies.forEach(b1 => {
             b1.ax = 0
             b1.ay = 0
-            if (b1 !== sun) bodies.forEach(b2 => { if (b1 !== b2) b1.updateAcceleration(b2) })
+            if (b1 instanceof Planet) bodies.forEach(b2 => { if (b1 !== b2) b1.updateAcceleration(b2) })
         })
 
         bodies.forEach(b => {
-            if (b !== sun) {
+            if (b instanceof Planet) {
                 b.updateVelocitiy()
                 b.updatePosition()
                 b.drawVelocityVector()
@@ -85,8 +85,56 @@ function runUniverse() {
             }
         })
     }
+    closestAndStrongest()
+}
+
+function closestAndStrongest() {
+
+    bodies.forEach(b1 => {
+        if (b1 instanceof Planet) {
+
+            let closest = { x: Infinity, y: Infinity }
+            let strongest = { m: 1, x: Infinity, y: Infinity }
+            bodies.forEach(b2 => {
+                if (b1 !== b2) {
+                    // if (config.drawLines) drawConnectingLine(b1, b2)
+                    strongest = strongerGravitationalAttraction(b2, strongest, b1)
+                    closest = distance(b1, b2) < distance(b1, closest) ? b2 : closest
+                }
+            })
+            b1.r = distance(b1, strongest)
+            // // drawConnectingLine(b1, closest, config.color.distance)
+            // console.log(b1)
+            // drawConnectingLine(b1, strongest)
+        }
+    })
+}
+
+function strongerGravitationalAttraction(a, b, c) {
+    return a.m / distance(a, c) ** 2 < b.m / distance(b, c) ** 2 ? b : a
+}
+
+function drawConnectingLine(from, to) {
+
+    let theta = Math.atan2(to.y - from.y, to.x - from.x)
+    let r = 12 / scale + from.R + to.R
 
 
+    let base = {
+        x: from.x + r * Math.cos(theta),
+        y: from.y + r * Math.sin(theta)
+    }
+
+    let tip = {
+        x: to.x - r * Math.cos(theta),
+        y: to.y - r * Math.sin(theta)
+    }
+    drawArrow(base, tip, distance(base, tip), from.color)
+
+    // let mid = midpoint(from, to)
+    // drawText([
+    //     `r: ${formatNumber(distance(from, to) * 1e-3)} km`
+    // ], midpoint(from, to).x, midpoint(from, to).y - (10 / config.scale), from.color, config.fontSize)
 }
 
 function compareBodies() {
@@ -192,6 +240,12 @@ function drawNames() {
         if (scale > 5e-14) drawText('Oort Cloud', oortCloud[0].x, oortCloud[0].y, 'grey', 13);
         if (god.R * scale < maxRenderDistance) god.details();
     }
+
+    bodies.forEach(b => {
+        if (b instanceof Planet) {
+            b.details()
+        }
+    })
 
 }
 

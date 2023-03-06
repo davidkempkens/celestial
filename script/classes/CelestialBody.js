@@ -17,6 +17,7 @@ class CelestialBody {
     this.name = name;
     this.center = center;
     this.color = color;
+    this.originalColor = color
     this.type = type;
     this.symbol = symbol;
     this.satelites = [];
@@ -130,10 +131,11 @@ class CelestialBody {
 
   drawTrajectory() {
     let rotation = deg(0);
-
+    // this.acc = (this.rp + this.ra) / 2
     c.beginPath();
     c.strokeStyle = this.color;
     c.lineWidth = 0.3 / scale;
+    // console.log(this.name, (this.a).toFixed())
     c.ellipse(this.center.x - this.e, this.center.y, this.a, this.b, rotation, 0, Math.PI * 2);
     c.stroke();
     c.closePath();
@@ -141,25 +143,17 @@ class CelestialBody {
 
   details() {
 
-    let diameterText = toLy(this.R * 2) > 0
-      ? `\u2205 ${formatNumber(toLy(this.R * 2))} ly `
-      : `\u2205 ${formatNumber(this.R * 2 * 1e-3)} km `;
-
+    let diameterText = `\u2205 ${formatMeter(this.R * 2)}`
     let textAbove = [diameterText];
 
-    let distanceText =
-      toLy(this.r) > 0
-        ? `\u2192 ${formatNumber(toLy(this.r))} ly `
-        : `\u2192 ${formatNumber(this.r * 1e-3)} km `;
-
-    let velocityText =
-      this.v > 1e3
-        ? `${formatNumber(this.v * 1e-3)} km/s `
-        : `${formatNumber(this.v)} m/s `;
+    let distanceText = `\u2192 ${formatMeter(this.r)}`
+    let velocityText = `v ${formatMeter(this.v)}/s`
 
     let textAside = (this.type != 'Galaxy' && this.type != 'God') ? [`${this.name} ${this.symbol} ${this.type}`] : [`${this.name} ${this.symbol}`];
     if (this.type === 'Galaxy' || this.type === 'God') textAside.push(diameterText)
     if (this.v > 0) textAside.push(velocityText);
+    if (this.acc > 0) textAside.push(`a ${formatMeter(this.acc)}/s²`);
+    if (this.f > 0) textAside.push(`f ${formatNumber(this.f.toExponential(2))} kg m/s²`);
     if (this.r > 0) textAside.push(distanceText);
     if (this.m > 0) textAside.push(`Mass: ${formatNumber(this.m.toExponential(2))} kg`);
 
