@@ -32,10 +32,10 @@ timeControl = [
     ['week', 60 * 60 * 24 * 7],
     ['month', 60 * 60 * 24 * 30],
     ['year', 60 * 60 * 24 * 365],
-    ['tsd years', 60 * 60 * 24 * 365 * 1000],
-    ['mio years', 60 * 60 * 24 * 365 * 1000000],
-    ['bio years', 60 * 60 * 24 * 365 * 1000000000],
-    ['trio years', 60 * 60 * 24 * 365 * 1000000000000]
+    //     ['tsd years', 60 * 60 * 24 * 365 * 1000],
+    //     ['mio years', 60 * 60 * 24 * 365 * 1000000],
+    //     ['bio years', 60 * 60 * 24 * 365 * 1000000000],
+    //     ['trio years', 60 * 60 * 24 * 365 * 1000000000000]
 ]
 
 
@@ -55,6 +55,7 @@ let fps = 60;
 let dt = 1;
 let softening = 1
 let gravityOn = true
+
 // SPEED OF LIGHT - C
 const C = 299792458;
 
@@ -142,9 +143,7 @@ function deg(d) {
     return d * (Math.PI / 180);
 }
 
-// Format Big Numbers
 function formatNumber(num) {
-    // noinspection JSCheckFunctionSignatures
     try {
         return num.toLocaleString("en-US", {
             notation: "compact",
@@ -156,7 +155,55 @@ function formatNumber(num) {
     }
 }
 
-// DRAW Text at scale and translated coords
+function formatMeter(m) {
+
+    if (m < 1e-27) return `${(m * 1e30).toFixed(0)} qm (m⁻³⁰)`
+    if (m < 1e-24) return `${(m * 1e27).toFixed(0)} rm (ᵐ⁻²⁷)`
+    if (m < 1e-21) return `${(m * 1e24).toFixed(0)} ym (m⁻²⁴)`
+    if (m < 1e-18) return `${(m * 1e21).toFixed(0)} zm (m⁻²¹)`
+    if (m < 1e-15) return `${(m * 1e18).toFixed(0)} am (m⁻¹⁸)`
+    if (m < 1e-12) return `${(m * 1e15).toFixed(0)} fm (m⁻¹⁵)`
+    if (m < 1e-9) return `${(m * 1e12).toFixed(0)} pm (m⁻¹²)`
+    if (m < 1e-6) return `${(m * 1e9).toFixed(0)} nm (m⁻⁹)`
+    if (m < 1e-3) return `${(m * 1e6).toFixed(0)} μm (m⁻⁶)`
+    if (m < 1e-2) return `${(m * 1e3).toFixed(0)} mm (m⁻³)`
+    if (m < 1) return `${(m * 100).toFixed(0)} cm`
+    if (m < 1e3) {
+        try {
+            return new Intl.NumberFormat("en-US", {
+                notation: "compact",
+                compactDisplay: "long",
+                // maximumSignificantDigits: 3
+            }).format(m) + ' m'
+        } catch (error) {
+            return error
+        }
+    }
+
+    // (1 ly = 9 460 730 472 580 800 m)
+    if (m < LY) {
+        try {
+            return new Intl.NumberFormat("en-US", {
+                notation: "compact",
+                compactDisplay: "long",
+                // maximumSignificantDigits: 3
+            }).format(m * 1e-3) + ' km'
+        } catch (error) {
+            return error
+        }
+    } else {
+        try {
+            return new Intl.NumberFormat("en-US", {
+                notation: "compact",
+                compactDisplay: "long",
+                // maximumSignificantDigits: 3
+            }).format(toLy(m)) + ' ly'
+        } catch (error) {
+            return error
+        }
+    }
+}
+
 function drawText(t, x, y, color, f) {
     let lineX, lineY;
     c.fillStyle = color;
@@ -238,6 +285,18 @@ function polarToCartesian(r, phi) {
 
 function cartesianToPolar(x, y) {
     return Math.sqrt(x ** 2 + y ** 2), Math.atan2(y, x);
+}
+
+function distance(a, b) {
+    let rx = b.x - a.x
+    let ry = b.y - a.y
+    return Math.sqrt(rx ** 2 + ry ** 2)
+}
+
+function midpoint(a, b) {
+    let dx = b.x - a.x
+    let dy = b.y - a.y
+    return { x: a.x + dx / 2, y: a.y + dy / 2 }
 }
 
 function drawArrow(from, to, length, color) {
