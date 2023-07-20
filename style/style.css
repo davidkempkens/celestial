@@ -34,11 +34,13 @@ body {
 }
 
 .container {
+    display: none;
     width: 100vw;
     height: 100vh;
 }
 
 #canvas {
+    /* display: none; */
     width: 100vw;
     height: 100vh;
 }
