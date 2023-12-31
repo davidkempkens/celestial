@@ -1,0 +1,50 @@
+:root {
+    --distance: 15rem;
+    --earth-radius: .5rem;
+    --sun-radius: 5rem;
+    --time-to-orbit: 100s;
+}
+
+.background {
+    background-color: #000000;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+#sun {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(var(--sun-radius) * 2);
+    height: calc(var(--sun-radius) * 2);
+    border-radius: 50%;
+    background-color: #F2A516;
+    box-shadow: 0 0 50px 0 #F2A516;
+    /* animation: spin 10s linear infinite; */
+}
+
+#earth {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(var(--earth-radius) * 2);
+    height: calc(var(--earth-radius) * 2);
+    border-radius: 50%;
+    background-color: #03588C;
+    animation: spin calc(var(--time-to-orbit)) linear infinite;
+}
+
+/*  keyfrom to orbit around body */
+@keyframes spin {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg) translateX(calc(var(--distance))) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg) translateX(calc(var(--distance))) rotate(-360deg);
+    }
+}
