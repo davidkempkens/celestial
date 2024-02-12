@@ -1,0 +1,22 @@
+{
+  "name": "celestial",
+  "version": "1.0.0",
+  "description": "The Solar System on a HTML Canvas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidkempkens/celestial.git"
+  },
+  "author": "David Kempkens",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidkempkens/celestial/issues"
+  },
+  "homepage": "https://github.com/davidkempkens/celestial#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
