@@ -200,7 +200,7 @@ function controls() {
     // HUD
     timeElement.innerHTML = `<b>T</b>ime/s 1 ${timeControl[i][0]}`;
     clockElement.innerHTML = `${secToTime(clock)}`
-    zoomElement.innerHTML = `<b>Z</b>oom: ${formatNumber(scale.toExponential(2))}`;
+    zoomElement.innerHTML = `${formatNumber(scale.toExponential(2))}`;
     stopElement.innerHTML = stopTime ? `<b>S</b>tart` : `<b>S</b>top`;
     stopElement.style.color = stopTime ? 'green' : 'red';
 
@@ -217,11 +217,14 @@ function controls() {
                 if (m.center === cameraBody) {
                     moonCount++;
                     currentListFrom = m.center;
+                    const li = document.createElement('li');
+                    hudMoons.appendChild(li);
+                    li.classList.add('hud__list-item');
                     const a = document.createElement('a');
-                    hudMoons.appendChild(a);
+                    li.appendChild(a);
+                    a.classList.add('hud__item-link');
                     a.style.color = m.color;
                     a.innerHTML = m.name;
-                    a.href = '#';
                     a.addEventListener('click', () => {
                         cameraBody = m;
                     });
@@ -229,7 +232,7 @@ function controls() {
             });
             moonListFilled = true;
             if (moonCount > 0) {
-                hudMoons.style.display = 'flex';
+                // hudMoons.style.display = 'flex';
             }
             // IF CAMERA BODY CHANGES BUT WITHOUT GOING NULL IN BETWEEN
             // CHECK IF CAMERA BODY MATCHES THE CURRENT LIST
@@ -237,7 +240,7 @@ function controls() {
             if (currentListFrom !== cameraBody) {
                 // IF CAMERA BODY IS CHANGED DELETE AND HIDE LIST
                 hudMoons.innerHTML = '';
-                hudMoons.style.display = 'none';
+                // hudMoons.style.display = 'none';
                 moonListFilled = false;
                 moonCount = 0;
                 currentListFrom = null;
@@ -246,7 +249,7 @@ function controls() {
     } else {
         // IF CAMERA BODY IS NULL DELETE AND HIDE LIST
         hudMoons.innerHTML = '';
-        hudMoons.style.display = 'none';
+        // hudMoons.style.display = 'none';
         moonListFilled = false;
         moonCount = 0;
         currentListFrom = null;

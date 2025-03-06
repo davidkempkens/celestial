@@ -2,38 +2,34 @@
     --bg-color: rgba(255, 255, 255, .05);
     --bg-color-opaque: rgba(255, 255, 255, .1);
     --bg-color-transparent: rgba(255, 255, 255, 0);
+    --btn-margin: .25rem;
 }
 
 * {
     box-sizing: border-box;
-    list-style: none;
     font-family: Consolas, monaco, monospace;
-    /* padding: 0;
-    margin: 0; */
     touch-action: manipulation;
-    text-decoration: none;
-}
-
-a {
-    color: white;
-    opacity: .5;
-    margin: 2px 15px;
-    text-align: center;
-}
-
-a:hover {
-    opacity: 1;
+    font-size: 13px;
+    /* overflow-y: scroll; */
 }
 
 body {
-    overflow: hidden;
     margin: 0;
     padding: 0;
-    width: 100vw;
-    height: 100vh;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: white;
 }
 
 .container {
+    position: relative;
     width: 100vw;
     height: 100vh;
 }
@@ -41,216 +37,164 @@ body {
 #canvas {
     width: 100vw;
     height: 100vh;
+    position: absolute;
 }
 
 .hud {
-    background-color: var(--bg-color);
-    padding: 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+
+    grid-template-areas:
+        "planets    moons  suns"
+        "planets    .      other"
+        "time       time   nav"
+        ".          .      nav"
+        ".          .      hide";
+
+    grid-template-columns: minmax(0, auto) minmax(0, auto) minmax(30%, auto);
+    grid-template-rows: minmax(0, auto) minmax(0, auto) auto 50px auto;
+
+    gap: .15rem;
+    padding: 1rem;
+    pointer-events: none;
+}
+
+.hud__list {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
-.hide-hud {
+.hud__list-item {
+    padding: .25rem;
+    border-radius: 5px;
     background-color: var(--bg-color);
-    position: fixed;
-    display: flex;
-    top: 1vh;
-    right: 1vw;
-}
+    color: white;
+    cursor: pointer;
+    transition: background-color .3s;
+    user-select: none;
+    /* transform: translateX(100px); */
 
-#nav-hud {
-    position: fixed;
-    top: 1vh;
-    left: 5vw;
-}
+    white-space: nowrap;
+    /* text-overflow: ellipsis; */
 
-#time-hud {
-    position: fixed;
-    top: 1%;
-    left: 50%;
-}
-
-#hud-planets {
-    position: fixed;
-    flex-direction: column;
-    left: 1%;
-    top: 15%;
-}
-
-#hud-moons {
-    position: fixed;
-    flex-direction: column;
-    left: 130px;
-    top: 15%;
-    display: none;
-}
-
-#hud-suns {
-    position: fixed;
-    flex-direction: column;
-    top: 15%;
-    right: 1%;
-}
-
-#hud-other {
-    position: fixed;
-    flex-direction: column;
-    top: 60%;
-    right: 1%;
-
-}
-
-
-@media only screen and (max-width: 800px) {
-    .hud {
+    &:hover {
         background-color: var(--bg-color-opaque);
-        background-color: var(--bg-color-transparent);
     }
 
-    a {
-        opacity: .7;
-        padding: 0px;
-        background-color: var(--bg-color);
-    }
+    pointer-events: auto;
+}
 
-    #nav-hud {
-        left: unset;
-        top: unset;
-        right: 1vw;
-        bottom: 1vh;
+.hud__nav {
+    grid-area: nav;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+
+    .hud__list {
         flex-direction: column-reverse;
-        /* width: 180px; */
-        /* max-height: max-content; */
-    }
-
-    #hud-planets {
-        font-size: small;
-        top: 8vh;
-        max-height: 34vh;
-        overflow: hidden;
-        max-width: 65px;
-        /* align-items: flex-start; */
-    }
-
-    #hud-moons {
-        font-size: small;
-        left: 72px;
-        top: 8vh;
-        max-width: 80px;
-        padding: 0;
-        margin: 0;
-    }
-
-    #hud-suns {
-        font-size: x-small;
-        top: 8vh;
-        /* max-width: min-content; */
-        /* bottom: 3vh; */
-        /* overflow: hidden; */
-    }
-
-    #hud-other {
-        font-size: x-small;
-        top: 50vh;
-        /* bottom: 19vh; */
-        left: 1vw;
-        max-width: 150px;
-        overflow-y: hidden;
-    }
-
-    #time-hud {
-        font-size: small;
-        top: 1vh;
-        right: 1vh;
-        /* max-height: min-content; */
-        left: 1vw;
-        /* max-height: min-content; */
-        /* padding: 0; */
+        align-items: flex-end;
+        justify-content: flex-end;
 
     }
 
-    #plusElement,
-    #minusElement {
-        padding: 5px 50px;
-        /* font-size: 20px; */
-    }
-
-    #clockElement {
-        margin: 3px;
-        width: 400px;
-    }
-
-    #stopElement {
-        margin: 1px;
-    }
-
-    #timeElement {
-        width: 150px;
-    }
-
-    .hide-hud {
-        top: unset;
-        bottom: 26vh;
-        z-index: 1;
+    .hud__list-item {
+        margin-top: var(--btn-margin);
     }
 }
 
-@media only screen and (max-height: 600px) {
-    .hud {
-        background-color: var(--bg-color-opaque);
-        padding: 0;
-        margin: 0;
-        font-size: 12px;
+
+.hud__time {
+    grid-area: time;
+    display: flex;
+
+    .hud__list {
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-start;
+
+        .hud__list-item {
+            margin-bottom: .5rem;
+        }
+
+    }
+}
+
+.hud__planets {
+    grid-area: planets;
+    width: max-content;
+
+    .hud__list {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    a {
-        opacity: .7;
-        padding: 1px;
-        background-color: var(--bg-color);
+    .hud__list-item {
+        margin-bottom: var(--btn-margin);
+    }
+}
+
+.hud__moons {
+    grid-area: moons;
+
+    .hud__list {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    #nav-hud {
-        top: unset;
-        left: unset;
-        right: 1%;
-        bottom: 1%;
-        max-width: 330px;
+    .hud__list-item {
+        margin-bottom: var(--btn-margin);
+    }
+}
+
+.hud__suns {
+    grid-area: suns;
+    /* overflow-y: scroll; */
+
+    .hud__list {
+        flex-direction: column;
+        align-items: flex-end;
     }
 
-    #hud-planets {
-        top: 30vh;
-        bottom: 1%;
+    .hud__list-item {
+        margin-bottom: var(--btn-margin);
+    }
+}
+
+.hud__other {
+    grid-area: other;
+    /* overflow-y: scroll; */
+
+    .hud__list {
+        flex-direction: column;
+        align-items: flex-end;
     }
 
-    #hud-moons {
-        top: unset;
-        bottom: 1%;
-        left: 15%;
+    .hud__list-item {
+        margin-bottom: var(--btn-margin);
+        transform: translateX(85%);
+        transition: transform .3s;
+
+        &:hover {
+            transform: translateX(0);
+        }
     }
 
-    #hud-suns {
-        top: 1%;
-    }
+}
 
-    #hud-other {
-        top: 1%;
-        right: 25%;
-    }
-
-    #time-hud {
-        top: 1%;
-        left: 25%;
-    }
-
-    #plusElement,
-    #minusElement {
-        padding: 5px;
-        font-size: 20px;
-    }
-
-    .hide-hud {
-        top: 1%;
-        right: unset;
-        left: 1%;
-    }
+.hud__hide-toggle {
+    grid-area: hide;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }

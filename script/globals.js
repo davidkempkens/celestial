@@ -174,11 +174,15 @@ function drawText(t, x, y, color, f) {
 function updateHUD(bodies, hud) {
 
     bodies.forEach(b => {
+        const li = document.createElement('li');
+        hud.appendChild(li);
+        li.classList.add('hud__list-item');
         const a = document.createElement('a');
-        hud.appendChild(a);
+        li.appendChild(a);
+        a.classList.add('hud__item-link');
         a.style.color = b.color;
         a.innerHTML = b.name;
-        a.href = '#';
+        // li.href = '#';
         a.addEventListener('click', () => {
             // scale = cameraBody === b ? 10 / b.R : sun.R * 1e-16;
             scale = 40 / b.R;
