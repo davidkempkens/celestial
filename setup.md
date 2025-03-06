@@ -31,5 +31,5 @@ JWT_SECRET=your jwt secret
 
 ```bash
 cd frontend
-npm i react-bootstrap react-icons
+npm i react-bootstrap react-icons bootstrap
 ```
