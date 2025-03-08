@@ -32,6 +32,4 @@ JWT_SECRET=your jwt secret
 ```bash
 cd frontend
 npm i react-bootstrap react-icons bootstrap react-router-dom react-router-bootstrap
-# maybe you need to install react-router instead of react-router-dom
-npm i react-router
 ```
