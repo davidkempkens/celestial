@@ -33,4 +33,5 @@ JWT_SECRET=your jwt secret
 cd frontend
 npm i react-bootstrap react-icons bootstrap react-router-dom react-router-bootstrap
 npm i @reduxjs/toolkit react-redux
+npm i react-toastify
 ```
