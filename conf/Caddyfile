@@ -1,0 +1,4 @@
+celestial.kempkens.dev {
+    root * /srv
+    file_server
+}
